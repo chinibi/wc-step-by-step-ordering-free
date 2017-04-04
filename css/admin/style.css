@@ -1,0 +1,29 @@
+.clearfix {
+  clear: both;
+}
+
+ul.sortable {
+  max-width: 300px;
+  min-height: 200px;
+}
+
+.sortable-item.sortable-fixed {
+  background-color: #ccc;
+}
+
+li.sortable-item {
+  border: 1px solid gray;
+  padding: 10px;
+  background-color: white;
+}
+
+.ui-sortable-placeholder {
+  border: 1px dashed black;
+  padding: 10px;
+  line-height: 2em;
+}
+
+div#sbs-order-container, div#sbs-pool-container {
+  padding: 100px;
+  float: left;
+}
