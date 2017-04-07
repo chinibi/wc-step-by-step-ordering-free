@@ -3,6 +3,10 @@
 // Create a WP-Admin menu item
 // This is a WooCommerce submenu item, indicating it's an extension of WooCommerce
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 add_action( 'admin_menu', 'sbs_plugin_admin_add_page' );
 
 function sbs_plugin_admin_add_page() {
@@ -33,7 +37,7 @@ add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 function sbs_plugin_options_page() {
 
   $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general_options';
-
+  ChromePhp::log(get_site_url());
   ?>
 
   <div>
@@ -178,15 +182,14 @@ function plugin_admin_init() {
     'sbs_display'
   );
 
-  register_setting('show_something', 'show_header');
-  register_setting('show_something', 'show_content');
-  register_setting('show_something', 'show_footer');
+  register_setting('show_something', 'show_section');
 
   register_setting('sbs_order_settings', 'step_order');
 
-  register_setting('sbs_display', 'color_scheme');
-  register_setting('sbs_display', 'navbar_style');
-  register_setting('sbs_display', 'show_calculator');
+  register_setting('sbs_display', 'sbs_display');
+  // register_setting('sbs_display', 'color_scheme');
+  // register_setting('sbs_display', 'navbar_style');
+  // register_setting('sbs_display', 'show_calculator');
 
 }
 
@@ -227,11 +230,11 @@ function sbs_display_description() {
 function toggle_display_callback( $args ) {
   ob_start();
   ?>
-    <input type="checkbox" id="show_header" name="show_header" value="1" <?php echo checked(1, get_option('show_header'), false) ?> />
+    <input type="checkbox" id="show_header" name="show_section[header]" value="1" <?php echo checked(1, get_option('show_section')['header'], false) ?> />
     <label for="show_header"><?php echo $args[0] ?></label><br />
-    <input type="checkbox" id="show_content" name="show_content" value="1" <?php echo checked(1, get_option('show_content'), false) ?> />
+    <input type="checkbox" id="show_content" name="show_section[content]" value="1" <?php echo checked(1, get_option('show_section')['content'], false) ?> />
     <label for="show_content"><?php echo $args[1] ?></label><br />
-    <input type="checkbox" id="show_footer" name="show_footer" value="1" <?php echo checked(1, get_option('show_footer'), false) ?> />
+    <input type="checkbox" id="show_footer" name="show_section[footer]" value="1" <?php echo checked(1, get_option('show_section')['footer'], false) ?> />
     <label for="show_footer"><?php echo $args[2] ?></label><br />
   <?php
 
@@ -260,11 +263,10 @@ function sbs_sbs_table_callback() {
   ob_start();
   ?>
   <?php  ?>
-  <div id="sbs-order-container">
+  <div class="sortable-container" id="sbs-order-container">
     <h3>Your Ordering Process</h3>
+    <div class="fixed-item noselect">Package Selection</div>
     <ul id="sbs-order" class="sortable">
-      <li id="sbs_01" data-catid="start" class="sortable-item">Package Selection</li>
-
       <?php if ( isset( $step_order) ) {
               foreach( $step_order as $category ) { ?>
                 <li data-catid="<?php echo $category['id'] ?>" class="sortable-item">
@@ -273,12 +275,11 @@ function sbs_sbs_table_callback() {
               <?php
               }
             } ?>
-
-      <li id="sbs_05" data-catid="end" class="sortable-item">Checkout</li>
     </ul>
+    <div class="fixed-item noselect">Checkout</div>
   </div>
 
-  <div id="sbs-pool-container">
+  <div class="sortable-container" id="sbs-pool-container">
     <h3>Available Categories</h3>
     <ul id="sbs-pool" class="sortable">
       <?php foreach( $all_categories as $category ) { ?>
@@ -291,7 +292,7 @@ function sbs_sbs_table_callback() {
 
   <div class="clearfix"></div>
 
-  <input type="text" id="step_order" name="step_order" value="<?php echo get_option('step_order') ?>" />
+  <input type="hidden" id="step_order" name="step_order" value="<?php echo get_option('step_order') ?>" />
   <?php
 
   echo ob_get_clean();
@@ -302,13 +303,13 @@ function sbs_sbs_table_callback() {
 function sbs_display_color_scheme_callback() {
   ob_start();
   ?>
-    <input type="radio" id="color-scheme-1" name="color_scheme" value="1" <?php echo checked(1, get_option('color_scheme'), false) ?> />
+    <input type="radio" id="color-scheme-1" name="sbs_display[color-scheme]" value="1" <?php echo checked(1, get_option('sbs_display')['color-scheme'], false) ?> />
     <label for="color-scheme-1">Red</label><br />
-    <input type="radio" id="color-scheme-2" name="color_scheme" value="2" <?php echo checked(2, get_option('color_scheme'), false) ?> />
+    <input type="radio" id="color-scheme-2" name="sbs_display[color-scheme]" value="2" <?php echo checked(2, get_option('sbs_display')['color-scheme'], false) ?> />
     <label for="color-scheme-2">Blue</label><br />
-    <input type="radio" id="color-scheme-3" name="color_scheme" value="3" <?php echo checked(3, get_option('color_scheme'), false) ?> />
+    <input type="radio" id="color-scheme-3" name="sbs_display[color-scheme]" value="3" <?php echo checked(3, get_option('sbs_display')['color-scheme'], false) ?> />
     <label for="color-scheme-3">Green</label><br />
-    <input type="radio" id="color-scheme-4" name="color_scheme" value="4" <?php echo checked(4, get_option('color_scheme'), false) ?> />
+    <input type="radio" id="color-scheme-4" name="sbs_display[color-scheme]" value="4" <?php echo checked(4, get_option('sbs_display')['color-scheme'], false) ?> />
     <label for="color-scheme-4">Gray</label><br />
   <?php
 
@@ -318,7 +319,7 @@ function sbs_display_color_scheme_callback() {
 function sbs_display_sidebar_calculator_callback() {
   ob_start();
   ?>
-    <input type="checkbox" id="show_calculator" name="show_calculator" value="1" <?php echo checked(1, get_option('show_calculator'), false) ?> />
+    <input type="checkbox" id="show_calculator" name="sbs_display[show-calculator]" value="1" <?php echo checked(1, get_option('sbs_display')['show-calculator'], false) ?> />
   <?php
 
   echo ob_get_clean();
@@ -327,11 +328,11 @@ function sbs_display_sidebar_calculator_callback() {
 function sbs_display_navbar_callback() {
   ob_start();
   ?>
-    <input type="radio" id="color-scheme-1" name="navbar_style" value="1" <?php echo checked(1, get_option('navbar_style'), false) ?> />
+    <input type="radio" id="color-scheme-1" name="sbs_display[navbar-style]" value="1" <?php echo checked(1, get_option('sbs_display')['navbar-style'], false) ?> />
     <label for="color-scheme-1">Circles</label><br />
-    <input type="radio" id="color-scheme-2" name="navbar_style" value="2" <?php echo checked(2, get_option('navbar_style'), false) ?> />
+    <input type="radio" id="color-scheme-2" name="sbs_display[navbar-style]" value="2" <?php echo checked(2, get_option('sbs_display')['navbar-style'], false) ?> />
     <label for="color-scheme-2">Squares</label><br />
-    <input type="radio" id="color-scheme-3" name="navbar_style" value="3" <?php echo checked(3, get_option('navbar_style'), false) ?> />
+    <input type="radio" id="color-scheme-3" name="sbs_display[navbar-style]" value="3" <?php echo checked(3, get_option('sbs_display')['navbar-style'], false) ?> />
     <label for="color-scheme-3">Triangles</label><br />
   <?php
 

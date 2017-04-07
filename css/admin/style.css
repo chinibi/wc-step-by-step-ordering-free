@@ -2,12 +2,37 @@
   clear: both;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+div.sortable-container {
+  overflow: auto;
+}
+
 ul.sortable {
   max-width: 300px;
-  min-height: 200px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 6px;
+  padding-right: 6px;
+  overflow: auto;
+  border: 1px solid #ddd;
 }
 
 .sortable-item.sortable-fixed {
+  background-color: #ccc;
+}
+
+div.fixed-item {
+  border: 1px solid gray;
+  padding: 10px;
   background-color: #ccc;
 }
 
@@ -15,6 +40,7 @@ li.sortable-item {
   border: 1px solid gray;
   padding: 10px;
   background-color: white;
+  cursor: move;
 }
 
 .ui-sortable-placeholder {

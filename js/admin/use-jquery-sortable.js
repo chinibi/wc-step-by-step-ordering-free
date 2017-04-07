@@ -4,7 +4,7 @@
     $('.sortable').sortable({
       items: '.sortable-item:not(.sortable-fixed)',
       placeholder: 'ui-sortable-placeholder',
-      cursor: 'crosshair',
+      cursor: 'move',
       start: function(e, ui) {
          ui.placeholder.height(ui.item.height());
       },
