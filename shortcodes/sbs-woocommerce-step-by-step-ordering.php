@@ -6,12 +6,14 @@ function sbs_remove_edit_link() {
 
 function sbs_previous_step_link( $current_step, $step_count ) {
 
+  $base_url = get_permalink( get_the_ID() );
+
   if ( $current_step > 0 ) {
 
     $previous_step = $current_step - 1;
     ob_start();
     ?>
-      <a href="<?php echo esc_url( get_site_url() . '/ordering/?step=' . $previous_step ) ?>">Previous Step</a>
+      <a href="<?php echo esc_url( $base_url . '?step=' . $previous_step ) ?>">Previous Step</a>
     <?php
     return ob_get_clean();
 
@@ -25,12 +27,14 @@ function sbs_previous_step_link( $current_step, $step_count ) {
 
 function sbs_next_step_link( $current_step, $step_count ) {
 
+  $base_url = get_permalink( get_the_ID() );
+
   if ( $current_step !== $step_count - 1 ) {
 
-    $previous_step = $current_step + 1;
+    $next_step = $current_step + 1;
     ob_start();
     ?>
-      <a href="<?php echo esc_url( get_site_url() . '/ordering/?step=' . $previous_step ) ?>">Next Step</a>
+      <a href="<?php echo esc_url( $base_url . '?step=' . $next_step ) ?>">Next Step</a>
     <?php
     return ob_get_clean();
 
@@ -81,7 +85,7 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   if ( !array_key_exists( $current_step, $steps ) ) {
     $current_step = 0;
   }
-
+  ChromePhp::log( get_permalink(get_the_ID()) );
   ob_start();
   ?>
   <h1>This is the Step-By-Step Ordering Process</h1>
