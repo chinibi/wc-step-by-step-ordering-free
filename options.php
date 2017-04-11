@@ -22,13 +22,14 @@ function sbs_plugin_admin_add_page() {
 
 function load_custom_wp_admin_style() {
   // load jQuery UI libraries
-  wp_enqueue_script( 'jquery-ui-draggable' );
-  wp_enqueue_script( 'jquery-ui-droppable' );
-  wp_enqueue_script( 'jquery-ui-sortable' );
-  wp_enqueue_style( 'jquery-ui-style', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css' );
+  // wp_enqueue_script( 'jquery-ui-draggable' );
+  // wp_enqueue_script( 'jquery-ui-droppable' );
+  // wp_enqueue_script( 'jquery-ui-sortable' );
+  // wp_enqueue_style( 'jquery-ui-style', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css' );
 
   // load custom jQuery UI scripts and styles
-  wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'jquery', 'jquery-ui-sortable', 'jquery-ui-droppable', 'jquery-ui-draggable' ) );
+	wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
+  wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ) );
   wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css' );
 }
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
@@ -241,22 +242,41 @@ function toggle_display_callback( $args ) {
   echo ob_get_clean();
 }
 
+function sbs_get_step_order() {
+	$step_order = get_option('step_order');
+	$step_order = json_decode( $step_order );
+
+	// Clean up this array because the nesting library did some weird stuff when serializing
+	$step_order = $step_order[0];
+	foreach( $step_order as $step ) {
+		$step->children = $step->children[0];
+	}
+
+	return $step_order;
+}
+
 function sbs_sbs_table_callback() {
 
   // get_the_category_by_ID() only works if this function is called for some reason
-  $all_categories = sbs_get_all_wc_categories();
+  $available_categories = sbs_get_all_wc_categories();
 
-  if ( get_option('step_order') ) {
-    $step_order_ids = explode( ',' , get_option('step_order') );
-    $step_order = array_map( function($id) {
-      return array( 'id' => (int) $id, 'name' => get_the_category_by_ID($id) );
-    }, $step_order_ids );
+	$step_order = sbs_get_step_order();
 
-    $all_categories = array_filter( $all_categories, function( $category ) {
-      $step_order_ids = explode( ',' , get_option('step_order') );
-      return !in_array( $category->term_id, $step_order_ids );
-    } );
-  }
+	$available_categories = array_filter( $available_categories, function( $category ) {
+
+		$step_order = sbs_get_step_order();
+		$flat_step_order = array();
+
+		foreach( $step_order as $step ) {
+			$flat_step_order[] = $step->catid;
+			foreach ($step->children as $child) {
+				$flat_step_order[] = $child->catid;
+			}
+		}
+
+		return !in_array( $category->term_id, $flat_step_order );
+	} );
+
   // Categories listed in the ordering process should not be listed in Available Categories
   // to prevent duplication
 
@@ -267,14 +287,35 @@ function sbs_sbs_table_callback() {
     <h3>Your Ordering Process</h3>
     <div class="fixed-item noselect">Package Selection</div>
     <ul id="sbs-order" class="sortable">
-      <?php if ( isset( $step_order) ) {
-              foreach( $step_order as $category ) { ?>
-                <li data-catid="<?php echo $category['id'] ?>" class="sortable-item">
-                  <?php echo $category['name'] ?>
-                </li>
-              <?php
-              }
-            } ?>
+
+      <?php
+			if ( isset( $step_order ) )
+			{
+        foreach( $step_order as $category )
+				{
+				?>
+          <li data-catid="<?php echo $category->catid ?>" class="sortable-item">
+            <?php echo get_the_category_by_ID( $category->catid ) ?>
+
+						<ul>
+							<?php
+							foreach( $category->children as $child )
+							{
+							?>
+								<li class="sortable-item" data-catid="<?php echo $child->catid ?>">
+									<?php echo get_the_category_by_ID( $child->catid ) ?>
+								</li>
+							<?php
+							}
+							?>
+						</ul>
+
+          </li>
+        <?php
+        }
+      }
+			?>
+
     </ul>
     <div class="fixed-item noselect">Checkout</div>
   </div>
@@ -282,9 +323,10 @@ function sbs_sbs_table_callback() {
   <div class="sortable-container" id="sbs-pool-container">
     <h3>Available Categories</h3>
     <ul id="sbs-pool" class="sortable">
-      <?php foreach( $all_categories as $category ) { ?>
+      <?php foreach( $available_categories as $category ) { ?>
               <li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
                 <?php echo $category->name ?>
+								<ul></ul>
               </li>
       <?php } ?>
     </ul>
@@ -292,7 +334,7 @@ function sbs_sbs_table_callback() {
 
   <div class="clearfix"></div>
 
-  <input type="hidden" id="step_order" name="step_order" value="<?php echo get_option('step_order') ?>" />
+  <input type="hidden" id="step_order" name="step_order" value="<?php echo esc_attr( get_option('step_order') ) ?>" />
   <?php
 
   echo ob_get_clean();

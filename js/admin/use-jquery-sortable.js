@@ -1,26 +1,17 @@
 (function($) {
   $(document).ready(function() {
 
-    $('.sortable').sortable({
-      items: '.sortable-item:not(.sortable-fixed)',
-      placeholder: 'ui-sortable-placeholder',
-      cursor: 'move',
-      start: function(e, ui) {
-         ui.placeholder.height(ui.item.height());
-      },
-      update: function(e, ui) {
-        var order = $('#sbs-order').sortable('toArray', {attribute: 'data-catid'});
-        order = order.filter(function(each) {
-          return !isNaN(each);
-        });
-        $('#step_order').val(order.join(','));
+    var group = $('.sortable').sortable({
+      group: 'sortable',
+      nested: true,
+      onDrop: function($item, container, _super) {
+        var data = $('#sbs-order').sortable('serialize').get();
+        var jsonString = JSON.stringify(data);
+
+        $('input#step_order').val(jsonString);
+        _super($item, container);
       }
     });
-
-    $('#sbs-order').sortable('option', 'connectWith', '#sbs-pool');
-    $('#sbs-pool').sortable('option', 'connectWith', '#sbs-order');
-
-    $('.sortable').disableSelection();
 
   });
 })(jQuery);
