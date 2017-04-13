@@ -47,16 +47,16 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     );
 
     ?>
-    <table id="widget-sidebar-cart-totals">
+    <table id="sbs-widget-sidebar-cart-totals">
       <?php
       foreach($totals as $cat_info)
       {
       ?>
         <tr class="<?php echo esc_attr( $cat_info['css_class'] ) ?>">
-          <td>
+          <td class="sbs-widget-sidebar-cat-name">
             <strong><?php echo esc_html( $cat_info['cat_name'] ) ?></strong>
           </td>
-          <td class="widget-sidebar-total-column">
+          <td data-cat="<?php echo esc_attr( $cat_info['cat_name'] ) ?>" class="sbs-widget-sidebar-total-column">
             <?php echo $cat_info['cat_total'] ?>
           </td>
         </tr>
@@ -68,28 +68,29 @@ class SBS_WC_Cart_Totals extends WP_Widget {
   <?php
   }
 
+  /**
+   * Adds a filter to the wc_price return value
+   *
+   * Wrap the price numeric value in a span tag to make it easily addressable
+   * by jQuery
+   */
+  public function filter_wc_price_add_span_tag( $return, $price, $args ) {
 
-/**
- * Gets the parent category of a specified product.
- *
- * Get all WooCommerce product categories for the specified product, then looks
- * through the parent property of each of them. A parent property with value 0
- * means the category is top-level.
- *
- *
- * @param int $product_id : The ID of the product
- *
- *
- * @return object $category : A category object returned by wp_get_post_terms
- */
-  private function get_product_parent_category( $product_id ) {
+    extract( apply_filters( 'wc_price_args', wp_parse_args( $args, array(
+    'ex_tax_label'       => false,
+    'currency'           => '',
+    'decimal_separator'  => wc_get_price_decimal_separator(),
+    'thousand_separator' => wc_get_price_thousand_separator(),
+    'decimals'           => wc_get_price_decimals(),
+    'price_format'       => get_woocommerce_price_format(),
+    ) ) ) );
 
-    $categories = wp_get_post_terms($product_id, 'product_cat');
+    $negative        = $price < 0;
+    $formatted_price = ( $negative ? '-' : '' ) . sprintf( $price_format, '<span class="woocomerce-Price-numeric">' . get_woocommerce_currency_symbol( $currency ), $price . '</span>' );
 
-    foreach ($categories as $key => $category) {
-      if ($category->parent === 0)
-        return $category;
-    }
+    $return = '<span class="woocommerce-Price-amount amount">' . $formatted_price . '</span>';
+
+    return $return;
 
   }
 
@@ -114,7 +115,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     $cart = $woocommerce->cart->get_cart();
     $category_total = 0;
     foreach($cart as $key => $cart_item) {
-      if ($this->get_product_parent_category( $cart_item['product_id'] )->term_id === $category_id)
+      if (sbs_get_product_parent_category( $cart_item['product_id'] )->term_id === $category_id)
         $category_total += $cart_item['line_total'];
     }
     return $category_total;
@@ -141,6 +142,8 @@ class SBS_WC_Cart_Totals extends WP_Widget {
   private function map_categories_to_widget_array_callback( $category ) {
 
     sbs_get_all_wc_categories();
+
+    add_filter( 'wc_price', array( $this, 'filter_wc_price_add_span_tag' ), 10, 3 );
 
     return array(
       'cat_name' => get_the_category_by_ID( $category->catid ),
