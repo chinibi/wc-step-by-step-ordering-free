@@ -52,7 +52,7 @@ function sbs_plugin_activation() {
 register_activation_hook( __FILE__, 'sbs_plugin_activation' );
 
 function sbs_enqueue_client_style_scripts() {
-	wp_enqueue_style( 'sbs-style', plugins_url( '/css/sbs-style.css', __FILE__ ) );
+	wp_enqueue_style( 'sbs-style', plugins_url( '/css/frontend/sbs-style.css', __FILE__ ) );
 	wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
 	wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart.js', __FILE__ ), array('jquery', 'accountingjs') );
 }
