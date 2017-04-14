@@ -21,16 +21,12 @@ function sbs_plugin_admin_add_page() {
 }
 
 function load_custom_wp_admin_style() {
-  // load jQuery UI libraries
-  // wp_enqueue_script( 'jquery-ui-draggable' );
-  // wp_enqueue_script( 'jquery-ui-droppable' );
-  // wp_enqueue_script( 'jquery-ui-sortable' );
-  // wp_enqueue_style( 'jquery-ui-style', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css' );
 
   // load custom jQuery UI scripts and styles
 	wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
   wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ) );
   wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css' );
+
 }
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
 
@@ -78,7 +74,7 @@ function sbs_render_active_tab($active_tab) {
 function sbs_render_general_options() {
   ob_start();
   ?>
-    <?php settings_fields('show_something') ?>
+    <?php settings_fields('sbs_show_something') ?>
     <?php do_settings_sections('sbs_general') ?>
   <?php
 
@@ -139,16 +135,11 @@ function plugin_admin_init() {
   );
 
   add_settings_field(
-    'show_something', // String for use in the 'id' attribute of tags.
-    'Content', // Title of the field.
+    'sbs_show_something', // String for use in the 'id' attribute of tags.
+    'Additional Features', // Title of the field.
     'toggle_display_callback', //  Function that fills the field with the desired inputs as part of the larger form. Passed a single argument, the $args array. Name and id of the input should match the $id given to this function. The function should echo its output.
     'sbs_general', //  The menu page on which to display this field. Should match $menu_slug from add_theme_page() or from do_settings_sections().
-    'sbs_general', // The section of the settings page in which to show the box (default or a section you added with add_settings_section(), look at the page in the source to see what the existing ones are.)
-    array(
-      'Activate this setting to display the header.',
-      'Activate this setting to display the body.',
-      'Activate this setting to display the footer.'
-    )
+    'sbs_general' // The section of the settings page in which to show the box (default or a section you added with add_settings_section(), look at the page in the source to see what the existing ones are.)
   );
 
   // SBS Step-By-Step Settings Fields
@@ -183,7 +174,7 @@ function plugin_admin_init() {
     'sbs_display'
   );
 
-  register_setting('show_something', 'show_section');
+  register_setting('sbs_show_something', 'sbs_ui_feature');
 
   register_setting('sbs_order_settings', 'step_order');
 
@@ -231,12 +222,8 @@ function sbs_display_description() {
 function toggle_display_callback( $args ) {
   ob_start();
   ?>
-    <input type="checkbox" id="show_header" name="show_section[header]" value="1" <?php echo checked(1, get_option('show_section')['header'], false) ?> />
-    <label for="show_header"><?php echo $args[0] ?></label><br />
-    <input type="checkbox" id="show_content" name="show_section[content]" value="1" <?php echo checked(1, get_option('show_section')['content'], false) ?> />
-    <label for="show_content"><?php echo $args[1] ?></label><br />
-    <input type="checkbox" id="show_footer" name="show_section[footer]" value="1" <?php echo checked(1, get_option('show_section')['footer'], false) ?> />
-    <label for="show_footer"><?php echo $args[2] ?></label><br />
+    <input type="checkbox" id="enable_lightbox" name="sbs_ui_feature[lightbox]" value="1" <?php echo checked(1, get_option('sbs_ui_feature')['lightbox'], false) ?> />
+    <label for="enable_lightbox">Clicking product thumbnails opens product details in a lightbox popup instead of taking the user to a new page.</label><br />
   <?php
 
   echo ob_get_clean();
