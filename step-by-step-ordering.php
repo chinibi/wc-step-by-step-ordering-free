@@ -12,59 +12,105 @@ Text Domain: wporg
 Domain Path: /languages
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-// Include helper functions
-include_once( plugin_dir_path( __FILE__ ) . 'includes/helper-functions/helper-functions.php' );
 
-// Include WP Admin Options page
-include_once( plugin_dir_path( __FILE__ ) . 'options.php' );
+if ( !class_exists( 'StepByStepSystem' ) ):
 
-// Include SBS Ordering Shortcode
-include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
+final class StepByStepSystem {
 
-// Include SBS Cart Totals Widget
-include_once( plugin_dir_path( __FILE__) . 'includes/widgets/sbs-cart-totals.php' );
+	public function __construct() {
+		$this->includes();
+		$this->initialize();
+	}
 
-// Include additional AJAX Add To Cart functions
-include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
+	private function includes() {
+		// Include helper functions
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/helper-functions/helper-functions.php' );
 
-function sbs_plugin_activation() {
+		// Include WP Admin Options page
+		include_once( plugin_dir_path( __FILE__ ) . 'options.php' );
 
-  if ( !post_exists( 'ordering' ) ) {
-    $page_data = array(
-      'post_status' => 'publish',
-      'post_type'   => 'page',
-      'post_author' => 1,
-      'post_name'   => 'ordering',
-      'post_title'  => 'Step-By-Step Ordering',
-      'comment_status' => 'closed',
-      'post_content'     => '[sbs_woocommerce_step_by_step_ordering]'
-    );
+		// Include SBS Ordering Shortcode
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
 
-    wp_insert_post( $page_data );
-  }
+		// Include WooCommerce template and action overrides
+		include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-template-override.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-action-override.php' );
+
+		// Include SBS Cart Totals Widget
+		include_once( plugin_dir_path( __FILE__) . 'includes/widgets/sbs-cart-totals.php' );
+
+		// Include additional AJAX Add To Cart functions
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
+	}
+
+
+	private function initialize() {
+
+		register_activation_hook( __FILE__, array( $this, 'plugin_activation' ) );
+		add_action( 'wp_head', array( $this, 'sbs_define_ajax_url' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_enqueue_client_style_scripts' ) );
+
+	}
+
+
+	public function plugin_activation() {
+
+	  if ( !post_exists( 'ordering' ) ) {
+	    $page_data = array(
+	      'post_status' => 'publish',
+	      'post_type'   => 'page',
+	      'post_author' => 1,
+	      'post_name'   => 'ordering',
+	      'post_title'  => 'Step-By-Step Ordering',
+	      'comment_status' => 'closed',
+	      'post_content'     => '[sbs_woocommerce_step_by_step_ordering]'
+	    );
+
+	    wp_insert_post( $page_data );
+	  }
+
+	}
+
+
+	public function sbs_enqueue_client_style_scripts() {
+
+		// Enqueue libraries
+		wp_enqueue_style( 'magnific-popup-style', plugins_url( '/css/frontend/magnific-popup.css', __FILE__ ) );
+
+		wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
+		wp_enqueue_script( 'magnific-popupjs', plugins_url( '/js/frontend/magnific-popup.min.js', __FILE__ ), array( 'jquery' ) );
+
+		// Enqueue custom stylesheets
+		wp_enqueue_style( 'sbs-style', plugins_url( '/css/frontend/sbs-style.css', __FILE__ ) );
+
+		// Enqueue custom scripts
+		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
+		wp_enqueue_script( 'sbs-use-magnific-popup', plugins_url( '/js/frontend/sbs-use-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
+
+	}
+
+
+	public function sbs_define_ajax_url() {
+	  ob_start();
+	  ?>
+	  <script type="text/javascript">
+	    var sbsAjaxUrl = "<?php echo admin_url('admin-ajax.php') ?>";
+	  </script>
+	  <?php
+	  echo ob_get_clean();
+	}
 
 }
 
-register_activation_hook( __FILE__, 'sbs_plugin_activation' );
+endif;
 
-function sbs_enqueue_client_style_scripts() {
-	wp_enqueue_style( 'sbs-style', plugins_url( '/css/frontend/sbs-style.css', __FILE__ ) );
-	wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
-	wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart.js', __FILE__ ), array('jquery', 'accountingjs') );
-}
-add_action( 'wp_enqueue_scripts', 'sbs_enqueue_client_style_scripts' );
 
-function sbs_define_ajax_url() {
-  ob_start();
-  ?>
-  <script type="text/javascript">
-    var sbsAjaxUrl = "<?php echo admin_url('admin-ajax.php') ?>";
-  </script>
-  <?php
-  echo ob_get_clean();
+function sbs_step_by_step_sys_main() {
+	new StepByStepSystem();
 }
-add_action( 'wp_head', 'sbs_define_ajax_url' );
+
+new StepByStepSystem();
