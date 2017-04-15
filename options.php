@@ -161,7 +161,7 @@ function plugin_admin_init() {
   );
   add_settings_field(
     'navbar_style',
-    'Navbar Appearance',
+    'Step Number Shapes',
     'sbs_display_navbar_callback',
     'sbs_display',
     'sbs_display'
@@ -249,6 +249,8 @@ function sbs_sbs_table_callback() {
 
 	$step_order = sbs_get_step_order();
 
+	// Categories listed in the ordering process should not be listed in Available Categories
+	// to prevent duplication
 	$available_categories = array_filter( $available_categories, function( $category ) {
 
 		$step_order = sbs_get_step_order();
@@ -263,9 +265,6 @@ function sbs_sbs_table_callback() {
 
 		return !in_array( $category->term_id, $flat_step_order );
 	} );
-
-  // Categories listed in the ordering process should not be listed in Available Categories
-  // to prevent duplication
 
   ob_start();
   ?>
@@ -333,13 +332,15 @@ function sbs_display_color_scheme_callback() {
   ob_start();
   ?>
     <input type="radio" id="color-scheme-1" name="sbs_display[color-scheme]" value="1" <?php echo checked(1, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-1">Red</label><br />
+    <label for="color-scheme-1">Default</label><br />
     <input type="radio" id="color-scheme-2" name="sbs_display[color-scheme]" value="2" <?php echo checked(2, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-2">Blue</label><br />
+    <label for="color-scheme-2">Spring Green</label><br />
     <input type="radio" id="color-scheme-3" name="sbs_display[color-scheme]" value="3" <?php echo checked(3, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-3">Green</label><br />
+    <label for="color-scheme-3">Aqua Green</label><br />
     <input type="radio" id="color-scheme-4" name="sbs_display[color-scheme]" value="4" <?php echo checked(4, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-4">Gray</label><br />
+    <label for="color-scheme-4">Autumn 1</label><br />
+		<input type="radio" id="color-scheme-5" name="sbs_display[color-scheme]" value="5" <?php echo checked(5, get_option('sbs_display')['color-scheme'], false) ?> />
+    <label for="color-scheme-5">Autumn 2</label><br />
   <?php
 
   echo ob_get_clean();
@@ -358,60 +359,14 @@ function sbs_display_navbar_callback() {
   ob_start();
   ?>
     <input type="radio" id="color-scheme-1" name="sbs_display[navbar-style]" value="1" <?php echo checked(1, get_option('sbs_display')['navbar-style'], false) ?> />
-    <label for="color-scheme-1">Circles</label><br />
+    <label for="color-scheme-1">Square</label><br />
     <input type="radio" id="color-scheme-2" name="sbs_display[navbar-style]" value="2" <?php echo checked(2, get_option('sbs_display')['navbar-style'], false) ?> />
-    <label for="color-scheme-2">Squares</label><br />
+    <label for="color-scheme-2">Circle</label><br />
     <input type="radio" id="color-scheme-3" name="sbs_display[navbar-style]" value="3" <?php echo checked(3, get_option('sbs_display')['navbar-style'], false) ?> />
     <label for="color-scheme-3">Triangles</label><br />
   <?php
 
   echo ob_get_clean();
-}
-
-function print_wc_categories() {
-  $taxonomy     = 'product_cat';
-  $orderby      = 'name';
-  $show_count   = 0;      // 1 for yes, 0 for no
-  $pad_counts   = 0;      // 1 for yes, 0 for no
-  $hierarchical = 1;      // 1 for yes, 0 for no
-  $title        = '';
-  $empty        = 0;
-
-  $args = array(
-         'taxonomy'     => $taxonomy,
-         'orderby'      => $orderby,
-         'show_count'   => $show_count,
-         'pad_counts'   => $pad_counts,
-         'hierarchical' => $hierarchical,
-         'title_li'     => $title,
-         'hide_empty'   => $empty
-  );
-  $all_categories = get_categories( $args );
-  echo var_dump( $all_categories );
-  foreach ($all_categories as $cat) {
-    if($cat->category_parent == 0) {
-        $category_id = $cat->term_id;
-        echo '<br /><a href="'. get_term_link($cat->slug, 'product_cat') .'">'. $cat->name .'</a>';
-
-        $args2 = array(
-                'taxonomy'     => $taxonomy,
-                'child_of'     => 0,
-                'parent'       => $category_id,
-                'orderby'      => $orderby,
-                'show_count'   => $show_count,
-                'pad_counts'   => $pad_counts,
-                'hierarchical' => $hierarchical,
-                'title_li'     => $title,
-                'hide_empty'   => $empty
-        );
-        $sub_cats = get_categories( $args2 );
-        if($sub_cats) {
-            foreach($sub_cats as $sub_category) {
-                echo  $sub_category->name ;
-            }
-        }
-    }
-  }
 }
 
 function sbs_get_all_wc_categories() {

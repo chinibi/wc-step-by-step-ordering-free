@@ -1,0 +1,112 @@
+
+.sbs-widget-sidebar-package {
+    background-color: #8a140e;
+    color: white;
+    border-bottom: 3px solid white;
+}
+
+#sbs-widget-sidebar-cart-totals {
+    background-color: #fcecc7;
+    font-size: .90em;
+    width: 311px;
+}
+
+.sbs-widget-sidebar-subtotal {
+    background-color: #ffde8f;
+    color: black;
+    border-top: 3px solid white;
+}
+
+.sbs-widget-sidebar-merch-credit {
+    background-color: #b9b2b0;
+    border-top: 3px solid white;
+    color: black;
+}
+
+.sbs-widget-sidebar-subtotal {
+    background-color: #ffde8f;
+    color: black;
+    border-top: 3px solid white;
+}
+
+.sbs-widget-sidebar-merch-credit {
+    background-color: #666666;
+    border-top: 3px solid white;
+    color: white;
+}
+
+.sbs-widget-sidebar-grand-total {
+    font-size: 1em;
+    background-color: #8a140e;
+    color: white;
+    border-top: 3px solid white;
+}
+
+.step-title.active {
+    background-color: #8a140e;
+    color: #fff;
+}
+
+.step-title.active > a {
+    color: white;
+}
+
+.step-index > span.active {
+    background-color: #cb5866;
+    color: white;
+}
+
+.step-title {
+    background-color: #ffde8f;
+    padding: 25px 0 15px;
+    margin-top: -20px;
+}
+
+.step-index > span {
+    background-color: #fcecc7;
+    height: 45px;
+    width: 45px;
+    display: inline-block;
+    color: #8a140e;
+    font-size: 1.6em;
+    /* border-radius: 100%; */
+    border: 3px solid white;
+    line-height: 39px;
+}
+
+.step-title > a {
+    display: block;
+    color: #8a140e;
+}
+
+.woocommerce-message {
+    background-color: #8a140e;
+    font-weight: bold;
+}
+
+.et_pb_text_1 > h3:not(:first-child) {
+    background-color: #ffde8f;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-left: 6px;
+}
+
+.woocommerce ul.products li.product .button {
+    background-color: #8a140e;
+    color: white;
+}
+
+a.open-popup-link {
+    color: #8a140e;
+}
+
+.showmore-btn-container {
+    text-align: right;
+    color: #8a140e;
+}
+
+#sbs-widget-sidebar-cart-totals td, #sbs-widget-sidebar-cart-totals tr {
+    max-width: 100%;
+    padding: 0.857em 0.587em;
+    font-weight: bold;
+}

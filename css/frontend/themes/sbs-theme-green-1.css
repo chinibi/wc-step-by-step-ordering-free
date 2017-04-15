@@ -1,0 +1,89 @@
+.sbs-widget-sidebar-package {
+    background-color: #497b36;
+    color: white;
+    border-bottom: 3px solid white;
+}
+
+#sbs-widget-sidebar-cart-totals {
+    background-color: #d1d1d1;
+}
+
+.sbs-widget-sidebar-subtotal {
+    background-color: #c9eabe;
+    color: black;
+    border-top: 3px solid white;
+}
+
+.sbs-widget-sidebar-merch-credit {
+    background-color: #d1d1d1;
+    border-top: 3px solid white;
+    color: black;
+}
+.sbs-widget-sidebar-subtotal {
+    background-color: #c9eabe;
+    color: black;
+    border-top: 3px solid white;
+}
+
+.sbs-widget-sidebar-grand-total {
+    font-size: 1em;
+    background-color: #497b36;
+    color: white;
+    border-top: 3px solid white;
+}
+
+
+.step-title.active {
+    background-color: #497b36;
+}
+
+.step-title.active > a {
+    color: white;
+}
+
+.step-index > span.active {
+    background-color: #2a4022;
+    color: white;
+}
+
+.step-title {
+    background-color: #d1d1d1;
+    padding: 25px 0 15px;
+    margin-top: -20px;
+}
+
+.step-index > span {
+    background-color: #c9eabe;
+    height: 45px;
+    width: 45px;
+    display: inline-block;
+    font-size: 1.6em;
+    /* border-radius: 100%; */
+    border: 3px solid white;
+    line-height: 39px;
+}
+
+.woocommerce-message {
+    background-color: #497b36;
+    color: white;
+}
+
+.woocommerce-message a {
+    color: lightblue;
+}
+
+.et_pb_text_1 > h3:not(:first-child) {
+    background-color: #f8ebcc;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-left: 6px;
+}
+
+.woocommerce ul.products li.product .button {
+    background-color: #497b36;
+    color: white;
+}
+
+a.open-popup-link {
+    color: #497b36;
+}

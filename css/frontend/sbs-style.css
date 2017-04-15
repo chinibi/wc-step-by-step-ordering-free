@@ -4,7 +4,6 @@
 div#sbs-navbar {
     display: flex;
     justify-content: space-around;
-    /*max-width: 922px;*/
     margin-bottom: 30px;
 }
 
@@ -18,14 +17,19 @@ span.step-span-container {
 }
 
 .step-index > span {
-    background-color: #cfe0c9;
+    background-color: white;
+    border: 1px solid black;
     height: 45px;
     width: 45px;
     display: inline-block;
     font-size: 1.6em;
-    /*border-radius: 100%;*/
     border: 3px solid white;
     line-height: 39px;
+}
+
+.step-index > span.active {
+    background-color: black;
+    color: white;
 }
 
 .step-title {
@@ -36,21 +40,13 @@ span.step-span-container {
 
 .step-title > a {
   display: block;
-  color: #648958;
+  /*color: #648958;*/
   text-decoration: none;
 }
 
 .step-title.active {
-    background-color: #669b53;
-}
-
-.step-title.active > a {
-    color: white;
-}
-
-.step-index > span.active {
-    background-color: #3b4f34;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 h1.step-by-step-title {
