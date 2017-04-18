@@ -24,3 +24,18 @@ function sbs_get_product_parent_category( $product_id ) {
   }
 
 }
+
+function sbs_get_wc_products_by_category( $category_id ) {
+
+  sbs_get_all_wc_categories();
+
+  $args = array(
+    'post_type' => 'product',
+    'product_cat' => get_term_by('id', $category_id, 'product_cat')->slug
+  );
+
+  $products = get_posts( $args );
+
+  return $products;
+
+}

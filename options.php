@@ -64,6 +64,9 @@ function sbs_render_active_tab($active_tab) {
     case 'sbs_options':
       echo sbs_render_sbs_options();
       break;
+		case 'package_options':
+			echo sbs_render_package_options();
+			break;
     case 'display_options':
       echo sbs_render_display_options();
       break;
@@ -89,6 +92,16 @@ function sbs_render_sbs_options() {
   <?php
 
   return ob_get_clean();
+}
+
+function sbs_render_package_options() {
+	ob_start();
+	?>
+		<?php settings_fields('sbs_package_settings') ?>
+		<?php do_settings_sections('sbs_package_settings') ?>
+	<?php
+
+	return ob_get_clean();
 }
 
 function sbs_render_display_options() {
@@ -127,6 +140,12 @@ function plugin_admin_init() {
     'sbs_sbs_description',
     'sbs_order_settings'
   );
+	add_settings_section(
+		'sbs_package_settings',
+		'Package Settings',
+		'sbs_package_description',
+		'sbs_package_settings'
+	);
   add_settings_section(
     'sbs_display',
     'Display Settings',
@@ -150,6 +169,22 @@ function plugin_admin_init() {
     'sbs_order_settings',
     'sbs_order_settings'
   );
+
+	// SBS Package Settings
+	add_settings_field(
+		'sbs_package_category',
+		'Package Category',
+		'sbs_package_category_callback',
+		'sbs_package_settings',
+		'sbs_package_settings'
+	);
+	add_settings_field(
+		'sbs_package_tiers',
+		'Package Tiers',
+		'sbs_package_tier_callback',
+		'sbs_package_settings',
+		'sbs_package_settings'
+	);
 
   // SBS Display Settings Fields
   add_settings_field(
@@ -177,6 +212,8 @@ function plugin_admin_init() {
   register_setting('sbs_show_something', 'sbs_ui_feature');
 
   register_setting('sbs_order_settings', 'step_order');
+
+	register_setting('sbs_package_settings', 'sbs_package');
 
   register_setting('sbs_display', 'sbs_display');
   // register_setting('sbs_display', 'color_scheme');
@@ -213,6 +250,20 @@ function sbs_sbs_description() {
 
   <?php
   echo ob_get_clean();
+}
+
+function sbs_package_description() {
+	ob_start();
+	?>
+		<p>
+			Packages serve as a lead-in to your store.  Selecting a package
+			on the Packages page will take the customer to Step 1 of the ordering process.
+		</p>
+		<p>
+			You can add additional features such as store credit to packages.
+		</p>
+	<?php
+	echo ob_get_clean();
 }
 
 function sbs_display_description() {
@@ -327,6 +378,107 @@ function sbs_sbs_table_callback() {
 
 }
 
+function sbs_package_category_callback() {
+	$wc_categories = sbs_get_all_wc_categories();
+	ob_start();
+	?>
+		<label for="select-package-category">
+			Select the WooCommerce product category your packages are assigned to.<br />
+			You must click Save Changes afterwards in order to refresh the package list.
+		</label><br />
+		<select id="select-package-category" name="sbs_package[category]">
+			<option value="">Select One</option>
+			<?php
+			foreach( $wc_categories as $category )
+			{
+			?>
+				<option value="<?php echo $category->term_id ?>" <?php selected( $category->term_id, get_option('sbs_package')['category'] ) ?>>
+					<?php echo $category->name ?>
+				</option>
+			<?php
+			}
+			?>
+		</select>
+	<?php
+
+	echo ob_get_clean();
+}
+
+function sbs_package_tier_callback() {
+
+	if ( !empty( get_option('sbs_package')['category'] ) ) {
+
+		$package_cat_id = get_option('sbs_package')['category'];
+		$packages = sbs_get_wc_products_by_category( $package_cat_id );
+
+	}
+
+	ob_start();
+	?>
+		<div class="inline">
+			<h3>Basic Tier</h3>
+
+			<div>
+				<label for="sbs-basic-package-name">Select Product: </label>
+				<select id="sbs-basic-package-name" name="sbs_package[basic][product]">
+					<option value="">Select One</option>
+					<?php
+
+					$selected_product = isset( get_option('sbs_package')['basic']['product'] ) ? get_option('sbs_package')['basic']['product'] : false;
+
+					foreach( $packages as $package )
+					{
+					?>
+						<option value="<?php echo $package->ID ?>" <?php selected( $package->ID, $selected_product ) ?>>
+							<?php echo $package->post_title ?>
+						</option>
+					<?php
+					}
+					?>
+				</select>
+			</div>
+
+			<div>
+				<label for="sbs-basic-package-credit">Store Credit: </label>
+				<input id="sbs-basic-package-credit" type="number" name="sbs_package[basic][credit]" value="<?php echo get_option('sbs_package')['basic']['credit'] ?>" />
+			</div>
+
+		</div>
+		<div class="inline">
+			<h3>Premium Tier</h3>
+
+			<div>
+				<label for="sbs-premium-package-name">Select Product: </label>
+				<select id="sbs-premium-package-name" name="sbs_package[premium][product]">
+					<option value="">Select One</option>
+					<?php
+
+					$selected_product = isset( get_option('sbs_package')['premium']['product'] ) ? get_option('sbs_package')['premium']['product'] : false;
+
+					foreach( $packages as $package )
+					{
+					?>
+						<option value="<?php echo $package->ID ?>" <?php selected( $package->ID, $selected_product ) ?>>
+							<?php echo $package->post_title ?>
+						</option>
+					<?php
+					}
+					?>
+				</select>
+			</div>
+
+			<div>
+				<label for="sbs-premium-package-credit">Store Credit: </label>
+				<input id="sbs-premium-package-credit" type="number" name="sbs_package[premium][credit]" value="<?php echo get_option('sbs_package')['premium']['credit'] ?>" />
+			</div>
+
+		</div>
+	<?php
+
+	echo ob_get_clean();
+
+}
+
 
 function sbs_display_color_scheme_callback() {
   ob_start();
@@ -341,6 +493,10 @@ function sbs_display_color_scheme_callback() {
     <label for="color-scheme-4">Autumn 1</label><br />
 		<input type="radio" id="color-scheme-5" name="sbs_display[color-scheme]" value="5" <?php echo checked(5, get_option('sbs_display')['color-scheme'], false) ?> />
     <label for="color-scheme-5">Autumn 2</label><br />
+		<input type="radio" id="color-scheme-6" name="sbs_display[color-scheme]" value="6" <?php echo checked(6, get_option('sbs_display')['color-scheme'], false) ?> />
+		<label for="color-scheme-6">Neon</label><br />
+		<input type="radio" id="color-scheme-7" name="sbs_display[color-scheme]" value="7" <?php echo checked(7, get_option('sbs_display')['color-scheme'], false) ?> />
+		<label for="color-scheme-7">Neon Gradients</label><br />
   <?php
 
   echo ob_get_clean();

@@ -83,7 +83,7 @@ function sbs_next_step_link( $current_step, $step_count ) {
 function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
   if ( $current_step === 0 ) {
-    echo 'Select Package Placeholder';
+    echo do_shortcode( '[sbs_select_package]' );
     return;
   }
 
@@ -148,51 +148,63 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   ob_start();
   ?>
 
-  <div id="sbs-navbar">
-    <?php foreach( $steps as $key => $step ) {
-            if ($key === 0) continue;
-    ?>
+  <?php
+  if ( $current_step > 0 )
+  {
+  ?>
+    <div id="sbs-navbar">
+      <?php foreach( $steps as $key => $step ) {
+              if ($key === 0) continue;
+      ?>
 
-            <span class="step-span-container">
-              <div class="step-div-container">
-                <div class="step-index">
-                  <span class="<?php echo $key === $current_step ? 'active' : null ?>">
-                    <?php echo $key ?>
-                  </span>
+              <span class="step-span-container">
+                <div class="step-div-container">
+                  <div class="step-index">
+                    <span class="<?php echo $key === $current_step ? 'active' : null ?>">
+                      <?php echo $key ?>
+                    </span>
+                  </div>
+                  <div class="step-title <?php echo $key === $current_step ? 'active' : null ?>">
+                    <?php
+
+                      if ($key < $current_step)
+                      {
+                      ?>
+                        <a href="<?php echo esc_url( sbs_previous_step_url($current_step, count($steps)) ) ?>"><?php echo $step->name ?></a>
+                      <?php
+                      }
+                      else if ($key === $current_step)
+                      {
+                      ?>
+                        <?php echo $step->name ?>
+                      <?php
+                      }
+                      else if ($key > $current_step)
+                      {
+                      ?>
+                        <a href="<?php echo esc_url( sbs_next_step_url($current_step, count($steps)) ) ?>"><?php echo $step->name ?></a>
+                      <?php
+                      }
+
+                    ?>
+                  </div>
                 </div>
-                <div class="step-title <?php echo $key === $current_step ? 'active' : null ?>">
-                  <?php
+              </span>
 
-                    if ($key < $current_step)
-                    {
-                    ?>
-                      <a href="<?php echo esc_url( sbs_previous_step_url($current_step, count($steps)) ) ?>"><?php echo $step->name ?></a>
-                    <?php
-                    }
-                    else if ($key === $current_step)
-                    {
-                    ?>
-                      <?php echo $step->name ?>
-                    <?php
-                    }
-                    else if ($key > $current_step)
-                    {
-                    ?>
-                      <a href="<?php echo esc_url( sbs_next_step_url($current_step, count($steps)) ) ?>"><?php echo $step->name ?></a>
-                    <?php
-                    }
-
-                  ?>
-                </div>
-              </div>
-            </span>
-
-    <?php } ?>
-  </div>
+      <?php } ?>
+    </div>
+  <?php
+  }
+  ?>
 
   <div>
     <?php sbs_render_step_by_step_ordering_content( $current_step, $steps ) ?>
   </div>
+
+  <?php
+  if ( $current_step > 0 )
+  {
+  ?>
 
   <div id="sbs-store-back-forward-buttons-container">
     <div class="sbs-store-back-forward-buttons">
@@ -202,6 +214,10 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
       <?php echo sbs_next_step_link( $current_step, count($steps) ) ?>
     </div>
   </div>
+
+  <?php
+  }
+  ?>
 
   <?php
 

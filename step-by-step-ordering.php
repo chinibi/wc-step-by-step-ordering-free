@@ -34,6 +34,7 @@ final class StepByStepSystem {
 		include_once( plugin_dir_path( __FILE__ ) . 'options.php' );
 
 		// Include SBS Ordering Shortcode
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-select-package.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
 
 		// Include WooCommerce template and action overrides
