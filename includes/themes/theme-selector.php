@@ -29,7 +29,7 @@ switch( get_option('sbs_display')['navbar-style'] ) {
   case 1: // Default shape (Square)
     break;
   case 2: // Circles
-    wp_enqueue_style( 'sbs-nav-theme-circle', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-nav-theme-circle.css', dirname( __FILE__ ) ), array( 'woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen' ));
+    wp_enqueue_style( 'sbs-nav-theme-circle', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-nav-theme-circle.css' ), array( 'woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen' ));
     break;
   default:
     break;
