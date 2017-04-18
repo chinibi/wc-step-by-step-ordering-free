@@ -1,0 +1,113 @@
+.sbs-widget-sidebar-package {
+    background-color: #b924c8;
+    color: #ffffff;
+    border-bottom: 3px solid white;
+}
+
+#sbs-widget-sidebar-cart-totals {
+    background-color: #f8c9fc;
+    font-size: .90em;
+    width: 311px;
+    color: #a31fb0;
+}
+
+
+.sbs-widget-sidebar-subtotal {
+    background-color: #f4f877;
+    color: #b924c8;
+    border-top: 3px solid white;
+}
+
+.sbs-widget-sidebar-merch-credit {
+    background-color: #b924c8;
+    border-top: 3px solid white;
+    color: #ffffff;
+}
+
+.sbs-widget-sidebar-subtotal {
+    background-color: #f4f877;
+    color: #b924c8;
+    border-top: 3px solid white;
+}
+
+.sbs-widget-sidebar-grand-total {
+    font-size: 1em;
+    background-color: #b924c8;
+    color: #ffffff;
+    border-top: 3px solid white;
+}
+
+.sbs-store-back-forward-buttons {
+    background-color: #870c93;
+    padding: 8px;
+    width: 49%;
+}
+
+.sbs-store-back-forward-buttons > a {
+    display: block;
+    color: #f4f877;
+}
+
+.step-title.active {
+  color: #b924c8;
+  background-color: #f4f877;
+  font-weight: 600;
+}
+
+.step-index > span.active {
+    background-color: #b924c8;
+    color: #ffffff;
+}
+
+.step-title {
+    background-color: #b924c8;
+    padding: 25px 0 15px;
+    margin-top: -20px;
+}
+
+.step-title > a {
+    display: block;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.step-index > span {
+    background-color: #f4f877;
+    height: 45px;
+    width: 45px;
+    display: inline-block;
+    color: #b924c8;
+    font-size: 1.6em;
+    border: 3px solid white;
+    line-height: 39px;
+}
+
+.woocommerce-message {
+    background-color: #f4f877;
+    font-weight: bold;
+    color: #b924c8 !important;
+}
+
+.et_pb_text_1 > h3:not(:first-child) {
+    background-color: #b924c8;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-left: 6px;
+    color: #f4f877;
+}
+
+.woocommerce ul.products li.product .button {
+    background-color: #b924c8;
+    color: #f4f877;
+    border: none;
+    font-weight: 600;
+}
+
+a.open-popup-link {
+    color: #b924c8;
+}
+
+.showmore-btn-container {
+    text-align: right;
+    color: #b924c8;
+}

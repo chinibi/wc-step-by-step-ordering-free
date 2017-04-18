@@ -144,3 +144,13 @@ a.add-prod-link.add-prod-link-modal {
   margin-top: 15px;
   text-align: center;
 }
+
+/* SBS Package Selection Panes */
+.sbs-package-container {
+  float: left;
+  width: 48%;
+}
+
+.sbs-package-title, .sbs-package-thumbnail, .sbs-package-price, .sbs-add-package-to-cart {
+  text-align: center;
+}
