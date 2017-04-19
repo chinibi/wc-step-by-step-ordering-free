@@ -47,7 +47,44 @@ $(document).ready(function() {
 
       $(targetCalcElement).html(newCategoryTotal);
       $(taxElement).html(newTax);
-      $(grandTotalElement).html(newGrandTotal);
+      // $(grandTotalElement).html(newGrandTotal);
+
+    });
+
+  });
+
+  $(document.body).on('added_to_cart', function() {
+
+    var data = {};
+    data.action = 'sbs_query_grand_total';
+
+    $.post(sbsAjaxUrl, data, function(response) {
+
+      if (!response) {
+        return;
+      }
+
+      console.log(response);
+
+      accounting.settings = {
+        currency: {
+          symbol: response.format.currency,
+          format: "%s%v",
+          decimal: response.format.decimal_separator,
+          thousand: response.format.thousand_separator,
+          precision: response.format.decimal_places
+        },
+        number: {
+          thousand: response.format.thousand_separator,
+          precision: response.format.decimal_places
+        }
+      };
+
+      var subTotalElement = '.sbs-widget-sidebar-total-column[data-cat="SUBTOTAL"] .woocomerce-Price-numeric'
+      var grandTotalElement = '.sbs-widget-sidebar-total-column[data-cat="GRAND TOTAL"] .woocomerce-Price-numeric';
+
+      $(subTotalElement).html( accounting.formatMoney( response.sub_total ) );
+      $(grandTotalElement).html( accounting.formatMoney( response.grand_total ) );
 
     });
 
