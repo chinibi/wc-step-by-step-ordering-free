@@ -1,0 +1,107 @@
+.sbs-widget-sidebar-package {
+    background-color: #000;
+    color: #ffffff;
+    border-bottom: 3px solid white;
+}
+
+#sbs-widget-sidebar-cart-totals {
+    background-color: #e0dfdf;
+}
+
+.sbs-widget-sidebar-subtotal {
+    background-color: #000000;
+    color: white;
+    border-top: 3px solid white;
+}
+
+.sbs-widget-sidebar-merch-credit {
+    background-color: #666666;
+    border-top: 3px solid white;
+    color: white;
+}
+
+.sbs-widget-sidebar-subtotal {
+    background-color: #000000;
+    color: white;
+    border-top: 3px solid white;
+}
+
+.sbs-widget-sidebar-grand-total {
+    font-size: 1em;
+    background-color: #e0dfdf;
+    color: #000000;
+    border-top: 3px solid white;
+}
+
+.sbs-store-back-forward-buttons {
+    background-color: #000000;
+    padding: 8px;
+    width: 49%;
+}
+
+.step-title.active {
+    background-color: #666666;
+}
+
+.step-title.active > a {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.step-index > span.active {
+    background-color: #e0dfdf;
+    color: #000000;
+}
+
+.step-title {
+    background-color: #bbbbbb;
+    margin-top: -20px;
+}
+
+.step-title > a {
+    display: block;
+    color: #000000;
+    font-weight: 600;
+}
+
+.step-index > span {
+    background-color: #666666;
+    height: 45px;
+    width: 45px;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 1.6em;
+    /* border-radius: 100%; */
+    border: 3px solid white;
+    line-height: 39px;
+}
+
+.woocommerce-message {
+    background-color: #bbbbbb;
+    font-weight: bold;
+    color: #000000 !important;
+}
+
+.et_pb_text_1 > h3:not(:first-child) {
+    background-color: #000000;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-left: 6px;
+    color: #ffffff;
+}
+
+.woocommerce ul.products li.product .button {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+}
+
+a.open-popup-link {
+    color: #666666;
+}
+
+.showmore-btn-container {
+    text-align: right;
+    color: #666666;
+}
