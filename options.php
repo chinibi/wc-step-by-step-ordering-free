@@ -179,6 +179,13 @@ function plugin_admin_init() {
 		'sbs_package_settings'
 	);
 	add_settings_field(
+		'sbs_package_merch_cred',
+		'Merchandise Credit',
+		'sbs_package_merch_cred_callback',
+		'sbs_package_settings',
+		'sbs_package_settings'
+	);
+	add_settings_field(
 		'sbs_package_tiers',
 		'Package Tiers',
 		'sbs_package_tier_callback',
@@ -404,6 +411,44 @@ function sbs_package_category_callback() {
 	echo ob_get_clean();
 }
 
+function sbs_package_merch_cred_callback() {
+
+	$wc_attributes = wc_get_attribute_taxonomies();
+	$selected_attr = isset( get_option('sbs_package')['merch-cred-attr'] ) ? get_option('sbs_package')['merch-cred-attr'] : null;
+
+	ob_start();
+	?>
+	<p>
+		You can assign store credit to packages.  To begin setting it up, create a
+		WooCommerce product attribute, then go to the package's product page and
+		add that attribute to the product, with the value of store credit you want
+		to assign.
+	</p>
+	<p>
+		Then select the attribute you created in the dropdown below and save. You
+		may need to refresh the page to see it.
+	</p>
+	<label for="sbs-merch-cred-attribute">Store Credit Product Attribute: </label>
+	<select id="sbs-merch-cred-attribute" name="sbs_package[merch-cred-attr]">
+		<option value="">Select One</option>
+		<?php
+		foreach ( $wc_attributes as $attr )
+		{
+		?>
+
+			<option value="<?php echo $attr->attribute_name ?>" <?php selected( $attr->attribute_name, $selected_attr ) ?>>
+				<?php echo $attr->attribute_label ?>
+			</option>
+
+		<?php
+		}
+		?>
+	</select>
+
+	<?php
+	echo ob_get_clean();
+}
+
 function sbs_package_tier_callback() {
 
 	if ( !empty( get_option('sbs_package')['category'] ) ) {
@@ -416,7 +461,7 @@ function sbs_package_tier_callback() {
 	ob_start();
 	?>
 		<div class="inline">
-			<h3>Basic Tier</h3>
+			<h3>Tier 1 (Lowest)</h3>
 
 			<div>
 				<label for="sbs-basic-package-name">Select Product: </label>
@@ -438,14 +483,9 @@ function sbs_package_tier_callback() {
 				</select>
 			</div>
 
-			<div>
-				<label for="sbs-basic-package-credit">Store Credit: </label>
-				<input id="sbs-basic-package-credit" type="number" name="sbs_package[basic][credit]" value="<?php echo get_option('sbs_package')['basic']['credit'] ?>" />
-			</div>
-
 		</div>
 		<div class="inline">
-			<h3>Premium Tier</h3>
+			<h3>Tier 2</h3>
 
 			<div>
 				<label for="sbs-premium-package-name">Select Product: </label>
@@ -467,11 +507,6 @@ function sbs_package_tier_callback() {
 				</select>
 			</div>
 
-			<div>
-				<label for="sbs-premium-package-credit">Store Credit: </label>
-				<input id="sbs-premium-package-credit" type="number" name="sbs_package[premium][credit]" value="<?php echo get_option('sbs_package')['premium']['credit'] ?>" />
-			</div>
-
 		</div>
 	<?php
 
@@ -481,22 +516,42 @@ function sbs_package_tier_callback() {
 
 
 function sbs_display_color_scheme_callback() {
+
+	$colors = array(
+		'Default',
+		'Spring Green',
+		'Aqua Green',
+		'Autumn 1',
+		'Autumn 2',
+		'Neon',
+		'Neon Gradients',
+		'Noir 1',
+		'Noir 2',
+		'Royal 1',
+		'Royal 2'
+	);
+
   ob_start();
   ?>
-    <input type="radio" id="color-scheme-1" name="sbs_display[color-scheme]" value="1" <?php echo checked(1, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-1">Default</label><br />
-    <input type="radio" id="color-scheme-2" name="sbs_display[color-scheme]" value="2" <?php echo checked(2, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-2">Spring Green</label><br />
-    <input type="radio" id="color-scheme-3" name="sbs_display[color-scheme]" value="3" <?php echo checked(3, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-3">Aqua Green</label><br />
-    <input type="radio" id="color-scheme-4" name="sbs_display[color-scheme]" value="4" <?php echo checked(4, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-4">Autumn 1</label><br />
-		<input type="radio" id="color-scheme-5" name="sbs_display[color-scheme]" value="5" <?php echo checked(5, get_option('sbs_display')['color-scheme'], false) ?> />
-    <label for="color-scheme-5">Autumn 2</label><br />
-		<input type="radio" id="color-scheme-6" name="sbs_display[color-scheme]" value="6" <?php echo checked(6, get_option('sbs_display')['color-scheme'], false) ?> />
-		<label for="color-scheme-6">Neon</label><br />
-		<input type="radio" id="color-scheme-7" name="sbs_display[color-scheme]" value="7" <?php echo checked(7, get_option('sbs_display')['color-scheme'], false) ?> />
-		<label for="color-scheme-7">Neon Gradients</label><br />
+
+		<?php
+		foreach( $colors as $key => $color )
+		{
+		?>
+
+			<input
+				type="radio"
+				id="color-scheme-<?php echo $key + 1 ?>"
+				name="sbs_display[color-scheme]"
+				value="<?php echo $key + 1 ?>"
+				<?php echo checked( $key + 1, get_option('sbs_display')['color-scheme'], false ) ?>
+			/>
+	    <label for="color-scheme-<?php echo $key + 1 ?>"><?php echo $color ?></label><br />
+
+		<?php
+		}
+		?>
+
   <?php
 
   echo ob_get_clean();

@@ -1,5 +1,9 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 class SBS_WC_Cart_Totals extends WP_Widget {
   public function __construct() {
     $widget_options = array(
@@ -29,9 +33,21 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
 
     $categories = sbs_get_step_order();
+
     $totals = array_map( array( $this, 'map_categories_to_widget_array_callback' ), $categories );
 
-    // Append Sales Tax and Grand Total to $totals
+    // Prepend Package to $totals
+    $package = sbs_get_package_from_cart();
+
+    if ( isset( $package ) ) {
+      array_unshift( $totals, array(
+        'cat_name' => $package['item']['data']->get_name() . '<br /><a class="sbs-change-package-btn" href="' . get_permalink( get_the_ID() ) . '">Change Package</a>',
+        'cat_total' => wc_price( $package['item']['line_total'] ),
+        'css_class' => 'sbs-widget-sidebar-package'
+      ) );
+    }
+
+    // Append Sales Tax, Merchandise Credit, and Grand Total to $totals
     // You must call the calculate_fees() function since by default taxes are
     // calculated only on checkout
     $woocommerce->cart->calculate_fees();
@@ -40,6 +56,15 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       'cat_total' => wc_price( $woocommerce->cart->get_taxes_total() ),
       'css_class' => 'sbs-widget-sidebar-subtotal'
     );
+
+    if ( isset( $package['credit'] ) ) {
+      $totals[] = array(
+        'cat_name' => 'Merchandise Credit',
+        'cat_total' => wc_price( $package['credit'] ),
+        'css_class' => 'sbs-widget-sidebar-merch-credit'
+      );
+    }
+
     $totals[] = array(
       'cat_name' => 'GRAND TOTAL',
       'cat_total' => 	wc_price( max( 0, apply_filters( 'woocommerce_calculated_total', round( $woocommerce->cart->cart_contents_total + $woocommerce->cart->tax_total + $woocommerce->cart->shipping_tax_total + $woocommerce->cart->shipping_total + $woocommerce->cart->fee_total, $woocommerce->cart->dp ), $woocommerce->cart ) ) ),
@@ -54,7 +79,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       ?>
         <tr class="<?php echo esc_attr( $cat_info['css_class'] ) ?>">
           <td class="sbs-widget-sidebar-cat-name">
-            <strong><?php echo esc_html( $cat_info['cat_name'] ) ?></strong>
+            <strong><?php echo $cat_info['cat_name'] ?></strong>
           </td>
           <td data-cat="<?php echo esc_attr( $cat_info['cat_name'] ) ?>" class="sbs-widget-sidebar-total-column">
             <?php echo $cat_info['cat_total'] ?>
@@ -96,33 +121,6 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
 
 /**
- * Gets the total value of cart items of a specific category, given its ID
- *
- * Get the WooCommerce cart object, then loop through each item and check
- * if the parent category of that item matches the specified category; if so
- * add the product's value to the running total.
- *
- * Returns a float value.  You must convert to a currency format afterwards.
- *
- * @param int $category_id : The ID of the product
- *
- *
- * @return float $category_total : The total value of matched cart items in float format
- */
-  private function get_cart_total_of_category( $category_id ) {
-
-    global $woocommerce;
-    $cart = $woocommerce->cart->get_cart();
-    $category_total = 0;
-    foreach($cart as $key => $cart_item) {
-      if (sbs_get_product_parent_category( $cart_item['product_id'] )->term_id === $category_id)
-        $category_total += $cart_item['line_total'];
-    }
-    return $category_total;
-
-  }
-
-/**
  * This is a array_map callback invoked by $this->widget().
  * Maps the categories array returned by get_option('step_order') to a format
  * required by the widget, so that names and total prices can be displayed.
@@ -147,7 +145,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
     return array(
       'cat_name' => get_the_category_by_ID( $category->catid ),
-      'cat_total' => wc_price( $this->get_cart_total_of_category( $category->catid ) ),
+      'cat_total' => wc_price( sbs_get_cart_total_of_category( $category->catid ) ),
       'css_class' => 'sbs-widget-sidebar-category'
     );
 

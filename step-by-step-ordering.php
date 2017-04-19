@@ -41,6 +41,9 @@ final class StepByStepSystem {
 		include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-template-override.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-action-override.php' );
 
+		// Include additions to WooCommerce actions
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/additional-actions.php' );
+
 		// Include SBS Cart Totals Widget
 		include_once( plugin_dir_path( __FILE__) . 'includes/widgets/sbs-cart-totals.php' );
 
@@ -116,10 +119,5 @@ final class StepByStepSystem {
 }
 
 endif;
-
-
-function sbs_step_by_step_sys_main() {
-	new StepByStepSystem();
-}
 
 new StepByStepSystem();

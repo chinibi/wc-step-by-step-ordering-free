@@ -1,5 +1,9 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 function sbs_remove_edit_link() {
   return '';
 }
@@ -193,6 +197,11 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
 
       <?php } ?>
     </div>
+
+    <div>
+      <?php wc_print_notices() ?>
+    </div>
+
   <?php
   }
   ?>
