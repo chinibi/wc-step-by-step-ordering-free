@@ -2,40 +2,44 @@
 *  Step-by-Step Ordering Navbar
 */
 div#sbs-navbar {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+div#sbs-navbar a {
+  box-shadow: none;
 }
 
 span.step-span-container {
-    width: 20%;
-    border: 4px solid white;
+  width: 20%;
+  border: 4px solid white;
 }
 
 .step-div-container {
-    text-align: center;
+  text-align: center;
 }
 
 .step-index > span {
-    background-color: white;
-    border: 1px solid black;
-    height: 45px;
-    width: 45px;
-    display: inline-block;
-    font-size: 1.6em;
-    border: 3px solid white;
-    line-height: 39px;
+  background-color: white;
+  border: 1px solid black;
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  font-size: 1.6em;
+  border: 3px solid white;
+  line-height: 39px;
 }
 
 .step-index > span.active {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 .step-title {
-    background-color: #ddd;
-    padding: 25px 0 15px;
-    margin-top: -20px;
+  background-color: #ddd;
+  padding: 25px 0 15px;
+  margin-top: -20px;
 }
 
 .step-title > a {
@@ -137,11 +141,16 @@ a.add-prod-link.add-prod-link-modal {
   border-radius: 2px;
 }
 
-#sbs-store-back-forward-buttons-container {
+#sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a {
+  box-shadow: none;
+}
+
+#sbs-store-back-forward-buttons-container, #sbs-widget-sidebar-back-forward-buttons-container {
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-top: 15px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
@@ -156,15 +165,42 @@ a.add-prod-link.add-prod-link-modal {
 }
 
 /* Cart Total Calculator Base Style */
+table#sbs-widget-sidebar-cart-totals td {
+  padding: 0.8em;
+}
+
+table#sbs-widget-sidebar-cart-totals td:not(:last-child) {
+  border-right: none;
+}
+
+div#sbs-widget-sidebar-back-forward-buttons-container td {
+  text-align: center;
+}
+
+.sbs-subcat-name {
+  margin-top: 20px;
+  padding: 10px;
+}
+
 a.sbs-change-package-btn {
   font-size: 0.7em;
   color: #ccc;
+  text-decoration: underline;
 }
 
 a.sbs-change-package-btn:hover {
-  color: initial;
+  color: #ccc;
 }
 
 .sbs-widget-sidebar-total-column {
   text-align: right;
+}
+
+/* WooCommerce Message colors */
+.woocommerce-message {
+  border-top-color: initial;
+}
+
+.woocommerce-message::before {
+  color: inherit;
 }

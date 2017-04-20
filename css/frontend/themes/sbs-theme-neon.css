@@ -7,7 +7,6 @@
 #sbs-widget-sidebar-cart-totals {
     background-color: #f8c9fc;
     font-size: .90em;
-    width: 311px;
     color: #a31fb0;
 }
 
@@ -48,6 +47,10 @@
     color: #f4f877;
 }
 
+.sbs-store-back-forward-buttons > a:hover {
+    color: #f4f877;
+}
+
 .step-title.active {
   color: #b924c8;
   background-color: #f4f877;
@@ -71,6 +74,10 @@
     font-weight: 600;
 }
 
+.step-title > a:hover {
+   color: #ffffff;
+}
+
 .step-index > span {
     background-color: #f4f877;
     height: 45px;
@@ -88,11 +95,8 @@
     color: #b924c8 !important;
 }
 
-.et_pb_text_1 > h3:not(:first-child) {
+.sbs-subcat-name {
     background-color: #b924c8;
-    margin-top: 20px;
-    padding-top: 10px;
-    padding-left: 6px;
     color: #f4f877;
 }
 

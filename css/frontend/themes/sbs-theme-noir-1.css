@@ -37,6 +37,11 @@
     background-color: #000000;
     padding: 8px;
     width: 49%;
+    color: white;
+}
+
+.sbs-store-back-forward-buttons a, .sbs-store-back-forward-buttons a:hover {
+    color: white;
 }
 
 .step-title.active {
@@ -64,6 +69,10 @@
     font-weight: 600;
 }
 
+.step-title > a:hover {
+    color: #000000;
+}
+
 .step-index > span {
     background-color: #666666;
     height: 45px;
@@ -82,11 +91,8 @@
     color: #000000 !important;
 }
 
-.et_pb_text_1 > h3:not(:first-child) {
+.sbs-subcat-name {
     background-color: #000000;
-    margin-top: 20px;
-    padding-top: 10px;
-    padding-left: 6px;
     color: #ffffff;
 }
 

@@ -25,13 +25,6 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     // get woocommerce properties and methods
     global $woocommerce;
 
-    // get the items currently in the cart
-    // $cart = $woocommerce->cart->get_cart();
-    // $package = get_package_information();
-    // make an associative array that will track value of items in cart by category
-    // $package_name = ($_SESSION['plan_type'] === 'pp' ? 'Pre-Plan ' : '') . str_replace('Package-', '', $package['package_tier']);
-
-
     $categories = sbs_get_step_order();
 
     $totals = array_map( array( $this, 'map_categories_to_widget_array_callback' ), $categories );
@@ -77,8 +70,31 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       'css_class' => 'sbs-widget-sidebar-grand-total'
     );
 
+		// Generate Previous/Next Step Buttons
+		$current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 0;
+
+	  $all_categories = sbs_get_all_wc_categories();
+
+	  // Generate the Steps array
+	  $steps = sbs_get_step_order();
+	  foreach( $steps as $step ) {
+	    $step->name = get_the_category_by_ID( $step->catid );
+	  }
+	  $steps_package = new stdClass();
+	  $steps_package->name = 'Packages';
+	  $steps_checkout = new stdClass();
+	  $steps_checkout->name = 'Checkout';
+	  array_unshift( $steps, $steps_package );
+	  array_push( $steps, $steps_checkout );
+
+	  // Default to step 0 if an invalid step was requested
+	  if ( !array_key_exists( $current_step, $steps ) ) {
+	    $current_step = 0;
+	  }
+
     ?>
     <table id="sbs-widget-sidebar-cart-totals">
+
       <?php
       foreach($totals as $cat_info)
       {
@@ -94,7 +110,17 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       <?php
       }
       ?>
+
     </table>
+
+		<div id="sbs-widget-sidebar-back-forward-buttons-container">
+	    <div class="sbs-store-back-forward-buttons">
+	      <?php echo sbs_previous_step_button( $current_step, count($steps) ) ?>
+	    </div>
+	    <div class="sbs-store-back-forward-buttons">
+	      <?php echo sbs_next_step_button( $current_step, count($steps) ) ?>
+	    </div>
+	  </div>
 
   <?php
   }

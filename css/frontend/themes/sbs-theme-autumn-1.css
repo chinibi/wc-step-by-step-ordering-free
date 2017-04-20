@@ -7,7 +7,6 @@
 #sbs-widget-sidebar-cart-totals {
     background-color: #fcecc7;
     font-size: .90em;
-    width: 311px;
 }
 
 .sbs-widget-sidebar-subtotal {
@@ -83,7 +82,7 @@
     font-weight: bold;
 }
 
-.et_pb_text_1 > h3:not(:first-child) {
+.sbs-subcat-name {
     background-color: #ffde8f;
     margin-top: 20px;
     padding-top: 10px;

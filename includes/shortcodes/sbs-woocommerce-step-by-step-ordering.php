@@ -25,7 +25,7 @@ function sbs_previous_step_url( $current_step, $step_count ) {
 
 }
 
-function sbs_previous_step_link( $current_step, $step_count ) {
+function sbs_previous_step_button( $current_step, $step_count ) {
 
   $base_url = get_permalink( get_the_ID() );
 
@@ -63,7 +63,7 @@ function sbs_next_step_url( $current_step, $step_count ) {
 
 }
 
-function sbs_next_step_link( $current_step, $step_count ) {
+function sbs_next_step_button( $current_step, $step_count ) {
 
   $base_url = get_permalink( get_the_ID() );
 
@@ -103,7 +103,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
         $sub_term = get_term_by('id', $subcategory->catid, 'product_cat', 'ARRAY_A');
 
-        echo '<h2 class="sbs-subcat-name">' . $sub_term['name'] .'</h2>';
+        echo '<h3 class="sbs-subcat-name">' . $sub_term['name'] .'</h3>';
         echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
         echo do_shortcode( '[product_category category=' . $sub_term['slug'] . ']' );
 
@@ -217,10 +217,10 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
 
   <div id="sbs-store-back-forward-buttons-container">
     <div class="sbs-store-back-forward-buttons">
-      <?php echo sbs_previous_step_link( $current_step, count($steps) ) ?>
+      <?php echo sbs_previous_step_button( $current_step, count($steps) ) ?>
     </div>
     <div class="sbs-store-back-forward-buttons">
-      <?php echo sbs_next_step_link( $current_step, count($steps) ) ?>
+      <?php echo sbs_next_step_button( $current_step, count($steps) ) ?>
     </div>
   </div>
 

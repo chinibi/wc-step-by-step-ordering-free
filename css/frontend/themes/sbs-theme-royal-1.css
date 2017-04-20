@@ -7,7 +7,6 @@
 #sbs-widget-sidebar-cart-totals {
     background-color: #9acbf0;
     font-size: .90em;
-    width: 311px;
     color: #000;
 }
 
@@ -65,6 +64,10 @@
   color: white;
 }
 
+.step-title a:hover {
+  color: white;
+}
+
 .step-index > span {
     background-color: #084675;
     height: 45px;
@@ -77,11 +80,8 @@
     line-height: 39px;
 }
 
-.et_pb_text_1 > h3:not(:first-child) {
+.sbs-subcat-name {
     background-color: #084675;
-    margin-top: 20px;
-    padding-top: 10px;
-    padding-left: 6px;
     color: #7dc3f8;
 }
 
@@ -98,7 +98,9 @@
     width: 49%;
 }
 
-.sbs-store-back-forward-buttons > a {
+#sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a,
+#sbs-widget-sidebar-back-forward-buttons-container .sbs-store-back-forward-buttons > a
+{
     display: block;
     color: #ffffff;
 }

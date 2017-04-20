@@ -73,11 +73,8 @@
     color: lightblue;
 }
 
-.et_pb_text_1 > h3:not(:first-child) {
+.sbs-subcat-name {
     background-color: #a8e892;
-    margin-top: 20px;
-    padding-top: 10px;
-    padding-left: 6px;
 }
 
 .woocommerce ul.products li.product .button {

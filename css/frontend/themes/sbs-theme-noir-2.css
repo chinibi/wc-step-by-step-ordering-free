@@ -7,7 +7,6 @@
 #sbs-widget-sidebar-cart-totals {
     background-color: #bbbbbb;
     font-size: .90em;
-    width: 311px;
     color: #000;
 }
 
@@ -52,6 +51,7 @@
 
 .step-title.active {
     background-color: #bbbbbb;
+    color: black;
  }
 
  .step-title.active > a {
@@ -95,11 +95,8 @@
     color: #ffffff !important;
 }
 
-.et_pb_text_1 > h3:not(:first-child) {
+.sbs-subcat-name {
     background-color: #bbbbbb;
-    margin-top: 20px;
-    padding-top: 10px;
-    padding-left: 6px;
     color: #555555;
 }
 
