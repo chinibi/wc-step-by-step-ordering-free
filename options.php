@@ -20,7 +20,7 @@ function sbs_plugin_admin_add_page() {
   );
 }
 
-function load_custom_wp_admin_style() {
+function sbs_load_custom_wp_admin_style() {
 
   // load custom jQuery UI scripts and styles
 	wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
@@ -28,13 +28,12 @@ function load_custom_wp_admin_style() {
   wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css' );
 
 }
-add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
+add_action( 'admin_enqueue_scripts', 'sbs_load_custom_wp_admin_style' );
 
 
 function sbs_plugin_options_page() {
 
   $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general_options';
-  ChromePhp::log(get_site_url());
   ?>
 
   <div>
@@ -125,8 +124,8 @@ function sbs_render_display_options() {
  * This function is registered with the 'admin_init' hook.
  */
 
-add_action('admin_init', 'plugin_admin_init');
-function plugin_admin_init() {
+add_action('admin_init', 'sbs_plugin_settings_init');
+function sbs_plugin_settings_init() {
 
   add_settings_section(
     'sbs_general', // String for use in the 'id' attribute of tags.
@@ -169,6 +168,13 @@ function plugin_admin_init() {
     'sbs_order_settings',
     'sbs_order_settings'
   );
+	add_settings_field(
+		'sbs_navbar_navigation',
+		'Navbar Navigation',
+		'sbs_navbar_navigation_callback',
+		'sbs_order_settings',
+		'sbs_order_settings'
+	);
 
 	// SBS Package Settings
 	add_settings_field(
@@ -203,11 +209,32 @@ function plugin_admin_init() {
   );
   add_settings_field(
     'navbar_style',
-    'Step Number Shapes',
+    'Step Number Shape',
     'sbs_display_navbar_callback',
     'sbs_display',
     'sbs_display'
   );
+	add_settings_field(
+		'nav_title_style',
+		'Step Name Shape',
+		'sbs_display_navbar_title_shape_callback',
+		'sbs_display',
+		'sbs_display'
+	);
+	add_settings_field(
+		'calc_widget',
+		'SBS Calculator Widget',
+		'sbs_display_calc_callback',
+		'sbs_display',
+		'sbs_display'
+	);
+	add_settings_field(
+		'misc_styles',
+		'Miscellaneous Styles',
+		'sbs_display_misc_callback',
+		'sbs_display',
+		'sbs_display'
+	);
   add_settings_field(
     'show_calculator',
     'Display Sidebar Calculator Widget',
@@ -217,11 +244,9 @@ function plugin_admin_init() {
   );
 
   register_setting('sbs_show_something', 'sbs_ui_feature');
-
   register_setting('sbs_order_settings', 'step_order');
-
+	register_setting('sbs_order_settings', 'sbs_navbar');
 	register_setting('sbs_package_settings', 'sbs_package');
-
   register_setting('sbs_display', 'sbs_display');
   // register_setting('sbs_display', 'color_scheme');
   // register_setting('sbs_display', 'navbar_style');
@@ -384,6 +409,37 @@ function sbs_sbs_table_callback() {
   echo ob_get_clean();
 
 }
+
+
+function sbs_navbar_navigation_callback() {
+
+	$option = isset( get_option('sbs_navbar')['throttle-nav'] ) ? get_option('sbs_navbar')['throttle-nav'] : 1;
+
+	ob_start();
+	?>
+
+	<input type="radio" id="step_navbar_navigation_1" name="sbs_navbar[throttle-nav]" value="1" <?php checked( 1, $option ) ?> />
+	<label for="step_navbar_navigation_1">
+		Only allow navigation one step at a time in any direction
+	</label><br />
+
+	<input type="radio" id="step_navbar_navigation_2" name="sbs_navbar[throttle-nav]" value="2" <?php checked( 2, $option ) ?> />
+	<label for="step_navbar_navigation_2">
+		Only allow forward navigation one step a time, but let users backtrack to
+		any step.
+	</label><br />
+
+	<input type="radio" id="step_navbar_navigation_3" name="sbs_navbar[throttle-nav]" value="3" <?php checked( 3, $option ) ?> />
+	<label for="step_navbar_navigation_3">
+		Users may freely navigate, skipping any step they'd like.
+	</label><br />
+
+	<?php
+
+	echo ob_get_clean();
+
+}
+
 
 function sbs_package_category_callback() {
 	$wc_categories = sbs_get_all_wc_categories();
@@ -557,6 +613,63 @@ function sbs_display_color_scheme_callback() {
   echo ob_get_clean();
 }
 
+function sbs_display_calc_callback() {
+	$calc_borders = isset( get_option('sbs_display')['calc-borders'] ) ? get_option('sbs_display')['calc-borders'] : false;
+	$calc_font = isset( get_option('sbs_display')['calc-font'] ) ? get_option('sbs_display')['calc-font'] : 1;
+
+	$fonts = array(
+		'Default',
+		'Helvetica',
+		'Arial',
+		'Verdana'
+	);
+
+	ob_start();
+	?>
+		<div>
+			<p><strong>Font Family</strong></p>
+			<?php
+			foreach( $fonts as $key => $font )
+			{
+			?>
+				<input
+					type="radio"
+					id="calc_font_<?php echo $key + 1 ?>"
+					name="sbs_display[calc-font]"
+					value="<?php echo $key + 1 ?>"
+					<?php checked( $key + 1, $calc_font ) ?>
+					/>
+				<label for="calc_font_<?php echo $key + 1 ?>">
+					<?php echo $font ?>
+				</label><br />
+			<?php
+			}
+			?>
+		</div>
+		<div>
+			<p><strong>Other Styles</strong></p>
+			<input type="checkbox" id="show_calc_borders" name="sbs_display[calc-borders]" value="1" <?php checked(1, $calc_borders) ?> />
+			<label for="show_calc_borders">
+				Show a vertical border separating the category column and the price column
+			</label>
+		</div>
+	<?php
+}
+
+function sbs_display_misc_callback() {
+	$hover_effect = isset( get_option('sbs_display')['hover-effect'] ) ? get_option('sbs_display')['hover-effect'] : false;
+
+	ob_start();
+	?>
+		<input type="checkbox" id="show_hover_effect" name="sbs_display[hover-effect]" value="1" <?php checked(1, $hover_effect) ?> />
+		<label for="show_hover_effect">
+			SBS links turn different colors when moused over (varies by theme)
+		</label><br />
+	<?php
+
+	echo ob_get_clean();
+}
+
 function sbs_display_sidebar_calculator_callback() {
   ob_start();
   ?>
@@ -578,6 +691,31 @@ function sbs_display_navbar_callback() {
   <?php
 
   echo ob_get_clean();
+}
+
+function sbs_display_navbar_title_shape_callback() {
+	$title_style = isset( get_option('sbs_display')['nav-title-style'] ) ? get_option('sbs_display')['nav-title-style'] : 1;
+
+	$styles = array(
+		'Default',
+		'Arrows'
+	);
+
+	ob_start();
+	?>
+		<?php
+		foreach ($styles as $key => $style)
+		{
+			$index = $key + 1;
+		?>
+
+			<input type="radio" id="nav-title-shape-<?php echo $index ?>" name="sbs_display[nav-title-style]" value="<?php echo $index ?>" <?php checked( $index, $title_style ) ?>>
+			<label for="nav-title-shape-<?php echo $index ?>"><?php echo $style ?></label><br />
+
+		<?php
+		}
+
+	echo ob_get_clean();
 }
 
 function sbs_get_all_wc_categories() {

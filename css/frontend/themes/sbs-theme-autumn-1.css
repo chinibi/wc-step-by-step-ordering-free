@@ -60,10 +60,8 @@
     margin-top: -20px;
 }
 
-.step-index > span {
+.step-index > span.step-number {
     background-color: #fcecc7;
-    height: 45px;
-    width: 45px;
     display: inline-block;
     color: #8a140e;
     font-size: 1.6em;
@@ -74,6 +72,10 @@
 
 .step-title > a {
     display: block;
+    color: #8a140e;
+}
+
+.step-title a:hover {
     color: #8a140e;
 }
 
@@ -107,4 +109,12 @@ a.open-popup-link {
     max-width: 100%;
     padding: 0.857em 0.587em;
     font-weight: bold;
+}
+
+#sbs-widget-sidebar-back-forward-buttons-container .sbs-store-back-forward-buttons > a,
+#sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a,
+#sbs-widget-sidebar-back-forward-buttons-container .sbs-store-back-forward-buttons > a:hover,
+#sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a:hover
+{
+  color: #8a140e;
 }

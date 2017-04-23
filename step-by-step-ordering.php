@@ -57,7 +57,6 @@ final class StepByStepSystem {
 		register_activation_hook( __FILE__, array( $this, 'plugin_activation' ) );
 		add_action( 'wp_head', array( $this, 'sbs_define_ajax_url' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_enqueue_client_style_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_enqueue_preset_themes' ) );
 
 	}
 
@@ -91,6 +90,7 @@ final class StepByStepSystem {
 
 		// Enqueue custom stylesheets
 		wp_enqueue_style( 'sbs-style', plugins_url( '/css/frontend/sbs-style.css', __FILE__ ), array( 'woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen' ) );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/theme-selector.php' );
 
 		// Enqueue custom scripts
 		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );

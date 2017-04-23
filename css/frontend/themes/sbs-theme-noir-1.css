@@ -73,7 +73,7 @@
     color: #000000;
 }
 
-.step-index > span {
+.step-index > span.step-number {
     background-color: #666666;
     height: 45px;
     width: 45px;

@@ -126,6 +126,62 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 }
 
 
+/**
+ *	Generate URLs for the SBS navbar
+ *	Links will vary on the choice of navigation method selected in admin options
+ *
+ *	@param int $step_key: The current index of the element being iterated over in
+ *												the array of SBS steps
+ *				 int $current_step: The step of the page being currently viewed, given
+ *														by $_GET['step']
+ *				 int $step_count: The number of steps in the SBS step array
+ *
+ *  @return string URL link
+ *
+ */
+function sbs_generate_navbar_url( $step_key, $current_step, $step_count ) {
+
+	$base_url = get_permalink( get_the_ID() );
+
+	$previous_step = $current_step - 1;
+	$next_step = $current_step + 1;
+	$nav_option = isset( get_option('sbs_navbar')['throttle-nav'] ) ? get_option('sbs_navbar')['throttle-nav'] : '1';
+
+	if ( $step_key < $current_step ) {
+
+		switch( $nav_option ) {
+			case '1':
+				return $base_url . '?step=' . $previous_step;
+			case '2':
+				return $base_url . '?step=' . $step_key;
+			case '3':
+				return $base_url . '?step=' . $step_key;
+		}
+
+	}
+
+	if ( $step_key === $current_step ) {
+
+		return false;
+
+	}
+
+	if ( $step_key > $current_step ) {
+
+		switch( $nav_option ) {
+			case '1':
+				return $base_url . '?step=' . $next_step;
+			case '2':
+				return $base_url . '?step=' . $next_step;
+			case '3':
+				return $base_url . '?step=' . $step_key;
+		}
+
+	}
+
+}
+
+
 function sbs_woocommerce_step_by_step_ordering_shortcode() {
 
   $current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 0;
@@ -164,35 +220,34 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
               <span class="step-span-container">
                 <div class="step-div-container">
                   <div class="step-index">
-                    <span class="<?php echo $key === $current_step ? 'active' : null ?>">
+										<span class="step-number-before"></span>
+                    <span class="step-number <?php echo $key === $current_step ? 'active' : null ?>">
                       <?php echo $key ?>
                     </span>
                   </div>
                   <div class="step-title <?php echo $key === $current_step ? 'active' : null ?>">
-                    <?php
+										<span class="step-title-text">
+	                    <?php
 
-                      if ($key < $current_step)
-                      {
-                      ?>
-                        <a href="<?php echo esc_url( sbs_previous_step_url($current_step, count($steps)) ) ?>"><?php echo $step->name ?></a>
-                      <?php
-                      }
-                      else if ($key === $current_step)
-                      {
-                      ?>
-                        <?php echo $step->name ?>
-                      <?php
-                      }
-                      else if ($key > $current_step)
-                      {
-                      ?>
-                        <a href="<?php echo esc_url( sbs_next_step_url($current_step, count($steps)) ) ?>"><?php echo $step->name ?></a>
-                      <?php
-                      }
+												if ( sbs_generate_navbar_url( $key, $current_step, count( $steps ) ) !== false )
+												{
+												?>
+													<a href="<?php echo esc_url( sbs_generate_navbar_url( $key, $current_step, count($steps) ) ) ?>"><?php echo $step->name ?></a>
+												<?php
+												}
+												else
+												{
+												?>
+													<?php echo $step->name ?>
+												<?php
+												}
 
-                    ?>
+	                    ?>
+										</span>
                   </div>
+									<div class="clearfix"></div>
                 </div>
+
               </span>
 
       <?php } ?>

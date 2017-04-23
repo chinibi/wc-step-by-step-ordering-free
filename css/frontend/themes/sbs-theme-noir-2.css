@@ -59,7 +59,7 @@
     font-weight: 600;
 }
 
-.step-index > span.active {
+.step-index > span.step-number.active {
     background-color: #000000;
     color: #ffffff;
 }
@@ -76,10 +76,8 @@
     font-weight: 600;
 }
 
-.step-index > span {
+.step-index > span.step-number {
     background-color: #bbbbbb;
-    height: 45px;
-    width: 45px;
     display: inline-block;
     color: #000000;
     font-size: 1.6em;

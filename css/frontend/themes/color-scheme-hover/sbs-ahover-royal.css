@@ -1,0 +1,6 @@
+.step-title a:hover,
+#sbs-widget-sidebar-back-forward-buttons-container .sbs-store-back-forward-buttons > a:hover,
+#sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a:hover
+{
+  color: lightblue;
+}

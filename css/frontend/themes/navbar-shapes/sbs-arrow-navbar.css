@@ -1,0 +1,71 @@
+/** ---------------------------
+ *
+ *  SBS Navbar Arrow style
+ *  Derived from http://code-chunk.com/chunks/543df4c394758/bootstrap-arrow-shaped-buttons
+ *
+ * ----------------------------- */
+
+.step-title {
+    position: relative;
+    padding-left: 36px;
+    padding-right: 18px;
+}
+
+.step-title:before,
+.step-title:after
+{ /* make two squares (before and after), looking similar to the button */
+    content:"";
+    position: absolute;
+    top: 10px; /* move it down because of rounded corners */
+    width: 48px; /* same as height */
+    height: 48px; /* button_outer_height / sqrt(2) */
+    background: inherit; /* use parent background */
+    border: inherit; /* use parent border */
+    border-color: transparent;
+    border-radius: 0px 4px 0px 0px; /* round arrow corner, the shorthand property doesn't accept "inherit" so it is set to 4px */
+    -webkit-border-radius: 0px 4px 0px 0px;
+    -moz-border-radius: 0px 4px 0px 0px;
+    box-sizing: border-box;
+}
+
+.step-title:before,
+.step-title:after {
+    transform: rotate(45deg); /* rotate right arrow squares 45 deg to point right */
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+}
+
+.step-title:before { /* align the "before" square to the left */
+    left: -24px;
+}
+.step-title:after { /* align the "after" square to the right */
+    right: -24px;
+}
+.step-title:after { /* bring arrow pointers to front */
+    z-index: 1;
+}
+.step-title:before { /* hide arrow tails background */
+    background-color: white;
+}
+
+.step-index span {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+}
+
+.step-title {
+    padding: 25px 0 15px;
+}
+
+span.step-title-text {
+    padding-left: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-index {
+    padding-left: 30px;
+}

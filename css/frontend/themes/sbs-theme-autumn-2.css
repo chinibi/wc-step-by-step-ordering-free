@@ -70,10 +70,8 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     margin-top: -20px;
 }
 
-.step-index > span {
+.step-index > span.step-number {
     background-color: #be645f;
-    height: 45px;
-    width: 45px;
     display: inline-block;
     color: #ffffff;
     font-size: 1.6em;

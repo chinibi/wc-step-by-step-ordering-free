@@ -1,3 +1,7 @@
+.clearfix {
+  clear: both;
+}
+
 /*
 *  Step-by-Step Ordering Navbar
 */
@@ -20,7 +24,7 @@ span.step-span-container {
   text-align: center;
 }
 
-.step-index > span {
+.step-index > span.step-number {
   background-color: white;
   border: 1px solid black;
   height: 45px;
@@ -165,6 +169,10 @@ a.add-prod-link.add-prod-link-modal {
 }
 
 /* Cart Total Calculator Base Style */
+table#sbs-widget-sidebar-cart-totals {
+  font-size: 0.9em;
+}
+
 table#sbs-widget-sidebar-cart-totals td {
   padding: 0.8em;
 }
