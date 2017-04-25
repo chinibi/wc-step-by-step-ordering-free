@@ -1,3 +1,21 @@
+/* SBS Package Selection Panes */
+
+.sbs-package-container {
+  border: 2px solid #f8c9fc;
+}
+
+.sbs-package-price {
+  color: #b924c8;
+  border-bottom: 1px solid #b924c8;
+}
+
+.sbs-package-title {
+  color: #f4f877;
+  background-color: #b924c8;
+}
+
+/* SBS Sidebar Calculator */
+
 .sbs-widget-sidebar-package {
     background-color: #b924c8;
     color: #ffffff;
@@ -62,19 +80,27 @@
     color: #ffffff;
 }
 
+.step-index span.step-number-before.active {
+    border-color: #b924c8 transparent;
+}
+
+.step-index span.step-number-before.inactive {
+    border-color: #f4f877 transparent;
+}
+
 .step-title {
     background-color: #b924c8;
     padding: 25px 0 15px;
     margin-top: -20px;
 }
 
-.step-title > a {
+.step-title-text a {
     display: block;
     color: #ffffff;
     font-weight: 600;
 }
 
-.step-title > a:hover {
+.step-title-text a:hover {
    color: #ffffff;
 }
 
@@ -98,7 +124,9 @@
     color: #f4f877;
 }
 
-.woocommerce ul.products li.product .button {
+.woocommerce ul.products li.product .button,
+.woocommerce a.button,
+.woocommerce a.button:hover {
     background-color: #b924c8;
     color: #f4f877;
     border: none;

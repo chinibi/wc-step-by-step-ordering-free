@@ -5,25 +5,49 @@ function sbs_render_package_selection_box( $product_id ) {
   $package = wc_get_product( $product_id );
   $add_to_cart_url = get_permalink( get_the_ID() ) . '?step=1&add-to-cart=' . $product_id;
 
+  $per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : 3;
+  $add_to_cart_text = isset( get_option('sbs_package')['add-to-cart-text'] ) ? get_option('sbs_package')['add-to-cart-text'] : 'Select Package';
+
+  switch ( $per_row ) {
+    case 1:
+      $container_width = '70%';
+      break;
+    case 2:
+      $container_width = '45%';
+      break;
+    case 3:
+      $container_width = '30%';
+      break;
+    case 4:
+      $container_width = '22%';
+      break;
+    case 5:
+      $container_width = '19%';
+      break;
+    default:
+      $container_width = '30%';
+      break;
+  }
+
   ob_start();
   ?>
 
-  <div class="sbs-package-container">
+  <div class="sbs-package-container woocommerce" style="flex: 0 1 calc(<?php echo $container_width ?> - 4px);">
     <div class="sbs-package-thumbnail">
       <?php echo $package->get_image() ?>
     </div>
     <div class="sbs-package-title">
-      <h2><?php echo $package->get_name() ?></h2>
-    </div>
-    <div class="sbs-package-content">
-      <?php echo $package->get_description() ?>
+      <?php echo $package->get_name() ?>
     </div>
     <div class="sbs-package-price">
       <?php echo wc_price( $package->get_price() ) ?>
     </div>
+    <div class="sbs-package-content">
+      <?php echo $package->get_description() ?>
+    </div>
     <div class="sbs-add-package-to-cart">
-      <a href="<?php echo esc_url( $add_to_cart_url ) ?>">
-        <?php echo $package->add_to_cart_text() ?>
+      <a href="<?php echo esc_url( $add_to_cart_url ) ?>" class="button product_type_simple add_to_cart_button">
+        <?php echo $add_to_cart_text ?>
       </a>
     </div>
   </div>
@@ -35,8 +59,7 @@ function sbs_render_package_selection_box( $product_id ) {
 
 function sbs_select_package_shortcode() {
 
-  $package_cat_id = get_option('sbs_package')['category'];
-  $packages = $package_cat_id ? sbs_get_wc_products_by_category( $package_cat_id ) : null;
+  $packages = sbs_get_active_packages();
 
   ob_start();
   ?>
@@ -52,15 +75,17 @@ function sbs_select_package_shortcode() {
 
   <?php
   } else {
-    $basic_package_id = get_option('sbs_package')['basic']['product'];
-    $premium_package_id = get_option('sbs_package')['premium']['product'];
   ?>
 
-    <?php echo sbs_render_package_selection_box( $basic_package_id ) ?>
-    <?php echo sbs_render_package_selection_box( $premium_package_id ) ?>
+    <div id="sbs-package-list">
+    <?php foreach( $packages as $package ) {
+            echo sbs_render_package_selection_box( $package->catid );
+          } ?>
+    </div>
 
   <?php
   }
+
 }
 
 

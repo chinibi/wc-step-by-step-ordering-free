@@ -198,6 +198,13 @@ function sbs_plugin_settings_init() {
 		'sbs_package_settings',
 		'sbs_package_settings'
 	);
+	add_settings_field(
+		'sbs_packages_style',
+		'Package Selection Appearance',
+		'sbs_package_select_style_callback',
+		'sbs_package_settings',
+		'sbs_package_settings'
+	);
 
   // SBS Display Settings Fields
   add_settings_field(
@@ -210,7 +217,7 @@ function sbs_plugin_settings_init() {
   add_settings_field(
     'navbar_style',
     'Step Number Shape',
-    'sbs_display_navbar_callback',
+    'sbs_display_navbar_number_shape_callback',
     'sbs_display',
     'sbs_display'
   );
@@ -351,57 +358,59 @@ function sbs_sbs_table_callback() {
 
   ob_start();
   ?>
-  <?php  ?>
-  <div class="sortable-container" id="sbs-order-container">
-    <h3>Your Ordering Process</h3>
-    <div class="fixed-item noselect">Package Selection</div>
-    <ul id="sbs-order" class="sortable">
 
-      <?php
-			if ( isset( $step_order ) )
-			{
-        foreach( $step_order as $category )
+	<div id="main-sortable-container">
+
+	  <div class="sortable-container" id="sbs-order-container">
+	    <h3>Your Ordering Process</h3>
+	    <div class="fixed-item noselect">Package Selection</div>
+	    <ul id="sbs-order" class="sortable">
+
+	      <?php
+				if ( isset( $step_order ) )
 				{
+	        foreach( $step_order as $category )
+					{
+					?>
+	          <li data-catid="<?php echo $category->catid ?>" class="sortable-item">
+	            <?php echo get_the_category_by_ID( $category->catid ) ?>
+
+							<ul>
+								<?php
+								foreach( $category->children as $child )
+								{
+								?>
+									<li class="sortable-item" data-catid="<?php echo $child->catid ?>">
+										<?php echo get_the_category_by_ID( $child->catid ) ?>
+									</li>
+								<?php
+								}
+								?>
+							</ul>
+
+	          </li>
+	        <?php
+	        }
+	      }
 				?>
-          <li data-catid="<?php echo $category->catid ?>" class="sortable-item">
-            <?php echo get_the_category_by_ID( $category->catid ) ?>
 
-						<ul>
-							<?php
-							foreach( $category->children as $child )
-							{
-							?>
-								<li class="sortable-item" data-catid="<?php echo $child->catid ?>">
-									<?php echo get_the_category_by_ID( $child->catid ) ?>
-								</li>
-							<?php
-							}
-							?>
-						</ul>
+	    </ul>
+	    <div class="fixed-item noselect">Checkout</div>
+	  </div>
 
-          </li>
-        <?php
-        }
-      }
-			?>
+	  <div class="sortable-container" id="sbs-pool-container">
+	    <h3>Available Categories</h3>
+	    <ul id="sbs-pool" class="sortable">
+	      <?php foreach( $available_categories as $category ) { ?>
+	              <li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
+	                <?php echo $category->name ?>
+									<ul></ul>
+	              </li>
+	      <?php } ?>
+	    </ul>
+	  </div>
 
-    </ul>
-    <div class="fixed-item noselect">Checkout</div>
-  </div>
-
-  <div class="sortable-container" id="sbs-pool-container">
-    <h3>Available Categories</h3>
-    <ul id="sbs-pool" class="sortable">
-      <?php foreach( $available_categories as $category ) { ?>
-              <li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
-                <?php echo $category->name ?>
-								<ul></ul>
-              </li>
-      <?php } ?>
-    </ul>
-  </div>
-
-  <div class="clearfix"></div>
+	</div>
 
   <input type="hidden" id="step_order" name="step_order" value="<?php echo esc_attr( get_option('step_order') ) ?>" />
   <?php
@@ -462,6 +471,8 @@ function sbs_package_category_callback() {
 			}
 			?>
 		</select>
+
+		<?php submit_button() ?>
 	<?php
 
 	echo ob_get_clean();
@@ -501,11 +512,13 @@ function sbs_package_merch_cred_callback() {
 		?>
 	</select>
 
+	<?php submit_button() ?>
+
 	<?php
 	echo ob_get_clean();
 }
 
-function sbs_package_tier_callback() {
+function sbs_package_tier_old_callback() {
 
 	if ( !empty( get_option('sbs_package')['category'] ) ) {
 
@@ -564,6 +577,117 @@ function sbs_package_tier_callback() {
 			</div>
 
 		</div>
+	<?php
+
+	echo ob_get_clean();
+
+}
+
+
+function sbs_get_active_packages() {
+
+	$package_order = get_option('sbs_package')['active'];
+	$package_order = json_decode( $package_order );
+	$package_order = $package_order[0];
+
+	return $package_order;
+
+}
+
+
+function sbs_package_tier_callback() {
+
+	$package_cat_id = get_option('sbs_package')['category'];
+	$all_packages = sbs_get_wc_products_by_category( $package_cat_id );
+	$active_packages = sbs_get_active_packages();
+
+	$available_packages = array_filter( $all_packages, function( $package ) {
+
+		$active_packages = sbs_get_active_packages();
+		$active_packages = array_map( function( $package ) {
+			return $package->catid;
+		}, $active_packages);
+
+		return !in_array( $package->ID, $active_packages );
+
+	} );
+
+	ob_start();
+	?>
+
+	<p>
+		Drag packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
+		the order in which they are displayed.
+	</p>
+
+	<div class="sortable-container" id="sbs-order-container">
+		<h3>Your Active Packages</h3>
+		<ul id="sbs-order" class="sortable">
+			<?php
+			if ( isset( $active_packages ) )
+			{
+				foreach( $active_packages as $package )
+				{
+				?>
+				<li data-catid="<?php echo $package->catid ?>" class="sortable-item">
+					<?php echo get_the_title( $package->catid ) ?>
+				</li>
+				<?php
+				}
+			}
+			?>
+		</ul>
+	</div>
+
+	<div class="sortable-container" id="sbs-pool-container">
+		<h3>Available Packages</h3>
+		<ul id="sbs-pool" class="sortable">
+			<?php
+			foreach( $available_packages as $package )
+			{
+			?>
+				<li data-catid="<?php echo $package->ID ?>" class="sortable-item">
+					<?php echo $package->post_title ?>
+				</li>
+			<?php
+			}
+			?>
+		</ul>
+	</div>
+
+	<input type="hidden" id="step_order" name="sbs_package[active]" value="<?php echo esc_attr( get_option('sbs_package')['active'] ) ?>" />
+
+	<?php
+
+	echo ob_get_clean();
+}
+
+
+function sbs_package_select_style_callback() {
+
+	$per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : 3;
+
+	$per_row_options = array( 1, 2, 3, 4, 5);
+
+	ob_start();
+	?>
+	<label for="sbs-package-per-row">Number of packages to display per row:</label>
+	<select id="sbs-package-per-row" name="sbs_package[per-row]">
+	<?php
+	foreach ( $per_row_options as $option )
+	{
+	?>
+		<option value="<?php echo $option ?>" <?php selected( $option, $per_row ) ?>>
+			<?php echo $option ?>
+		</option>
+	<?php
+	}
+	?>
+	</select><br />
+
+	<label for="sbs-package-add-cart-label">"Add to Cart" Text: </label>
+	<input type="text" id="sbs-package-add-cart-label" name="sbs_package[add-to-cart-text]" value="<?php echo get_option('sbs_package')['add-to-cart-text'] ?>" placeholder='Default: "Select Package"' />
+
 	<?php
 
 	echo ob_get_clean();
@@ -679,16 +803,27 @@ function sbs_display_sidebar_calculator_callback() {
   echo ob_get_clean();
 }
 
-function sbs_display_navbar_callback() {
+function sbs_display_navbar_number_shape_callback() {
+	$number_style = isset( get_option('sbs_display')['navbar-style'] ) ? get_option('sbs_display')['navbar-style'] : 1;
+
+	$styles = array(
+		'Default (Square)',
+		'Circle',
+		'Downward Triangle',
+		'Upward Triangle'
+	);
+
   ob_start();
-  ?>
-    <input type="radio" id="color-scheme-1" name="sbs_display[navbar-style]" value="1" <?php echo checked(1, get_option('sbs_display')['navbar-style'], false) ?> />
-    <label for="color-scheme-1">Square</label><br />
-    <input type="radio" id="color-scheme-2" name="sbs_display[navbar-style]" value="2" <?php echo checked(2, get_option('sbs_display')['navbar-style'], false) ?> />
-    <label for="color-scheme-2">Circle</label><br />
-    <input type="radio" id="color-scheme-3" name="sbs_display[navbar-style]" value="3" <?php echo checked(3, get_option('sbs_display')['navbar-style'], false) ?> />
-    <label for="color-scheme-3">Triangles</label><br />
-  <?php
+	?>
+		<?php
+		foreach ( $styles as $key => $style )
+		{
+			$index = $key + 1;
+		?>
+			<input type="radio" id="color-scheme-<?php echo $index ?>" name="sbs_display[navbar-style]" value="<?php echo $index ?>" <?php echo checked( $index, $number_style, false) ?> />
+			<label for="color-scheme-<?php echo $index ?>"><?php echo $style ?></label><br />
+  	<?php
+		}
 
   echo ob_get_clean();
 }
@@ -698,6 +833,7 @@ function sbs_display_navbar_title_shape_callback() {
 
 	$styles = array(
 		'Default',
+		'Capsule',
 		'Arrows'
 	);
 

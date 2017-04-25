@@ -1,3 +1,7 @@
+.sbs-package-title {
+  background-color: #ddd;
+}
+
 .sbs-widget-sidebar-package {
     background-color: #000;
     color: #ffffff;
@@ -53,9 +57,17 @@
     font-weight: 600;
 }
 
-.step-index > span.active {
+.step-index > span.step-number.active {
     background-color: #e0dfdf;
     color: #000000;
+}
+
+.step-index span.step-number-before.active {
+    border-color: #e0dfdf transparent;
+}
+
+.step-index span.step-number-before.inactive {
+    border-color: #666666 transparent;
 }
 
 .step-title {
@@ -63,13 +75,13 @@
     margin-top: -20px;
 }
 
-.step-title > a {
+.step-title-text a {
     display: block;
     color: #000000;
     font-weight: 600;
 }
 
-.step-title > a:hover {
+.step-title-text a:hover {
     color: #000000;
 }
 

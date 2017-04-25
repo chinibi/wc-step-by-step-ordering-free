@@ -1,0 +1,31 @@
+.step-index span.step-number-before {
+    position: absolute;
+    z-index: 2;
+    width: 0;
+    height: 0;
+    border-top: 50px solid;
+    border-left: 29px solid;
+    border-right: 29px solid;
+    margin-left: -6px;
+}
+
+.step-index span.step-number-after {
+    position: absolute;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-top: 54px solid white;
+    border-left: 34px solid transparent;
+    border-right: 34px solid transparent;
+    margin-left: -56px;
+}
+
+.step-index span.step-number {
+    border: transparent;
+    background-color: transparent;
+    position: relative;
+}
+
+.step-index > span.step-number.active {
+    background: transparent;
+}

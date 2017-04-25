@@ -52,12 +52,20 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     font-weight: 600;
 }
 
-.step-index > span.active {
+.step-index > span.step-title-text.active {
     background-color: #fcecc7;
     color: #8a140e;
 }
 
-.step-title > a, .step-title > a:hover {
+.step-index span.step-number-before.active {
+    border-color: #fcecc7 transparent;
+}
+
+.step-index span.step-number-before.inactive {
+    border-color: #be645f transparent;
+}
+
+.step-title-text a, .step-title-text a:hover {
     display: block;
     color: #ffffff;
     font-weight: 600;
@@ -96,7 +104,9 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     color: #ffde8f;
 }
 
-.woocommerce ul.products li.product .button {
+.woocommerce ul.products li.product .button,
+.woocommerce a.button,
+.woocommerce a.button:hover {
     background-color: #ffde8f;
     color: #8a140e;
     border: none;

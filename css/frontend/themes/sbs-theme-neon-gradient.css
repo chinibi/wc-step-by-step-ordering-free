@@ -1,3 +1,19 @@
+/* SBS Package Selection Panes */
+
+.sbs-package-container {
+  border: 2px solid #f8c9fc;
+}
+
+.sbs-package-price {
+  color: #b924c8;
+  border-bottom: 1px solid #b924c8;
+}
+
+.sbs-package-title {
+  color: #f4f877;
+  background-color: #b924c8;
+}
+
 .sbs-widget-sidebar-package {
     color: #ffffff;
     border-bottom: 3px solid white;
@@ -96,13 +112,13 @@ a.open-popup-link {
     line-height: 39px;
 }
 
-.step-title > a {
+.step-title-text a {
     display: block;
     color: #ffffff;
     font-weight: 600;
 }
 
-.step-title > a:hover {
+.step-title-text a:hover {
     color: #ffffff;
 }
 
@@ -110,6 +126,15 @@ a.open-popup-link {
     background-color: #167ed7;
     color: #ffffff;
 }
+
+.step-index span.step-number-before.active {
+    border-color: #167ed7 transparent;
+}
+
+.step-index span.step-number-before.inactive {
+    border-color: #f4f877 transparent;
+}
+
 
 
 .sbs-widget-sidebar-merch-credit {

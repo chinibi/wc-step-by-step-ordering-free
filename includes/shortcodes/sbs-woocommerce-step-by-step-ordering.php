@@ -84,9 +84,29 @@ function sbs_next_step_button( $current_step, $step_count ) {
 
 }
 
+function sbs_hide_sidebar_default_theme() {
+
+	$current_theme = wp_get_theme()->get('Name');
+
+	if ($current_theme == 'Twenty Sixteen' || $current_theme == 'Twenty Fifteen') {
+		add_action( 'widgets_init', unregister_sidebar( 'sidebar-1' ), 11 );
+		ob_start();
+		?>
+		<style>
+			@media screen and (min-width: 56.875em) {.content-area {width: 100%;}}
+		</style>
+		<?php
+		echo ob_get_clean();
+	}
+
+}
+
 function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
   if ( $current_step === 0 ) {
+		add_action( 'sbs_before_select_package', 'sbs_hide_sidebar_default_theme' );
+
+		do_action( 'sbs_before_select_package' );
     echo do_shortcode( '[sbs_select_package]' );
     return;
   }
@@ -220,10 +240,11 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
               <span class="step-span-container">
                 <div class="step-div-container">
                   <div class="step-index">
-										<span class="step-number-before"></span>
-                    <span class="step-number <?php echo $key === $current_step ? 'active' : null ?>">
+										<span class="step-number-before <?php echo $key === $current_step ? 'active' : 'inactive' ?>"></span>
+                    <span class="step-number <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
                       <?php echo $key ?>
                     </span>
+										<span class="step-number-after"></span>
                   </div>
                   <div class="step-title <?php echo $key === $current_step ? 'active' : null ?>">
 										<span class="step-title-text">

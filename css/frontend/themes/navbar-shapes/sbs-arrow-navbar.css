@@ -51,9 +51,8 @@
 }
 
 .step-index span {
-    position: relative;
     text-align: center;
-    z-index: 2;
+    white-space: nowrap;
 }
 
 .step-title {
@@ -64,6 +63,10 @@ span.step-title-text {
     padding-left: 30px;
     position: relative;
     z-index: 2;
+}
+
+span.step-title-text a {
+    display: inline;
 }
 
 .step-index {

@@ -16,8 +16,16 @@ div.sortable-container {
   /*overflow: auto;*/
 }
 
+#main-sortable-container {
+  display: flex;
+  justify-content: center;
+}
+
+.sortable-container {
+  width: 30%;
+}
+
 ol.sortable, ul.sortable {
-  min-width: 400px;
   padding-top: 25px;
   padding-bottom: 25px;
   padding-left: 6px;

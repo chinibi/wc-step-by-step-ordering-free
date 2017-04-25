@@ -1,3 +1,21 @@
+/* SBS Package Selection Panes */
+
+.sbs-package-container {
+  border: 2px solid #9acbf0;
+}
+
+.sbs-package-price {
+  color: #2481c8;
+  border-bottom: 1px solid #2481c8;
+}
+
+.sbs-package-title {
+  color: #fff;
+  background-color: #2481c8;
+}
+
+/* SBS Sidebar Calculator */
+
 .sbs-widget-sidebar-package {
     background-color: #084675;
     color: #ffffff;
@@ -54,6 +72,14 @@
     color: #ffffff;
 }
 
+.step-index span.step-number-before.active {
+    border-color: #2481c8 transparent;
+}
+
+.step-index span.step-number-before.inactive {
+    border-color: #084675 transparent;
+}
+
 .step-title {
     background-color: #2481c8;
     padding: 25px 0 15px;
@@ -83,7 +109,10 @@
     color: #7dc3f8;
 }
 
-.woocommerce ul.products li.product .button {
+.woocommerce ul.products li.product .button,
+.woocommerce a.button,
+.woocommerce a.button:hover
+{
     background-color: #084675;
     color: #7dc3f8;
     border: none;

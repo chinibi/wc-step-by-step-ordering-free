@@ -44,17 +44,18 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     // You must call the calculate_fees() function since by default taxes are
     // calculated only on checkout
     $woocommerce->cart->calculate_fees();
+
+		$totals[] = array(
+			'cat_name' => 'SUBTOTAL',
+			'cat_total' => wc_price( $woocommerce->cart->subtotal - $woocommerce->cart->get_taxes_total() ),
+			'css_class' => 'sbs-widget-sidebar-subtotal'
+		);
+
     $totals[] = array(
       'cat_name' => 'Sales Tax',
       'cat_total' => wc_price( $woocommerce->cart->get_taxes_total() ),
       'css_class' => 'sbs-widget-sidebar-category'
     );
-
-		$totals[] = array(
-			'cat_name' => 'SUBTOTAL',
-			'cat_total' => wc_price( $woocommerce->cart->subtotal ),
-			'css_class' => 'sbs-widget-sidebar-subtotal'
-		);
 
     if ( isset( $package['credit'] ) ) {
       $totals[] = array(

@@ -5,13 +5,13 @@
 /*
 *  Step-by-Step Ordering Navbar
 */
-div#sbs-navbar {
+#sbs-navbar {
   display: flex;
   justify-content: space-around;
   margin-bottom: 30px;
 }
 
-div#sbs-navbar a {
+#sbs-navbar a {
   box-shadow: none;
 }
 
@@ -33,9 +33,11 @@ span.step-span-container {
   font-size: 1.6em;
   border: 3px solid white;
   line-height: 39px;
+  position: relative;
+  z-index: 3;
 }
 
-.step-index > span.active {
+.step-index > span.step-number.active {
   background-color: black;
   color: white;
 }
@@ -159,9 +161,42 @@ a.add-prod-link.add-prod-link-modal {
 }
 
 /* SBS Package Selection Panes */
+#sbs-package-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 .sbs-package-container {
-  float: left;
-  width: 48%;
+  border: 2px solid gray;
+  border: 2px solid gray;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.sbs-package-thumbnail {
+  max-width: 100%;
+}
+
+.sbs-package-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.sbs-package-content {
+  padding: 20px 20px 0 20px;
+}
+
+.sbs-package-content ul,
+.sbs-package-content ol
+{
+  padding: 0 20px;
+}
+
+.sbs-package-price {
+  font-size: 36px;
+  border-bottom: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .sbs-package-title, .sbs-package-thumbnail, .sbs-package-price, .sbs-add-package-to-cart {
@@ -169,19 +204,19 @@ a.add-prod-link.add-prod-link-modal {
 }
 
 /* Cart Total Calculator Base Style */
-table#sbs-widget-sidebar-cart-totals {
+#sbs-widget-sidebar-cart-totals {
   font-size: 0.9em;
 }
 
-table#sbs-widget-sidebar-cart-totals td {
+#sbs-widget-sidebar-cart-totals td {
   padding: 0.8em;
 }
 
-table#sbs-widget-sidebar-cart-totals td:not(:last-child) {
+#sbs-widget-sidebar-cart-totals td:not(:last-child) {
   border-right: none;
 }
 
-div#sbs-widget-sidebar-back-forward-buttons-container td {
+#sbs-widget-sidebar-back-forward-buttons-container td {
   text-align: center;
 }
 

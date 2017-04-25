@@ -47,8 +47,12 @@ switch( get_option('sbs_display')['navbar-style'] ) {
   case 2: // Circles
     wp_enqueue_style( 'sbs-nav-theme-circle', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-circle-step-no.css' ), array( 'sbs-style' ));
     break;
-  case 3: // Triangles
-    wp_enqueue_style( 'sbs-nav-step-triangle', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-triangle-step-no.css' ), array( 'sbs-style' ));
+  case 3: // Downward-pointing Triangles
+    wp_enqueue_style( 'sbs-nav-step-triangle-down', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-triangledown-step-no.css' ), array( 'sbs-style' ));
+    break;
+  case 4: // Upward Pointing Triangles
+    wp_enqueue_style( 'sbs-nav-step-triangle-up', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-triangleup-step-no.css' ), array( 'sbs-style' ));
+    break;
   default:
     break;
 
@@ -121,7 +125,10 @@ switch( get_option('sbs_display')['nav-title-style'] ) {
 
   case 1: // Default (Rectangular)
     break;
-  case 2: // Arrows
+  case 2: // Capsule
+    wp_enqueue_style( 'sbs-theme-nav-title-capsule', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-capsule-navbar.css' ), array( 'sbs-style' ) );
+    break; 
+  case 3: // Arrows
     wp_enqueue_style( 'sbs-theme-nav-title-arrow', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-arrow-navbar.css' ), array( 'sbs-style' ) );
     break;
   default:
