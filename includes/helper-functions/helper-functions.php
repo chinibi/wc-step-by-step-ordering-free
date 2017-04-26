@@ -29,6 +29,21 @@ function sbs_get_product_parent_category( $product_id ) {
 
 }
 
+/**
+ * Gets the parent category of a specified product.
+ *
+ * Get all WooCommerce product categories for the specified product, then looks
+ * through the parent property of each of them. A parent property with value 0
+ * means the category is top-level.
+ *
+ *
+ * @param int $product_id
+ *
+ *
+ * @return WC_Category object $category
+ */
+
+
 
 /**
  * Gets all WooCommerce products of a specified category
@@ -142,3 +157,62 @@ function sbs_is_item_in_cart( $product_id ) {
 
   return false;
 }
+
+
+/**
+ *	Get a list of all WooCommerce product categories
+ *
+ *	@return array WC_Category
+ *
+ */
+
+function sbs_get_all_wc_categories() {
+
+  $taxonomy     = 'product_cat';
+  $orderby      = 'name';
+  $show_count   = 0;      // 1 for yes, 0 for no
+  $pad_counts   = 0;      // 1 for yes, 0 for no
+  $hierarchical = 1;      // 1 for yes, 0 for no
+  $title        = '';
+  $empty        = 0;
+
+  $args = array(
+         'taxonomy'     => $taxonomy,
+         'orderby'      => $orderby,
+         'show_count'   => $show_count,
+         'pad_counts'   => $pad_counts,
+         'hierarchical' => $hierarchical,
+         'title_li'     => $title,
+         'hide_empty'   => $empty
+  );
+  $all_categories = get_categories( $args );
+
+  return $all_categories;
+
+}
+
+
+/**
+ *	Get a list of all product subcategories of a specified parent category
+ *
+ *	@param int $parent_id Parent Category ID
+ *
+ *	@return array WC_Category
+ *
+ */
+
+ function sbs_get_subcategories_from_parent( $parent_id ) {
+
+	 $args = array(
+		 'hierarchical' => 1,
+		 'show_option_none' => '',
+		 'hide_empty' => 0,
+		 'parent' => $parent_id,
+		 'taxonomy' => 'product_cat'
+	 );
+
+	 $subcats = get_categories( $args );
+
+	 return $subcats;
+
+ }

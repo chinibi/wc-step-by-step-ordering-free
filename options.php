@@ -43,6 +43,7 @@ function sbs_plugin_options_page() {
       <a href="?page=stepbystepsys&tab=general_options" class="nav-tab <?php echo $active_tab === 'general_options' ? 'nav-tab-active' : null ?>">General</a>
       <a href="?page=stepbystepsys&tab=sbs_options" class="nav-tab <?php echo $active_tab === 'sbs_options' ? 'nav-tab-active' : null ?>">Step-By-Step</a>
       <a href="?page=stepbystepsys&tab=package_options" class="nav-tab <?php echo $active_tab === 'package_options' ? 'nav-tab-active' : null ?>">Packages</a>
+      <a href="?page=stepbystepsys&tab=onf_options" class="nav-tab <?php echo $active_tab === 'onf_options' ? 'nav-tab-active' : null ?>">Options and Fees</a>
       <a href="?page=stepbystepsys&tab=display_options" class="nav-tab <?php echo $active_tab === 'display_options' ? 'nav-tab-active' : null ?>">Display</a>
     </h2>
 
@@ -65,6 +66,9 @@ function sbs_render_active_tab($active_tab) {
       break;
 		case 'package_options':
 			echo sbs_render_package_options();
+			break;
+		case 'onf_options':
+			echo sbs_render_onf_options();
 			break;
     case 'display_options':
       echo sbs_render_display_options();
@@ -98,6 +102,16 @@ function sbs_render_package_options() {
 	?>
 		<?php settings_fields('sbs_package_settings') ?>
 		<?php do_settings_sections('sbs_package_settings') ?>
+	<?php
+
+	return ob_get_clean();
+}
+
+function sbs_render_onf_options() {
+	ob_start();
+	?>
+		<?php settings_fields('sbs_onf_settings') ?>
+		<?php do_settings_sections('sbs_onf_settings') ?>
 	<?php
 
 	return ob_get_clean();
@@ -144,6 +158,12 @@ function sbs_plugin_settings_init() {
 		'Package Settings',
 		'sbs_package_description',
 		'sbs_package_settings'
+	);
+	add_settings_section(
+		'sbs_onf_settings',
+		'Options and Fees Settings',
+		'sbs_onf_description',
+		'sbs_onf_settings'
 	);
   add_settings_section(
     'sbs_display',
@@ -206,6 +226,29 @@ function sbs_plugin_settings_init() {
 		'sbs_package_settings'
 	);
 
+	// SBS Options and Fees Settings Fields
+	add_settings_field(
+		'sbs_onf_enable',
+		'', // Enable/Disable Options and Fees page
+		'sbs_onf_enable_callback',
+		'sbs_onf_settings',
+		'sbs_onf_settings'
+	);
+	add_settings_field(
+		'sbs_onf_category',
+		'Category',
+		'sbs_onf_category_callback',
+		'sbs_onf_settings',
+		'sbs_onf_settings'
+	);
+	add_settings_field(
+		'sbs_onf_order',
+		'Options and Fees Builder',
+		'sbs_onf_order_callback',
+		'sbs_onf_settings',
+		'sbs_onf_settings'
+	);
+
   // SBS Display Settings Fields
   add_settings_field(
     'color_scheme',
@@ -261,6 +304,7 @@ function sbs_plugin_settings_init() {
   register_setting('sbs_order_settings', 'step_order');
 	register_setting('sbs_order_settings', 'sbs_navbar');
 	register_setting('sbs_package_settings', 'sbs_package');
+	register_setting('sbs_onf_settings', 'sbs_onf');
   register_setting('sbs_display', 'sbs_display');
   // register_setting('sbs_display', 'color_scheme');
   // register_setting('sbs_display', 'navbar_style');
@@ -307,6 +351,17 @@ function sbs_package_description() {
 		</p>
 		<p>
 			You can add additional features such as store credit to packages.
+		</p>
+	<?php
+	echo ob_get_clean();
+}
+
+function sbs_onf_description() {
+	ob_start();
+	?>
+		<p>
+			The Options and Fees page is for miscellaneous items, services, and fees.
+			They will be each displayed compactly in a table.
 		</p>
 	<?php
 	echo ob_get_clean();
@@ -402,6 +457,16 @@ function sbs_sbs_table_callback() {
 				?>
 
 	    </ul>
+
+			<?php
+			if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 )
+			{
+			?>
+				<div class="fixed-item noselect">Options and Fees</div>
+			<?php
+			}
+			?>
+
 	    <div class="fixed-item noselect">Checkout</div>
 	  </div>
 
@@ -485,6 +550,7 @@ function sbs_package_category_callback() {
 	echo ob_get_clean();
 }
 
+
 function sbs_package_merch_cred_callback() {
 
 	$wc_attributes = wc_get_attribute_taxonomies();
@@ -523,71 +589,6 @@ function sbs_package_merch_cred_callback() {
 
 	<?php
 	echo ob_get_clean();
-}
-
-function sbs_package_tier_old_callback() {
-
-	if ( !empty( get_option('sbs_package')['category'] ) ) {
-
-		$package_cat_id = get_option('sbs_package')['category'];
-		$packages = sbs_get_wc_products_by_category( $package_cat_id );
-
-	}
-
-	ob_start();
-	?>
-		<div class="inline">
-			<h3>Tier 1 (Lowest)</h3>
-
-			<div>
-				<label for="sbs-basic-package-name">Select Product: </label>
-				<select id="sbs-basic-package-name" name="sbs_package[basic][product]">
-					<option value="">Select One</option>
-					<?php
-
-					$selected_product = isset( get_option('sbs_package')['basic']['product'] ) ? get_option('sbs_package')['basic']['product'] : false;
-
-					foreach( $packages as $package )
-					{
-					?>
-						<option value="<?php echo $package->ID ?>" <?php selected( $package->ID, $selected_product ) ?>>
-							<?php echo $package->post_title ?>
-						</option>
-					<?php
-					}
-					?>
-				</select>
-			</div>
-
-		</div>
-		<div class="inline">
-			<h3>Tier 2</h3>
-
-			<div>
-				<label for="sbs-premium-package-name">Select Product: </label>
-				<select id="sbs-premium-package-name" name="sbs_package[premium][product]">
-					<option value="">Select One</option>
-					<?php
-
-					$selected_product = isset( get_option('sbs_package')['premium']['product'] ) ? get_option('sbs_package')['premium']['product'] : false;
-
-					foreach( $packages as $package )
-					{
-					?>
-						<option value="<?php echo $package->ID ?>" <?php selected( $package->ID, $selected_product ) ?>>
-							<?php echo $package->post_title ?>
-						</option>
-					<?php
-					}
-					?>
-				</select>
-			</div>
-
-		</div>
-	<?php
-
-	echo ob_get_clean();
-
 }
 
 
@@ -702,6 +703,158 @@ function sbs_package_select_style_callback() {
 
 	<label for="sbs-package-add-cart-label">"Add to Cart" Text: </label>
 	<input type="text" id="sbs-package-add-cart-label" name="sbs_package[add-to-cart-text]" value="<?php echo get_option('sbs_package')['add-to-cart-text'] ?>" placeholder='Default: "Select Package"' />
+
+	<?php
+
+	echo ob_get_clean();
+
+}
+
+
+function sbs_onf_enable_callback() {
+
+	$option = get_option('sbs_onf')['disabled'];
+
+	ob_start();
+	?>
+		<input type="checkbox" id="onf_disabled" name="sbs_onf[disabled]" value="1" <?php checked(1, $option) ?> />
+		<label for="onf_disabled">Disable Options and Fees page</label>
+	<?php
+
+	echo ob_get_clean();
+
+}
+
+function sbs_onf_category_callback() {
+
+	$wc_categories = sbs_get_all_wc_categories();
+
+	ob_start();
+	?>
+		<label for="select-package-category">
+			Select the WooCommerce product category your Options and Fees items are located.<br />
+			Then click Save Changes to refresh the page.
+		</label><br />
+		<select id="select-package-category" name="sbs_onf[category]">
+			<option value="">Select One</option>
+			<?php
+			foreach( $wc_categories as $category )
+			{
+			?>
+				<option value="<?php echo $category->term_id ?>" <?php selected( $category->term_id, get_option('sbs_onf')['category'] ) ?>>
+					<?php echo $category->name ?>
+				</option>
+			<?php
+			}
+			?>
+		</select>
+
+		<?php submit_button() ?>
+	<?php
+
+	echo ob_get_clean();
+}
+
+function sbs_get_onf_order() {
+
+	$onf_order = get_option('sbs_onf')['order'];
+
+	if ( empty($onf_order) )
+		return null;
+
+	$onf_order = json_decode( $onf_order );
+
+	// Clean up this array because the nesting library did some weird stuff when serializing
+	$onf_order = $onf_order[0];
+	foreach( $onf_order as $onf ) {
+		$onf->children = $onf->children[0];
+	}
+
+	return $onf_order;
+
+}
+
+function sbs_onf_order_callback() {
+
+	$onf_category = get_option('sbs_onf')['category'];
+	$onf_order = sbs_get_onf_order();
+
+	if ( !isset( $onf_category ) ) {
+		echo '<p>Select a product category above to begin.</p>';
+		return;
+	}
+
+	$onf_subcats = sbs_get_subcategories_from_parent( $onf_category );
+
+	$available_categories = array_filter( $onf_subcats, function( $category ) {
+
+		$onf_order = sbs_get_onf_order();
+
+		if ( isset( $onf_order ) ) {
+			$onf_order = array_map( function( $package ) {
+				return $package->catid;
+			}, $onf_order);
+		} else {
+			$onf_order = array();
+		}
+
+		return !in_array( $category->term_id, $onf_order );
+	} );
+
+	ob_start();
+	?>
+
+	<div class="sortable-container" id="sbs-order-container">
+		<h3>Options and Fees Page Outline</h3>
+		<ul id="sbs-order" class="sortable">
+
+			<?php
+			if ( $onf_order )
+			{
+				foreach( $onf_order as $category )
+				{
+				?>
+					<li data-catid="<?php echo $category->catid ?>" class="sortable-item">
+						<?php echo get_the_category_by_ID( $category->catid ) ?>
+
+						<ul>
+							<?php
+							if ( $onf_order->children )
+							{
+								foreach( $category->children as $child )
+								{
+								?>
+									<li class="sortable-item" data-catid="<?php echo $child->catid ?>">
+										<?php echo get_the_category_by_ID( $child->catid ) ?>
+									</li>
+								<?php
+								}
+							}
+							?>
+						</ul>
+
+					</li>
+				<?php
+				}
+			}
+			?>
+
+		</ul>
+	</div>
+
+	<div class="sortable-container" id="sbs-pool-container">
+		<h3>Available Categories</h3>
+		<ul id="sbs-pool" class="sortable">
+			<?php foreach( $available_categories as $category ) { ?>
+							<li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
+								<?php echo $category->name ?>
+								<ul></ul>
+							</li>
+			<?php } ?>
+		</ul>
+	</div>
+
+	<input type="hidden" id="step_order" name="sbs_onf[order]" value="<?php echo esc_attr( get_option('sbs_onf')['order'] ) ?>" />
 
 	<?php
 
@@ -848,7 +1001,7 @@ function sbs_display_fonts_callback() {
 		<?php
 		}
 		?>
-	</div>
+		</div>
 		<?php
 	}
 
@@ -928,29 +1081,4 @@ function sbs_display_navbar_title_shape_callback() {
 		}
 
 	echo ob_get_clean();
-}
-
-function sbs_get_all_wc_categories() {
-
-  $taxonomy     = 'product_cat';
-  $orderby      = 'name';
-  $show_count   = 0;      // 1 for yes, 0 for no
-  $pad_counts   = 0;      // 1 for yes, 0 for no
-  $hierarchical = 1;      // 1 for yes, 0 for no
-  $title        = '';
-  $empty        = 0;
-
-  $args = array(
-         'taxonomy'     => $taxonomy,
-         'orderby'      => $orderby,
-         'show_count'   => $show_count,
-         'pad_counts'   => $pad_counts,
-         'hierarchical' => $hierarchical,
-         'title_li'     => $title,
-         'hide_empty'   => $empty
-  );
-  $all_categories = get_categories( $args );
-
-  return $all_categories;
-
 }
