@@ -38,7 +38,7 @@ global $woocommerce;
 global $post;
 global $product;
 
-if ( $product->is_sold_individually() && is_item_in_cart( $product->get_id() ) ) {
+if ( $product->is_sold_individually() && sbs_is_item_in_cart( $product->get_id() ) ) {
 
   echo apply_filters( 'woocommerce_loop_add_to_cart_link',
   	sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
@@ -54,16 +54,16 @@ if ( $product->is_sold_individually() && is_item_in_cart( $product->get_id() ) )
 
 else {
 
-echo apply_filters( 'woocommerce_loop_add_to_cart_link',
-	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
-		esc_url( $product->add_to_cart_url() ),
-		esc_attr( isset( $quantity ) ? $quantity : 1 ),
-		esc_attr( $product->get_id() ),
-		esc_attr( $product->get_sku() ),
-		esc_attr( isset( $class ) ? $class : 'button' ),
-		esc_html( $product->add_to_cart_text() )
-	),
-$product );
+  echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+  	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
+  		esc_url( $product->add_to_cart_url() ),
+  		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+  		esc_attr( $product->get_id() ),
+  		esc_attr( $product->get_sku() ),
+  		esc_attr( isset( $class ) ? $class : 'button' ),
+  		esc_html( $product->add_to_cart_text() )
+  	),
+  $product );
 
 }
 
@@ -78,13 +78,16 @@ echo        '<div class="modal-price"><strong>' . wc_price($product->get_price()
 echo        '<p>' . the_content() . '</p>';
 echo        '<div class="modal-add-to-cart">';
 
-if ( !$product->is_sold_individually() ) {
-  echo            '<strong class="modal-add-to-cart-qty-label">Qty.</strong>';
-  echo            '<input type="number" value="1" min="1" class="modal-select-quantity" id="modal-quantity-' . $product->get_id() . '">';
-} else {
-  echo            '<input type="number" value="1" min="1" class="modal-select-quantity hidden" id="modal-quantity-' . $product->get_id() . '">';
-}
+echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
+		esc_url( $product->add_to_cart_url() ),
+		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+		esc_attr( $product->get_id() ),
+		esc_attr( $product->get_sku() ),
+		esc_attr( isset( $class ) ? $class : 'button' ),
+		esc_html( $product->add_to_cart_text() )
+	),
+$product );
 
-echo            '<a class="add-prod-link add-prod-link-modal" onclick=addToCartWithQuantity(' . $product->get_id() . ',"#modal-quantity-' . $product->get_id() . '") >Add To Cart</a>';
 echo    '</div>';
 echo '</div>';

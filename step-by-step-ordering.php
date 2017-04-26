@@ -4,7 +4,7 @@ Plugin Name: WooCommerce Step By Step Ordering
 Plugin URI:  http://stepbystepsys.com
 Description: Guide customers through your customized ordering process. Requires WooCommerce.
 Version:     0.0.1
-Author:      Trevor Pham, The Dream Builders Company
+Author:      Trevor Pham, Andrew Lambros, The Dream Builders Company
 Author URI:  http://stepbystepsys.com
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -93,7 +93,7 @@ final class StepByStepSystem {
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/theme-selector.php' );
 
 		// Enqueue custom scripts
-		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
+		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
 		wp_enqueue_script( 'sbs-use-magnific-popup', plugins_url( '/js/frontend/sbs-use-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
 
 	}

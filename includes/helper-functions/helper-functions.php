@@ -121,3 +121,24 @@ function sbs_get_cart_total_of_category( $category_id ) {
 	 }
 
  }
+
+ /**
+  *	Check if the specified item is in the cart
+	*
+	* @param int $product_id
+  *
+  *	@return bool
+	*
+  */
+
+function sbs_is_item_in_cart( $product_id ) {
+  global $woocommerce;
+  $cart = $woocommerce->cart->get_cart();
+
+  foreach( $cart as $key => $cart_item ) {
+    if ( $product_id === $cart_item['product_id'] )
+      return true;
+  }
+
+  return false;
+}

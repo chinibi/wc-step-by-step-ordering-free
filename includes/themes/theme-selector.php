@@ -64,13 +64,130 @@ switch( get_option('sbs_display')['calc-font'] ) {
   case 1: // Default (determined by Wordpress Theme)
     break;
   case 2: // Helvetica
-    wp_enqueue_style( 'sbs-calc-theme-helvetica', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-calc-theme-helvetica.css' ), array( 'sbs-style' ));
+    wp_enqueue_style( 'sbs-calc-theme-helvetica', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/calculator/helvetica.css' ), array( 'sbs-style' ));
     break;
   case 3: // Arial
-    wp_enqueue_style( 'sbs-calc-theme-arial', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-calc-theme-arial.css' ), array( 'sbs-style' ));
+    wp_enqueue_style( 'sbs-calc-theme-arial', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/calculator/arial.css' ), array( 'sbs-style' ));
     break;
   case 4: // Verdana
-    wp_enqueue_style( 'sbs-calc-theme-verdana', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-calc-theme-verdana.css' ), array( 'sbs-style' ));
+    wp_enqueue_style( 'sbs-calc-theme-verdana', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/calculator/verdana.css' ), array( 'sbs-style' ));
+    break;
+  case 5: // Georgia
+    wp_enqueue_style( 'sbs-calc-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/calculator/georgia.css' ), array( 'sbs-style' ));
+    break;
+  case 6: // Lucida
+    wp_enqueue_style( 'sbs-calc-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/calculator/lucida.css' ), array( 'sbs-style' ));
+    break;
+  case 7: // Palatino
+    wp_enqueue_style( 'sbs-calc-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/calculator/palatino.css' ), array( 'sbs-style' ));
+    break;
+  default:
+    break;
+
+}
+
+switch( get_option('sbs_display')['category-font'] ) {
+
+  case 1: // Default (determined by Wordpress Theme)
+    break;
+  case 2: // Helvetica
+    wp_enqueue_style( 'sbs-cat-theme-helvetica', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/helvetica.css' ), array( 'sbs-style' ));
+    break;
+  case 3: // Arial
+    wp_enqueue_style( 'sbs-cat-theme-arial', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/arial.css' ), array( 'sbs-style' ));
+    break;
+  case 4: // Verdana
+    wp_enqueue_style( 'sbs-cat-theme-verdana', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/verdana.css' ), array( 'sbs-style' ));
+    break;
+  case 5: // Georgia
+    wp_enqueue_style( 'sbs-cat-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/georgia.css' ), array( 'sbs-style' ));
+    break;
+  case 6: // Lucida
+    wp_enqueue_style( 'sbs-cat-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/lucida.css' ), array( 'sbs-style' ));
+    break;
+  case 7: // Palatino
+    wp_enqueue_style( 'sbs-cat-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/palatino.css' ), array( 'sbs-style' ));
+    break;
+  default:
+    break;
+
+}
+
+switch( get_option('sbs_display')['category-desc-font'] ) {
+
+  case 1: // Default (determined by Wordpress Theme)
+    break;
+  case 2: // Helvetica
+    wp_enqueue_style( 'sbs-catdesc-theme-helvetica', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/category-descriptions/helvetica.css' ), array( 'sbs-style' ));
+    break;
+  case 3: // Arial
+    wp_enqueue_style( 'sbs-catdesc-theme-arial', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/category-descriptions/arial.css' ), array( 'sbs-style' ));
+    break;
+  case 4: // Verdana
+    wp_enqueue_style( 'sbs-catdesc-theme-verdana', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/category-descriptions/verdana.css' ), array( 'sbs-style' ));
+    break;
+  case 5: // Georgia
+    wp_enqueue_style( 'sbs-catdesc-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/category-descriptions/georgia.css' ), array( 'sbs-style' ));
+    break;
+  case 6: // Lucida
+    wp_enqueue_style( 'sbs-catdesc-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/category-descriptions/lucida.css' ), array( 'sbs-style' ));
+    break;
+  case 7: // Palatino
+    wp_enqueue_style( 'sbs-catdesc-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/category-descriptions/palatino.css' ), array( 'sbs-style' ));
+    break;
+  default:
+    break;
+
+}
+
+switch( get_option('sbs_display')['nav-button-font'] ) {
+
+  case 1: // Default (determined by Wordpress Theme)
+    break;
+  case 2: // Helvetica
+    wp_enqueue_style( 'sbs-navbutton-theme-helvetica', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/nav-buttons/helvetica.css' ), array( 'sbs-style' ));
+    break;
+  case 3: // Arial
+    wp_enqueue_style( 'sbs-navbutton-theme-arial', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/nav-buttons/arial.css' ), array( 'sbs-style' ));
+    break;
+  case 4: // Verdana
+    wp_enqueue_style( 'sbs-navbutton-theme-verdana', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/nav-buttons/verdana.css' ), array( 'sbs-style' ));
+    break;
+  case 5: // Georgia
+    wp_enqueue_style( 'sbs-navbutton-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/nav-buttons/georgia.css' ), array( 'sbs-style' ));
+    break;
+  case 6: // Lucida
+    wp_enqueue_style( 'sbs-navbutton-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/nav-buttons/lucida.css' ), array( 'sbs-style' ));
+    break;
+  case 7: // Palatino
+    wp_enqueue_style( 'sbs-navbutton-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/nav-buttons/palatino.css' ), array( 'sbs-style' ));
+    break;
+  default:
+    break;
+
+}
+
+switch( get_option('sbs_display')['navbar-font'] ) {
+
+  case 1: // Default (determined by Wordpress Theme)
+    break;
+  case 2: // Helvetica
+    wp_enqueue_style( 'sbs-nav-theme-helvetica', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/navbar/helvetica.css' ), array( 'sbs-style' ));
+    break;
+  case 3: // Arial
+    wp_enqueue_style( 'sbs-nav-theme-arial', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/navbar/arial.css' ), array( 'sbs-style' ));
+    break;
+  case 4: // Verdana
+    wp_enqueue_style( 'sbs-nav-theme-verdana', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/navbar/verdana.css' ), array( 'sbs-style' ));
+    break;
+  case 5: // Georgia
+    wp_enqueue_style( 'sbs-nav-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/navbar/georgia.css' ), array( 'sbs-style' ));
+    break;
+  case 6: // Lucida
+    wp_enqueue_style( 'sbs-nav-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/navbar/lucida.css' ), array( 'sbs-style' ));
+    break;
+  case 7: // Palatino
+    wp_enqueue_style( 'sbs-nav-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/navbar/palatino.css' ), array( 'sbs-style' ));
     break;
   default:
     break;
@@ -127,7 +244,7 @@ switch( get_option('sbs_display')['nav-title-style'] ) {
     break;
   case 2: // Capsule
     wp_enqueue_style( 'sbs-theme-nav-title-capsule', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-capsule-navbar.css' ), array( 'sbs-style' ) );
-    break; 
+    break;
   case 3: // Arrows
     wp_enqueue_style( 'sbs-theme-nav-title-arrow', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-arrow-navbar.css' ), array( 'sbs-style' ) );
     break;

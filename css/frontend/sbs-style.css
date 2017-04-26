@@ -26,7 +26,6 @@ span.step-span-container {
 
 .step-index > span.step-number {
   background-color: white;
-  border: 1px solid black;
   height: 45px;
   width: 45px;
   display: inline-block;
@@ -50,7 +49,6 @@ span.step-span-container {
 
 .step-title > a {
   display: block;
-  /*color: #648958;*/
   text-decoration: none;
 }
 
@@ -80,7 +78,7 @@ h1.step-by-step-title {
   background: #FFF;
   padding: 20px;
   width: auto;
-  max-width: 500px;
+  max-width: 800px;
   margin: 20px auto;
   display: flex;
   justify-content: space-between;
@@ -107,12 +105,28 @@ h1.step-by-step-title {
   width: 56px;
 }
 
+.woocommerce .quantity,
+.modal-add-to-cart form .quantity {
+  display: inline;
+}
+
+.modal-add-to-cart form .quantity input {
+  width: 15%;
+}
+
+input[type="number"].modal-select-quantity {
+  width: 56px;
+}
+
 .modal-add-to-cart-qty-label {
   line-height: 3em;
 }
 
 a.add-prod-link.add-prod-link-modal {
-  line-height: 2em;
+  line-height: 3em;
+  background-color: #f7f7f7;
+  padding: 6px;
+  border: 1px solid;
 }
 
 @media (max-width: 768px) {
@@ -149,6 +163,7 @@ a.add-prod-link.add-prod-link-modal {
 
 #sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a {
   box-shadow: none;
+  display: block;
 }
 
 #sbs-store-back-forward-buttons-container, #sbs-widget-sidebar-back-forward-buttons-container {
@@ -168,6 +183,7 @@ a.add-prod-link.add-prod-link-modal {
 }
 
 .sbs-package-container {
+  position: relative;
   border: 2px solid gray;
   border: 2px solid gray;
   padding-bottom: 20px;
@@ -184,7 +200,7 @@ a.add-prod-link.add-prod-link-modal {
 }
 
 .sbs-package-content {
-  padding: 20px 20px 0 20px;
+  padding: 20px;
 }
 
 .sbs-package-content ul,
@@ -201,6 +217,13 @@ a.add-prod-link.add-prod-link-modal {
 
 .sbs-package-title, .sbs-package-thumbnail, .sbs-package-price, .sbs-add-package-to-cart {
   text-align: center;
+}
+
+.sbs-add-package-to-cart {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
 }
 
 /* Cart Total Calculator Base Style */

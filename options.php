@@ -236,6 +236,13 @@ function sbs_plugin_settings_init() {
 		'sbs_display'
 	);
 	add_settings_field(
+		'sbs_fonts',
+		'Fonts',
+		'sbs_display_fonts_callback',
+		'sbs_display',
+		'sbs_display'
+	);
+	add_settings_field(
 		'misc_styles',
 		'Miscellaneous Styles',
 		'sbs_display_misc_callback',
@@ -587,6 +594,9 @@ function sbs_package_tier_old_callback() {
 function sbs_get_active_packages() {
 
 	$package_order = get_option('sbs_package')['active'];
+
+	if ( !isset( $package_order ) ) return null;
+
 	$package_order = json_decode( $package_order );
 	$package_order = $package_order[0];
 
@@ -604,9 +614,14 @@ function sbs_package_tier_callback() {
 	$available_packages = array_filter( $all_packages, function( $package ) {
 
 		$active_packages = sbs_get_active_packages();
-		$active_packages = array_map( function( $package ) {
-			return $package->catid;
-		}, $active_packages);
+
+		if ( isset( $active_packages ) ) {
+			$active_packages = array_map( function( $package ) {
+				return $package->catid;
+			}, $active_packages);
+		} else {
+			$active_packages = array();
+		}
 
 		return !in_array( $package->ID, $active_packages );
 
@@ -779,6 +794,67 @@ function sbs_display_calc_callback() {
 		</div>
 	<?php
 }
+
+
+function sbs_display_fonts_callback() {
+
+	$category_font = isset( get_option('sbs_display')['category-font'] ) ? get_option('sbs_display')['category-font'] : 1;
+	$category_desc_font = isset( get_option('sbs_display')['category-desc-font'] ) ? get_option('sbs_display')['category-desc-font'] : 1;
+	$nav_button_font = isset( get_option('sbs_display')['nav-button-font'] ) ? get_option('sbs_display')['nav-button-font'] : 1;
+	$navbar_font = isset( get_option('sbs_display')['navbar-font'] ) ? get_option('sbs_display')['navbar-font'] : 1;
+
+	$fonts = array(
+		'Default',
+		'Helvetica',
+		'Arial',
+		'Verdana',
+		'Georgia',
+		'Lucida',
+		'Palatino'
+	);
+
+	$sections = array(
+		array( 'title' => 'Subcategory Name', 'slug' => 'category-font', 'option' => $category_font ),
+		array( 'title' => 'Subcategory Description', 'slug' => 'category-desc-font', 'option' => $category_desc_font ),
+		array( 'title' => 'Nav Buttons', 'slug' => 'nav-button-font', 'option' => $nav_button_font ),
+		array( 'title' => 'Navbar', 'slug' => 'navbar-font', 'option' => $navbar_font ),
+	);
+
+	ob_start();
+	?>
+
+	<?php
+	foreach ( $sections as $section )
+	{
+	?>
+		<div class="horizontal-stack">
+		<div><strong><?php echo $section['title'] ?></strong></div>
+		<?php
+		foreach ( $fonts as $key => $font )
+		{
+			$index = $key + 1;
+		?>
+			<input
+				type="radio"
+				id="<?php echo $section['slug'] . $key ?>"
+				name="sbs_display[<?php echo $section['slug'] ?>]"
+				value="<?php echo $index ?>"
+				<?php checked( $index, $section['option'] ) ?>
+				/>
+			<label for="<?php echo $section['slug'] . $key ?>">
+				<?php echo $font ?>
+			</label><br />
+
+		<?php
+		}
+		?>
+	</div>
+		<?php
+	}
+
+}
+
+
 
 function sbs_display_misc_callback() {
 	$hover_effect = isset( get_option('sbs_display')['hover-effect'] ) ? get_option('sbs_display')['hover-effect'] : false;
