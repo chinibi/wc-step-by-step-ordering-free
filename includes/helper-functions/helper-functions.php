@@ -46,7 +46,7 @@ function sbs_get_product_parent_category( $product_id ) {
 
 
 /**
- * Gets all WooCommerce products of a specified category
+ * Gets all WooCommerce product-type posts of a specified category
  *
  *
  * @param int $category_id
@@ -142,17 +142,17 @@ function sbs_get_cart_total_of_category( $category_id ) {
 	*
 	* @param int $product_id
   *
-  *	@return bool
+  *	@return string $key || bool false
 	*
   */
 
-function sbs_is_item_in_cart( $product_id ) {
+function sbs_get_cart_key( $product_id ) {
   global $woocommerce;
   $cart = $woocommerce->cart->get_cart();
 
   foreach( $cart as $key => $cart_item ) {
     if ( $product_id === $cart_item['product_id'] )
-      return true;
+      return $key;
   }
 
   return false;

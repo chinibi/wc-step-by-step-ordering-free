@@ -86,6 +86,15 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 	  $steps_checkout = new stdClass();
 	  $steps_checkout->name = 'Checkout';
 	  array_unshift( $steps, $steps_package );
+
+		if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
+
+			$steps_onf = new stdClass();
+			$steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
+			array_push( $steps, $steps_onf );
+
+		}
+		
 	  array_push( $steps, $steps_checkout );
 
 	  // Default to step 0 if an invalid step was requested
@@ -182,54 +191,6 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       'css_class' => 'sbs-widget-sidebar-category'
     );
 
-  }
-
-  public function render_change_package_link($package_type, $county) {
-    $base_url = '';
-    switch($package_type) {
-      case 'pp':
-        $base_url = '/pre-plan-cremation';
-        break;
-      case 'dho':
-        $base_url = '/a-death-has-occurred';
-        break;
-    }
-    $county_suffix = '';
-    switch($county) {
-      case 'Los Angeles':
-        $county_suffix = '-la';
-        break;
-      case 'Ventura':
-        $county_suffix = '-vc';
-        break;
-      case 'San Bernardino':
-        $county_suffix = '-sbc';
-        break;
-      case 'San Diego':
-        $county_suffix = '-sd';
-        break;
-      case 'Riverside':
-        $county_suffix = '-ri';
-        break;
-      case 'Orange':
-        $county_suffix = '-oc';
-        break;
-      case 'Santa Barbara':
-        $county_suffix = '-sb';
-        break;
-
-      default:
-        $county_suffix = '-la';
-        break;
-    }
-
-    return '
-      <span id="change-pkg-btn">
-        <a href="' . $base_url . $county_suffix . '/">
-          <small>Change Package</small>
-        </a>
-      </span>
-    ';
   }
 
   public function form( $instance ) {

@@ -38,7 +38,7 @@ global $woocommerce;
 global $post;
 global $product;
 
-if ( $product->is_sold_individually() && sbs_is_item_in_cart( $product->get_id() ) ) {
+if ( $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
 
   echo apply_filters( 'woocommerce_loop_add_to_cart_link',
   	sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',

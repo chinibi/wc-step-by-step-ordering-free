@@ -64,7 +64,7 @@ function sbs_select_package_shortcode() {
   ob_start();
   ?>
   <?php
-  if ( empty( $packages ) || is_null( $packages ) )
+  if ( !$packages )
   {
   ?>
 

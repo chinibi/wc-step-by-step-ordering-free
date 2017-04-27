@@ -135,6 +135,14 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
   }
 
+	if ( get_option('sbs_onf')['disabled'] != 1 && $current_step === count($steps) - 2 ) {
+
+    echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Options' . '</h1>';
+		echo do_shortcode( '[sbs_options_and_fees]' );
+		return;
+
+	}
+
   if ($current_step === count($steps) - 1) {
 
     echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Checkout' . '</h1>';
@@ -218,6 +226,15 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   $steps_checkout = new stdClass();
   $steps_checkout->name = 'Checkout';
   array_unshift( $steps, $steps_package );
+
+	if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
+
+		$steps_onf = new stdClass();
+		$steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
+		array_push( $steps, $steps_onf );
+
+	}
+
   array_push( $steps, $steps_checkout );
 
   // Default to step 0 if an invalid step was requested
