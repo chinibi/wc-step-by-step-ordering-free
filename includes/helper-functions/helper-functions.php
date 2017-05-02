@@ -107,35 +107,35 @@ function sbs_get_cart_total_of_category( $category_id ) {
  *						credit => float Merchandise Credit assigned to package
  */
 
- function sbs_get_package_from_cart() {
+function sbs_get_package_from_cart() {
 
-	 global $woocommerce;
-	 $result = array();
-	 $package_cat_id = (int) get_option('sbs_package')['category'];
-	 $merch_cred_attr = isset( get_option('sbs_package')['merch-cred-attr'] ) ? get_option('sbs_package')['merch-cred-attr'] : null;
-	 $cart = $woocommerce->cart->get_cart();
+	global $woocommerce;
+	$result = array();
+	$package_cat_id = (int) get_option('sbs_package')['category'];
+	$merch_cred_attr = isset( get_option('sbs_package')['merch-cred-attr'] ) ? get_option('sbs_package')['merch-cred-attr'] : null;
+	$cart = $woocommerce->cart->get_cart();
 
 
-	 foreach ( $cart as $item ) {
+	foreach ( $cart as $item ) {
 
-		 $product_parent = sbs_get_product_parent_category( $item['product_id'] )->term_id;
-		 if ( $product_parent === $package_cat_id ) {
+		$product_parent = sbs_get_product_parent_category( $item['product_id'] )->term_id;
+		if ( $product_parent === $package_cat_id ) {
 
-			 $merch_cred_terms = get_the_terms( $item['product_id'], 'pa_' . $merch_cred_attr );
-			 if ( !empty( $merch_cred_terms ) ) {
-				 $merch_credit = floatval( $merch_cred_terms[0]->name );
-			 }
+			$merch_cred_terms = get_the_terms( $item['product_id'], 'pa_' . $merch_cred_attr );
+			if ( !empty( $merch_cred_terms ) ) {
+				$merch_credit = floatval( $merch_cred_terms[0]->name );
+			}
 
-			 return array(
-				 'item' => $item,
-				 'credit' => isset( $merch_credit ) ? $merch_credit : null
-			 );
+			return array(
+				'item' => $item,
+				'credit' => isset( $merch_credit ) ? $merch_credit : null
+			);
 
-		 }
+		}
 
-	 }
+	}
 
- }
+}
 
  /**
   *	Check if the specified item is in the cart
@@ -201,18 +201,46 @@ function sbs_get_all_wc_categories() {
  *
  */
 
- function sbs_get_subcategories_from_parent( $parent_id ) {
+function sbs_get_subcategories_from_parent( $parent_id ) {
 
-	 $args = array(
-		 'hierarchical' => 1,
-		 'show_option_none' => '',
-		 'hide_empty' => 0,
-		 'parent' => $parent_id,
-		 'taxonomy' => 'product_cat'
-	 );
+	$args = array(
+		'hierarchical' => 1,
+		'show_option_none' => '',
+		'hide_empty' => 0,
+		'parent' => $parent_id,
+		'taxonomy' => 'product_cat'
+	);
 
-	 $subcats = get_categories( $args );
+	$subcats = get_categories( $args );
 
-	 return $subcats;
+	return $subcats;
 
- }
+}
+
+function sbs_get_full_step_order() {
+
+  $steps = sbs_get_step_order();
+  foreach( $steps as $step ) {
+    $step->name = get_the_category_by_ID( $step->catid );
+  }
+  $steps_package = new stdClass();
+  $steps_package->name = 'Packages';
+	$steps_package->catid = get_option('sbs_package')['category'];
+  $steps_checkout = new stdClass();
+  $steps_checkout->name = 'Checkout';
+  array_unshift( $steps, $steps_package );
+
+  if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
+
+    $steps_onf = new stdClass();
+    $steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
+		$steps_onf->catid = (string) get_option('sbs_onf')['category'];
+    array_push( $steps, $steps_onf );
+
+  }
+
+  array_push( $steps, $steps_checkout );
+
+  return $steps;
+
+}

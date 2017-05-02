@@ -38,45 +38,21 @@ global $woocommerce;
 global $post;
 global $product;
 
-if ( $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
-
-  echo apply_filters( 'woocommerce_loop_add_to_cart_link',
-  	sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
-  		esc_attr( isset( $quantity ) ? $quantity : 1 ),
-  		esc_attr( $product->get_id() ),
-  		esc_attr( $product->get_sku() ),
-  		esc_attr( (isset( $class ) ? $class : 'button') . ' nolink' ),
-  		esc_html( "In Cart" )
-  	),
-  $product );
-
-}
-
-else {
-
-  echo apply_filters( 'woocommerce_loop_add_to_cart_link',
-  	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
-  		esc_url( $product->add_to_cart_url() ),
-  		esc_attr( isset( $quantity ) ? $quantity : 1 ),
-  		esc_attr( $product->get_id() ),
-  		esc_attr( $product->get_sku() ),
-  		esc_attr( isset( $class ) ? $class : 'button' ),
-  		esc_html( $product->add_to_cart_text() )
-  	),
-  $product );
-
-}
-
-echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link">Learn More</a>';
-echo '<div id="modal-product-' . $product->get_id() . '" class="white-popup mfp-hide">';
-echo    '<div class="modal-left-side">';
-echo        '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
-echo    '</div>';
-echo    '<div class="modal-right-side">';
-echo        '<div class="modal-title"><h3>' . $product->get_title() . '</h3></div>';
-echo        '<div class="modal-price"><strong>' . wc_price($product->get_price()) . '</strong></div>';
-echo        '<p>' . the_content() . '</p>';
-echo        '<div class="modal-add-to-cart">';
+// if ( $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
+//
+//   echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+//   	sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
+//   		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+//   		esc_attr( $product->get_id() ),
+//   		esc_attr( $product->get_sku() ),
+//   		esc_attr( (isset( $class ) ? $class : 'button') . ' nolink' ),
+//   		esc_html( "In Cart" )
+//   	),
+//   $product );
+//
+// }
+//
+// else {
 
 echo apply_filters( 'woocommerce_loop_add_to_cart_link',
 	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
@@ -88,6 +64,17 @@ echo apply_filters( 'woocommerce_loop_add_to_cart_link',
 		esc_html( $product->add_to_cart_text() )
 	),
 $product );
+
+// }
+
+echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link">Learn More</a>';
+echo '<div id="modal-product-' . $product->get_id() . '" class="white-popup mfp-hide">';
+echo    '<div class="modal-left-side">';
+echo      '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
+echo    '</div>';
+echo    '<div class="modal-right-side">';
+
+do_action( 'woocommerce_single_product_summary' );
 
 echo    '</div>';
 echo '</div>';

@@ -54,7 +54,7 @@ function sbs_apply_merchandise_credit() {
 add_action( 'woocommerce_cart_calculate_fees', 'sbs_apply_merchandise_credit' );
 
 
-function sbs_quantity_inputs_for_woocommerce_loop_add_to_cart_link( $html, $product ) {
+function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 
 	global $woocommerce;
 
@@ -89,4 +89,4 @@ function sbs_quantity_inputs_for_woocommerce_loop_add_to_cart_link( $html, $prod
 
 }
 
-add_filter( 'woocommerce_loop_add_to_cart_link', 'sbs_quantity_inputs_for_woocommerce_loop_add_to_cart_link', 10, 2 );
+add_filter( 'woocommerce_loop_add_to_cart_link', 'sbs_woocommerce_loop_add_to_cart_link', 10, 2 );

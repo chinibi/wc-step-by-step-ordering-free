@@ -45,6 +45,16 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     // calculated only on checkout
     $woocommerce->cart->calculate_fees();
 
+		if ( !isset( get_option('sbs_onf')['disabled'] ) && isset( get_option('sbs_onf')['category'] ) ) {
+
+			$totals[] = array(
+				'cat_name' => get_the_category_by_ID( get_option('sbs_onf')['category'] ),
+				'cat_total' => wc_price( sbs_get_cart_total_of_category( get_option('sbs_onf')['category'] ) ),
+				'css_class' => 'sbs-widget-sidebar-category'
+			);
+
+		}
+
 		$totals[] = array(
 			'cat_name' => 'SUBTOTAL',
 			'cat_total' => wc_price( $woocommerce->cart->subtotal - $woocommerce->cart->get_taxes_total() ),
@@ -94,7 +104,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 			array_push( $steps, $steps_onf );
 
 		}
-		
+
 	  array_push( $steps, $steps_checkout );
 
 	  // Default to step 0 if an invalid step was requested

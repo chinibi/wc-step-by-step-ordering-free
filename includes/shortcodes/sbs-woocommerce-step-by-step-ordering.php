@@ -101,6 +101,148 @@ function sbs_hide_sidebar_default_theme() {
 
 }
 
+function sbs_render_required_products( $category_id ) {
+
+	// $title = isset( get_option('sbs_step_section_label')['req-label-' . $current_step] ) ? get_option('sbs_step_section_label')['req-label-' . $current_step] . ' (Required)' : 'Featured Items';
+
+	$sub_term = get_term_by('id', $category_id, 'product_cat', 'ARRAY_A');
+
+	$req_args = array(
+		'post_type' => 'product',
+		'post_status' => 'publish',
+		'ignore_sticky_posts'	=> 1,
+		'posts_per_page' => 12,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'product_cat',
+				'field' => 'id',
+				'terms' => $category_id
+			)
+		)
+	);
+
+	$query = new WP_Query( $req_args );
+
+	$required_products = sbs_req_get_required_products( $category_id );
+
+	if ( $query->have_posts() && !empty( $required_products ) ):
+
+		echo '<h3 class="sbs-subcat-name">Select ' . $sub_term['name'] .' (Required)</h3>';
+		echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
+		echo '<div class="woocommerce columns-4">';
+		woocommerce_product_loop_start();
+
+		while ( $query->have_posts() ):
+
+			$query->the_post();
+			$product = wc_get_product( $query->post->ID );
+
+			if ( $product->get_attribute( 'required' ) )
+				wc_get_template_part( 'content', 'product' );
+
+		endwhile;
+
+		woocommerce_product_loop_end();
+
+	endif;
+	wp_reset_postdata();
+
+}
+
+function sbs_render_featured_products( $current_step, $steps ) {
+
+	$title = isset( get_option('sbs_step_section_label')['feat-label-' . $current_step] ) ? get_option('sbs_step_section_label')['feat-label-' . $current_step] : 'Featured Items';
+
+	$args = array(
+		'post_type' => 'product',
+		'post_status' => 'publish',
+		'ignore_sticky_posts'	=> 1,
+		'posts_per_page' => 12,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'product_cat',
+				'field' => 'id',
+				'terms' => $steps[$current_step]->catid
+			),
+			array(
+				'taxonomy' => 'product_visibility',
+				'field'    => 'name',
+				'terms'    => 'featured',
+				'operator' => 'IN'
+			)
+		)
+	);
+
+	$query = new WP_Query( $args );
+
+	if ( $query->have_posts() ):
+
+		echo '<h3 class="sbs-subcat-name">' . $title . '</h3>';
+		echo '<div class="woocommerce columns-4">';
+		woocommerce_product_loop_start();
+
+		while ( $query->have_posts() ):
+
+			$query->the_post();
+
+			wc_get_template_part( 'content', 'product' );
+
+		endwhile;
+
+		woocommerce_product_loop_end();
+		echo '</div>';
+
+	endif;
+	wp_reset_postdata();
+
+}
+
+
+function sbs_render_product_category( $category_id ) {
+
+	$sub_term = get_term_by('id', $category_id, 'product_cat', 'ARRAY_A');
+
+	$req_args = array(
+		'post_type' => 'product',
+		'post_status' => 'publish',
+		'ignore_sticky_posts'	=> 1,
+		'posts_per_page' => 24,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'product_cat',
+				'field' => 'id',
+				'terms' => $category_id
+			)
+		)
+	);
+
+	$query = new WP_Query( $req_args );
+
+	if ( $query->have_posts() ):
+
+		echo '<h3 class="sbs-subcat-name">' . $sub_term['name'] .'</h3>';
+		echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
+		echo '<div class="woocommerce columns-4">';
+		woocommerce_product_loop_start();
+
+		while ( $query->have_posts() ):
+
+			$query->the_post();
+			$product = wc_get_product( $query->post->ID );
+
+			if ( !$product->get_attribute( 'required' ) )
+				wc_get_template_part( 'content', 'product' );
+
+		endwhile;
+
+		woocommerce_product_loop_end();
+
+	endif;
+	wp_reset_postdata();
+
+}
+
+
 function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
   if ( $current_step === 0 ) {
@@ -117,15 +259,15 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
     echo '<h1 class="sbs-step-title">Step ' . $current_step . ': ' . $current_category_name . '</h1>';
 
+		sbs_render_featured_products( $current_step, $steps );
+
     if ( !empty( $steps[$current_step]->children ) ) {
 
       foreach( $steps[$current_step]->children as $subcategory ) {
 
-        $sub_term = get_term_by('id', $subcategory->catid, 'product_cat', 'ARRAY_A');
+				sbs_render_required_products( $subcategory->catid );
 
-        echo '<h3 class="sbs-subcat-name">' . $sub_term['name'] .'</h3>';
-        echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
-        echo do_shortcode( '[product_category category=' . $sub_term['slug'] . ']' );
+        sbs_render_product_category( $subcategory->catid );
 
       }
 
@@ -241,6 +383,8 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   if ( !array_key_exists( $current_step, $steps ) ) {
     $current_step = 0;
   }
+
+	do_action( 'sbs_before_sbs_content' );
 
   ob_start();
   ?>

@@ -195,6 +195,13 @@ function sbs_plugin_settings_init() {
 		'sbs_order_settings',
 		'sbs_order_settings'
 	);
+	add_settings_field(
+		'sbs_required_featured_label',
+		'Featured and Required Products',
+		'sbs_req_feat_label_callback',
+		'sbs_order_settings',
+		'sbs_order_settings'
+	);
 
 	// SBS Package Settings
 	add_settings_field(
@@ -303,6 +310,7 @@ function sbs_plugin_settings_init() {
   register_setting('sbs_show_something', 'sbs_ui_feature');
   register_setting('sbs_order_settings', 'step_order');
 	register_setting('sbs_order_settings', 'sbs_navbar');
+	register_setting('sbs_order_settings', 'sbs_step_section_label');
 	register_setting('sbs_package_settings', 'sbs_package');
 	register_setting('sbs_onf_settings', 'sbs_onf');
   register_setting('sbs_display', 'sbs_display');
@@ -383,6 +391,11 @@ function toggle_display_callback( $args ) {
 
 function sbs_get_step_order() {
 	$step_order = get_option('step_order');
+
+	if ( !isset( $step_order ) ) {
+		return;
+	}
+
 	$step_order = json_decode( $step_order );
 
 	// Clean up this array because the nesting library did some weird stuff when serializing
@@ -519,6 +532,40 @@ function sbs_navbar_navigation_callback() {
 
 	echo ob_get_clean();
 
+}
+
+
+function sbs_req_feat_label_callback() {
+
+	$step_order = sbs_get_step_order();
+
+	if ( empty( $step_order ) ) {
+		return;
+	}
+
+	ob_start();
+	?>
+
+	<?php
+	foreach( $step_order as $key => $step ):
+		$index = $key + 1;
+
+		$required_label = isset( get_option('sbs_step_section_label')['req-label-' . $index] ) ? get_option('sbs_step_section_label')['req-label-' . $index] : null;
+
+		$featured_label = isset( get_option('sbs_step_section_label')['feat-label-' . $index] ) ? get_option('sbs_step_section_label')['feat-label-' . $index] : null;
+
+	?>
+		<div>
+			<p><strong>Step <?php echo $index ?> - <?php echo get_the_category_by_ID( $step->catid ) ?></strong></p>
+			<label for="required_label_<?php echo $index ?>">Required Items Section Name</label>
+			<input type="text" id="required_label_<?php echo $index ?>" name="sbs_step_section_label[req-label-<?php echo $index ?>]" value="<?php echo $required_label ?>" /><br />
+			<label for="featured_label_<?php echo $index ?>">Featured Items Section Name</label>
+			<input type="text" id="featured_label_<?php echo $index ?>" name="sbs_step_section_label[feat-label-<?php echo $index ?>]" value="<?php echo $featured_label ?>" />
+		</div>
+	<?php
+	endforeach;
+
+	echo ob_get_clean();
 }
 
 

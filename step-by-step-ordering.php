@@ -44,6 +44,7 @@ final class StepByStepSystem {
 
 		// Include additions to WooCommerce actions
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/additional-actions.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/required-products.php' );
 
 		// Include SBS Cart Totals Widget
 		include_once( plugin_dir_path( __FILE__) . 'includes/widgets/sbs-cart-totals.php' );
@@ -94,6 +95,8 @@ final class StepByStepSystem {
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/theme-selector.php' );
 
 		// Enqueue custom scripts
+		// wp_enqueue_script( 'single-product-lightbox', plugins_url( '/woocommerce/assets/js/frontend/single-product.js' ) );
+
 		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
 		wp_enqueue_script( 'sbs-use-magnific-popup', plugins_url( '/js/frontend/sbs-use-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
 
