@@ -131,7 +131,10 @@ function sbs_render_required_products( $category_id ) {
 
 	if ( $query->have_posts() && !empty( $required_products ) ):
 
-		echo '<h3 class="sbs-subcat-name">Select ' . $sub_term['name'] .' (Required)</h3>';
+		$required_label_before = isset( get_option('sbs_general')['req-label-before'] ) ? get_option('sbs_general')['req-label-before'] : "Featured Items";
+		$required_label_after = isset( get_option('sbs_general')['req-label-after'] ) ? get_option('sbs_general')['req-label-after'] : '(Required)';
+
+		echo '<h3 class="sbs-subcat-name">' . esc_html( $required_label_before ) . ' ' . $sub_term['name'] . ' ' . esc_html( $required_label_after ) . '</h3>';
 		echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
 		echo '<div class="woocommerce columns-4">';
 		woocommerce_product_loop_start();
@@ -155,7 +158,7 @@ function sbs_render_required_products( $category_id ) {
 
 function sbs_render_featured_products( $current_step, $steps ) {
 
-	$title = isset( get_option('sbs_step_section_label')['feat-label-' . $current_step] ) ? get_option('sbs_step_section_label')['feat-label-' . $current_step] : 'Featured Items';
+	$title = isset( get_option('sbs_general')['featured-label'] ) ? get_option('sbs_general')['featured-label'] : 'Featured Items';
 
 	$args = array(
 		'post_type' => 'product',

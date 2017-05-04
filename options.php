@@ -644,14 +644,21 @@ function sbs_req_feat_label_callback() {
 	?>
 		<fieldset>
 			<label>
-				"Featured Items" Section Title:
+				<strong>"Featured Items" Section Title:</strong>
+			</label><br />
+			<label>
 				<input type="text" name="sbs_general[featured-label]" value="<?php echo $featured_label ?>" />
 			</label><br />
 			<label>
-				"Required Items" Section Title:<br />
-				<input type="text" name="sbs_general[req-label-before]" value="<?php echo $req_label_before ?>" placeholder="Before Category Name" />
-				(Category Name)
-				<input type="text" name="sbs_general[req-label-after]" value="<?php echo $req_label_after ?>" placeholder="After Category Name" />
+				<strong>"Required Items" Section Title:</strong>
+			</label><br />
+			<label>
+				Before Category Name:
+				<input type="text" name="sbs_general[req-label-before]" value="<?php echo $req_label_before ?>" />
+			</label><br />
+			<label>
+				After Category Name:
+				<input type="text" name="sbs_general[req-label-after]" value="<?php echo $req_label_after ?>" />
 			</label>
 		</fieldset>
 	<?php
