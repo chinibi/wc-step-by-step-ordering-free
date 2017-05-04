@@ -404,16 +404,22 @@ function sbs_page_name_callback() {
 
 	ob_start();
 	?>
-	<p>The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.</p>
-	<select id="sbs_page_name" name="sbs_general[page-name]">
-		<?php
-		foreach( $pages as $page ):
-		?>
-		<option value="<?php echo $page->ID ?>" <?php selected( $page->ID, $option ) ?>><?php echo $page->post_title ?></option>
-		<?php
-		endforeach;
-		?>
-	</select>
+	<fieldset>
+		<label>
+			<p>The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.</p>
+			<p><strong>You may need to set this option again if you change the name of the page.</strong></p>
+			<select id="sbs_page_name" name="sbs_general[page-name]">
+				<option value="">(Select a Page)</option>
+				<?php
+				foreach( $pages as $page ):
+				?>
+				<option value="<?php echo esc_attr( $page->ID ) ?>" <?php echo selected( $page->ID, $option ) ?>><?php echo esc_html( $page->post_title ) ?></option>
+				<?php
+				endforeach;
+				?>
+			</select>
+		</label>
+	</fieldset>
 	<?php
 
 	echo ob_get_clean();
