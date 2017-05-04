@@ -65,7 +65,7 @@ final class StepByStepSystem {
 
 	public function plugin_activation() {
 
-	  if ( !post_exists( 'ordering' ) ) {
+	  if ( !post_exists( 'Step-By-Step Ordering' ) ) {
 	    $page_data = array(
 	      'post_status' => 'publish',
 	      'post_type'   => 'page',
@@ -89,6 +89,7 @@ final class StepByStepSystem {
 
 		wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
 		wp_enqueue_script( 'magnific-popupjs', plugins_url( '/js/frontend/magnific-popup.min.js', __FILE__ ), array( 'jquery' ) );
+		wp_enqueue_script( 'zoom', plugins_url( '/js/frontend/zoom.min.js', __FILE__ ), array( 'jquery' ) );
 
 		// Enqueue custom stylesheets
 		wp_enqueue_style( 'sbs-style', plugins_url( '/css/frontend/sbs-style.css', __FILE__ ), array( 'woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen' ) );
@@ -98,7 +99,9 @@ final class StepByStepSystem {
 		// wp_enqueue_script( 'single-product-lightbox', plugins_url( '/woocommerce/assets/js/frontend/single-product.js' ) );
 
 		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
-		wp_enqueue_script( 'sbs-use-magnific-popup', plugins_url( '/js/frontend/sbs-use-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
+		wp_enqueue_script( 'sbs-init-magnific-popup', plugins_url( '/js/frontend/sbs-init-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
+		wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
+		wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
 
 	}
 

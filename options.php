@@ -80,7 +80,7 @@ function sbs_render_active_tab($active_tab) {
 function sbs_render_general_options() {
   ob_start();
   ?>
-    <?php settings_fields('sbs_show_something') ?>
+    <?php settings_fields('sbs_general') ?>
     <?php do_settings_sections('sbs_general') ?>
   <?php
 
@@ -172,13 +172,34 @@ function sbs_plugin_settings_init() {
     'sbs_display'
   );
 
-  add_settings_field(
-    'sbs_show_something', // String for use in the 'id' attribute of tags.
-    'Additional Features', // Title of the field.
-    'toggle_display_callback', //  Function that fills the field with the desired inputs as part of the larger form. Passed a single argument, the $args array. Name and id of the input should match the $id given to this function. The function should echo its output.
-    'sbs_general', //  The menu page on which to display this field. Should match $menu_slug from add_theme_page() or from do_settings_sections().
-    'sbs_general' // The section of the settings page in which to show the box (default or a section you added with add_settings_section(), look at the page in the source to see what the existing ones are.)
-  );
+	add_settings_field(
+		'sbs_page_name', // String for use in the 'id' attribute of tags.
+		'Step-By-Step Page', // Title of the field.
+		'sbs_page_name_callback', //  Function that fills the field with the desired inputs as part of the larger form. Passed a single argument, the $args array. Name and id of the input should match the $id given to this function. The function should echo its output.
+		'sbs_general', //  The menu page on which to display this field. Should match $menu_slug from add_theme_page() or from do_settings_sections().
+		'sbs_general' // The section of the settings page in which to show the box (default or a section you added with add_settings_section(), look at the page in the source to see what the existing ones are.)
+	);
+  // add_settings_field(
+  //   'sbs_show_something',
+  //   'Additional Features',
+  //   'toggle_display_callback',
+  //   'sbs_general',
+  //   'sbs_general'
+  // );
+	add_settings_field(
+		'sbs_featured_position',
+		'Featured Items Position',
+		'sbs_featured_items_pos_callback',
+		'sbs_general',
+		'sbs_general'
+	);
+	add_settings_field(
+		'sbs_required_featured_label',
+		'Featured and Required Products',
+		'sbs_req_feat_label_callback',
+		'sbs_general',
+		'sbs_general'
+	);
 
   // SBS Step-By-Step Settings Fields
   add_settings_field(
@@ -192,13 +213,6 @@ function sbs_plugin_settings_init() {
 		'sbs_navbar_navigation',
 		'Navbar Navigation',
 		'sbs_navbar_navigation_callback',
-		'sbs_order_settings',
-		'sbs_order_settings'
-	);
-	add_settings_field(
-		'sbs_required_featured_label',
-		'Featured and Required Products',
-		'sbs_req_feat_label_callback',
 		'sbs_order_settings',
 		'sbs_order_settings'
 	);
@@ -299,18 +313,18 @@ function sbs_plugin_settings_init() {
 		'sbs_display',
 		'sbs_display'
 	);
-  add_settings_field(
-    'show_calculator',
-    'Display Sidebar Calculator Widget',
-    'sbs_display_sidebar_calculator_callback',
-    'sbs_display',
-    'sbs_display'
-  );
+  // add_settings_field(
+  //   'show_calculator',
+  //   'Display Sidebar Calculator Widget',
+  //   'sbs_display_sidebar_calculator_callback',
+  //   'sbs_display',
+  //   'sbs_display'
+  // );
 
-  register_setting('sbs_show_something', 'sbs_ui_feature');
+	register_setting('sbs_general', 'sbs_general');
+  register_setting('sbs_general', 'sbs_ui_feature');
   register_setting('sbs_order_settings', 'step_order');
 	register_setting('sbs_order_settings', 'sbs_navbar');
-	register_setting('sbs_order_settings', 'sbs_step_section_label');
 	register_setting('sbs_package_settings', 'sbs_package');
 	register_setting('sbs_onf_settings', 'sbs_onf');
   register_setting('sbs_display', 'sbs_display');
@@ -332,8 +346,6 @@ function sbs_plugin_settings_init() {
  */
 
 function sbs_general_description() {
-
-  echo '<p>Main description goes here.</p>';
 
 }
 
@@ -379,7 +391,37 @@ function sbs_display_description() {
   echo '<p>Customize the appearance of the ordering process with preset styles and themes.</p>';
 }
 
+/**
+ *  Options Form Output Callbacks
+ *
+ */
+
+function sbs_page_name_callback() {
+
+	$pages = get_pages();
+
+	$option = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+
+	ob_start();
+	?>
+	<p>The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.</p>
+	<select id="sbs_page_name" name="sbs_general[page-name]">
+		<?php
+		foreach( $pages as $page ):
+		?>
+		<option value="<?php echo $page->ID ?>" <?php selected( $page->ID, $option ) ?>><?php echo $page->post_title ?></option>
+		<?php
+		endforeach;
+		?>
+	</select>
+	<?php
+
+	echo ob_get_clean();
+}
+
 function toggle_display_callback( $args ) {
+	$option = isset( get_option('sbs_ui_feature')['lightbox'] ) ? get_option('sbs_ui_feature')['lightbox'] : 1;
+
   ob_start();
   ?>
     <input type="checkbox" id="enable_lightbox" name="sbs_ui_feature[lightbox]" value="1" <?php echo checked(1, get_option('sbs_ui_feature')['lightbox'], false) ?> />
@@ -387,6 +429,28 @@ function toggle_display_callback( $args ) {
   <?php
 
   echo ob_get_clean();
+}
+
+function sbs_featured_items_pos_callback() {
+
+	$option = isset( get_option('sbs_general')['featured-items-position'] ) ? get_option('sbs_general')['featured-items-position'] : 2;
+
+	ob_start();
+	?>
+		<fieldset>
+			<label>
+				<input type="radio" name="sbs_general[featured-items-position]" value="1" <?php echo checked(1, $option) ?>>
+				Top
+			</label><br />
+			<label>
+				<input type="radio" name="sbs_general[featured-items-position]" value="2" <?php echo checked(2, $option) ?>>
+				Bottom
+			</label>
+		</fieldset>
+	<?php
+
+	echo ob_get_clean();
+
 }
 
 function sbs_get_step_order() {
@@ -511,22 +575,23 @@ function sbs_navbar_navigation_callback() {
 
 	ob_start();
 	?>
+	<fieldset>
+		<label>
+			<input type="radio" id="step_navbar_navigation_1" name="sbs_navbar[throttle-nav]" value="1" <?php checked( 1, $option ) ?> />
+			Only allow navigation one step at a time in any direction
+		</label><br />
 
-	<input type="radio" id="step_navbar_navigation_1" name="sbs_navbar[throttle-nav]" value="1" <?php checked( 1, $option ) ?> />
-	<label for="step_navbar_navigation_1">
-		Only allow navigation one step at a time in any direction
-	</label><br />
+		<label>
+			<input type="radio" id="step_navbar_navigation_2" name="sbs_navbar[throttle-nav]" value="2" <?php checked( 2, $option ) ?> />
+			Only allow forward navigation one step a time, but let users backtrack to
+			any step.
+		</label><br />
 
-	<input type="radio" id="step_navbar_navigation_2" name="sbs_navbar[throttle-nav]" value="2" <?php checked( 2, $option ) ?> />
-	<label for="step_navbar_navigation_2">
-		Only allow forward navigation one step a time, but let users backtrack to
-		any step.
-	</label><br />
-
-	<input type="radio" id="step_navbar_navigation_3" name="sbs_navbar[throttle-nav]" value="3" <?php checked( 3, $option ) ?> />
-	<label for="step_navbar_navigation_3">
-		Users may freely navigate, skipping any step they'd like.
-	</label><br />
+		<label>
+			<input type="radio" id="step_navbar_navigation_3" name="sbs_navbar[throttle-nav]" value="3" <?php checked( 3, $option ) ?> />
+			Users may freely navigate, skipping any step they'd like.
+		</label><br />
+	</fieldset>
 
 	<?php
 
@@ -534,7 +599,7 @@ function sbs_navbar_navigation_callback() {
 
 }
 
-
+/*
 function sbs_req_feat_label_callback() {
 
 	$step_order = sbs_get_step_order();
@@ -567,7 +632,33 @@ function sbs_req_feat_label_callback() {
 
 	echo ob_get_clean();
 }
+*/
 
+function sbs_req_feat_label_callback() {
+
+	$featured_label = isset( get_option('sbs_general')['featured-label'] ) ? get_option('sbs_general')['featured-label'] : 'Featured Items';
+	$req_label_before = isset( get_option('sbs_general')['req-label-before'] ) ? get_option('sbs_general')['req-label-before'] : 'Select';
+	$req_label_after = isset( get_option('sbs_general')['req-label-after'] ) ? get_option('sbs_general')['req-label-after'] : '(Required)';
+
+	ob_start();
+	?>
+		<fieldset>
+			<label>
+				"Featured Items" Section Title:
+				<input type="text" name="sbs_general[featured-label]" value="<?php echo $featured_label ?>" />
+			</label><br />
+			<label>
+				"Required Items" Section Title:<br />
+				<input type="text" name="sbs_general[req-label-before]" value="<?php echo $req_label_before ?>" placeholder="Before Category Name" />
+				(Category Name)
+				<input type="text" name="sbs_general[req-label-after]" value="<?php echo $req_label_after ?>" placeholder="After Category Name" />
+			</label>
+		</fieldset>
+	<?php
+
+	echo ob_get_clean();
+
+}
 
 function sbs_package_category_callback() {
 	$wc_categories = sbs_get_all_wc_categories();
@@ -734,22 +825,28 @@ function sbs_package_select_style_callback() {
 
 	ob_start();
 	?>
-	<label for="sbs-package-per-row">Number of packages to display per row:</label>
-	<select id="sbs-package-per-row" name="sbs_package[per-row]">
-	<?php
-	foreach ( $per_row_options as $option )
-	{
-	?>
-		<option value="<?php echo $option ?>" <?php selected( $option, $per_row ) ?>>
-			<?php echo $option ?>
-		</option>
-	<?php
-	}
-	?>
-	</select><br />
+	<fieldset>
+		<label>
+			Number of packages to display per row:
+			<select id="sbs-package-per-row" name="sbs_package[per-row]">
+		</label>
+		<?php
+		foreach ( $per_row_options as $option )
+		{
+		?>
+			<option value="<?php echo $option ?>" <?php selected( $option, $per_row ) ?>>
+				<?php echo $option ?>
+			</option>
+		<?php
+		}
+		?>
+		</select><br />
 
-	<label for="sbs-package-add-cart-label">"Add to Cart" Text: </label>
-	<input type="text" id="sbs-package-add-cart-label" name="sbs_package[add-to-cart-text]" value="<?php echo get_option('sbs_package')['add-to-cart-text'] ?>" placeholder='Default: "Select Package"' />
+		<label>
+			"Add to Cart" Text:
+			<input type="text" id="sbs-package-add-cart-label" name="sbs_package[add-to-cart-text]" value="<?php echo get_option('sbs_package')['add-to-cart-text'] ?>" placeholder='Default: "Select Package"' />
+		</label>
+	</fieldset>
 
 	<?php
 
@@ -760,7 +857,7 @@ function sbs_package_select_style_callback() {
 
 function sbs_onf_enable_callback() {
 
-	$option = get_option('sbs_onf')['disabled'];
+	$option = isset( get_option('sbs_onf')['disabled'] ) ? get_option('sbs_onf')['disabled'] : false;
 
 	ob_start();
 	?>
@@ -866,7 +963,7 @@ function sbs_onf_order_callback() {
 
 						<ul>
 							<?php
-							if ( $onf_order->children )
+							if ( !empty( $onf_order->children ) )
 							{
 								foreach( $category->children as $child )
 								{

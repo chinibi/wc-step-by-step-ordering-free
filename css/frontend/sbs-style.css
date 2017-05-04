@@ -270,3 +270,15 @@ a.sbs-change-package-btn:hover {
 .woocommerce-message::before {
   color: inherit;
 }
+
+.product-loop-in-cart {
+  margin-bottom: 0.5em;
+}
+
+.product-loop-remove {
+  margin-left: 0.5em;
+}
+
+.checkout-package {
+  background-color: lightgreen;
+}

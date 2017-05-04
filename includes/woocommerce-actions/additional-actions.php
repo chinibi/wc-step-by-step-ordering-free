@@ -90,3 +90,92 @@ function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 }
 
 add_filter( 'woocommerce_loop_add_to_cart_link', 'sbs_woocommerce_loop_add_to_cart_link', 10, 2 );
+
+function sbs_render_checkout_sbs_navbar() {
+
+  $all_categories = sbs_get_all_wc_categories();
+
+  $steps = sbs_get_full_step_order();
+
+  $current_step = count( $steps ) - 1;
+
+  ob_start();
+  ?>
+  <div id="sbs-navbar">
+    <?php foreach( $steps as $key => $step ):
+            if ($key === 0) continue;
+    ?>
+
+            <span class="step-span-container">
+              <div class="step-div-container">
+                <div class="step-index">
+									<span class="step-number-before <?php echo $key === $current_step ? 'active' : 'inactive' ?>"></span>
+                  <span class="step-number <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
+                    <?php echo $key ?>
+                  </span>
+									<span class="step-number-after"></span>
+                </div>
+                <div class="step-title <?php echo $key === $current_step ? 'active' : null ?>">
+									<span class="step-title-text">
+                    <?php
+
+											if ( sbs_generate_navbar_url( $key, $current_step, count( $steps ) ) !== false )
+											{
+											?>
+												<a href="<?php echo esc_url( sbs_generate_navbar_url( $key, $current_step, count($steps) ) ) ?>"><?php echo $step->name ?></a>
+											<?php
+											}
+											else
+											{
+											?>
+												<?php echo $step->name ?>
+											<?php
+											}
+
+                    ?>
+									</span>
+                </div>
+								<div class="clearfix"></div>
+              </div>
+            </span>
+
+    <?php endforeach; ?>
+  </div>
+	<?php
+
+	echo ob_get_clean();
+
+}
+add_action( 'woocommerce_before_checkout_notice', 'sbs_render_checkout_sbs_navbar', 10 );
+
+
+function sbs_render_checkout_goback_button() {
+
+	$all_categories = sbs_get_all_wc_categories();
+	$steps = sbs_get_full_step_order();
+
+	$current_step = count($steps) - 1;
+	echo '<a class="button alt" href="' . sbs_previous_step_url( $current_step, count($steps) ) . '">&#171; Return to Ordering</a>';
+
+}
+add_action( 'woocommerce_review_order_before_submit', 'sbs_render_checkout_goback_button', 10 );
+
+
+function sbs_highlight_package_checkout( $class_name, $cart_item ) {
+
+	if ( isset( get_option('sbs_package')['category'] ) ) {
+
+		$package_cat = (int) get_option('sbs_package')['category'];
+
+		$cart_item_cat = sbs_get_product_parent_category( $cart_item['product_id'] );
+
+		if ( $package_cat === $cart_item_cat->term_id ) {
+			$class_name .= ' checkout-package';
+		}
+
+	}
+
+	return $class_name;
+
+}
+add_filter( 'woocommerce_cart_item_class', 'sbs_highlight_package_checkout', 10, 2 );

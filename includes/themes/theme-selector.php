@@ -195,7 +195,7 @@ switch( get_option('sbs_display')['navbar-font'] ) {
 }
 
 // Calculator widget column borders
-if ( get_option('sbs_display')['calc-borders'] == 1 ) {
+if ( isset( get_option('sbs_display')['calc-borders'] ) ) {
   wp_enqueue_style( 'sbs-calc-theme-withborder', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-calc-theme-withborder.css' ), array( 'sbs-style' ) );
 }
 

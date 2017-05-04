@@ -10,7 +10,8 @@ function sbs_remove_edit_link() {
 
 function sbs_previous_step_url( $current_step, $step_count ) {
 
-  $base_url = get_permalink( get_the_ID() );
+	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+  $base_url = get_permalink( $sbs_page );
 
   if ( $current_step > 0 ) {
 
@@ -27,7 +28,8 @@ function sbs_previous_step_url( $current_step, $step_count ) {
 
 function sbs_previous_step_button( $current_step, $step_count ) {
 
-  $base_url = get_permalink( get_the_ID() );
+	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+  $base_url = get_permalink( $sbs_page );
 
   if ( $current_step > 0 ) {
 
@@ -48,7 +50,8 @@ function sbs_previous_step_button( $current_step, $step_count ) {
 
 function sbs_next_step_url( $current_step, $step_count ) {
 
-  $base_url = get_permalink( get_the_ID() );
+	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+  $base_url = get_permalink( $sbs_page );
 
   if ( $current_step !== $step_count - 1 ) {
 
@@ -65,7 +68,8 @@ function sbs_next_step_url( $current_step, $step_count ) {
 
 function sbs_next_step_button( $current_step, $step_count ) {
 
-  $base_url = get_permalink( get_the_ID() );
+	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+  $base_url = get_permalink( $sbs_page );
 
   if ( $current_step !== $step_count - 1 ) {
 
@@ -245,6 +249,8 @@ function sbs_render_product_category( $category_id ) {
 
 function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
+	global $woocommerce;
+
   if ( $current_step === 0 ) {
 		add_action( 'sbs_before_select_package', 'sbs_hide_sidebar_default_theme' );
 
@@ -255,11 +261,15 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
   if ( isset( $steps[$current_step]->catid ) ) {
 
+		$cat_term = get_term_by( 'id', $steps[$current_step]->catid, 'product_cat', 'ARRAY_A' );
     $current_category_name = get_the_category_by_ID( $steps[$current_step]->catid );
 
     echo '<h1 class="sbs-step-title">Step ' . $current_step . ': ' . $current_category_name . '</h1>';
+		echo '<p>' . $cat_term['description'] . '</p>';
 
-		sbs_render_featured_products( $current_step, $steps );
+		if ( isset( get_option('sbs_general')['featured-items-position'] ) && get_option('sbs_general')['featured-items-position'] === '1' ) {
+			sbs_render_featured_products( $current_step, $steps );
+		}
 
     if ( !empty( $steps[$current_step]->children ) ) {
 
@@ -272,6 +282,10 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
       }
 
     }
+
+		if ( !isset( get_option('sbs_general')['featured-items-position'] ) || get_option('sbs_general')['featured-items-position'] === '2' ) {
+			sbs_render_featured_products( $current_step, $steps );
+		}
 
     return;
 
@@ -287,8 +301,9 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
   if ($current_step === count($steps) - 1) {
 
-    echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Checkout' . '</h1>';
-    echo do_shortcode( '[woocommerce_checkout]' );
+    // echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Checkout' . '</h1>';
+    // echo do_shortcode( '[woocommerce_checkout]' );
+		echo '<script type="text/javascript">window.location.href="' . esc_url( $woocommerce->cart->get_checkout_url() ) . '"</script>';
     return;
 
   }
@@ -311,7 +326,9 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
  */
 function sbs_generate_navbar_url( $step_key, $current_step, $step_count ) {
 
-	$base_url = get_permalink( get_the_ID() );
+	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+
+	$base_url = get_permalink( $sbs_page );
 
 	$previous_step = $current_step - 1;
 	$next_step = $current_step + 1;
@@ -429,7 +446,6 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
                   </div>
 									<div class="clearfix"></div>
                 </div>
-
               </span>
 
       <?php } ?>

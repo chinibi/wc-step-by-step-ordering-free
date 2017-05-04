@@ -137,14 +137,14 @@ function sbs_get_package_from_cart() {
 
 }
 
- /**
-  *	Check if the specified item is in the cart
-	*
-	* @param int $product_id
-  *
-  *	@return string $key || bool false
-	*
-  */
+/**
+ *	Check if the specified item is in the cart
+ *
+ *	@param int $product_id
+ *
+ *	@return string $key || bool false
+ *
+ */
 
 function sbs_get_cart_key( $product_id ) {
   global $woocommerce;
@@ -152,7 +152,7 @@ function sbs_get_cart_key( $product_id ) {
 
   foreach( $cart as $key => $cart_item ) {
     if ( $product_id === $cart_item['product_id'] )
-      return $key;
+      return array( 'key' => $key, 'cart_item' => $cart_item );
   }
 
   return false;

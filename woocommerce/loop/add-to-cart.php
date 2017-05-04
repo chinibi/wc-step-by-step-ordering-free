@@ -35,37 +35,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $woocommerce;
-global $post;
 global $product;
 
-// if ( $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
-//
-//   echo apply_filters( 'woocommerce_loop_add_to_cart_link',
-//   	sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
-//   		esc_attr( isset( $quantity ) ? $quantity : 1 ),
-//   		esc_attr( $product->get_id() ),
-//   		esc_attr( $product->get_sku() ),
-//   		esc_attr( (isset( $class ) ? $class : 'button') . ' nolink' ),
-//   		esc_html( "In Cart" )
-//   	),
-//   $product );
-//
-// }
-//
-// else {
+// echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+//   sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
+//     esc_attr( isset( $quantity ) ? $quantity : 1 ),
+//     esc_attr( $product->get_id() ),
+//     esc_attr( $product->get_sku() ),
+//     esc_attr( (isset( $class ) ? $class : 'button') . ' nolink' ),
+//     esc_html( "In Cart" )
+//   ),
+// $product );
 
-echo apply_filters( 'woocommerce_loop_add_to_cart_link',
-	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
-		esc_url( $product->add_to_cart_url() ),
-		esc_attr( isset( $quantity ) ? $quantity : 1 ),
-		esc_attr( $product->get_id() ),
-		esc_attr( $product->get_sku() ),
-		esc_attr( isset( $class ) ? $class : 'button' ),
-		esc_html( $product->add_to_cart_text() )
-	),
-$product );
+if ( sbs_get_cart_key( $product->get_id() ) ) {
+  echo '<div class="product-loop-in-cart">';
+  echo '<span class="product-loop-in-cart-text">';
+  echo esc_html( sbs_get_cart_key( $product->get_id() )['cart_item']['quantity'] ) . ' In Cart';
+  echo '<small class="product-loop-remove"><a href="' . esc_url( $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] ) ) . '">Remove</a></small>';
+  echo '</span></div>';
+}
 
-// }
+if ( $product->is_type( 'variable' ) ) {
+
+  echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+  	sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" data-mfp-src="#modal-product-%s" class="%s open-popup-link">%s</a><br>',
+  		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+  		esc_attr( $product->get_id() ),
+  		esc_attr( $product->get_sku() ),
+      esc_attr( $product->get_id() ),
+  		esc_attr( isset( $class ) ? $class : 'button' ),
+  		esc_html( $product->add_to_cart_text() )
+  	),
+  $product );
+
+}
+
+else {
+
+  echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+  	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
+  		esc_url( $product->add_to_cart_url() ),
+  		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+  		esc_attr( $product->get_id() ),
+  		esc_attr( $product->get_sku() ),
+  		esc_attr( isset( $class ) ? $class : 'button' ),
+  		esc_html( $product->add_to_cart_text() )
+  	),
+  $product );
+
+}
 
 echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link">Learn More</a>';
 echo '<div id="modal-product-' . $product->get_id() . '" class="white-popup mfp-hide">';
