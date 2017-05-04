@@ -1,4 +1,4 @@
-.sbs-package-title {
+.sbs-package-title, .checkout-package {
   background-color: #ddd;
 }
 
@@ -108,7 +108,16 @@
     color: #ffffff;
 }
 
-.woocommerce ul.products li.product .button {
+.woocommerce ul.products li.product .button,
+.woocommerce a.button,
+.woocommerce a.button.alt,
+.woocommerce a.button:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button,
+.woocommerce button.button.alt,
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt
+{
     background-color: #000000;
     color: #ffffff;
     border: none;

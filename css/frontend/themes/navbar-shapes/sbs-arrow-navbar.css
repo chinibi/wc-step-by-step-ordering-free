@@ -22,19 +22,19 @@
     background: inherit; /* use parent background */
     border: inherit; /* use parent border */
     border-color: transparent;
-    border-radius: 0px 4px 0px 0px; /* round arrow corner, the shorthand property doesn't accept "inherit" so it is set to 4px */
-    -webkit-border-radius: 0px 4px 0px 0px;
-    -moz-border-radius: 0px 4px 0px 0px;
+    -webkit-border-radius: 0 4px 0 0;
+    -moz-border-radius: 0 4px 0 0;
+    border-radius: 0 4px 0 0; /* round arrow corner, the shorthand property doesn't accept "inherit" so it is set to 4px */
     box-sizing: border-box;
 }
 
 .step-title:before,
 .step-title:after {
-    transform: rotate(45deg); /* rotate right arrow squares 45 deg to point right */
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
+    transform: rotate(45deg); /* rotate right arrow squares 45 deg to point right */
 }
 
 .step-title:before { /* align the "before" square to the left */

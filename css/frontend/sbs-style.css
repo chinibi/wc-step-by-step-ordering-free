@@ -105,11 +105,13 @@ h1.step-by-step-title {
   width: 56px;
 }
 
+.quantity,
 .woocommerce .quantity,
 .modal-add-to-cart form .quantity {
   display: inline;
 }
 
+.quantity input[type="number"],
 .modal-add-to-cart form .quantity input {
   width: 15%;
 }
@@ -271,6 +273,11 @@ a.sbs-change-package-btn:hover {
   color: inherit;
 }
 
+.button.wc-forward {
+  display: none;
+}
+
+/* WooCommerce Product Loop */
 .product-loop-in-cart {
   margin-bottom: 0.5em;
 }
@@ -279,6 +286,7 @@ a.sbs-change-package-btn:hover {
   margin-left: 0.5em;
 }
 
+/* Checkout Page */
 .checkout-package {
   background-color: lightgreen;
 }

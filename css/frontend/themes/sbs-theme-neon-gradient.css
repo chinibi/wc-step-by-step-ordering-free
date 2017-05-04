@@ -9,7 +9,7 @@
   border-bottom: 1px solid #b924c8;
 }
 
-.sbs-package-title {
+.sbs-package-title, .checkout-package {
   color: #f4f877;
   background-color: #b924c8;
 }
@@ -72,7 +72,16 @@
 }
 
 
-.woocommerce ul.products li.product .button {
+.woocommerce ul.products li.product .button,
+.woocommerce a.button,
+.woocommerce a.button.alt,
+.woocommerce a.button:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button,
+.woocommerce button.button.alt,
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt
+{
     /* background-color: #b924c8; */
     color: #f4f877;
     border: none;

@@ -11,7 +11,7 @@
   border-bottom: 1px solid rgba(2,122,34,0.44);
 }
 
-.sbs-package-title {
+.sbs-package-title, .checkout-package {
   background-color: lightgreen;
 }
 
@@ -116,7 +116,14 @@
 
 .woocommerce ul.products li.product .button,
 .woocommerce a.button,
-.woocommerce a.button:hover {
+.woocommerce a.button.alt,
+.woocommerce a.button:hover,
+.woocommerce a.button.alt:hover,
+.woocommerce button.button,
+.woocommerce button.button.alt,
+.woocommerce button.button.alt:hover,
+.woocommerce input.button.alt
+{
     background-color: #497b36;
     color: white;
 }
