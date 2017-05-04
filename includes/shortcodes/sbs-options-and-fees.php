@@ -7,7 +7,7 @@ function sbs_options_and_fees_shortcode() {
   ob_start();
   ?>
 
-  <table>
+  <table class="woocommerce">
   <?php
   foreach ( $onf_categories as $category )
   {
@@ -43,6 +43,8 @@ function sbs_options_and_fees_shortcode() {
       </td>
       <td>
         <?php echo wc_price( $wc_product->get_price() ) ?>
+      </td>
+      <td style="display:none;">
       </td>
     </tr>
 

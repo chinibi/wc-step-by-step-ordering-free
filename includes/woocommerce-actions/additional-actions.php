@@ -68,7 +68,7 @@ function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 	}
 
 	elseif ( $product && $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
-		$remove_url = $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() ) );
+		$remove_url = $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] );
 
 		$html = '<form action="' . esc_url( $remove_url ) . '" class="cart" method="post" enctype="multipart/form-data">';
 		$html .= '<button type="submit" class="button alt">' . 'Remove' . '</button>';

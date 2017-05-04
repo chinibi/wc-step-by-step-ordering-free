@@ -131,7 +131,7 @@ function sbs_render_required_products( $category_id ) {
 
 	if ( $query->have_posts() && !empty( $required_products ) ):
 
-		$required_label_before = isset( get_option('sbs_general')['req-label-before'] ) ? get_option('sbs_general')['req-label-before'] : "Featured Items";
+		$required_label_before = isset( get_option('sbs_general')['req-label-before'] ) ? get_option('sbs_general')['req-label-before'] : 'Select';
 		$required_label_after = isset( get_option('sbs_general')['req-label-after'] ) ? get_option('sbs_general')['req-label-after'] : '(Required)';
 
 		echo '<h3 class="sbs-subcat-name">' . esc_html( $required_label_before ) . ' ' . $sub_term['name'] . ' ' . esc_html( $required_label_after ) . '</h3>';
@@ -294,7 +294,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
   }
 
-	if ( get_option('sbs_onf')['disabled'] != 1 && $current_step === count($steps) - 2 ) {
+	if ( !isset( get_option('sbs_onf')['disabled'] ) && $current_step === count($steps) - 2 ) {
 
     echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Options' . '</h1>';
 		echo do_shortcode( '[sbs_options_and_fees]' );

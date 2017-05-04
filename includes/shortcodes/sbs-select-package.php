@@ -47,7 +47,7 @@ function sbs_render_package_selection_box( $product_id ) {
     </div>
     <div class="sbs-add-package-to-cart">
       <a href="<?php echo esc_url( $add_to_cart_url ) ?>" class="button product_type_simple add_to_cart_button">
-        <?php echo $add_to_cart_text ?>
+        <?php echo esc_html( $add_to_cart_text ) ?>
       </a>
     </div>
   </div>

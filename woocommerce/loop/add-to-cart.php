@@ -86,7 +86,7 @@ else {
 }
 
 echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link">Learn More</a>';
-echo '<div id="modal-product-' . $product->get_id() . '" class="white-popup mfp-hide">';
+echo '<div id="modal-product-' . $product->get_id() . '" class="woocommerce white-popup mfp-hide">';
 echo    '<div class="modal-left-side">';
 echo      '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
 echo    '</div>';
