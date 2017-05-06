@@ -2,6 +2,10 @@
   clear: both;
 }
 
+.danger {
+  color: red;
+}
+
 /*
 *  Step-by-Step Ordering Navbar
 */

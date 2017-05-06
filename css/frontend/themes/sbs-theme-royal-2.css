@@ -76,25 +76,6 @@
     background-color: #2481c8;
 }
 
-.step-index > span.step-number.active {
-    background-color: #084675;
-    color: #ffffff;
-}
-
-.step-index span.step-number-before.active {
-    border-color: #084675 transparent;
-}
-
-.step-index span.step-number-before.inactive {
-    border-color: #2481c8 transparent;
-}
-
-.step-title {
-    background-color: #084675;
-    padding: 25px 0 15px;
-    margin-top: -20px;
-}
-
 .step-index > span.step-number {
     background-color: #2481c8;
     display: inline-block;
@@ -102,6 +83,39 @@
     font-size: 1.6em;
     border: 3px solid white;
     line-height: 39px;
+}
+
+.step-index > span.step-number:before,
+.step-index > span.step-number:after
+{
+    background-color: #2481c8;
+}
+
+.step-index > span.step-number.active {
+    background-color: #084675;
+    color: #ffffff;
+}
+
+.step-index > span.step-number.active:before,
+.step-index > span.step-number.active:after
+{
+    background-color: #084675;
+}
+
+.step-index span.step-number-before.active,
+.step-index span.step-number-before.active:after {
+    border-color: #084675 transparent;
+}
+
+.step-index span.step-number-before.inactive,
+.step-index span.step-number-before.inactive:after {
+    border-color: #2481c8 transparent;
+}
+
+.step-title {
+    background-color: #084675;
+    padding: 25px 0 15px;
+    margin-top: -20px;
 }
 
 .step-title-text > a {

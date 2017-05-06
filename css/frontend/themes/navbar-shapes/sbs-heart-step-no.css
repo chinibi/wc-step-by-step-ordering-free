@@ -1,0 +1,58 @@
+/**
+ *  Source: https://css-tricks.com/examples/ShapesOfCSS/
+ */
+
+.step-index > span.step-number:before,
+.step-index > span.step-number:after
+{
+    position: absolute;
+    content: "";
+    z-index: -1;
+    left: 22px;
+    top: -6px;
+    width: 35px;
+    height: 56px;
+    -moz-border-radius: 50px 50px 0 0;
+    border-radius: 50px 50px 0 0;
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    -webkit-transform-origin: 0 100%;
+       -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+         -o-transform-origin: 0 100%;
+            transform-origin: 0 100%;
+}
+
+.step-index > span.step-number:after {
+    left: -13px;
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+    -webkit-transform-origin: 100% 100%;
+       -moz-transform-origin: 100% 100%;
+        -ms-transform-origin: 100% 100%;
+         -o-transform-origin: 100% 100%;
+            transform-origin: 100% 100%;
+}
+
+.step-index > span.step-number:before {
+    border-bottom: 3px solid white;
+    border-left: 3px solid white;
+}
+
+.step-index > span.step-number:after {
+    border-bottom: 3px solid white;
+    border-right: 3px solid white;
+}
+
+.step-index > span.step-number,
+.step-index > span.step-number.active
+{
+    background-color: transparent;
+    border: none;
+}

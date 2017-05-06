@@ -67,16 +67,40 @@
     font-weight: 600;
 }
 
+.step-index > span.step-number {
+    background-color: #084675;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 1.6em;
+    /* border-radius: 100%; */
+    border: 3px solid white;
+    line-height: 39px;
+}
+
+.step-index > span.step-number:before,
+.step-index > span.step-number:after
+{
+    background-color: #084675;
+}
+
 .step-index > span.step-number.active {
     background-color: #2481c8;
     color: #ffffff;
 }
 
-.step-index span.step-number-before.active {
+.step-index > span.step-number.active:before,
+.step-index > span.step-number.active:after
+{
+    background-color: #2481c8;
+}
+
+.step-index span.step-number-before.active,
+.step-index span.step-number-before.active:after {
     border-color: #2481c8 transparent;
 }
 
-.step-index span.step-number-before.inactive {
+.step-index span.step-number-before.inactive,
+.step-index span.step-number-before.inactive:after {
     border-color: #084675 transparent;
 }
 
@@ -92,16 +116,6 @@
 
 .step-title a:hover {
     color: white;
-}
-
-.step-index > span.step-number {
-    background-color: #084675;
-    display: inline-block;
-    color: #ffffff;
-    font-size: 1.6em;
-    /* border-radius: 100%; */
-    border: 3px solid white;
-    line-height: 39px;
 }
 
 .sbs-subcat-name {

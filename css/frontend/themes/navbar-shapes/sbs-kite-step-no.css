@@ -1,0 +1,49 @@
+/**
+ *  Source: https://css-tricks.com/examples/ShapesOfCSS/
+ */
+
+.step-index span.step-number-before {
+  position: absolute;
+  z-index: 2;
+  width: 0;
+  height: 0;
+  border-top: 43px solid;
+  border-left: 25px solid;
+  border-right: 25px solid;
+  margin-left: -3px;
+}
+
+.step-index span.step-number-before:after {
+  position: absolute;
+  content: "";
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-bottom: 16px solid;
+  border-left: 24px solid;
+  border-right: 24px solid;
+  left: -24px;
+  top: -59px;
+}
+
+.step-index span.step-number-after {
+    position: absolute;
+    z-index: 1;
+    width: 0;
+    height: 0;
+    border-top: 47px solid white;
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
+    margin-left: -51px;
+}
+
+.step-index span.step-number {
+    border: transparent;
+    background-color: transparent;
+    position: relative;
+    top: -8px;
+}
+
+.step-index > span.step-number.active {
+    background: transparent;
+}

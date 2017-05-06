@@ -1,0 +1,25 @@
+/**
+ *  Source: https://css-tricks.com/examples/ShapesOfCSS/
+ */
+
+.step-title {
+  position: relative;
+  z-index: 1;
+  border-radius: 50% / 10%;
+}
+
+span.step-span-container {
+  width: 15%;
+}
+
+.step-title:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 10%;
+  bottom: 10%;
+  right: -5%;
+  left: -5%;
+  background: inherit;
+  border-radius: 5% / 50%;
+}

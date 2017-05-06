@@ -110,6 +110,15 @@ a.open-popup-link {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 );
 }
 
+.step-title-text a {
+    display: block;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.step-title-text a:hover {
+    color: #ffffff;
+}
 
 .step-index > span.step-number {
     background-color: #f4f877;
@@ -121,14 +130,10 @@ a.open-popup-link {
     line-height: 39px;
 }
 
-.step-title-text a {
-    display: block;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.step-title-text a:hover {
-    color: #ffffff;
+.step-index > span.step-number:before,
+.step-index > span.step-number:after
+{
+    background-color: #f4f877;
 }
 
 .step-index > span.step-number.active {
@@ -136,11 +141,19 @@ a.open-popup-link {
     color: #ffffff;
 }
 
-.step-index span.step-number-before.active {
+.step-index > span.step-number.active:before,
+.step-index > span.step-number.active:after {
+    background-color: #167ed7;
+}
+
+
+.step-index span.step-number-before.active,
+.step-index span.step-number-before.active:after {
     border-color: #167ed7 transparent;
 }
 
-.step-index span.step-number-before.inactive {
+.step-index span.step-number-before.inactive,
+.step-index span.step-number-before.inactive:after {
     border-color: #f4f877 transparent;
 }
 

@@ -63,16 +63,40 @@
     font-weight: 600;
 }
 
+.step-index > span.step-number {
+    background-color: #bbbbbb;
+    display: inline-block;
+    color: #000000;
+    font-size: 1.6em;
+    /* border-radius: 100%; */
+    border: 3px solid white;
+    line-height: 39px;
+}
+
+.step-index > span.step-number:before,
+.step-index > span.step-number:after
+{
+    background-color: #bbbbbb;
+}
+
 .step-index > span.step-number.active {
     background-color: #000000;
     color: #ffffff;
 }
 
-.step-index span.step-number-before.active {
+.step-index > span.step-number.active:before,
+.step-index > span.step-number.active:after {
+    background-color: #000000;
+}
+
+
+.step-index span.step-number-before.active,
+.step-index span.step-number-before.active:after {
     border-color: #000000 transparent;
 }
 
-.step-index span.step-number-before.inactive {
+.step-index span.step-number-before.inactive,
+.step-index span.step-number-before.inactive:after {
     border-color: #bbbbbb transparent;
 }
 
@@ -91,17 +115,6 @@
 .step-title-text a:hover {
     color: #ffffff;
 }
-
-.step-index > span.step-number {
-    background-color: #bbbbbb;
-    display: inline-block;
-    color: #000000;
-    font-size: 1.6em;
-    /* border-radius: 100%; */
-    border: 3px solid white;
-    line-height: 39px;
-}
-
 
 .woocommerce-message {
     background-color: #000000;

@@ -40,18 +40,27 @@ switch( get_option('sbs_display')['color-scheme'] ) {
 }
 
 // SBS Navbar Step Number shape
-switch( get_option('sbs_display')['navbar-style'] ) {
+switch( (int) get_option('sbs_display')['navbar-style'] ) {
 
   case 1: // Default shape (Square)
     break;
   case 2: // Circles
-    wp_enqueue_style( 'sbs-nav-theme-circle', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-circle-step-no.css' ), array( 'sbs-style' ));
+    wp_enqueue_style( 'sbs-nav-step-circle', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-circle-step-no.css' ), array( 'sbs-theme-color' ));
     break;
   case 3: // Downward-pointing Triangles
-    wp_enqueue_style( 'sbs-nav-step-triangle-down', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-triangledown-step-no.css' ), array( 'sbs-style' ));
+    wp_enqueue_style( 'sbs-nav-step-triangle-down', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-triangledown-step-no.css' ), array( 'sbs-theme-color' ));
     break;
   case 4: // Upward Pointing Triangles
-    wp_enqueue_style( 'sbs-nav-step-triangle-up', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-triangleup-step-no.css' ), array( 'sbs-style' ));
+    wp_enqueue_style( 'sbs-nav-step-triangle-up', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-triangleup-step-no.css' ), array( 'sbs-theme-color' ));
+    break;
+  case 5: // Hearts
+    wp_enqueue_style( 'sbs-nav-step-heart', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-heart-step-no.css' ), array( 'sbs-theme-color' ));
+    break;
+  case 6: // 12-pointed starburst
+    wp_enqueue_style( 'sbs-nav-step-12star', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-12star-step-no.css' ), array( 'sbs-theme-color' ));
+    break;
+  case 7: // Kite
+    wp_enqueue_style( 'sbs-nav-step-kite', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-kite-step-no.css' ), array( 'sbs-theme-color' ));
     break;
   default:
     break;
@@ -201,7 +210,7 @@ if ( isset( get_option('sbs_display')['calc-borders'] ) ) {
 
 
 // Anchor tag hover color effect
-if ( isset(get_option('sbs_display')['hover-effect']) && get_option('sbs_display')['hover-effect'] == '1' ) {
+if ( isset(get_option('sbs_display')['hover-effect'] ) && get_option('sbs_display')['hover-effect'] == '1' ) {
 
   switch( get_option('sbs_display')['color-scheme'] ) {
 
@@ -218,18 +227,25 @@ if ( isset(get_option('sbs_display')['hover-effect']) && get_option('sbs_display
       break;
     case 5: // Autumn 2 "Autumn 2"
       wp_enqueue_style( 'sbs-theme-hover-color', plugins_url( 'wc-step-by-step-ordering/css/frontend/themes/color-scheme-hover/sbs-ahover-autumn-2.css' ), array( 'sbs-theme-color' ) );
+      break;
     case 6: // Neon "Neon"
       wp_enqueue_style( 'sbs-theme-hover-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/color-scheme-hover/sbs-ahover-neon.css' ), array( 'sbs-theme-color' ) );
+      break;
     case 7: // Neon Gradient "Neon Gradient"
       wp_enqueue_style( 'sbs-theme-hover-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/color-scheme-hover/sbs-ahover-neon.css' ), array( 'sbs-theme-color' ) );
+      break;
     case 8: // Grayscale "Noir 1"
       wp_enqueue_style( 'sbs-theme-hover-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/color-scheme-hover/sbs-ahover-noir-1.css' ), array( 'sbs-theme-color' ) );
+      break;
     case 9: // Grayscale "Noir 2"
       wp_enqueue_style( 'sbs-theme-hover-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/color-scheme-hover/sbs-ahover-noir-2.css' ), array( 'sbs-theme-color' ) );
+      break;
     case 10: // Blue "Royal 1"
       wp_enqueue_style( 'sbs-theme-hover-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/color-scheme-hover/sbs-ahover-royal.css' ), array( 'sbs-theme-color' ) );
+      break;
     case 11:
       wp_enqueue_style( 'sbs-theme-hover-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/color-scheme-hover/sbs-ahover-royal.css' ), array( 'sbs-theme-color' ) );
+      break;
     default:
       break;
 
@@ -247,6 +263,9 @@ switch( get_option('sbs_display')['nav-title-style'] ) {
     break;
   case 3: // Arrows
     wp_enqueue_style( 'sbs-theme-nav-title-arrow', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-arrow-navbar.css' ), array( 'sbs-style' ) );
+    break;
+  case 4: // TV Screen
+    wp_enqueue_style( 'sbs-theme-nav-title-tv', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-tv-navbar.css' ), array( 'sbs-style' ) );
     break;
   default:
     break;

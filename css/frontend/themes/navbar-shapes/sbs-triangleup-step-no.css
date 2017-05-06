@@ -1,3 +1,7 @@
+/**
+ *  Source: https://css-tricks.com/examples/ShapesOfCSS/
+ */
+
 .step-index span.step-number-before {
     position: absolute;
     z-index: 2;

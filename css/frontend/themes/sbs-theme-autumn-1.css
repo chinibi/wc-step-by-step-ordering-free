@@ -67,25 +67,6 @@
     color: white;
 }
 
-.step-index > span.step-number.active {
-    background-color: #cb5866;
-    color: white;
-}
-
-.step-index span.step-number-before.active {
-    border-color: #cb5866 transparent;
-}
-
-.step-index span.step-number-before.inactive {
-    border-color: #fcecc7 transparent;
-}
-
-.step-title {
-    background-color: #ffde8f;
-    padding: 25px 0 15px;
-    margin-top: -20px;
-}
-
 .step-index > span.step-number {
     background-color: #fcecc7;
     display: inline-block;
@@ -94,6 +75,39 @@
     /* border-radius: 100%; */
     border: 3px solid white;
     line-height: 39px;
+}
+
+.step-index > span.step-number:before,
+.step-index > span.step-number:after
+{
+    background-color: #fcecc7;
+}
+
+
+.step-index > span.step-number.active {
+    background-color: #cb5866;
+    color: white;
+}
+
+.step-index > span.step-number.active:before,
+.step-index > span.step-number.active:after {
+    background-color: #cb5866;
+}
+
+.step-index > span.step-number.active:before,
+.step-index > span.step-number.active:after {
+    border-color: #cb5866 transparent;
+}
+
+.step-index span.step-number-before.active,
+.step-index span.step-number-before.active:after {
+    border-color: #fcecc7 transparent;
+}
+
+.step-title {
+    background-color: #ffde8f;
+    padding: 25px 0 15px;
+    margin-top: -20px;
 }
 
 .step-title-text a {

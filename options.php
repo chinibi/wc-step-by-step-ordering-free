@@ -1196,7 +1196,10 @@ function sbs_display_navbar_number_shape_callback() {
 		'Default (Square)',
 		'Circle',
 		'Downward Triangle',
-		'Upward Triangle'
+		'Upward Triangle',
+		'Heart',
+		'12-Pointed Star',
+		'Kite'
 	);
 
   ob_start();
@@ -1220,7 +1223,8 @@ function sbs_display_navbar_title_shape_callback() {
 	$styles = array(
 		'Default',
 		'Capsule',
-		'Arrows'
+		'Arrows',
+		'TV Screen'
 	);
 
 	ob_start();

@@ -47,9 +47,30 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     color: white;
 }
 
+.step-index > span.step-number {
+    background-color: #be645f;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 1.6em;
+    /* border-radius: 100%; */
+    border: 3px solid white;
+    line-height: 39px;
+}
+
+.step-index > span.step-number:before,
+.step-index > span.step-number:after
+{
+    background-color: #be645f;
+}
+
 .step-title.active {
     background-color: #ffde8f;
     color: #8a140e;
+ }
+
+ .step-index > span.step-number.active:before,
+ .step-index > span.step-number.active:after {
+     background-color: #ffde8f;
  }
 
 .step-title.active > a {
@@ -62,11 +83,13 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     color: #8a140e;
 }
 
-.step-index span.step-number-before.active {
+.step-index span.step-number-before.active,
+.step-index span.step-number-before.active:after {
     border-color: #fcecc7 transparent;
 }
 
-.step-index span.step-number-before.inactive {
+.step-index span.step-number-before.inactive,
+.step-index span.step-number-before.inactive:after {
     border-color: #be645f transparent;
 }
 
@@ -81,16 +104,6 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     padding: 25px 0 15px;
     /* color: darkblue !important; */
     margin-top: -20px;
-}
-
-.step-index > span.step-number {
-    background-color: #be645f;
-    display: inline-block;
-    color: #ffffff;
-    font-size: 1.6em;
-    /* border-radius: 100%; */
-    border: 3px solid white;
-    line-height: 39px;
 }
 
 .woocommerce-message {
