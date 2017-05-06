@@ -2,6 +2,8 @@
 
 function sbs_options_and_fees_shortcode() {
 
+  global $woocommerce;
+
   $onf_categories = sbs_get_onf_order();
 
   ob_start();
@@ -17,42 +19,99 @@ function sbs_options_and_fees_shortcode() {
     </tr>
 
     <?php
-    $products = sbs_get_wc_products_by_category( $category->catid );
 
-    foreach ( $products as $product )
-    {
-    $wc_product = wc_get_product( $product->ID );
-    ?>
+    $args = array(
+      'post_type' => 'product',
+      'post_status' => 'publish',
+      'posts_per_page' => -1,
+      'tax_query' => array(
+        array(
+          'taxonomy' => 'product_cat',
+  				'field' => 'id',
+  				'terms' => $category->catid
+        )
+      )
+    );
 
-    <tr>
-      <td>
-        <?php echo apply_filters( 'woocommerce_loop_add_to_cart_link',
-        	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
-        		esc_url( $wc_product->add_to_cart_url() ),
-        		esc_attr( isset( $quantity ) ? $quantity : 1 ),
-        		esc_attr( $wc_product->get_id() ),
-        		esc_attr( $wc_product->get_sku() ),
-        		esc_attr( isset( $class ) ? $class : 'button' ),
-        		esc_html( $wc_product->add_to_cart_text() )
-        	),
-        $wc_product ) ?>
-      </td>
-      <td>
-        <div><?php echo $wc_product->get_name() ?></div>
-        <div><?php echo $wc_product->get_description() ?></div>
-      </td>
-      <td>
-        <?php echo wc_price( $wc_product->get_price() ) ?>
-      </td>
-      <td style="display:none;">
-      </td>
-    </tr>
+    $query = new WP_Query( $args );
 
-    <?php
-    }
-    ?>
+    if ( $query->have_posts() ):
+      while( $query->have_posts() ):
+        $query->the_post();
+        $product = wc_get_product( $query->post->ID );
+        ?>
+        <tr>
+          <td>
+            <?php
+            if ( sbs_get_cart_key( $product->get_id() ) ) {
+              echo '<div class="product-loop-in-cart">';
+              echo '<span class="product-loop-in-cart-text">';
+              echo esc_html( sbs_get_cart_key( $product->get_id() )['cart_item']['quantity'] ) . ' In Cart';
+              echo '<small class="product-loop-remove"><a href="' . esc_url( $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] ) ) . '">Remove</a></small>';
+              echo '</span></div>';
+            }
 
-  <?php
+            if ( ! $product->is_type( 'simple' ) ) {
+
+              echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+              	sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" data-mfp-src="#modal-product-%s" class="%s open-popup-link">%s</a><br>',
+              		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+              		esc_attr( $product->get_id() ),
+              		esc_attr( $product->get_sku() ),
+                  esc_attr( $product->get_id() ),
+              		esc_attr( isset( $class ) ? $class : 'button' ),
+              		esc_html( $product->add_to_cart_text() )
+              	),
+              $product );
+
+            }
+
+            else {
+
+              echo apply_filters( 'woocommerce_loop_add_to_cart_link',
+              	sprintf( '<a rel="nofollow" href="%s" data-quantity="%s" data-product_id="%s" data-product_sku="%s" class="%s">%s</a><br>',
+              		esc_url( $product->add_to_cart_url() ),
+              		esc_attr( isset( $quantity ) ? $quantity : 1 ),
+              		esc_attr( $product->get_id() ),
+              		esc_attr( $product->get_sku() ),
+              		esc_attr( isset( $class ) ? $class : 'button' ),
+              		esc_html( $product->add_to_cart_text() )
+              	),
+              $product );
+            }
+
+            ?>
+          </td>
+          <td>
+            <div><?php echo $product->get_name() ?></div>
+            <div><?php echo $product->get_description() ?></div>
+            <div>
+              <span class="danger"><?php echo $product->get_attribute('required') ? '(Required)' : null ?></span>
+              <a data-mfp-src="#modal-product-<?php echo $product->get_id() ?>" class="open-popup-link"><small>Learn More</small></a>
+            </div>
+          </td>
+          <td>
+            <?php echo $product->get_price_html() ?>
+          </td>
+          <td style="display:none;">
+            <?php
+            echo '<div id="modal-product-' . $product->get_id() . '" class="woocommerce white-popup mfp-hide">';
+            echo    '<div class="modal-left-side">';
+            echo      '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
+            echo    '</div>';
+            echo    '<div class="modal-right-side">';
+
+            do_action( 'woocommerce_single_product_summary' );
+
+            echo    '</div>';
+            echo '</div>';
+            ?>
+          </td>
+        </tr>
+        <?php
+      endwhile;
+    endif;
+    wp_reset_postdata();
   }
   ?>
   </table>

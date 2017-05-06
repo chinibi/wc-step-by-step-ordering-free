@@ -55,7 +55,7 @@ if ( sbs_get_cart_key( $product->get_id() ) ) {
   echo '</span></div>';
 }
 
-if ( $product->is_type( 'variable' ) ) {
+if ( ! $product->is_type( 'simple' ) ) {
 
   echo apply_filters( 'woocommerce_loop_add_to_cart_link',
   	sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" data-mfp-src="#modal-product-%s" class="%s open-popup-link">%s</a><br>',

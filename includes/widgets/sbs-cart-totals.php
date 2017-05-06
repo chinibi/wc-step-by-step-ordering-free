@@ -49,7 +49,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
 			$totals[] = array(
 				'cat_name' => get_the_category_by_ID( get_option('sbs_onf')['category'] ),
-				'cat_total' => wc_price( sbs_get_cart_total_of_category( get_option('sbs_onf')['category'] ) ),
+				'cat_total' => wc_price( sbs_get_cart_total_of_category( (int) get_option('sbs_onf')['category'] ) ),
 				'css_class' => 'sbs-widget-sidebar-category'
 			);
 
@@ -76,7 +76,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     }
 
     $totals[] = array(
-      'cat_name' => 'GRAND TOTAL',
+      'cat_name' => 'TOTAL',
       'cat_total' => 	wc_price( max( 0, apply_filters( 'woocommerce_calculated_total', round( $woocommerce->cart->cart_contents_total + $woocommerce->cart->tax_total + $woocommerce->cart->shipping_tax_total + $woocommerce->cart->shipping_total + $woocommerce->cart->fee_total, $woocommerce->cart->dp ), $woocommerce->cart ) ) ),
       'css_class' => 'sbs-widget-sidebar-grand-total'
     );

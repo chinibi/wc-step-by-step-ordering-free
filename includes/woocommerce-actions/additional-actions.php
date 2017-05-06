@@ -179,3 +179,17 @@ function sbs_highlight_package_checkout( $class_name, $cart_item ) {
 
 }
 add_filter( 'woocommerce_cart_item_class', 'sbs_highlight_package_checkout', 10, 2 );
+
+
+// Fix for actions being called before the WooCommerce $product global is instantiated
+function sbs_reprioritize_single_product_actions() {
+
+	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 50 );
+	add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 11 );
+	add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 20 );
+	add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 25 );
+
+}
+add_action( 'woocommerce_loaded', 'sbs_reprioritize_single_product_actions' );
