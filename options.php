@@ -645,27 +645,46 @@ function sbs_req_feat_label_callback() {
 	$featured_label = isset( get_option('sbs_general')['featured-label'] ) ? get_option('sbs_general')['featured-label'] : 'Featured Items';
 	$req_label_before = isset( get_option('sbs_general')['req-label-before'] ) ? get_option('sbs_general')['req-label-before'] : 'Select';
 	$req_label_after = isset( get_option('sbs_general')['req-label-after'] ) ? get_option('sbs_general')['req-label-after'] : '(Required)';
+	$opt_label_before = isset( get_option('sbs_general')['opt-label-before'] ) ? get_option('sbs_general')['opt-label-before'] : '';
+	$opt_label_after = isset( get_option('sbs_general')['opt-label-after'] ) ? get_option('sbs_general')['opt-label-after'] : '(Addons)';
 
 	ob_start();
 	?>
 		<fieldset>
-			<label>
-				<strong>"Featured Items" Section Title:</strong>
-			</label><br />
-			<label>
-				<input type="text" name="sbs_general[featured-label]" value="<?php echo $featured_label ?>" />
-			</label><br />
-			<label>
-				<strong>"Required Items" Section Title:</strong>
-			</label><br />
-			<label>
-				Before Category Name:
-				<input type="text" name="sbs_general[req-label-before]" value="<?php echo $req_label_before ?>" />
-			</label><br />
-			<label>
-				After Category Name:
-				<input type="text" name="sbs_general[req-label-after]" value="<?php echo $req_label_after ?>" />
-			</label>
+			<span>
+				<label>
+					<strong>"Required Items" Section Title:</strong>
+				</label><br />
+				<label>
+					Before Category Name:
+					<input type="text" name="sbs_general[req-label-before]" value="<?php echo $req_label_before ?>" />
+				</label><br />
+				<label>
+					After Category Name:
+					<input type="text" name="sbs_general[req-label-after]" value="<?php echo $req_label_after ?>" />
+				</label><br />
+			</span>
+			<span>
+				<label>
+					<strong>"Optional Items" Section Title:</strong>
+				</label><br />
+				<label>
+					Before Category Name:
+					<input type="text" name="sbs_general[opt-label-before]" value="<?php echo $opt_label_before ?>" />
+				</label><br />
+				<label>
+					After Category Name:
+					<input type="text" name="sbs_general[opt-label-after]" value="<?php echo $opt_label_after ?>" />
+				</label><br />
+			</span>
+			<span>
+				<label>
+					<strong>"Featured Items" Section Title:</strong>
+				</label><br />
+				<label>
+					<input type="text" name="sbs_general[featured-label]" value="<?php echo $featured_label ?>" />
+				</label><br />
+			</span>
 		</fieldset>
 	<?php
 
@@ -1199,7 +1218,8 @@ function sbs_display_navbar_number_shape_callback() {
 		'Upward Triangle',
 		'Heart',
 		'12-Pointed Star',
-		'Kite'
+		'Kite',
+		'Badge Ribbon'
 	);
 
   ob_start();
@@ -1224,7 +1244,8 @@ function sbs_display_navbar_title_shape_callback() {
 		'Default',
 		'Capsule',
 		'Arrows',
-		'TV Screen'
+		'TV Screen',
+		'Parallelogram'
 	);
 
 	ob_start();
