@@ -15,7 +15,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
   public function widget( $args, $instance ) {
     // render only on WooCommerce shop pages and not on Cart and Checkout pages
-    if ( is_cart() || is_checkout() ) {
+    if ( is_cart() || is_checkout() || !isset($_GET['step']) ) {
       return;
     }
 
