@@ -115,7 +115,7 @@ function sbs_render_checkout_sbs_navbar() {
                   </span>
 									<span class="step-number-after"></span>
                 </div>
-                <div class="step-title <?php echo $key === $current_step ? 'active' : null ?>">
+                <div class="step-title <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
 									<span class="step-title-text">
                     <?php
 

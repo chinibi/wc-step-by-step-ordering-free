@@ -225,9 +225,14 @@ function sbs_render_product_category( $category_id ) {
 
 	$query = new WP_Query( $req_args );
 
-	if ( $query->have_posts() ):
+	$optional_products = sbs_req_get_optional_products( $category_id );
 
-		echo '<h3 class="sbs-subcat-name">' . $sub_term['name'] .'</h3>';
+	if ( $query->have_posts() && !empty( $optional_products ) ):
+
+		$optional_label_before = isset( get_option('sbs_general')['opt-label-before'] ) ? get_option('sbs_general')['opt-label-before'] : null;
+		$optional_label_after = isset( get_option('sbs_general')['opt-label-after'] ) ? get_option('sbs_general')['opt-label-after'] : '(Addons)';
+
+		echo '<h3 class="sbs-subcat-name">' . esc_html( $optional_label_before ) . ' ' . $sub_term['name'] . ' ' . esc_html( $optional_label_after ) . '</h3>';
 		echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
 		echo '<div class="woocommerce columns-4">';
 		woocommerce_product_loop_start();
@@ -427,7 +432,7 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
                     </span>
 										<span class="step-number-after"></span>
                   </div>
-                  <div class="step-title <?php echo $key === $current_step ? 'active' : null ?>">
+                  <div class="step-title <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
 										<span class="step-title-text">
 	                    <?php
 

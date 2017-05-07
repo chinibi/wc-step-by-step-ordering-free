@@ -46,6 +46,36 @@ function sbs_req_get_required_products( $categories ) {
 }
 
 
+function sbs_req_get_optional_products( $categories ) {
+
+	$args = array(
+		'post_type' => 'product',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'pa_required',
+				'field' => 'slug',
+				'terms' => 'required',
+				'operator' => 'NOT IN'
+			),
+			array(
+				'taxonomy' => 'product_cat',
+				'field' => 'term_id',
+				'terms' => $categories
+			)
+		)
+	);
+
+	$posts = get_posts( $args );
+
+	$results = array_map( function( $post ) {
+		return wc_get_product( $post->ID );
+	}, $posts);
+
+	return $results;
+
+}
+
+
 function sbs_req_are_required_products_in_cart( $categories ) {
 
   $products = sbs_get_required_products( $categories );
