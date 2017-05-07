@@ -35,7 +35,7 @@ $(document).ready(function() {
         height: variationImage.src_h  ? variationImage.src_h  : $image.attr('height'),
         src:    variationImage.src    ? variationImage.src    : $image.attr('src'),
         sizes:  variationImage.sizes  ? variationImage.sizes  : $image.attr('sizes'),
-        srcset: variationImage.srcset ? variationImage.srcset : $image.attr('srcset'),
+        srcset: variationImage.srcset ? variationImage.srcset : null,
         alt:    variationImage.alt    ? variationImage.alt    : $image.attr('alt')
       });
     }
