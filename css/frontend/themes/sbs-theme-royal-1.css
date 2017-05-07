@@ -60,11 +60,25 @@
     color: #ffffff !important;
 }
 
+.step-title {
+    background-color: #2481c8;
+    padding: 25px 0 15px;
+    margin-top: -20px;
+}
+
+.step-title:before {
+    border-color: #2481c8 transparent;
+}
+
 
 .step-title.active {
     background-color: #084675;
     color: #ffffff;
     font-weight: 600;
+}
+
+.step-title.active:before {
+    border-color: #2481c8 transparent;
 }
 
 .step-index > span.step-number {
@@ -77,9 +91,10 @@
     line-height: 39px;
 }
 
-.step-index > span.step-number:before,
-.step-index > span.step-number:after
+.step-index > span.step-number.inactive:before,
+.step-index > span.step-number.inactive:after
 {
+    border-color: #084675 transparent;
     background-color: #084675;
 }
 
@@ -91,6 +106,7 @@
 .step-index > span.step-number.active:before,
 .step-index > span.step-number.active:after
 {
+    border-color: #2481c8 transparent;
     background-color: #2481c8;
 }
 
@@ -102,12 +118,6 @@
 .step-index span.step-number-before.inactive,
 .step-index span.step-number-before.inactive:after {
     border-color: #084675 transparent;
-}
-
-.step-title {
-    background-color: #2481c8;
-    padding: 25px 0 15px;
-    margin-top: -20px;
 }
 
 .step-title a {

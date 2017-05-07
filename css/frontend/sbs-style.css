@@ -51,6 +51,10 @@ span.step-span-container {
   margin-top: -20px;
 }
 
+.step-title:before {
+  content: "";
+}
+
 .step-title > a {
   display: block;
   text-decoration: none;

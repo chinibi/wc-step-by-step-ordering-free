@@ -73,9 +73,10 @@
     line-height: 39px;
 }
 
-.step-index > span.step-number:before,
-.step-index > span.step-number:after
+.step-index > span.step-number.inactive:before,
+.step-index > span.step-number.inactive:after
 {
+    border-color: #bbbbbb transparent;
     background-color: #bbbbbb;
 }
 
@@ -86,6 +87,7 @@
 
 .step-index > span.step-number.active:before,
 .step-index > span.step-number.active:after {
+    border-color: #000000 transparent;
     background-color: #000000;
 }
 

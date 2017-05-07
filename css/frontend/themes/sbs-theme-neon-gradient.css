@@ -130,9 +130,10 @@ a.open-popup-link {
     line-height: 39px;
 }
 
-.step-index > span.step-number:before,
-.step-index > span.step-number:after
+.step-index > span.step-number.inactive:before,
+.step-index > span.step-number.inactive:after
 {
+    border-color: #f4f877 transparent;
     background-color: #f4f877;
 }
 
@@ -143,6 +144,7 @@ a.open-popup-link {
 
 .step-index > span.step-number.active:before,
 .step-index > span.step-number.active:after {
+    border-color: #167ed7 transparent;
     background-color: #167ed7;
 }
 

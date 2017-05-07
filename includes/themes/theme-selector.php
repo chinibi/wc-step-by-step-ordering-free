@@ -62,6 +62,8 @@ switch( (int) get_option('sbs_display')['navbar-style'] ) {
   case 7: // Kite
     wp_enqueue_style( 'sbs-nav-step-kite', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-kite-step-no.css' ), array( 'sbs-theme-color' ));
     break;
+  case 8: // Badge Ribbon
+    wp_enqueue_style( 'sbs-nav-step-kite', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-ribbon-step-no.css' ), array( 'sbs-theme-color' ));  
   default:
     break;
 
@@ -259,14 +261,17 @@ switch( get_option('sbs_display')['nav-title-style'] ) {
   case 1: // Default (Rectangular)
     break;
   case 2: // Capsule
-    wp_enqueue_style( 'sbs-theme-nav-title-capsule', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-capsule-navbar.css' ), array( 'sbs-style' ) );
+    wp_enqueue_style( 'sbs-theme-nav-title-capsule', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-capsule-navbar.css' ), array( 'sbs-theme-color' ) );
     break;
   case 3: // Arrows
-    wp_enqueue_style( 'sbs-theme-nav-title-arrow', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-arrow-navbar.css' ), array( 'sbs-style' ) );
+    wp_enqueue_style( 'sbs-theme-nav-title-arrow', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-arrow-navbar.css' ), array( 'sbs-theme-color' ) );
     break;
   case 4: // TV Screen
-    wp_enqueue_style( 'sbs-theme-nav-title-tv', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-tv-navbar.css' ), array( 'sbs-style' ) );
+    wp_enqueue_style( 'sbs-theme-nav-title-tv', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-tv-navbar.css' ), array( 'sbs-theme-color' ) );
     break;
+  case 5: // Parallelogram
+  wp_enqueue_style( 'sbs-theme-nav-title-tv', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-para-navbar.css' ), array( 'sbs-theme-color' ) );
+  break;
   default:
     break;
 

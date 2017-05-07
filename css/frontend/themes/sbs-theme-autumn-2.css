@@ -57,9 +57,15 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     line-height: 39px;
 }
 
-.step-index > span.step-number:before,
-.step-index > span.step-number:after
+.step-index > span.step-number.active {
+    background-color: #8a140e;
+    color: #ffffff;
+}
+
+.step-index > span.step-number.inactive:before,
+.step-index > span.step-number.inactive:after
 {
+    border-color: #be645f transparent;
     background-color: #be645f;
 }
 
@@ -68,10 +74,11 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     color: #8a140e;
  }
 
- .step-index > span.step-number.active:before,
- .step-index > span.step-number.active:after {
-     background-color: #ffde8f;
- }
+.step-index > span.step-number.active:before,
+.step-index > span.step-number.active:after {
+    border-color: #8a140e transparent;
+    background-color: #8a140e;
+}
 
 .step-title.active > a {
     color: #8a140e;
