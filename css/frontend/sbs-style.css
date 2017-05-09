@@ -272,6 +272,13 @@ a.sbs-change-package-btn:hover {
   text-align: right;
 }
 
+/* Mini-Cart Widget (WooCommerce base feature) */
+.widget_shopping_cart_content .total,
+.widget_shopping_cart_content .buttons
+{
+  display: none;
+}
+
 /* WooCommerce Message colors */
 .woocommerce-message {
   border-top-color: initial;
