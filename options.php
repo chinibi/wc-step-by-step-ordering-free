@@ -339,10 +339,7 @@ function sbs_plugin_settings_init() {
  * ------------------------------------------------------------------------ */
 
 /**
- * This function provides a simple description for the General Options page.
- *
- * It is called from the 'sandbox_initialize_theme_options' function by being passed as a parameter
- * in the add_settings_section function.
+ * These functions provide the descriptions for each settings section
  */
 
 function sbs_general_description() {
@@ -489,6 +486,9 @@ function sbs_sbs_table_callback() {
 	$available_categories = array_filter( $available_categories, function( $category ) {
 
 		$step_order = sbs_get_step_order();
+		$package_cat = isset( get_option('sbs_package')['category'] ) ? get_option('sbs_package')['category'] : null;
+		$option_cat = isset( get_option('sbs_onf')['category'] ) ? get_option('sbs_onf')['category'] : null;
+
 		$flat_step_order = array();
 
 		foreach( $step_order as $step ) {
@@ -498,7 +498,8 @@ function sbs_sbs_table_callback() {
 			}
 		}
 
-		return !in_array( $category->term_id, $flat_step_order );
+		return !in_array( $category->term_id, $flat_step_order ) && $category->term_id != $package_cat && $category->term_id != $option_cat;
+
 	} );
 
   ob_start();
@@ -517,7 +518,7 @@ function sbs_sbs_table_callback() {
 	        foreach( $step_order as $category )
 					{
 					?>
-	          <li data-catid="<?php echo $category->catid ?>" class="sortable-item">
+	          <li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
 	            <?php echo get_the_category_by_ID( $category->catid ) ?>
 
 							<ul>
@@ -525,7 +526,7 @@ function sbs_sbs_table_callback() {
 								foreach( $category->children as $child )
 								{
 								?>
-									<li class="sortable-item" data-catid="<?php echo $child->catid ?>">
+									<li class="sortable-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
 										<?php echo get_the_category_by_ID( $child->catid ) ?>
 									</li>
 								<?php
@@ -556,12 +557,31 @@ function sbs_sbs_table_callback() {
 	  <div class="sortable-container" id="sbs-pool-container">
 	    <h3>Available Categories</h3>
 	    <ul id="sbs-pool" class="sortable">
-	      <?php foreach( $available_categories as $category ) { ?>
-	              <li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
-	                <?php echo $category->name ?>
-									<ul></ul>
-	              </li>
-	      <?php } ?>
+	      <?php foreach( $available_categories as $category ): ?>
+
+					<?php if ( $category->category_parent === 0 ): ?>
+
+	          <li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
+	            <?php echo $category->name ?>
+
+							<ul>
+								<?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
+								<?php if ( !empty( $children ) ): ?>
+									<?php foreach( $children as $child_id ): ?>
+
+										<li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
+											<?php echo get_the_category_by_ID( $child_id ) ?>
+										</li>
+
+									<?php endforeach; ?>
+								<?php endif; ?>
+							</ul>
+
+	          </li>
+
+					<?php endif; ?>
+
+	      <?php endforeach; ?>
 	    </ul>
 	  </div>
 
@@ -605,40 +625,6 @@ function sbs_navbar_navigation_callback() {
 
 }
 
-/*
-function sbs_req_feat_label_callback() {
-
-	$step_order = sbs_get_step_order();
-
-	if ( empty( $step_order ) ) {
-		return;
-	}
-
-	ob_start();
-	?>
-
-	<?php
-	foreach( $step_order as $key => $step ):
-		$index = $key + 1;
-
-		$required_label = isset( get_option('sbs_step_section_label')['req-label-' . $index] ) ? get_option('sbs_step_section_label')['req-label-' . $index] : null;
-
-		$featured_label = isset( get_option('sbs_step_section_label')['feat-label-' . $index] ) ? get_option('sbs_step_section_label')['feat-label-' . $index] : null;
-
-	?>
-		<div>
-			<p><strong>Step <?php echo $index ?> - <?php echo get_the_category_by_ID( $step->catid ) ?></strong></p>
-			<label for="required_label_<?php echo $index ?>">Required Items Section Name</label>
-			<input type="text" id="required_label_<?php echo $index ?>" name="sbs_step_section_label[req-label-<?php echo $index ?>]" value="<?php echo $required_label ?>" /><br />
-			<label for="featured_label_<?php echo $index ?>">Featured Items Section Name</label>
-			<input type="text" id="featured_label_<?php echo $index ?>" name="sbs_step_section_label[feat-label-<?php echo $index ?>]" value="<?php echo $featured_label ?>" />
-		</div>
-	<?php
-	endforeach;
-
-	echo ob_get_clean();
-}
-*/
 
 function sbs_req_feat_label_callback() {
 
@@ -905,6 +891,8 @@ function sbs_onf_category_callback() {
 
 	$wc_categories = sbs_get_all_wc_categories();
 
+	$option = isset( get_option('sbs_onf')['category'] ) ? get_option('sbs_onf')['category'] : null;
+
 	ob_start();
 	?>
 		<label for="select-package-category">
@@ -917,7 +905,7 @@ function sbs_onf_category_callback() {
 			foreach( $wc_categories as $category )
 			{
 			?>
-				<option value="<?php echo $category->term_id ?>" <?php selected( $category->term_id, get_option('sbs_onf')['category'] ) ?>>
+				<option value="<?php echo $category->term_id ?>" <?php selected( $category->term_id, $option ) ?>>
 					<?php echo $category->name ?>
 				</option>
 			<?php
