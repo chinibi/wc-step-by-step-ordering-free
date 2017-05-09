@@ -63,7 +63,7 @@ switch( (int) get_option('sbs_display')['navbar-style'] ) {
     wp_enqueue_style( 'sbs-nav-step-kite', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-kite-step-no.css' ), array( 'sbs-theme-color' ));
     break;
   case 8: // Badge Ribbon
-    wp_enqueue_style( 'sbs-nav-step-kite', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-ribbon-step-no.css' ), array( 'sbs-theme-color' ));  
+    wp_enqueue_style( 'sbs-nav-step-kite', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/navbar-shapes/sbs-ribbon-step-no.css' ), array( 'sbs-theme-color' ));
   default:
     break;
 
@@ -114,10 +114,10 @@ switch( get_option('sbs_display')['category-font'] ) {
     wp_enqueue_style( 'sbs-cat-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/georgia.css' ), array( 'sbs-style' ));
     break;
   case 6: // Lucida
-    wp_enqueue_style( 'sbs-cat-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/lucida.css' ), array( 'sbs-style' ));
+    wp_enqueue_style( 'sbs-cat-theme-lucida', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/lucida.css' ), array( 'sbs-style' ));
     break;
   case 7: // Palatino
-    wp_enqueue_style( 'sbs-cat-theme-georgia', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/palatino.css' ), array( 'sbs-style' ));
+    wp_enqueue_style( 'sbs-cat-theme-palatino', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/fonts/categories/palatino.css' ), array( 'sbs-style' ));
     break;
   default:
     break;
