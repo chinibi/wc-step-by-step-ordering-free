@@ -222,12 +222,15 @@ function sbs_get_full_step_order() {
   $steps = sbs_get_step_order();
   foreach( $steps as $step ) {
     $step->name = get_the_category_by_ID( $step->catid );
+		$step->type = 'main';
   }
   $steps_package = new stdClass();
   $steps_package->name = 'Packages';
 	$steps_package->catid = get_option('sbs_package')['category'];
+	$steps_package->type = 'package';
   $steps_checkout = new stdClass();
   $steps_checkout->name = 'Checkout';
+	$steps_checkout->type = 'checkout';
   array_unshift( $steps, $steps_package );
 
   if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
@@ -235,6 +238,7 @@ function sbs_get_full_step_order() {
     $steps_onf = new stdClass();
     $steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
 		$steps_onf->catid = (string) get_option('sbs_onf')['category'];
+		$steps_onf->type = 'options';
     array_push( $steps, $steps_onf );
 
   }

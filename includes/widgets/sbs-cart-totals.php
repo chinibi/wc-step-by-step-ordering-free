@@ -25,6 +25,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     // get woocommerce properties and methods
     global $woocommerce;
 
+		// TODO: Refactor for use with sbs_get_full_step_order() instead.
     $categories = sbs_get_step_order();
 
     $totals = array_map( array( $this, 'map_categories_to_widget_array_callback' ), $categories );
@@ -47,8 +48,18 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
 		if ( !isset( get_option('sbs_onf')['disabled'] ) && isset( get_option('sbs_onf')['category'] ) ) {
 
+			$steps = sbs_get_full_step_order();
+
+			foreach( $steps as $key => $step ) {
+				if ( empty( $step->catid ) ) continue;
+				if ( get_option('sbs_onf')['category'] == $step->catid ) {
+					$step_number = "${key}. ";
+					break;
+				}
+			}
+
 			$totals[] = array(
-				'cat_name' => get_the_category_by_ID( get_option('sbs_onf')['category'] ),
+				'cat_name' => $step_number . get_the_category_by_ID( get_option('sbs_onf')['category'] ),
 				'cat_total' => wc_price( sbs_get_cart_total_of_category( (int) get_option('sbs_onf')['category'] ) ),
 				'css_class' => 'sbs-widget-sidebar-category'
 			);
@@ -69,8 +80,8 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
     if ( isset( $package['credit'] ) ) {
       $totals[] = array(
-        'cat_name' => 'Merchandise Credit',
-        'cat_total' => wc_price( $package['credit'] ),
+        'cat_name' => isset(get_option('sbs_package')['merch-cred-label']) ? esc_html(get_option('sbs_package')['merch-cred-label']) : 'Merchandise Credit',
+        'cat_total' => wc_price(sbs_get_merchandise_credit_to_apply()) . ' of ' . wc_price( $package['credit'] ),
         'css_class' => 'sbs-widget-sidebar-merch-credit'
       );
     }
@@ -116,8 +127,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     <table id="sbs-widget-sidebar-cart-totals">
 
       <?php
-      foreach($totals as $cat_info)
-      {
+      foreach($totals as $key => $cat_info):
       ?>
         <tr class="<?php echo esc_attr( $cat_info['css_class'] ) ?>">
           <td class="sbs-widget-sidebar-cat-name">
@@ -128,7 +138,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
           </td>
         </tr>
       <?php
-      }
+			endforeach;
       ?>
 
     </table>
@@ -195,8 +205,18 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
     add_filter( 'wc_price', array( $this, 'filter_wc_price_add_span_tag' ), 10, 3 );
 
+		$steps = sbs_get_full_step_order();
+
+		foreach( $steps as $key => $step ) {
+			if ( empty( $step->catid ) ) continue;
+			if ( $category->catid == $step->catid ) {
+				$step_number = "${key}. ";
+				break;
+			}
+		}
+
     return array(
-      'cat_name' => get_the_category_by_ID( $category->catid ),
+      'cat_name' => $step_number . get_the_category_by_ID( $category->catid ),
       'cat_total' => wc_price( sbs_get_cart_total_of_category( $category->catid ) ),
       'css_class' => 'sbs-widget-sidebar-category'
     );

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ *	Additional actions hooked into WooCommerce
+ *
+ *	This file is for miscellaneous snippet-sized pieces of additional
+ *	functionality to be added into WooCommerce.
+ *
+ *
+ */
+
 if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
@@ -24,6 +33,28 @@ function sbs_select_package_and_clear_cart( $passed, $product_id, $quantity ) {
 }
 add_action( 'woocommerce_add_to_cart_validation', 'sbs_select_package_and_clear_cart', 1, 3 );
 
+
+// Get the amount of store credit currently applied
+function sbs_get_merchandise_credit_to_apply() {
+
+	global $woocommerce;
+	$cart = $woocommerce->cart->get_cart();
+	// Get total value of all items in cart, except the package
+	$package = sbs_get_package_from_cart();
+
+	if ( isset( $package ) && isset( $package['credit'] ) ) {
+
+		$cart_total = $woocommerce->cart->cart_contents_total - $package['item']['line_total'];
+
+		// The amount of credit applied caps at some specified value.
+		// It should be negative since we are adding a negative fee to the total
+		$credit = min( $package['credit'], $cart_total );
+
+	}
+
+	return isset( $credit ) ? $credit : false;
+
+}
 
 // Apply any store credit assigned to the package in the cart
 
@@ -179,6 +210,15 @@ function sbs_highlight_package_checkout( $class_name, $cart_item ) {
 
 }
 add_filter( 'woocommerce_cart_item_class', 'sbs_highlight_package_checkout', 10, 2 );
+
+
+function sbs_add_cart_shortcode_to_checkout() {
+
+	echo '<h2>Review Your Order</h2>';
+	echo do_shortcode( '[woocommerce_cart]' );
+
+}
+add_action( 'woocommerce_before_checkout_form', 'sbs_add_cart_shortcode_to_checkout', 10 );
 
 
 // Fix for actions being called before the WooCommerce $product global is instantiated

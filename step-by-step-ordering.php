@@ -44,7 +44,9 @@ final class StepByStepSystem {
 
 		// Include additions to WooCommerce actions
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/additional-actions.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/sbs-product-custom-fields.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/required-products.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/auto-add-product.php' );
 
 		// Include SBS Cart Totals Widget
 		include_once( plugin_dir_path( __FILE__) . 'includes/widgets/sbs-cart-totals.php' );

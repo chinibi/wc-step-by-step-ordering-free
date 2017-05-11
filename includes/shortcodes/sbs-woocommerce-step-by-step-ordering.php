@@ -213,7 +213,7 @@ function sbs_render_product_category( $category_id ) {
 		'post_type' => 'product',
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
-		'posts_per_page' => 24,
+		'posts_per_page' => -1,
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'product_cat',
@@ -267,7 +267,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
     return;
   }
 
-  if ( isset( $steps[$current_step]->catid ) ) {
+  if ( $steps[$current_step]->type === 'main' ) {
 
 		$cat_term = get_term_by( 'id', $steps[$current_step]->catid, 'product_cat', 'ARRAY_A' );
     $current_category_name = get_the_category_by_ID( $steps[$current_step]->catid );
@@ -384,32 +384,34 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   $all_categories = sbs_get_all_wc_categories();
 
   // Generate the Steps array
-  $steps = sbs_get_step_order();
-  foreach( $steps as $step ) {
-    $step->name = get_the_category_by_ID( $step->catid );
-  }
-  $steps_package = new stdClass();
-  $steps_package->name = 'Packages';
-  $steps_checkout = new stdClass();
-  $steps_checkout->name = 'Checkout';
-  array_unshift( $steps, $steps_package );
+  // $steps = sbs_get_step_order();
+  // foreach( $steps as $step ) {
+  //   $step->name = get_the_category_by_ID( $step->catid );
+  // }
+  // $steps_package = new stdClass();
+  // $steps_package->name = 'Packages';
+  // $steps_checkout = new stdClass();
+  // $steps_checkout->name = 'Checkout';
+  // array_unshift( $steps, $steps_package );
+	//
+	// if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
+	//
+	// 	$steps_onf = new stdClass();
+	// 	$steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
+	// 	array_push( $steps, $steps_onf );
+	//
+	// }
+	//
+  // array_push( $steps, $steps_checkout );
 
-	if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
-
-		$steps_onf = new stdClass();
-		$steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
-		array_push( $steps, $steps_onf );
-
-	}
-
-  array_push( $steps, $steps_checkout );
+	$steps = sbs_get_full_step_order();
 
   // Default to step 0 if an invalid step was requested
   if ( !array_key_exists( $current_step, $steps ) ) {
     $current_step = 0;
   }
 
-	do_action( 'sbs_before_sbs_content' );
+	do_action( 'sbs_before_sbs_content', $current_step, $steps );
 
   ob_start();
   ?>

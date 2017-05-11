@@ -21,6 +21,8 @@ function sbs_req_get_required_products( $categories ) {
 
 	$args = array(
 		'post_type' => 'product',
+		'post_status' => 'publish',
+		'posts_per_page' => -1,
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'pa_required',
@@ -50,6 +52,8 @@ function sbs_req_get_optional_products( $categories ) {
 
 	$args = array(
 		'post_type' => 'product',
+		'post_status' => 'publish',
+		'posts_per_page' => -1,
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'pa_required',

@@ -9,7 +9,7 @@ function sbs_options_and_fees_shortcode() {
   ob_start();
   ?>
 
-  <table class="woocommerce">
+  <table class="woocommerce sbs-options-and-fees">
   <?php
   foreach ( $onf_categories as $category )
   {
@@ -24,6 +24,7 @@ function sbs_options_and_fees_shortcode() {
       'post_type' => 'product',
       'post_status' => 'publish',
       'posts_per_page' => -1,
+      'orderby' => 'menu_order',
       'tax_query' => array(
         array(
           'taxonomy' => 'product_cat',
@@ -40,7 +41,7 @@ function sbs_options_and_fees_shortcode() {
         $query->the_post();
         $product = wc_get_product( $query->post->ID );
         ?>
-        <tr>
+        <tr class="<?php echo $product->get_attribute('required') ? 'required' : null ?>">
           <td>
             <?php
             if ( sbs_get_cart_key( $product->get_id() ) ) {

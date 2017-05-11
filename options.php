@@ -711,6 +711,7 @@ function sbs_package_merch_cred_callback() {
 
 	$wc_attributes = wc_get_attribute_taxonomies();
 	$selected_attr = isset( get_option('sbs_package')['merch-cred-attr'] ) ? get_option('sbs_package')['merch-cred-attr'] : null;
+	$calc_label = isset( get_option('sbs_package')['merch-cred-label'] ) ? get_option('sbs_package')['merch-cred-label'] : 'Merchandise Credit';
 
 	ob_start();
 	?>
@@ -724,22 +725,29 @@ function sbs_package_merch_cred_callback() {
 		Then select the attribute you created in the dropdown below and save. You
 		may need to refresh the page to see it.
 	</p>
-	<label for="sbs-merch-cred-attribute">Store Credit Product Attribute: </label>
-	<select id="sbs-merch-cred-attribute" name="sbs_package[merch-cred-attr]">
-		<option value="">Select One</option>
-		<?php
-		foreach ( $wc_attributes as $attr )
-		{
-		?>
+	<fieldset>
+		<label>Store Credit Product Attribute:
+			<select id="sbs-merch-cred-attribute" name="sbs_package[merch-cred-attr]">
+				<option value="">Select One</option>
+				<?php
+				foreach ( $wc_attributes as $attr )
+				{
+				?>
 
-			<option value="<?php echo $attr->attribute_name ?>" <?php selected( $attr->attribute_name, $selected_attr ) ?>>
-				<?php echo $attr->attribute_label ?>
-			</option>
+					<option value="<?php echo esc_attr( $attr->attribute_name ) ?>" <?php selected( $attr->attribute_name, $selected_attr ) ?>>
+						<?php echo esc_html( $attr->attribute_label ) ?>
+					</option>
 
-		<?php
-		}
-		?>
-	</select>
+				<?php
+				}
+				?>
+			</select>
+		</label><br>
+		<label>
+			Calculator Widget Label:
+			<input type="text" name="sbs_package[merch-cred-label]" value="<?php echo $calc_label ?>" />
+		</label>
+	</fieldset>
 
 	<?php submit_button() ?>
 
