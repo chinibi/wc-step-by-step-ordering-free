@@ -4,9 +4,15 @@
     border-bottom: 3px solid white;
 }
 
-.checkout-package {
+.checkout-package,
+.woocommerce .checkout-package a
+{
     background-color: #ffde8f;
     color: #8a140e;
+}
+
+.woocommerce .checkout-package a.remove {
+  color: #8a140e !important; /* overrides WooCommerce important tag */
 }
 
 #sbs-widget-sidebar-cart-totals {

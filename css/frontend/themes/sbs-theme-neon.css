@@ -9,9 +9,16 @@
   border-bottom: 1px solid #b924c8;
 }
 
-.sbs-package-title, .checkout-package {
+.sbs-package-title,
+.checkout-package,
+.woocommerce .checkout-package a
+{
   color: #f4f877;
   background-color: #b924c8;
+}
+
+.woocommerce .checkout-package a.remove {
+  color: #f4f877 !important; /* overrides WooCommerce important tag */
 }
 
 /* SBS Sidebar Calculator */

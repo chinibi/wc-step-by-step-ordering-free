@@ -23,7 +23,6 @@ div.sortable-container {
 
 #main-sortable-container {
   display: flex;
-  justify-content: center;
 }
 
 .sortable-container {

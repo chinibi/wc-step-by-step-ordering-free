@@ -65,6 +65,10 @@ span.step-span-container {
   color: white;
 }
 
+@media (max-width: 768px) {
+  .step-title {display: none;}
+}
+
 h1.step-by-step-title {
   font-size: 36px;
   margin-bottom: 20px;
@@ -251,6 +255,10 @@ a.add-prod-link.add-prod-link-modal {
 
 #sbs-widget-sidebar-back-forward-buttons-container td {
   text-align: center;
+}
+
+.sbs-widget-sidebar-package {
+  white-space: nowrap;
 }
 
 .sbs-subcat-name {
