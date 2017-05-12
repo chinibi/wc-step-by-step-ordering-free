@@ -99,6 +99,28 @@ function sbs_get_cart_total_of_category( $category_id ) {
 
 }
 
+// Get the amount of store credit currently applied
+function sbs_get_merchandise_credit_to_apply() {
+
+	global $woocommerce;
+	$cart = $woocommerce->cart->get_cart();
+	// Get total value of all items in cart, except the package
+	$package = sbs_get_package_from_cart();
+
+	if ( isset( $package ) && isset( $package['credit'] ) ) {
+
+		$cart_total = $woocommerce->cart->cart_contents_total - $package['item']['line_total'];
+
+		// The amount of credit applied caps at some specified value.
+		// It should be negative since we are adding a negative fee to the total
+		$credit = min( $package['credit'], $cart_total );
+
+	}
+
+	return isset( $credit ) ? $credit : false;
+
+}
+
 /**
  *	Retrieve the selected package from the cart
  *
@@ -112,18 +134,17 @@ function sbs_get_package_from_cart() {
 	global $woocommerce;
 	$result = array();
 	$package_cat_id = (int) get_option('sbs_package')['category'];
-	$merch_cred_attr = isset( get_option('sbs_package')['merch-cred-attr'] ) ? get_option('sbs_package')['merch-cred-attr'] : null;
 	$cart = $woocommerce->cart->get_cart();
-
 
 	foreach ( $cart as $item ) {
 
 		$product_parent = sbs_get_product_parent_category( $item['product_id'] )->term_id;
 		if ( $product_parent === $package_cat_id ) {
 
-			$merch_cred_terms = get_the_terms( $item['product_id'], 'pa_' . $merch_cred_attr );
-			if ( !empty( $merch_cred_terms ) ) {
-				$merch_credit = floatval( $merch_cred_terms[0]->name );
+			$merch_credit = get_post_meta( $item['product_id'], '_merch_credit', true );
+
+			if ( !empty( $merch_credit ) && is_numeric( $merch_credit ) && floatval( $merch_credit ) > 0 ) {
+				$merch_credit = floatval( $merch_credit );
 			}
 
 			return array(

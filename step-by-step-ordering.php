@@ -16,8 +16,7 @@ if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-
-if ( !class_exists( 'StepByStepSystem' ) ):
+if ( ! class_exists( 'StepByStepSystem' ) ):
 
 final class StepByStepSystem {
 
@@ -45,6 +44,8 @@ final class StepByStepSystem {
 		// Include additions to WooCommerce actions
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/additional-actions.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/sbs-product-custom-fields.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/product-cat-either-or.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/store-credit.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/required-products.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/auto-add-product.php' );
 

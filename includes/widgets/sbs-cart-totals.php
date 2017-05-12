@@ -78,7 +78,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       'css_class' => 'sbs-widget-sidebar-category'
     );
 
-    if ( isset( $package['credit'] ) ) {
+    if ( isset( $package['credit'] ) && $package['credit'] > 0 ) {
       $totals[] = array(
         'cat_name' => isset(get_option('sbs_package')['merch-cred-label']) ? esc_html(get_option('sbs_package')['merch-cred-label']) : 'Merchandise Credit',
         'cat_total' => wc_price(sbs_get_merchandise_credit_to_apply()) . ' of ' . wc_price( $package['credit'] ),

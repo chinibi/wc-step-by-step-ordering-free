@@ -116,6 +116,7 @@ function sbs_render_required_products( $category_id ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => 12,
+		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'product_cat',
@@ -165,6 +166,7 @@ function sbs_render_featured_products( $current_step, $steps ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => 12,
+		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'product_cat',
@@ -214,6 +216,7 @@ function sbs_render_product_category( $category_id ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => -1,
+		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'product_cat',
