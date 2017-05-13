@@ -23,12 +23,9 @@ function sbs_req_get_required_products( $categories ) {
 		'post_type' => 'product',
 		'post_status' => 'publish',
 		'posts_per_page' => -1,
+		'meta_key' => '_required_product',
+		'meta_value' => 'yes',
 		'tax_query' => array(
-			array(
-				'taxonomy' => 'pa_required',
-				'field' => 'slug',
-				'terms' => 'required'
-			),
       array(
         'taxonomy' => 'product_cat',
         'field' => 'term_id',
@@ -56,12 +53,6 @@ function sbs_req_get_optional_products( $categories ) {
 		'posts_per_page' => -1,
 		'tax_query' => array(
 			array(
-				'taxonomy' => 'pa_required',
-				'field' => 'slug',
-				'terms' => 'required',
-				'operator' => 'NOT IN'
-			),
-			array(
 				'taxonomy' => 'product_cat',
 				'field' => 'term_id',
 				'terms' => $categories
@@ -72,7 +63,8 @@ function sbs_req_get_optional_products( $categories ) {
 	$posts = get_posts( $args );
 
 	$results = array_map( function( $post ) {
-		return wc_get_product( $post->ID );
+		if ( get_post_meta( $post->ID, '_required_product', true) !== 'yes' )
+			return wc_get_product( $post->ID );
 	}, $posts);
 
 	return $results;

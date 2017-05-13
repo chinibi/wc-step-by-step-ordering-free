@@ -116,6 +116,8 @@ function sbs_render_required_products( $category_id ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => 12,
+		'meta_key' => '_required_product',
+		'meta_value' => 'yes',
 		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
@@ -128,9 +130,9 @@ function sbs_render_required_products( $category_id ) {
 
 	$query = new WP_Query( $req_args );
 
-	$required_products = sbs_req_get_required_products( $category_id );
+	// $required_products = sbs_req_get_required_products( $category_id );
 
-	if ( $query->have_posts() && !empty( $required_products ) ):
+	if ( $query->have_posts() ):
 
 		$required_label_before = isset( get_option('sbs_general')['req-label-before'] ) ? get_option('sbs_general')['req-label-before'] : 'Select';
 		$required_label_after = isset( get_option('sbs_general')['req-label-after'] ) ? get_option('sbs_general')['req-label-after'] : '(Required)';
@@ -145,8 +147,7 @@ function sbs_render_required_products( $category_id ) {
 			$query->the_post();
 			$product = wc_get_product( $query->post->ID );
 
-			if ( $product->get_attribute( 'required' ) )
-				wc_get_template_part( 'content', 'product' );
+			wc_get_template_part( 'content', 'product' );
 
 		endwhile;
 
@@ -244,8 +245,9 @@ function sbs_render_product_category( $category_id ) {
 
 			$query->the_post();
 			$product = wc_get_product( $query->post->ID );
+			$is_required = get_post_meta( $product->get_id(), '_required_product', true ) === 'yes';
 
-			if ( !$product->get_attribute( 'required' ) )
+			if ( !$is_required )
 				wc_get_template_part( 'content', 'product' );
 
 		endwhile;

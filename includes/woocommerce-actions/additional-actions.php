@@ -170,7 +170,7 @@ function sbs_add_cart_shortcode_to_checkout() {
 add_action( 'woocommerce_before_checkout_form', 'sbs_add_cart_shortcode_to_checkout', 10 );
 
 
-// Fix for actions being called before the WooCommerce $product global is instantiated
+// Fix for actions being called when the WooCommerce $product global is unavailable.
 function sbs_reprioritize_single_product_actions() {
 
 	remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
@@ -182,3 +182,28 @@ function sbs_reprioritize_single_product_actions() {
 
 }
 add_action( 'woocommerce_loaded', 'sbs_reprioritize_single_product_actions' );
+
+
+// Move the package product to the top of the cart list. Fixes autoadd-type
+// products being listed above packages.
+function sbs_move_package_to_top_of_cart_list() {
+
+	global $woocommerce;
+	$cart = $woocommerce->cart->cart_contents;
+	$package = sbs_get_package_from_cart();
+
+	if ( empty( $package ) ) {
+		return;
+	}
+
+	$package_in_cart = array();
+	foreach( $cart as $key => $cart_item ) {
+		if ( $key == $package['key'] ) {
+			$package_in_cart = array( $key => $cart_item );
+			$woocommerce->cart->cart_contents = $package_in_cart + $woocommerce->cart->cart_contents;
+			break;
+		}
+	}
+
+}
+add_action( 'woocommerce_cart_loaded_from_session', 'sbs_move_package_to_top_of_cart_list', 100 );

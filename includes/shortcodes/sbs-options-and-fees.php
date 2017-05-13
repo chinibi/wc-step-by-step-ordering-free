@@ -40,8 +40,9 @@ function sbs_options_and_fees_shortcode() {
       while( $query->have_posts() ):
         $query->the_post();
         $product = wc_get_product( $query->post->ID );
+        $is_required = get_post_meta( $product->get_id(), '_required_product', true ) === 'yes';
         ?>
-        <tr class="<?php echo $product->get_attribute('required') ? 'required' : null ?>">
+        <tr class="<?php echo $is_required ? 'required' : null ?>">
           <td>
             <?php
             if ( sbs_get_cart_key( $product->get_id() ) ) {
@@ -87,7 +88,7 @@ function sbs_options_and_fees_shortcode() {
             <div><?php echo $product->get_name() ?></div>
             <div><?php echo $product->get_description() ?></div>
             <div>
-              <span class="danger"><?php echo $product->get_attribute('required') ? '(Required)' : null ?></span>
+              <span class="danger"><?php echo $is_required ? '(Required)' : null ?></span>
               <a data-mfp-src="#modal-product-<?php echo $product->get_id() ?>" class="open-popup-link"><small>Learn More</small></a>
             </div>
           </td>

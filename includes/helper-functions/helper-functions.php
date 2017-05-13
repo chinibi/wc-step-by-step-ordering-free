@@ -136,7 +136,7 @@ function sbs_get_package_from_cart() {
 	$package_cat_id = (int) get_option('sbs_package')['category'];
 	$cart = $woocommerce->cart->get_cart();
 
-	foreach ( $cart as $item ) {
+	foreach ( $cart as $key => $item ) {
 
 		$product_parent = sbs_get_product_parent_category( $item['product_id'] )->term_id;
 		if ( $product_parent === $package_cat_id ) {
@@ -148,6 +148,7 @@ function sbs_get_package_from_cart() {
 			}
 
 			return array(
+				'key' => $key,
 				'item' => $item,
 				'credit' => isset( $merch_credit ) ? $merch_credit : null
 			);
