@@ -68,19 +68,7 @@ final class StepByStepSystem {
 
 	public function plugin_activation() {
 
-	  if ( !post_exists( 'Step-By-Step Ordering' ) ) {
-	    $page_data = array(
-	      'post_status' => 'publish',
-	      'post_type'   => 'page',
-	      'post_author' => 1,
-	      'post_name'   => 'ordering',
-	      'post_title'  => 'Step-By-Step Ordering',
-	      'comment_status' => 'closed',
-	      'post_content'     => '[sbs_woocommerce_step_by_step_ordering]'
-	    );
-
-	    wp_insert_post( $page_data );
-	  }
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/plugin/activation.php' );
 
 	}
 
@@ -99,12 +87,12 @@ final class StepByStepSystem {
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/theme-selector.php' );
 
 		// Enqueue custom scripts
-		// wp_enqueue_script( 'single-product-lightbox', plugins_url( '/woocommerce/assets/js/frontend/single-product.js' ) );
 
 		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
 		wp_enqueue_script( 'sbs-init-magnific-popup', plugins_url( '/js/frontend/sbs-init-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
 		wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
 		wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
+		wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );
 
 	}
 
