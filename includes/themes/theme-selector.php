@@ -10,6 +10,7 @@
 switch( get_option('sbs_display')['color-scheme'] ) {
 
   case 1: // No preset theme, unstyled
+    wp_enqueue_style( 'sbs-theme-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-theme-default.css' ), array( 'sbs-style' ) );
     break;
   case 2: // Green 1 "Spring Green"
     wp_enqueue_style( 'sbs-theme-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-theme-green-1.css' ), array( 'sbs-style' ) );
@@ -35,6 +36,7 @@ switch( get_option('sbs_display')['color-scheme'] ) {
   case 11:
     wp_enqueue_style( 'sbs-theme-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-theme-royal-2.css' ), array( 'sbs-style' ) );
   default:
+    wp_enqueue_style( 'sbs-theme-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-theme-default.css' ), array( 'sbs-style' ) );
     break;
 
 }
