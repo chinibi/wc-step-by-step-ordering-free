@@ -3,7 +3,11 @@
 function sbs_render_package_selection_box( $product_id ) {
 
   $package = wc_get_product( $product_id );
-  $add_to_cart_url = get_permalink( get_the_ID() ) . '?step=1&add-to-cart=' . $product_id;
+
+  $sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+  $base_url = get_permalink( $sbs_page );
+
+  $add_to_cart_url = $base_url . '?step=1&add-to-cart=' . $product_id;
 
   $per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : 3;
   $add_to_cart_text = isset( get_option('sbs_package')['add-to-cart-text'] ) ? get_option('sbs_package')['add-to-cart-text'] : 'Select Package';
@@ -32,7 +36,15 @@ function sbs_render_package_selection_box( $product_id ) {
   ob_start();
   ?>
 
-  <div class="sbs-package-container woocommerce" style="flex: 0 1 calc(<?php echo $container_width ?> - 4px);">
+  <style>
+    @media (min-width: 768px) {
+      .sbs-package-container.woocommerce {
+        flex: 0 1 calc(<?php echo $container_width ?> - 4px);
+      }
+    }
+  </style>
+
+  <div class="sbs-package-container woocommerce">
     <div class="sbs-package-thumbnail">
       <?php echo $package->get_image() ?>
     </div>
