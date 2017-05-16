@@ -46,7 +46,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     // calculated only on checkout
     $woocommerce->cart->calculate_fees();
 
-		if ( !isset( get_option('sbs_onf')['disabled'] ) && isset( get_option('sbs_onf')['category'] ) ) {
+		if ( sbs_is_onf_section_active() ) {
 
 			$steps = sbs_get_full_step_order();
 
@@ -108,7 +108,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 	  $steps_checkout->name = 'Checkout';
 	  array_unshift( $steps, $steps_package );
 
-		if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
+		if ( sbs_is_onf_section_active() ) {
 
 			$steps_onf = new stdClass();
 			$steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
