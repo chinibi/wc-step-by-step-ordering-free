@@ -304,7 +304,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 
   }
 
-	if ( !isset( get_option('sbs_onf')['disabled'] ) && $current_step === count($steps) - 2 ) {
+	if ( sbs_is_onf_section_active() && $current_step === count($steps) - 2 ) {
 
     echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Options' . '</h1>';
 		echo do_shortcode( '[sbs_options_and_fees]' );
@@ -382,32 +382,53 @@ function sbs_generate_navbar_url( $step_key, $current_step, $step_count ) {
 }
 
 
+function sbs_render_sbs_navbar( $current_step, $steps ) {
+
+	foreach( $steps as $key => $step ):
+		if ($key === 0) continue;
+	?>
+
+		<span class="step-span-container">
+			<div class="step-div-container">
+				<div class="step-index">
+					<span class="step-number-before <?php echo $key === $current_step ? 'active' : 'inactive' ?>"></span>
+					<span class="step-number <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
+						<a href="<?php echo esc_url( sbs_generate_navbar_url( $key, $current_step, count($steps) ) ) ?>"><?php echo $key ?></a>
+					</span>
+					<span class="step-number-after"></span>
+				</div>
+				<div class="step-title <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
+					<span class="step-title-text">
+
+						<?php
+						if ( sbs_generate_navbar_url( $key, $current_step, count( $steps ) ) !== false ):
+						?>
+							<a href="<?php echo esc_url( sbs_generate_navbar_url( $key, $current_step, count($steps) ) ) ?>"><?php echo $step->name ?></a>
+						<?php
+						else:
+						?>
+							<?php echo esc_html( $step->name ) ?>
+						<?php
+						endif;
+						?>
+
+					</span>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</span>
+
+	<?php
+	endforeach;
+
+}
+
+
 function sbs_woocommerce_step_by_step_ordering_shortcode() {
 
   $current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 0;
 
   $all_categories = sbs_get_all_wc_categories();
-
-  // Generate the Steps array
-  // $steps = sbs_get_step_order();
-  // foreach( $steps as $step ) {
-  //   $step->name = get_the_category_by_ID( $step->catid );
-  // }
-  // $steps_package = new stdClass();
-  // $steps_package->name = 'Packages';
-  // $steps_checkout = new stdClass();
-  // $steps_checkout->name = 'Checkout';
-  // array_unshift( $steps, $steps_package );
-	//
-	// if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
-	//
-	// 	$steps_onf = new stdClass();
-	// 	$steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
-	// 	array_push( $steps, $steps_onf );
-	//
-	// }
-	//
-  // array_push( $steps, $steps_checkout );
 
 	$steps = sbs_get_full_step_order();
 
@@ -422,56 +443,17 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   ?>
 
   <?php
-  if ( $current_step > 0 )
-  {
+  if ( $current_step > 0 ): // Do not render on package selection page.
   ?>
     <div id="sbs-navbar">
-      <?php foreach( $steps as $key => $step ) {
-              if ($key === 0) continue;
-      ?>
-
-              <span class="step-span-container">
-                <div class="step-div-container">
-                  <div class="step-index">
-										<span class="step-number-before <?php echo $key === $current_step ? 'active' : 'inactive' ?>"></span>
-                    <span class="step-number <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
-                      <?php echo $key ?>
-                    </span>
-										<span class="step-number-after"></span>
-                  </div>
-                  <div class="step-title <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
-										<span class="step-title-text">
-	                    <?php
-
-												if ( sbs_generate_navbar_url( $key, $current_step, count( $steps ) ) !== false )
-												{
-												?>
-													<a href="<?php echo esc_url( sbs_generate_navbar_url( $key, $current_step, count($steps) ) ) ?>"><?php echo $step->name ?></a>
-												<?php
-												}
-												else
-												{
-												?>
-													<?php echo $step->name ?>
-												<?php
-												}
-
-	                    ?>
-										</span>
-                  </div>
-									<div class="clearfix"></div>
-                </div>
-              </span>
-
-      <?php } ?>
+    	<?php sbs_render_sbs_navbar( $current_step, $steps ) ?>
     </div>
 
     <div>
       <?php wc_print_notices() ?>
     </div>
-
   <?php
-  }
+	endif;
   ?>
 
   <div>
@@ -479,8 +461,7 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   </div>
 
   <?php
-  if ( $current_step > 0 )
-  {
+  if ( $current_step > 0 ): // Do not render on package selection page.
   ?>
 
   <div id="sbs-store-back-forward-buttons-container">
@@ -493,7 +474,7 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   </div>
 
   <?php
-  }
+	endif;
   ?>
 
   <?php
