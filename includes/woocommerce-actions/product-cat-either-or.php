@@ -9,6 +9,10 @@
  *
  */
 
+if ( !defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
+
 add_action( 'product_cat_add_form_fields', 'sbs_add_product_cat_custom_fields', 20 );
 add_action( 'product_cat_edit_form_fields', 'sbs_edit_product_cat_custom_fields', 30 );
 add_action( 'create_product_cat', 'sbs_save_product_cat_custom_meta', 10 );

@@ -2,6 +2,10 @@
 
 // Apply any store credit assigned to the package in the cart
 
+if ( !defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
+
 function sbs_apply_merchandise_credit() {
 
 	global $woocommerce;

@@ -6,14 +6,14 @@
  *	This file is for miscellaneous snippet-sized pieces of additional
  *	functionality to be added into WooCommerce.
  *
+ *	Any functionality of significant code length should be in their own
+ *	separate files in this directory.
  *
  */
 
 if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
-
-
 
 // Selecting a package will clear the cart, restarting the user's session
 
@@ -24,8 +24,31 @@ function sbs_select_package_and_clear_cart( $passed, $product_id, $quantity ) {
   $package_cat_id = (int) get_option('sbs_package')['category'];
   $product_parent_cat = sbs_get_product_parent_category( $product_id )->term_id;
 
-  if ( $product_parent_cat === $package_cat_id  ) {
-    $woocommerce->cart->empty_cart();
+	$empty_cart_option = isset( get_option('sbs_package')['clear-cart'] ) ? get_option('sbs_package')['clear-cart'] : '1';
+
+  if ( $product_parent_cat === $package_cat_id ) {
+
+		if ( $empty_cart_option === '1' ) { // Empty Cart on package select
+
+	    $woocommerce->cart->empty_cart();
+
+		}
+		elseif ( $empty_cart_option === '2' ) { // Do not empty cart, only swap packages
+
+			$cart = $woocommerce->cart->get_cart();
+			foreach( $cart as $cart_key => $cart_item ) {
+
+				$cart_item_categories = wp_get_post_terms( $cart_item['product_id'], 'product_cat' );
+				foreach( $cart_item_categories as $cart_item_category ) {
+					if ( $cart_item_category->term_id == $package_cat_id ) {
+						$woocommerce->cart->remove_cart_item( $cart_key );
+						break;
+					}
+				}
+
+			}
+
+		}
   }
 
   return true;
@@ -82,44 +105,7 @@ function sbs_render_checkout_sbs_navbar() {
   ob_start();
   ?>
   <div id="sbs-navbar">
-    <?php foreach( $steps as $key => $step ):
-            if ($key === 0) continue;
-    ?>
-
-            <span class="step-span-container">
-              <div class="step-div-container">
-                <div class="step-index">
-									<span class="step-number-before <?php echo $key === $current_step ? 'active' : 'inactive' ?>"></span>
-                  <span class="step-number <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
-                    <?php echo $key ?>
-                  </span>
-									<span class="step-number-after"></span>
-                </div>
-                <div class="step-title <?php echo $key === $current_step ? 'active' : 'inactive' ?>">
-									<span class="step-title-text">
-                    <?php
-
-											if ( sbs_generate_navbar_url( $key, $current_step, count( $steps ) ) !== false )
-											{
-											?>
-												<a href="<?php echo esc_url( sbs_generate_navbar_url( $key, $current_step, count($steps) ) ) ?>"><?php echo $step->name ?></a>
-											<?php
-											}
-											else
-											{
-											?>
-												<?php echo $step->name ?>
-											<?php
-											}
-
-                    ?>
-									</span>
-                </div>
-								<div class="clearfix"></div>
-              </div>
-            </span>
-
-    <?php endforeach; ?>
+		<?php sbs_render_sbs_navbar( $current_step, $steps ) ?>
   </div>
 	<?php
 

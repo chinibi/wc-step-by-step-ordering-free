@@ -9,6 +9,10 @@
  *
  */
 
+if ( !defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
+
 function sbs_autoadd_products_to_cart( $passed, $product_id ) {
 
   global $woocommerce;

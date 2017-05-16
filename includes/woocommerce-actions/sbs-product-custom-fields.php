@@ -7,6 +7,10 @@
  *
  */
 
+if ( !defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
+
 // Display Fields
 add_action( 'woocommerce_product_options_general_product_data', 'sbs_add_custom_general_fields' );
 

@@ -11,6 +11,9 @@
  *
  */
 
+if ( !defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
 
 /**
  *  Get all required products of specified categories
@@ -109,17 +112,22 @@ function sbs_req_required_products_requirement_met_so_far() {
   $required_products = sbs_req_get_required_products( $subcats_so_far );
 
   $success = true;
+	$earliest_step_failed = null;
+	$missing_products = array();
+
   if ( !empty( $required_products ) ) {
 		foreach( $required_products as $product ) {
 
 			if ( !sbs_get_cart_key( $product->get_id() ) ) {
 
         $success = false;
-        $earliest_cat_failed = isset( $earliest_cat_failed ) ? $earliest_cat_failed : sbs_get_product_parent_category( $product->get_id() )->term_id;
+				$missing_products[] = $product->get_name();
+        $cat_failed = sbs_get_product_parent_category( $product->get_id() )->term_id;
+
         foreach( $steps as $key => $step ) {
-          if ( $step->catid == $earliest_cat_failed ) {
-            $earliest_step_failed = (string) $key;
-            break;
+          if ( (int) $step->catid === $cat_failed ) {
+						$step_failed = $key;
+            $earliest_step_failed = ( empty( $earliest_step_failed ) || $key < $earliest_step_failed ) ? $step_failed : $earliest_step_failed;
           }
         }
 
@@ -129,9 +137,12 @@ function sbs_req_required_products_requirement_met_so_far() {
 	}
 
   if ( !$success ) {
-    wc_add_notice( 'You must add required items to your cart before proceeding', 'error' );
+
+		$missing_products = implode( ", ", $missing_products );
+    wc_add_notice( sprintf( 'You must add required items to your cart before proceeding: %s', esc_html( $missing_products ) ), 'error' );
     wp_redirect( get_permalink( get_the_ID() ) . '?step=' . $earliest_step_failed );
     exit;
+
   }
 
 }
