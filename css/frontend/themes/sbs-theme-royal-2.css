@@ -130,6 +130,7 @@
     font-weight: 600;
 }
 
+a.sbs-change-package-btn,
 .step-title-text a:hover {
     color: #ffffff;
 }
@@ -148,6 +149,12 @@
 .sbs-subcat-name {
     background-color: #2481c8;
     color: #ffffff;
+}
+
+.woocommerce ul.products li.product .price,
+.product-name a
+{
+    color: #34a3f7;
 }
 
 .woocommerce ul.products li.product .button,

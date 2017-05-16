@@ -72,6 +72,7 @@
     color: #f4f877;
 }
 
+a.sbs-change-package-btn,
 .sbs-store-back-forward-buttons > a:hover {
     color: #f4f877;
 }
@@ -163,7 +164,10 @@
     font-weight: 600;
 }
 
-a.open-popup-link {
+a.open-popup-link,
+.woocommerce ul.products li.product .price,
+.product-name a
+{
     color: #b924c8;
 }
 

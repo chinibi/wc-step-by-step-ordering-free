@@ -37,6 +37,12 @@
     margin-left: -51px;
 }
 
+@media (max-width: 767px) {
+    .step-index span.step-number-after {
+        display: none;
+    }
+}
+
 .step-index span.step-number {
     border: transparent;
     background-color: transparent;

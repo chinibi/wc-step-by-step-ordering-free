@@ -10,7 +10,7 @@
     border-bottom: 50px solid;
     border-left: 29px solid;
     border-right: 29px solid;
-    margin-top: -7px;
+    margin-top: -12px;
     margin-left: -6px;
 }
 
@@ -22,8 +22,14 @@
     border-bottom: 54px solid white;
     border-left: 34px solid transparent;
     border-right: 34px solid transparent;
-    margin-top: -9px;
+    margin-top: -13px;
     margin-left: -56px;
+}
+
+@media (max-width: 767px) {
+    .step-index span.step-number-after {
+        display: none;
+    }
 }
 
 .step-index span.step-number {

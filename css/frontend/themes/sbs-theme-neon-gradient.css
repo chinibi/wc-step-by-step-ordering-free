@@ -100,7 +100,10 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 );
 }
 
-a.open-popup-link {
+a.open-popup-link,
+.woocommerce ul.products li.product .price,
+.product-name a
+{
     color: #167ed7;
 }
 
@@ -123,6 +126,7 @@ a.open-popup-link {
     font-weight: 600;
 }
 
+a.sbs-change-package-btn,
 .step-title-text a:hover {
     color: #ffffff;
 }

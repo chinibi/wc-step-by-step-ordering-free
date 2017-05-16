@@ -6,6 +6,17 @@
   color: red;
 }
 
+/**
+ *  General Element Styles
+ *
+ */
+.woocommerce input[type="date"], .woocommerce input[type="time"], .woocommerce input[type="datetime-local"],
+.woocommerce input[type="week"], .woocommerce input[type="month"], .woocommerce input[type="text"], .woocommerce input[type="email"],
+.woocommerce input[type="url"], .woocommerce input[type="password"], .woocommerce input[type="search"],
+.woocommerce input[type="tel"], .woocommerce input[type="number"], .woocommerce textarea {
+  background: #eaeaea;
+}
+
 /*
 *  Step-by-Step Ordering Navbar
 */
@@ -29,7 +40,7 @@ span.step-span-container {
 }
 
 .step-index > span.step-number {
-  background-color: white;
+  background-color: #b5b5b5;
   height: 45px;
   width: 45px;
   display: inline-block;
@@ -40,9 +51,32 @@ span.step-span-container {
   z-index: 3;
 }
 
+.step-index > span.step-number.inactive:before,
+.step-index > span.step-number.inactive:after
+{
+    border-color: #b5b5b5 transparent;
+    background-color: #b5b5b5;
+}
+
+.step-index span.step-number-before.inactive,
+.step-index span.step-number-before.inactive:after {
+    border-color: #b5b5b5 transparent;
+}
+
 .step-index > span.step-number.active {
-  background-color: black;
+  background-color: #353535;
   color: white;
+}
+
+.step-index > span.step-number.active:before,
+.step-index > span.step-number.active:after {
+    border-color: #353535 transparent;
+    background-color: #353535;
+}
+
+.step-index span.step-number-before.active,
+.step-index span.step-number-before.active:after {
+    border-color: #353535 transparent;
 }
 
 .step-title {
@@ -58,6 +92,10 @@ span.step-span-container {
 .step-title > a {
   display: block;
   text-decoration: none;
+}
+
+.step-number a {
+  color: inherit;
 }
 
 .step-title.active {
@@ -98,6 +136,20 @@ h1.step-by-step-title {
 
 .modal-left-side, .modal-right-side {
   width: 48%;
+}
+
+@media (max-width: 768px) {
+  .white-popup {
+    display: block;
+  }
+
+  .modal-left-side, .modal-right-side {
+    width: auto;
+  }
+
+  .modal-left-side {
+    margin-top: 20px;
+  }
 }
 
 .modal-add-to-cart {
@@ -262,13 +314,12 @@ a.add-prod-link.add-prod-link-modal {
 }
 
 .sbs-subcat-name {
-  margin-top: 20px;
   padding: 10px;
 }
 
 a.sbs-change-package-btn {
-  font-size: 0.7em;
-  color: #ccc;
+  font-size: 0.8em;
+  /*color: #ccc;*/
   text-decoration: underline;
 }
 
@@ -278,6 +329,45 @@ a.sbs-change-package-btn:hover {
 
 .sbs-widget-sidebar-total-column {
   text-align: right;
+}
+
+/* Options and Fees Table */
+.sbs-onf-mobile-add-to-cart {
+  display: none;
+}
+
+.sbs-onf-price-column {
+  text-align: right;
+}
+
+th.sbs-subcat-name[colspan="1"] {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sbs-onf-product-name {
+    border-bottom: none;
+  }
+
+  .sbs-onf-mobile-add-to-cart {
+    display: inline;
+  }
+
+  .sbs-options-and-fees td {
+    display: block;
+  }
+
+  td.sbs-onf-desktop-add-to-cart {
+    display: none;
+  }
+
+  th.sbs-subcat-name[colspan="1"] {
+    display: block;
+  }
+
+  th.sbs-subcat-name[colspan="3"] {
+    display: none;
+  }
 }
 
 /* Mini-Cart Widget (WooCommerce base feature) */

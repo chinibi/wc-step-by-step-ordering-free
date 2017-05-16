@@ -72,3 +72,9 @@ span.step-title-text a {
 .step-index {
     padding-left: 30px;
 }
+
+@media (max-width: 767px) {
+  .step-index {
+      padding-left: 0;
+  }
+}

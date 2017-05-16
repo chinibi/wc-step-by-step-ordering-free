@@ -112,7 +112,8 @@
 }
 
 .step-title-text a,
-.step-title-text a:hover
+.step-title-text a:hover,
+a.sbs-change-package-btn
 {
   color: #497b36;
 }
@@ -152,6 +153,9 @@
     color: white;
 }
 
-a.open-popup-link {
+a.open-popup-link,
+.woocommerce ul.products li.product .price,
+.product-name a
+{
     color: #497b36;
 }

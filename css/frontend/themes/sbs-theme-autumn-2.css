@@ -98,7 +98,7 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
 
 .step-index span.step-number-before.active,
 .step-index span.step-number-before.active:after {
-    border-color: #fcecc7 transparent;
+    border-color: #8a140e transparent;
 }
 
 .step-index span.step-number-before.inactive,

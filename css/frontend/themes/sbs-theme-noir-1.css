@@ -44,7 +44,10 @@
     color: white;
 }
 
-.sbs-store-back-forward-buttons a, .sbs-store-back-forward-buttons a:hover {
+.sbs-store-back-forward-buttons a,
+.sbs-store-back-forward-buttons a:hover,
+a.sbs-change-package-btn
+{
     color: white;
 }
 

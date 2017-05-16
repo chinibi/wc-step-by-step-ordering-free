@@ -127,7 +127,7 @@
     border-color: #084675 transparent;
 }
 
-.step-title a {
+.step-title a, a.sbs-change-package-btn {
     color: white;
 }
 
@@ -138,6 +138,12 @@
 .sbs-subcat-name {
     background-color: #084675;
     color: #7dc3f8;
+}
+
+.woocommerce ul.products li.product .price,
+.product-name a
+{
+    color: #34a3f7;
 }
 
 .woocommerce ul.products li.product .button,

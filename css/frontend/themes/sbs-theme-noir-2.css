@@ -114,6 +114,7 @@
     font-weight: 600;
 }
 
+a.sbs-change-package-btn,
 .step-title-text a:hover {
     color: #ffffff;
 }
