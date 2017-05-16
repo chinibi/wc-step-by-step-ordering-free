@@ -239,6 +239,15 @@ function sbs_get_subcategories_from_parent( $parent_id ) {
 
 }
 
+/**
+ *	Get the complete step-by-step order, from package selection to checkout.
+ *
+ *	@return Array of Step objects
+ *			(string) name
+ *			(string) category_id
+ *			(string) type, Identifies the step type so the step-by-step shortcode knows how to correctly render that step.
+ */
+
 function sbs_get_full_step_order() {
 
   $steps = sbs_get_step_order();
@@ -255,7 +264,7 @@ function sbs_get_full_step_order() {
 	$steps_checkout->type = 'checkout';
   array_unshift( $steps, $steps_package );
 
-  if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 ) {
+  if ( sbs_is_onf_section_active() ) {
 
     $steps_onf = new stdClass();
     $steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
@@ -268,5 +277,20 @@ function sbs_get_full_step_order() {
   array_push( $steps, $steps_checkout );
 
   return $steps;
+
+}
+
+/**
+ *	The Options and Fees page should be enabled only if both the 'enabled' input
+ *	is selected and a category is selected in the settings.
+ *
+ */
+
+function sbs_is_onf_section_active() {
+
+	$category_selected = isset( get_option('sbs_onf')['category'] );
+	$activated = !isset( get_option('sbs_onf')['enabled'] ) || get_option('sbs_onf')['enabled'] === '1';
+
+	return $activated && $category_selected;
 
 }
