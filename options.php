@@ -204,7 +204,7 @@ function sbs_plugin_settings_init() {
   // SBS Step-By-Step Settings Fields
   add_settings_field(
     'step_order',
-    'Step Order',
+    'Step-By-Step Builder',
     'sbs_sbs_table_callback',
     'sbs_order_settings',
     'sbs_order_settings'
@@ -226,16 +226,16 @@ function sbs_plugin_settings_init() {
 		'sbs_package_settings'
 	);
 	add_settings_field(
-		'sbs_package_merch_cred',
-		'Merchandise Credit',
-		'sbs_package_merch_cred_callback',
+		'sbs_package_tiers',
+		'Package Page Builder',
+		'sbs_package_tier_callback',
 		'sbs_package_settings',
 		'sbs_package_settings'
 	);
 	add_settings_field(
-		'sbs_package_tiers',
-		'Package Tiers',
-		'sbs_package_tier_callback',
+		'sbs_package_add_to_cart',
+		'Add-to-Cart Behavior',
+		'sbs_package_atc_callback',
 		'sbs_package_settings',
 		'sbs_package_settings'
 	);
@@ -246,11 +246,18 @@ function sbs_plugin_settings_init() {
 		'sbs_package_settings',
 		'sbs_package_settings'
 	);
+	add_settings_field(
+		'sbs_package_merch_cred',
+		'Calculator Widget Label',
+		'sbs_package_merch_cred_callback',
+		'sbs_package_settings',
+		'sbs_package_settings'
+	);
 
 	// SBS Options and Fees Settings Fields
 	add_settings_field(
 		'sbs_onf_enable',
-		'', // Enable/Disable Options and Fees page
+		'Enable / Disable', // Enable/Disable Options and Fees page
 		'sbs_onf_enable_callback',
 		'sbs_onf_settings',
 		'sbs_onf_settings'
@@ -543,7 +550,7 @@ function sbs_sbs_table_callback() {
 	    </ul>
 
 			<?php
-			if ( !isset( get_option('sbs_onf')['disabled'] ) || get_option('sbs_onf')['disabled'] != 1 )
+			if ( sbs_is_onf_section_active() )
 			{
 			?>
 				<div class="fixed-item noselect">Options and Fees</div>
@@ -716,7 +723,6 @@ function sbs_package_merch_cred_callback() {
 	?>
 	<fieldset>
 		<label>
-			Calculator Widget Label:
 			<input type="text" name="sbs_package[merch-cred-label]" value="<?php echo $calc_label ?>" />
 		</label>
 	</fieldset>
@@ -765,51 +771,79 @@ function sbs_package_tier_callback() {
 	ob_start();
 	?>
 
-	<p>
-		Drag packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
-		the order in which they are displayed.
-	</p>
+	<?php if ( !isset( $package_cat_id ) ): ?>
 
-	<div class="sortable-container" id="sbs-order-container">
-		<h3>Your Active Packages</h3>
-		<ul id="sbs-order" class="sortable">
-			<?php
-			if ( isset( $active_packages ) )
-			{
-				foreach( $active_packages as $package )
-				{
-				?>
-				<li data-catid="<?php echo $package->catid ?>" class="sortable-item">
-					<?php echo get_the_title( $package->catid ) ?>
-				</li>
+		<p>Select a package category above to begin.</p>
+
+	<?php else: ?>
+		<p>
+			Drag packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
+			the order in which they are displayed.
+		</p>
+
+		<div class="sortable-container" id="sbs-order-container">
+			<h3>Your Active Packages</h3>
+			<ul id="sbs-order" class="sortable">
 				<?php
+				if ( isset( $active_packages ) )
+				{
+					foreach( $active_packages as $package )
+					{
+					?>
+					<li data-catid="<?php echo $package->catid ?>" class="sortable-item">
+						<?php echo get_the_title( $package->catid ) ?>
+					</li>
+					<?php
+					}
 				}
-			}
-			?>
-		</ul>
-	</div>
+				?>
+			</ul>
+		</div>
 
-	<div class="sortable-container" id="sbs-pool-container">
-		<h3>Available Packages</h3>
-		<ul id="sbs-pool" class="sortable">
-			<?php
-			foreach( $available_packages as $package )
-			{
-			?>
-				<li data-catid="<?php echo $package->ID ?>" class="sortable-item">
-					<?php echo $package->post_title ?>
-				</li>
-			<?php
-			}
-			?>
-		</ul>
-	</div>
+		<div class="sortable-container" id="sbs-pool-container">
+			<h3>Available Packages</h3>
+			<ul id="sbs-pool" class="sortable">
+				<?php
+				if ( isset( $package_cat_id ) ) {
+					foreach( $available_packages as $package )
+					{
+					?>
+						<li data-catid="<?php echo $package->ID ?>" class="sortable-item">
+							<?php echo $package->post_title ?>
+						</li>
+					<?php
+					}
+				}
+				?>
+			</ul>
+		</div>
 
-	<input type="hidden" id="step_order" name="sbs_package[active]" value="<?php echo esc_attr( get_option('sbs_package')['active'] ) ?>" />
+		<input type="hidden" id="step_order" name="sbs_package[active]" value="<?php echo esc_attr( get_option('sbs_package')['active'] ) ?>" />
 
+	<?php
+	endif;
+
+	echo ob_get_clean();
+}
+
+function sbs_package_atc_callback() {
+
+	$option = isset( get_option('sbs_package')['clear-cart'] ) ? get_option('sbs_package')['clear-cart'] : '1';
+
+	ob_start();
+	?>
+	<fieldset>
+		<label>
+			<select id="sbs_package[clear-cart]" name="sbs_package[clear-cart]">
+				<option value="1">Clear the cart when a package is selected</option>
+				<option value="2">Do not clear the cart when a package is selected</option>
+			</select>
+		</label>
+	</fieldset>
 	<?php
 
 	echo ob_get_clean();
+
 }
 
 
@@ -853,12 +887,23 @@ function sbs_package_select_style_callback() {
 
 function sbs_onf_enable_callback() {
 
-	$option = isset( get_option('sbs_onf')['disabled'] ) ? get_option('sbs_onf')['disabled'] : false;
+	$option_defined = isset( get_option('sbs_onf')['enabled'] );
+	$category_defined = isset( get_option('sbs_onf')['category'] ) && !empty( get_option('sbs_onf')['category'] );
+	$option = $category_defined ? get_option('sbs_onf')['enabled'] : '0';
 
 	ob_start();
 	?>
-		<input type="checkbox" id="onf_disabled" name="sbs_onf[disabled]" value="1" <?php checked(1, $option) ?> />
-		<label for="onf_disabled">Disable Options and Fees page</label>
+		<fieldset>
+			<label>
+				<select id="sbs_onf[enabled]" name="sbs_onf[enabled]" <?php disabled( false, $category_defined ) ?>>
+					<option value="1" <?php selected(1, $option) ?>>Activated</option>
+					<option value="0" <?php selected(0, $option) ?>>Deactivated</option>
+				</select>
+				<?php if ( !$category_defined ): ?>
+					<p class="description">Select a product category below to enable the Options and Fees section in your ordering process.</p>
+				<?php endif ?>
+			</label>
+		</fieldset>
 	<?php
 
 	echo ob_get_clean();
@@ -1007,8 +1052,10 @@ function sbs_onf_order_callback() {
 
 function sbs_display_color_scheme_callback() {
 
+	$option = isset( get_option('sbs_display')['color-scheme'] ) ? get_option('sbs_display')['color-scheme'] : 1;
+
 	$colors = array(
-		'Default',
+		"Use your theme's colors (Default)",
 		'Spring Green',
 		'Aqua Green',
 		'Autumn 1',
@@ -1023,25 +1070,20 @@ function sbs_display_color_scheme_callback() {
 
   ob_start();
   ?>
-
+	<fieldset>
+		<select id="sbs_display[color-scheme]" name="sbs_display[color-scheme]">
 		<?php
 		foreach( $colors as $key => $color )
 		{
 		?>
-
-			<input
-				type="radio"
-				id="color-scheme-<?php echo $key + 1 ?>"
-				name="sbs_display[color-scheme]"
-				value="<?php echo $key + 1 ?>"
-				<?php echo checked( $key + 1, get_option('sbs_display')['color-scheme'], false ) ?>
-			/>
-	    <label for="color-scheme-<?php echo $key + 1 ?>"><?php echo $color ?></label><br />
-
+	    <option value="<?php echo $key + 1 ?>" <?php echo selected( $key + 1, $option, false ) ?>>
+				<?php echo esc_html( $color ) ?>
+			</option>
 		<?php
 		}
 		?>
-
+		</select>
+	</fieldset>
   <?php
 
   echo ob_get_clean();
@@ -1052,7 +1094,7 @@ function sbs_display_calc_callback() {
 	$calc_font = isset( get_option('sbs_display')['calc-font'] ) ? get_option('sbs_display')['calc-font'] : 1;
 
 	$fonts = array(
-		'Default',
+		"Theme Default",
 		'Helvetica',
 		'Arial',
 		'Verdana'
@@ -1061,24 +1103,22 @@ function sbs_display_calc_callback() {
 	ob_start();
 	?>
 		<div>
-			<p><strong>Font Family</strong></p>
-			<?php
-			foreach( $fonts as $key => $font )
-			{
-			?>
-				<input
-					type="radio"
-					id="calc_font_<?php echo $key + 1 ?>"
-					name="sbs_display[calc-font]"
-					value="<?php echo $key + 1 ?>"
-					<?php checked( $key + 1, $calc_font ) ?>
-					/>
-				<label for="calc_font_<?php echo $key + 1 ?>">
-					<?php echo $font ?>
-				</label><br />
-			<?php
-			}
-			?>
+			<fieldset>
+				<label>
+					<p><strong>Font Family</strong></p>
+					<select id="sbs_display[calc-font]" name="sbs_display[calc-font]">
+					<?php
+					foreach( $fonts as $key => $font )
+					{
+					?>
+						<option value="<?php echo $key + 1 ?>" <?php selected( $key + 1, $calc_font ) ?>>
+							<?php echo $font ?>
+						</option>
+					<?php
+					}
+					?>
+					</select>
+				</label>
 		</div>
 		<div>
 			<p><strong>Other Styles</strong></p>
@@ -1099,7 +1139,7 @@ function sbs_display_fonts_callback() {
 	$navbar_font = isset( get_option('sbs_display')['navbar-font'] ) ? get_option('sbs_display')['navbar-font'] : 1;
 
 	$fonts = array(
-		'Default',
+		'Theme Default',
 		'Helvetica',
 		'Arial',
 		'Verdana',
@@ -1122,29 +1162,28 @@ function sbs_display_fonts_callback() {
 	foreach ( $sections as $section )
 	{
 	?>
-		<div class="horizontal-stack">
-		<div><strong><?php echo $section['title'] ?></strong></div>
-		<?php
-		foreach ( $fonts as $key => $font )
-		{
-			$index = $key + 1;
-		?>
-			<input
-				type="radio"
-				id="<?php echo $section['slug'] . $key ?>"
-				name="sbs_display[<?php echo $section['slug'] ?>]"
-				value="<?php echo $index ?>"
-				<?php checked( $index, $section['option'] ) ?>
-				/>
-			<label for="<?php echo $section['slug'] . $key ?>">
-				<?php echo $font ?>
-			</label><br />
-
-		<?php
-		}
-		?>
-		</div>
-		<?php
+	<fieldset>
+		<label>
+			<div><strong><?php echo $section['title'] ?></strong></div>
+			<select id="sbs_display[<?php echo $section['slug'] ?>]" name="sbs_display[<?php echo $section['slug'] ?>]">
+			<?php
+			foreach ( $fonts as $key => $font )
+			{
+				$index = $key + 1;
+			?>
+				<option
+					value="<?php echo $index ?>"
+					<?php selected( $index, $section['option'] ) ?>
+					>
+					<?php echo $font ?>
+				</option>
+			<?php
+			}
+			?>
+			</select>
+		</label>
+	</fieldset>
+	<?php
 	}
 
 }
@@ -1178,7 +1217,7 @@ function sbs_display_navbar_number_shape_callback() {
 	$number_style = isset( get_option('sbs_display')['navbar-style'] ) ? get_option('sbs_display')['navbar-style'] : 1;
 
 	$styles = array(
-		'Default (Square)',
+		'Square (Default)',
 		'Circle',
 		'Downward Triangle',
 		'Upward Triangle',
@@ -1190,15 +1229,22 @@ function sbs_display_navbar_number_shape_callback() {
 
   ob_start();
 	?>
+	<fieldset>
+		<select id="sbs_display[navbar-style]" name="sbs_display[navbar-style]">
 		<?php
 		foreach ( $styles as $key => $style )
 		{
 			$index = $key + 1;
 		?>
-			<input type="radio" id="color-scheme-<?php echo $index ?>" name="sbs_display[navbar-style]" value="<?php echo $index ?>" <?php echo checked( $index, $number_style, false) ?> />
-			<label for="color-scheme-<?php echo $index ?>"><?php echo $style ?></label><br />
+			<option value="<?php echo $index ?>" <?php echo selected( $index, $number_style, false) ?> >
+				<?php echo $style ?>
+			</option>
   	<?php
 		}
+		?>
+		</select>
+	</fieldset>
+	<?php
 
   echo ob_get_clean();
 }
@@ -1207,7 +1253,7 @@ function sbs_display_navbar_title_shape_callback() {
 	$title_style = isset( get_option('sbs_display')['nav-title-style'] ) ? get_option('sbs_display')['nav-title-style'] : 1;
 
 	$styles = array(
-		'Default',
+		'Rectangular (Default)',
 		'Capsule',
 		'Arrows',
 		'TV Screen',
@@ -1216,17 +1262,22 @@ function sbs_display_navbar_title_shape_callback() {
 
 	ob_start();
 	?>
+	<fieldset>
+		<select id="sbs_display[nav-title-style]" name="sbs_display[nav-title-style]">
 		<?php
 		foreach ($styles as $key => $style)
 		{
 			$index = $key + 1;
 		?>
-
-			<input type="radio" id="nav-title-shape-<?php echo $index ?>" name="sbs_display[nav-title-style]" value="<?php echo $index ?>" <?php checked( $index, $title_style ) ?>>
-			<label for="nav-title-shape-<?php echo $index ?>"><?php echo $style ?></label><br />
-
+			<option value="<?php echo $index ?>" <?php selected( $index, $title_style ) ?>>
+				<?php echo $style ?>
+			</option>
 		<?php
 		}
+		?>
+		</select>
+	</fieldset>
+	<?php
 
 	echo ob_get_clean();
 }
