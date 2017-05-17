@@ -32,10 +32,11 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
     // Prepend Package to $totals
     $package = sbs_get_package_from_cart();
+		$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
 
     if ( isset( $package ) ) {
       array_unshift( $totals, array(
-        'cat_name' => $package['item']['data']->get_name() . '<br /><a class="sbs-change-package-btn" href="' . get_permalink( get_the_ID() ) . '">Change Package</a>',
+        'cat_name' => $package['item']['data']->get_name() . '<br /><a class="sbs-change-package-btn" href="' . get_permalink( $package_page ) . '">Change Package</a>',
         'cat_total' => wc_price( $package['item']['line_total'] ),
         'css_class' => 'sbs-widget-sidebar-package'
       ) );

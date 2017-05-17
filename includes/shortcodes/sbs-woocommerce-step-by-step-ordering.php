@@ -1,22 +1,35 @@
 <?php
 
+/**
+ *	Step-By-Step Ordering Shortcode
+ *
+ *	This is the main shortcode for rendering SBS content, from package selection
+ *	to product selection, to checkout.
+ *
+ */
+
 if ( !defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
-}
-
-function sbs_remove_edit_link() {
-  return '';
 }
 
 function sbs_previous_step_url( $current_step, $step_count ) {
 
 	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
-  $base_url = get_permalink( $sbs_page );
+	$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
+
+  $sbs_base_url = get_permalink( $sbs_page );
+	$package_base_url = get_permalink( $package_page );
 
   if ( $current_step > 0 ) {
 
     $previous_step = $current_step - 1;
-    return $base_url . '?step=' . $previous_step;
+
+		if ( $previous_step === 0 ) {
+			return $package_base_url;
+		}
+		else {
+			return $sbs_base_url . '?step=' . $previous_step;
+		}
 
   } else {
 
@@ -29,14 +42,21 @@ function sbs_previous_step_url( $current_step, $step_count ) {
 function sbs_previous_step_button( $current_step, $step_count ) {
 
 	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+	$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
+
   $base_url = get_permalink( $sbs_page );
+	$package_base_url = get_permalink( $package_page );
 
   if ( $current_step > 0 ) {
 
     $previous_step = $current_step - 1;
     ob_start();
     ?>
-      <a href="<?php echo esc_url( $base_url . '?step=' . $previous_step ) ?>">&#171; GO BACK</a>
+			<?php if ( $previous_step === 0 ): ?>
+				<a href="<?php echo esc_url( $package_base_url ) ?>">&#171; GO BACK</a>
+			<?php else: ?>
+      	<a href="<?php echo esc_url( $base_url . '?step=' . $previous_step ) ?>">&#171; GO BACK</a>
+			<?php endif ?>
     <?php
     return ob_get_clean();
 
@@ -88,22 +108,6 @@ function sbs_next_step_button( $current_step, $step_count ) {
 
 }
 
-function sbs_hide_sidebar_default_theme() {
-
-	$current_theme = wp_get_theme()->get('Name');
-
-	if ($current_theme == 'Twenty Sixteen' || $current_theme == 'Twenty Fifteen') {
-		add_action( 'widgets_init', unregister_sidebar( 'sidebar-1' ), 11 );
-		ob_start();
-		?>
-		<style>
-			@media screen and (min-width: 56.875em) {.content-area {width: 100%;}}
-		</style>
-		<?php
-		echo ob_get_clean();
-	}
-
-}
 
 function sbs_render_required_products( $category_id ) {
 
@@ -152,6 +156,7 @@ function sbs_render_required_products( $category_id ) {
 		endwhile;
 
 		woocommerce_product_loop_end();
+		echo '</div>';
 
 	endif;
 	wp_reset_postdata();
@@ -253,6 +258,7 @@ function sbs_render_product_category( $category_id ) {
 		endwhile;
 
 		woocommerce_product_loop_end();
+		echo '</div>';
 
 	endif;
 	wp_reset_postdata();
@@ -265,10 +271,10 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 	global $woocommerce;
 
   if ( $current_step === 0 ) {
-		add_action( 'sbs_before_select_package', 'sbs_hide_sidebar_default_theme' );
 
-		do_action( 'sbs_before_select_package' );
-    echo do_shortcode( '[sbs_select_package]' );
+		$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
+
+    echo sprintf( '<script>window.location.href="%s"</script>', get_permalink( $package_page ) );
     return;
   }
 

@@ -219,6 +219,13 @@ function sbs_plugin_settings_init() {
 
 	// SBS Package Settings
 	add_settings_field(
+		'sbs_package_page',
+		'Package Page',
+		'sbs_package_page_callback',
+		'sbs_package_settings',
+		'sbs_package_settings'
+	);
+	add_settings_field(
 		'sbs_package_category',
 		'Package Category',
 		'sbs_package_category_callback',
@@ -410,8 +417,8 @@ function sbs_page_name_callback() {
 	?>
 	<fieldset>
 		<label>
-			<p>The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.</p>
-			<p><strong>You may need to set this option again if you change the name of the page.</strong></p>
+			<p>The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.<br>
+			<strong>You may need to set this option again if you change the name of the page.</strong></p>
 			<select id="sbs_page_name" name="sbs_general[page-name]">
 				<option value="">(Select a Page)</option>
 				<?php
@@ -684,6 +691,34 @@ function sbs_req_feat_label_callback() {
 	echo ob_get_clean();
 
 }
+
+
+function sbs_package_page_callback() {
+
+	$option = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
+
+	$pages = get_pages();
+
+	ob_start();
+	?>
+	<fieldset>
+		<label>
+			<p>The page where the Select Packages page is located must be selected in order for navigation to work properly.<br>
+			<strong>You may need to set this option again if you change the name of the page.</strong></p>
+			<select id="sbs_package[page-name]" name="sbs_package[page-name]">
+				<?php foreach( $pages as $page ): ?>
+				<option value="<?php echo esc_attr( $page->ID ) ?>" <?php echo selected( $page->ID, $option ) ?>>
+					<?php echo esc_html( $page->post_title ) ?>
+				</option>
+				<?php endforeach ?>
+			</select>
+		</label>
+	</fieldset>
+	<?php
+
+	echo ob_get_clean();
+}
+
 
 function sbs_package_category_callback() {
 	$wc_categories = sbs_get_all_wc_categories();
