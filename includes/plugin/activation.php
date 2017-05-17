@@ -19,3 +19,17 @@ if ( !post_exists( 'Step-By-Step Ordering' ) ) {
 
   wp_insert_post( $page_data );
 }
+
+if ( !post_exists( 'Choose Package' ) ) {
+  $page_data = array(
+    'post_status' => 'publish',
+    'post_type'   => 'page',
+    'post_author' => 1,
+    'post_name'   => 'choose-package',
+    'post_title'  => 'Choose Package',
+    'comment_status' => 'closed',
+    'post_content'     => '[sbs_select_package]'
+  );
+
+  wp_insert_post( $page_data );
+}
