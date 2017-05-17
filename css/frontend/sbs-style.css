@@ -17,6 +17,12 @@
   background: #eaeaea;
 }
 
+.quantity,
+.woocommerce .quantity
+{
+  display: inline;
+}
+
 /*
 *  Step-by-Step Ordering Navbar
 */
@@ -80,6 +86,7 @@ span.step-span-container {
 }
 
 .step-title {
+  height: 68px;
   background-color: #ddd;
   padding: 25px 0 15px;
   margin-top: -20px;
@@ -138,6 +145,10 @@ h1.step-by-step-title {
   width: 48%;
 }
 
+.mfp-content .product_meta {
+  display: none; /* Do not show categories on modal popups */
+}
+
 @media (max-width: 768px) {
   .white-popup {
     display: block;
@@ -152,7 +163,7 @@ h1.step-by-step-title {
   }
 }
 
-.modal-add-to-cart {
+/*.modal-add-to-cart {
   margin-top: 50px;
   display: flex;
   justify-content: space-between;
@@ -169,8 +180,7 @@ h1.step-by-step-title {
   width: 56px;
 }
 
-.quantity,
-.woocommerce .quantity,
+
 .modal-add-to-cart form .quantity {
   display: inline;
 }
@@ -217,7 +227,7 @@ a.add-prod-link.add-prod-link-modal {
     margin-top: 10px;
   }
 
-}
+}*/
 
 /* Next/Previous Step Buttons at the bottom of each page */
 .sbs-store-back-forward-buttons {
@@ -269,6 +279,17 @@ a.add-prod-link.add-prod-link-modal {
   padding: 20px;
 }
 
+@media (max-width: 768px) {
+  .sbs-package-container {
+    width: 100%;
+  }
+
+  .sbs-package-content {
+    padding: 20px 4%;
+    font-size: 0.75em;
+  }
+}
+
 .sbs-package-content ul,
 .sbs-package-content ol
 {
@@ -290,6 +311,15 @@ a.add-prod-link.add-prod-link-modal {
   bottom: 10px;
   left: 0;
   right: 0;
+}
+
+/* Return to Ordering button on checkout */
+@media (max-width: 768px) {
+  .woocommerce a.button.sbs-checkout-return {
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* Cart Total Calculator Base Style */
