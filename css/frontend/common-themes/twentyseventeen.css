@@ -1,0 +1,29 @@
+#sbs-navbar .step-title-text {
+  line-height: 1.75;
+}
+
+.woocommerce input[type="number"] {
+  width: 5em;
+}
+
+.woocommerce ul.products li.product .button, .woocommerce a.button, .woocommerce a.button.alt, .woocommerce a.button:hover, .woocommerce a.button.alt:hover, .woocommerce button.button, .woocommerce button.button.alt, .woocommerce button.button.alt:hover, .woocommerce input.button.alt
+{
+  padding: 10px;
+  border-radius: 2px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+body.page-two-column.woocommerce-account:not(.archive) #primary .entry-content, body.page-two-column.woocommerce-cart:not(.archive) #primary .entry-content, body.page-two-column.woocommerce-checkout:not(.archive) #primary .entry-content
+{
+  width: 100%;
+}
+
+.sbs-options-and-fees td:first-child, .sbs-options-and-fees th:first-child {
+  padding-left: 10px;
+  white-space: nowrap;
+}
+
+.widget_shopping_cart_content dt {
+  font-weight: normal;
+}

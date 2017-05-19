@@ -4,6 +4,7 @@
     border-bottom: 3px solid white;
 }
 
+.sbs-package-title,
 .checkout-package,
 .woocommerce .checkout-package a
 {
@@ -20,7 +21,7 @@
     font-size: .90em;
 }
 
-a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
+#sbs-widget-sidebar-cart-totals a.sbs-change-package-btn, #sbs-widget-sidebar-cart-totals a.sbs-change-package-btn:hover {
     color: #8a140e;
 }
 
@@ -53,7 +54,7 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     color: white;
 }
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
     background-color: #be645f;
     display: inline-block;
     color: #ffffff;
@@ -63,56 +64,56 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     line-height: 39px;
 }
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
     background-color: #8a140e;
     color: #ffffff;
 }
 
-.step-index > span.step-number.inactive:before,
-.step-index > span.step-number.inactive:after
+#sbs-navbar .step-index > span.step-number.inactive:before,
+#sbs-navbar .step-index > span.step-number.inactive:after
 {
     border-color: #be645f transparent;
     background-color: #be645f;
 }
 
-.step-title.active {
+#sbs-navbar .step-title.active {
     background-color: #ffde8f;
     color: #8a140e;
  }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after {
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after {
     border-color: #8a140e transparent;
     background-color: #8a140e;
 }
 
-.step-title.active > a {
+#sbs-navbar .step-title.active > a {
     color: #8a140e;
     font-weight: 600;
 }
 
-.step-index > span.step-title-text.active {
+#sbs-navbar .step-index > span.step-title-text.active {
     background-color: #fcecc7;
     color: #8a140e;
 }
 
-.step-index span.step-number-before.active,
-.step-index span.step-number-before.active:after {
+#sbs-navbar .step-index span.step-number-before.active,
+#sbs-navbar .step-index span.step-number-before.active:after {
     border-color: #8a140e transparent;
 }
 
-.step-index span.step-number-before.inactive,
-.step-index span.step-number-before.inactive:after {
+#sbs-navbar .step-index span.step-number-before.inactive,
+#sbs-navbar .step-index span.step-number-before.inactive:after {
     border-color: #be645f transparent;
 }
 
-.step-title-text a, .step-title-text a:hover {
+#sbs-navbar .step-title-text a,  .step-title-text a:hover {
     display: block;
     color: #ffffff;
     font-weight: 600;
 }
 
-.step-title {
+#sbs-navbar .step-title {
     background-color: #8a140e;
     padding: 25px 0 15px;
     /* color: darkblue !important; */
@@ -132,7 +133,7 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
 
 .sbs-subcat-name {
     background-color: #8a140e;
-    color: #ffde8f;
+    color: #ffde8f !important;
 }
 
 .woocommerce ul.products li.product .button,
@@ -148,4 +149,14 @@ a.sbs-change-package-btn, a.sbs-change-package-btn:hover {
     background-color: #ffde8f;
     color: #8a140e;
     border: none;
+}
+
+a.open-popup-link,
+.woocommerce ul.products li.product .price,
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.product-name a,
+.product-loop-remove a
+{
+    color: #8a140e;
 }

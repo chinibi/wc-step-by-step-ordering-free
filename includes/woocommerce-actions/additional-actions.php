@@ -57,42 +57,42 @@ function sbs_select_package_and_clear_cart( $passed, $product_id, $quantity ) {
 add_action( 'woocommerce_add_to_cart_validation', 'sbs_select_package_and_clear_cart', 1, 3 );
 
 
-function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
-
-	global $woocommerce;
-
-	if ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() && ! $product->is_sold_individually() ) {
-		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
-		$html .= 'Qty.' . woocommerce_quantity_input( array(), $product, false );
-		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
-		$html .= '</form>';
-
-		return $html;
-	}
-
-	elseif ( $product && $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
-		$remove_url = $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] );
-
-		$html = '<form action="' . esc_url( $remove_url ) . '" class="cart" method="post" enctype="multipart/form-data">';
-		$html .= '<button type="submit" class="button alt">' . 'Remove' . '</button>';
-		$html .= '</form>';
-
-		return $html;
-	}
-
-	elseif ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() ) {
-		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
-		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
-		$html .= '</form>';
-
-		return $html;
-	}
-
-	return $html;
-
-}
-
-add_filter( 'woocommerce_loop_add_to_cart_link', 'sbs_woocommerce_loop_add_to_cart_link', 10, 2 );
+// function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
+//
+// 	global $woocommerce;
+//
+// 	if ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() && ! $product->is_sold_individually() ) {
+// 		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
+// 		$html .= 'Qty.' . woocommerce_quantity_input( array(), $product, false );
+// 		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
+// 		$html .= '</form>';
+//
+// 		return $html;
+// 	}
+//
+// 	elseif ( $product && $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
+// 		$remove_url = $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] );
+//
+// 		$html = '<form action="' . esc_url( $remove_url ) . '" class="cart" method="post" enctype="multipart/form-data">';
+// 		$html .= '<button type="submit" class="button alt">' . 'Remove' . '</button>';
+// 		$html .= '</form>';
+//
+// 		return $html;
+// 	}
+//
+// 	elseif ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() ) {
+// 		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
+// 		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
+// 		$html .= '</form>';
+//
+// 		return $html;
+// 	}
+//
+// 	return $html;
+//
+// }
+//
+// add_filter( 'woocommerce_loop_add_to_cart_link', 'sbs_woocommerce_loop_add_to_cart_link', 10, 2 );
 
 function sbs_render_checkout_sbs_navbar() {
 
@@ -193,3 +193,18 @@ function sbs_move_package_to_top_of_cart_list() {
 
 }
 add_action( 'woocommerce_cart_loaded_from_session', 'sbs_move_package_to_top_of_cart_list', 100 );
+
+
+// Attach required attributes and CSS classes to the product loop link wrapper
+function woocommerce_template_loop_product_link_open_custom() {
+  global $product;
+	echo '<a href="' . get_the_permalink() . '" data-mfp-src="#modal-product-' . $product->get_id() .'" class="woocommerce-LoopProduct-link open-popup-link">';
+}
+function sbs_replace_woocommerce_template_loop_product_link_open() {
+
+  remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+  add_action ( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open_custom', 10 );
+
+}
+
+add_action( 'plugins_loaded', 'sbs_replace_woocommerce_template_loop_product_link_open' );

@@ -2,7 +2,7 @@
  *  Source: https://css-tricks.com/examples/ShapesOfCSS/
  */
 
-.step-index span.step-number-before {
+#sbs-navbar .step-index span.step-number-before {
   position: absolute;
   z-index: 2;
   width: 0;
@@ -13,7 +13,7 @@
   margin-left: -3px;
 }
 
-.step-index span.step-number-before:after {
+#sbs-navbar .step-index span.step-number-before:after {
   position: absolute;
   content: "";
   z-index: 1;
@@ -26,7 +26,7 @@
   top: -59px;
 }
 
-.step-index span.step-number-after {
+#sbs-navbar .step-index span.step-number-after {
     position: absolute;
     z-index: 1;
     width: 0;
@@ -38,18 +38,18 @@
 }
 
 @media (max-width: 767px) {
-    .step-index span.step-number-after {
+    #sbs-navbar .step-index span.step-number-after {
         display: none;
     }
 }
 
-.step-index span.step-number {
+#sbs-navbar .step-index span.step-number {
     border: transparent;
     background-color: transparent;
     position: relative;
     top: -8px;
 }
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
     background: transparent;
 }

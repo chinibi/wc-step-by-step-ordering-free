@@ -1,4 +1,4 @@
-/* SBS Package Selection Panes */
+#sbs-navbar /* SBS Package Selection Panes */
 
 .sbs-package-container {
   border: 2px solid #f8c9fc;
@@ -72,18 +72,18 @@
     color: #f4f877;
 }
 
-a.sbs-change-package-btn,
+#sbs-widget-sidebar-cart-totals a.sbs-change-package-btn,
 .sbs-store-back-forward-buttons > a:hover {
     color: #f4f877;
 }
 
-.step-title.active {
+#sbs-navbar .step-title.active {
   color: #b924c8;
   background-color: #f4f877;
   font-weight: 600;
 }
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
     background-color: #f4f877;
     display: inline-block;
     color: #b924c8;
@@ -92,48 +92,48 @@ a.sbs-change-package-btn,
     line-height: 39px;
 }
 
-.step-index > span.step-number.inactive:before,
-.step-index > span.step-number.inactive:after
+#sbs-navbar .step-index > span.step-number.inactive:before,
+#sbs-navbar .step-index > span.step-number.inactive:after
 {
     border-color: #f4f877 transparent;
     background-color: #f4f877;
 }
 
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
     background-color: #b924c8;
     color: #ffffff;
 }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after {
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after {
     border-color: #b924c8 transparent;
     background-color: #b924c8;
 }
 
-.step-index span.step-number-before.active,
-.step-index span.step-number-before.active:after {
+#sbs-navbar .step-index span.step-number-before.active,
+#sbs-navbar .step-index span.step-number-before.active:after {
     border-color: #b924c8 transparent;
 }
 
-.step-index span.step-number-before.inactive,
-.step-index span.step-number-before.inactive:after {
+#sbs-navbar .step-index span.step-number-before.inactive,
+#sbs-navbar .step-index span.step-number-before.inactive:after {
     border-color: #f4f877 transparent;
 }
 
-.step-title {
+#sbs-navbar .step-title {
     background-color: #b924c8;
     padding: 25px 0 15px;
     margin-top: -20px;
 }
 
-.step-title-text a {
+#sbs-navbar .step-title-text a {
     display: block;
     color: #ffffff;
     font-weight: 600;
 }
 
-.step-title-text a:hover {
+#sbs-navbar .step-title-text a:hover {
    color: #ffffff;
 }
 
@@ -145,7 +145,7 @@ a.sbs-change-package-btn,
 
 .sbs-subcat-name {
     background-color: #b924c8;
-    color: #f4f877;
+    color: #f4f877 !important;
 }
 
 .woocommerce ul.products li.product .button,
@@ -166,7 +166,10 @@ a.sbs-change-package-btn,
 
 a.open-popup-link,
 .woocommerce ul.products li.product .price,
-.product-name a
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.product-name a,
+.product-loop-remove a
 {
     color: #b924c8;
 }

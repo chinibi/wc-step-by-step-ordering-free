@@ -870,8 +870,8 @@ function sbs_package_atc_callback() {
 	<fieldset>
 		<label>
 			<select id="sbs_package[clear-cart]" name="sbs_package[clear-cart]">
-				<option value="1">Clear the cart when a package is selected</option>
-				<option value="2">Do not clear the cart when a package is selected</option>
+				<option value="1" <?php selected(1, $option) ?>>Clear the cart when a package is selected</option>
+				<option value="2" <?php selected(2, $option) ?>>Do not clear the cart when a package is selected</option>
 			</select>
 		</label>
 	</fieldset>

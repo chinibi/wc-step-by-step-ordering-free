@@ -1,8 +1,8 @@
-.step-title {
+#sbs-navbar .step-title {
   position: relative;
 }
 
-.step-title:before {
+#sbs-navbar .step-title:before {
   content: "";
   position: absolute;
   height: 0;

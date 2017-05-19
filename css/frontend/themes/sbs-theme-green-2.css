@@ -51,15 +51,15 @@
 }
 
 
-.step-title.active {
+#sbs-navbar .step-title.active {
     background-color: #497b36;
 }
 
-.step-title.active > a {
+#sbs-navbar .step-title.active > a {
     color: white;
 }
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
     background-color: #a8e892;
     display: inline-block;
     font-size: 1.6em;
@@ -68,43 +68,42 @@
     line-height: 39px;
 }
 
-.step-index > span.step-number.inactive:before,
-.step-index > span.step-number.inactive:after
+#sbs-navbar .step-index > span.step-number.inactive:before,
+#sbs-navbar .step-index > span.step-number.inactive:after
 {
     border-color: #a8e892 transparent;
     background-color: #a8e892;
 }
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
     background-color: #2a4022;
     color: white;
 }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after {
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after {
     border-color: #2a4022 transparent;
     background-color: #2a4022;
 }
 
-.step-index span.step-number-before.active,
-.step-index span.step-number-before.active:after {
+#sbs-navbar .step-index span.step-number-before.active,
+#sbs-navbar .step-index span.step-number-before.active:after {
     border-color: #2a4022 transparent;
 }
 
-.step-index span.step-number-before.inactive,
-.step-index span.step-number-before.inactive:after {
+#sbs-navbar .step-index span.step-number-before.inactive,
+#sbs-navbar .step-index span.step-number-before.inactive:after {
     border-color: #a8e892 transparent;
 }
 
-.step-title {
+#sbs-navbar .step-title {
     background-color: #f8ebcc;
     padding: 25px 0 15px;
     margin-top: -20px;
 }
 
-.step-title-text a,
-.step-title-text a:hover,
-a.sbs-change-package-btn
+#sbs-navbar .step-title-text a,
+#sbs-navbar .step-title-text a:hover
 {
   color: #497b36;
 }
@@ -115,6 +114,10 @@ a.sbs-change-package-btn
 #sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a:hover
 {
   color: #497b36;
+}
+
+#sbs-widget-sidebar-cart-totals a.sbs-change-package-btn {
+  color: white;
 }
 
 .woocommerce-message {
@@ -146,7 +149,10 @@ a.sbs-change-package-btn
 
 a.open-popup-link,
 .woocommerce ul.products li.product .price,
-.product-name a
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.product-name a,
+.product-loop-remove a
 {
     color: #497b36;
 }

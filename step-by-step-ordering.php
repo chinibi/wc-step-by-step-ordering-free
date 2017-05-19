@@ -39,10 +39,10 @@ final class StepByStepSystem {
 
 		// Include WooCommerce template and action overrides
 		include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-template-override.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-action-override.php' );
 
 		// Include additions to WooCommerce actions
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/additional-actions.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-loop.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/sbs-product-custom-fields.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/product-cat-either-or.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/store-credit.php' );
@@ -62,6 +62,7 @@ final class StepByStepSystem {
 		register_activation_hook( __FILE__, array( $this, 'plugin_activation' ) );
 		add_action( 'wp_head', array( $this, 'sbs_define_ajax_url' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_enqueue_client_style_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_dequeue_third_party_scripts'), 20 );
 
 	}
 
@@ -83,7 +84,8 @@ final class StepByStepSystem {
 		wp_enqueue_script( 'zoom', plugins_url( '/js/frontend/zoom.min.js', __FILE__ ), array( 'jquery' ) );
 
 		// Enqueue custom stylesheets
-		wp_enqueue_style( 'sbs-style', plugins_url( '/css/frontend/sbs-style.css', __FILE__ ), array( 'woocommerce-general', 'woocommerce-layout', 'woocommerce-smallscreen' ) );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/main-style.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/common-theme-styles.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/theme-selector.php' );
 
 		// Enqueue custom scripts
@@ -93,6 +95,13 @@ final class StepByStepSystem {
 		wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
 		wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
 		wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );
+
+	}
+
+
+	public function sbs_dequeue_third_party_scripts() {
+
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/common-theme-styles-dequeue.php' );
 
 	}
 

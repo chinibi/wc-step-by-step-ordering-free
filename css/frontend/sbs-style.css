@@ -36,16 +36,16 @@
   box-shadow: none;
 }
 
-span.step-span-container {
+#sbs-navbar span.step-span-container {
   width: 20%;
   border: 4px solid white;
 }
 
-.step-div-container {
+#sbs-navbar .step-div-container {
   text-align: center;
 }
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
   background-color: #b5b5b5;
   height: 45px;
   width: 45px;
@@ -57,55 +57,54 @@ span.step-span-container {
   z-index: 3;
 }
 
-.step-index > span.step-number.inactive:before,
-.step-index > span.step-number.inactive:after
+#sbs-navbar .step-index > span.step-number.inactive:before,
+#sbs-navbar .step-index > span.step-number.inactive:after
 {
     border-color: #b5b5b5 transparent;
     background-color: #b5b5b5;
 }
 
-.step-index span.step-number-before.inactive,
-.step-index span.step-number-before.inactive:after {
+#sbs-navbar .step-index span.step-number-before.inactive,
+#sbs-navbar .step-index span.step-number-before.inactive:after {
     border-color: #b5b5b5 transparent;
 }
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
   background-color: #353535;
   color: white;
 }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after {
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after {
     border-color: #353535 transparent;
     background-color: #353535;
 }
 
-.step-index span.step-number-before.active,
-.step-index span.step-number-before.active:after {
+#sbs-navbar .step-index span.step-number-before.active,
+#sbs-navbar .step-index span.step-number-before.active:after {
     border-color: #353535 transparent;
 }
 
-.step-title {
-  height: 68px;
+#sbs-navbar .step-title {
   background-color: #ddd;
   padding: 25px 0 15px;
   margin-top: -20px;
 }
 
-.step-title:before {
+#sbs-navbar .step-title:before {
   content: "";
 }
 
-.step-title > a {
+#sbs-navbar .step-title > a {
   display: block;
   text-decoration: none;
 }
 
-.step-number a {
+#sbs-navbar .step-number a {
   color: inherit;
 }
 
-.step-title.active {
+#sbs-navbar .step-title.active {
   background-color: black;
   color: white;
 }
@@ -163,71 +162,6 @@ h1.step-by-step-title {
   }
 }
 
-/*.modal-add-to-cart {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.modal-select-quantity {
-  border: 1px solid black;
-  color: #000;
-  font-size: 1.3em;
-  font-weight: normal;
-  height: 58px;
-  text-align: center;
-  vertical-align: top;
-  width: 56px;
-}
-
-
-.modal-add-to-cart form .quantity {
-  display: inline;
-}
-
-.quantity input[type="number"],
-.modal-add-to-cart form .quantity input {
-  width: 15%;
-}
-
-input[type="number"].modal-select-quantity {
-  width: 56px;
-}
-
-.modal-add-to-cart-qty-label {
-  line-height: 3em;
-}
-
-a.add-prod-link.add-prod-link-modal {
-  line-height: 3em;
-  background-color: #f7f7f7;
-  padding: 6px;
-  border: 1px solid;
-}
-
-@media (max-width: 768px) {
-  .modal-add-to-cart {
-    display: inline;
-  }
-
-  .modal-add-to-cart-qty-label {
-    padding-right: 10px;
-    line-height: 1em;
-  }
-
-  .modal-select-quantity {
-    height: 30px;
-  }
-
-  a.add-prod-link.add-prod-link-modal {
-    line-height: 1em;
-    font-size: 16px;
-    display: block;
-    text-align: center;
-    margin-top: 10px;
-  }
-
-}*/
 
 /* Next/Previous Step Buttons at the bottom of each page */
 .sbs-store-back-forward-buttons {
@@ -264,6 +198,7 @@ a.add-prod-link.add-prod-link-modal {
   border: 2px solid gray;
   padding-bottom: 20px;
   margin-bottom: 20px;
+  line-height: 1.75;
 }
 
 .sbs-package-thumbnail {
@@ -286,7 +221,6 @@ a.add-prod-link.add-prod-link-modal {
 
   .sbs-package-content {
     padding: 20px 4%;
-    font-size: 0.75em;
   }
 }
 
@@ -345,9 +279,15 @@ a.add-prod-link.add-prod-link-modal {
 
 .sbs-subcat-name {
   padding: 10px;
+  margin-bottom: 1em;
 }
 
-a.sbs-change-package-btn {
+.sbs-subcat-description {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+}
+
+#sbs-widget-sidebar-cart-totals a.sbs-change-package-btn {
   font-size: 0.8em;
   /*color: #ccc;*/
   text-decoration: underline;

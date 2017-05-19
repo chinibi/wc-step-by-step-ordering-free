@@ -5,14 +5,14 @@
  *
  * ----------------------------- */
 
-.step-title {
+#sbs-navbar .step-title {
     position: relative;
     padding-left: 36px;
     padding-right: 18px;
 }
 
-.step-title:before,
-.step-title:after
+#sbs-navbar .step-title:before,
+#sbs-navbar .step-title:after
 { /* make two squares (before and after), looking similar to the button */
     content:"";
     position: absolute;
@@ -28,8 +28,8 @@
     box-sizing: border-box;
 }
 
-.step-title:before,
-.step-title:after {
+#sbs-navbar .step-title:before,
+#sbs-navbar .step-title:after {
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
@@ -37,44 +37,44 @@
     transform: rotate(45deg); /* rotate right arrow squares 45 deg to point right */
 }
 
-.step-title:before { /* align the "before" square to the left */
+#sbs-navbar .step-title:before { /* align the "before" square to the left */
     left: -24px;
 }
-.step-title:after { /* align the "after" square to the right */
+#sbs-navbar .step-title:after { /* align the "after" square to the right */
     right: -24px;
 }
-.step-title:after { /* bring arrow pointers to front */
+#sbs-navbar .step-title:after { /* bring arrow pointers to front */
     z-index: 1;
 }
-.step-title:before { /* hide arrow tails background */
+#sbs-navbar .step-title:before { /* hide arrow tails background */
     background-color: white;
 }
 
-.step-index span {
+#sbs-navbar .step-index span {
     text-align: center;
     white-space: nowrap;
 }
 
-.step-title {
+#sbs-navbar .step-title {
     padding: 25px 0 15px;
 }
 
-span.step-title-text {
+#sbs-navbar span.step-title-text {
     padding-left: 30px;
     position: relative;
     z-index: 2;
 }
 
-span.step-title-text a {
+#sbs-navbar span.step-title-text a {
     display: inline;
 }
 
-.step-index {
+#sbs-navbar .step-index {
     padding-left: 30px;
 }
 
 @media (max-width: 767px) {
-  .step-index {
+  #sbs-navbar .step-index {
       padding-left: 0;
   }
 }

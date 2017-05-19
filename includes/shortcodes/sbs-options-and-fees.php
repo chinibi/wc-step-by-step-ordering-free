@@ -112,7 +112,7 @@ function sbs_options_and_fees_shortcode() {
             echo    '<div class="modal-left-side">';
             echo      '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
             echo    '</div>';
-            echo    '<div class="modal-right-side">';
+            echo    '<div class="modal-right-side single-product">';
 
             do_action( 'woocommerce_single_product_summary' );
 

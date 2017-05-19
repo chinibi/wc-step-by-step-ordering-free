@@ -1,4 +1,4 @@
-.sbs-package-title, .checkout-package {
+#sbs-navbar .sbs-package-title, .checkout-package {
   background-color: #ddd;
 }
 
@@ -46,21 +46,21 @@
 
 .sbs-store-back-forward-buttons a,
 .sbs-store-back-forward-buttons a:hover,
-a.sbs-change-package-btn
+#sbs-widget-sidebar-cart-totals a.sbs-change-package-btn
 {
     color: white;
 }
 
-.step-title.active {
+#sbs-navbar .step-title.active {
     background-color: #666666;
 }
 
-.step-title.active > a {
+#sbs-navbar .step-title.active > a {
     color: #ffffff;
     font-weight: 600;
 }
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
     background-color: #666666;
     height: 45px;
     width: 45px;
@@ -72,46 +72,46 @@ a.sbs-change-package-btn
     line-height: 39px;
 }
 
-.step-index > span.step-number.inactive:before,
-.step-index > span.step-number.inactive:after
+#sbs-navbar .step-index > span.step-number.inactive:before,
+#sbs-navbar .step-index > span.step-number.inactive:after
 {
     border-color: #666666 transparent;
     background-color: #666666;
 }
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
     background-color: #e0dfdf;
     color: #000000;
 }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after {
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after {
     border-color: #e0dfdf transparent;
     background-color: #e0dfdf;
 }
 
-.step-index span.step-number-before.active,
-.step-index span.step-number-before.active:after {
+#sbs-navbar .step-index span.step-number-before.active,
+#sbs-navbar .step-index span.step-number-before.active:after {
     border-color: #e0dfdf transparent;
 }
 
-.step-index span.step-number-before.inactive,
-.step-index span.step-number-before.inactive:after {
+#sbs-navbar .step-index span.step-number-before.inactive,
+#sbs-navbar .step-index span.step-number-before.inactive:after {
     border-color: #666666 transparent;
 }
 
-.step-title {
+#sbs-navbar .step-title {
     background-color: #bbbbbb;
     margin-top: -20px;
 }
 
-.step-title-text a {
+#sbs-navbar .step-title-text a {
     display: block;
     color: #000000;
     font-weight: 600;
 }
 
-.step-title-text a:hover {
+#sbs-navbar .step-title-text a:hover {
     color: #000000;
 }
 
@@ -123,7 +123,7 @@ a.sbs-change-package-btn
 
 .sbs-subcat-name {
     background-color: #000000;
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 .woocommerce ul.products li.product .button,
@@ -142,7 +142,13 @@ a.sbs-change-package-btn
     font-weight: 600;
 }
 
-a.open-popup-link {
+a.open-popup-link,
+.woocommerce ul.products li.product .price,
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.product-name a,
+.product-loop-remove a
+{
     color: #666666;
 }
 

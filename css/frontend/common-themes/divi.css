@@ -1,0 +1,95 @@
+
+/* Package Selection Page */
+.sbs-package-container {
+  padding-bottom: 50px;
+}
+
+@media (min-width: 768px) and (max-width: 900px) {
+  .woocommerce .sbs-add-package-to-cart a.button {
+    font-size: 1.2em;
+  }
+}
+
+/* Step-By-Step Navbar */
+.step-number-after {
+  display: none;
+}
+
+.step-title {
+  height: 68px;
+}
+
+/* WooCommerce notices and errors */
+.woocommerce-error {
+  background-color: #b31d1d;
+}
+
+/* Main Step-By-Step Product Loop */
+
+@media (min-width: 981px) and (max-width: 1200px) {
+  .woocommerce ul.products a.button,
+  .woocommerce ul.products button.alt,
+  .woocommerce ul.products button.button.alt
+  {
+    font-size: 0.9em;
+  }
+
+  .woocommerce ul.products a.button::after,
+  .woocommerce ul.products button.alt::after,
+  .woocommerce ul.products button.button.alt::after
+  {
+    font-size: 24px;
+    line-height: 0.9em;
+  }
+
+}
+
+@media (min-width: 1201px) {
+  .woocommerce ul.products a.button,
+  .woocommerce ul.products button.alt,
+  .woocommerce ul.products button.button.alt  {
+    font-size: 1.2em;
+  }
+  .woocommerce ul.products a.button::after,
+  .woocommerce ul.products button.alt::after,
+  .woocommerce ul.products button.button.alt::after {
+    line-height: 0.9em;
+  }
+}
+
+.sbs-options-and-fees.woocommerce a.button, .sbs-options-and-fees.woocommerce a.button.alt, .sbs-options-and-fees.woocommerce a.button:hover, .sbs-options-and-fees.woocommerce a.button.alt:hover, .sbs-options-and-fees.woocommerce button.button, .sbs-options-and-fees.woocommerce .sbs-options-and-fees button.button.alt, .sbs-options-and-fees.woocommerce button.button.alt:hover, .sbs-options-and-fees.woocommerce input.button.alt
+{
+  font-size: 1.2em;
+}
+
+.sbs-options-and-fees.woocommerce a.button::after,
+.sbs-options-and-fees.woocommerce button.alt::after,
+.sbs-options-and-fees.woocommerce button.button.alt::after
+{
+  line-height: 0.9em;
+}
+
+
+.woocommerce .quantity input.qty {
+  height: auto;
+}
+
+.woocommerce .quantity input.qty, .woocommerce-page .quantity input.qty, .woocommerce #content .quantity input.qty, .woocommerce-page #content .quantity input.qty, .woocommerce-cart table.cart td.actions .coupon .input-text
+{
+  color: #1d1111 !important; /* Overrides Divi important tag */
+  background-color: #bbb !important;
+}
+
+p.sbs-subcat-description:last-of-type {
+  padding-bottom: 1em;
+}
+
+/* Magnific Popup */
+.mfp-content p.price {
+  font-size: 1.5em;
+  padding-bottom: 1em;
+}
+
+.mfp-content .woocommerce .quantity input.qty {
+  height: 49px;
+}

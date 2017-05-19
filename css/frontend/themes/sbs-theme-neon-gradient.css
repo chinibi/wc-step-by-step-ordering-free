@@ -1,4 +1,4 @@
-/* SBS Package Selection Panes */
+#sbs-navbar /* SBS Package Selection Panes */
 
 .sbs-package-container {
   border: 2px solid #f8c9fc;
@@ -71,7 +71,7 @@
 
 .sbs-subcat-name {
     background-color: #b924c8;
-    color: #f4f877;
+    color: #f4f877 !important;
     background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%);
     background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
     background: linear-gradient(to bottom, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
@@ -102,13 +102,16 @@
 
 a.open-popup-link,
 .woocommerce ul.products li.product .price,
-.product-name a
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.product-name a,
+.product-loop-remove a
 {
     color: #167ed7;
 }
 
 
-.step-title {
+#sbs-navbar .step-title {
     background-color: #b924c8;
     padding: 25px 0 15px;
     /* color: darkblue !important; */
@@ -120,18 +123,18 @@ a.open-popup-link,
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 );
 }
 
-.step-title-text a {
+#sbs-navbar .step-title-text a {
     display: block;
     color: #ffffff;
     font-weight: 600;
 }
 
-a.sbs-change-package-btn,
-.step-title-text a:hover {
+#sbs-widget-sidebar-cart-totals a.sbs-change-package-btn,
+#sbs-navbar .step-title-text a:hover {
     color: #ffffff;
 }
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
     background-color: #f4f877;
     display: inline-block;
     color: #2284d9;
@@ -141,32 +144,32 @@ a.sbs-change-package-btn,
     line-height: 39px;
 }
 
-.step-index > span.step-number.inactive:before,
-.step-index > span.step-number.inactive:after
+#sbs-navbar .step-index > span.step-number.inactive:before,
+#sbs-navbar .step-index > span.step-number.inactive:after
 {
     border-color: #f4f877 transparent;
     background-color: #f4f877;
 }
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
     background-color: #167ed7;
     color: #ffffff;
 }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after {
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after {
     border-color: #167ed7 transparent;
     background-color: #167ed7;
 }
 
 
-.step-index span.step-number-before.active,
-.step-index span.step-number-before.active:after {
+#sbs-navbar .step-index span.step-number-before.active,
+#sbs-navbar .step-index span.step-number-before.active:after {
     border-color: #167ed7 transparent;
 }
 
-.step-index span.step-number-before.inactive,
-.step-index span.step-number-before.inactive:after {
+#sbs-navbar .step-index span.step-number-before.inactive,
+#sbs-navbar .step-index span.step-number-before.inactive:after {
     border-color: #f4f877 transparent;
 }
 

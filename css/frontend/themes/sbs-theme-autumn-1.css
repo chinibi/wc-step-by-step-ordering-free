@@ -65,16 +65,16 @@
     border-top: 3px solid white;
 }
 
-.step-title.active {
+#sbs-navbar .step-title.active {
     background-color: #8a140e;
     color: #fff;
 }
 
-.step-title.active > a, a.sbs-change-package-btn {
+#sbs-navbar .step-title.active > a, #sbs-widget-sidebar-cart-totals a.sbs-change-package-btn {
     color: white;
 }
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
     background-color: #fcecc7;
     display: inline-block;
     color: #8a140e;
@@ -84,60 +84,60 @@
     line-height: 39px;
 }
 
-.step-index > span.step-number a {
+#sbs-navbar .step-index > span.step-number a {
     color: #8a140e;
 }
 
-.step-index > span.step-number.inactive:before,
-.step-index > span.step-number.inactive:after
+#sbs-navbar .step-index > span.step-number.inactive:before,
+#sbs-navbar .step-index > span.step-number.inactive:after
 {
     border-color: #fcecc7 transparent;
     background-color: #fcecc7;
 }
 
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
     background-color: #cb5866;
     color: white;
 }
 
-.step-index > span.step-number.active a {
+#sbs-navbar .step-index > span.step-number.active a {
     color: white;
 }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after {
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after {
     border-color: #cb5866 transparent;
     background-color: #cb5866;
 }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after {
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after {
     border-color: #cb5866 transparent;
 }
 
-.step-index span.step-number-before.active,
-.step-index span.step-number-before.active:after {
+#sbs-navbar .step-index span.step-number-before.active,
+#sbs-navbar .step-index span.step-number-before.active:after {
     border-color: #cb5866 transparent;
 }
 
-.step-index span.step-number-before.inactive,
-.step-index span.step-number-before.inactive:after {
+#sbs-navbar .step-index span.step-number-before.inactive,
+#sbs-navbar .step-index span.step-number-before.inactive:after {
     border-color: #fcecc7 transparent;
 }
 
-.step-title {
+#sbs-navbar .step-title {
     background-color: #ffde8f;
     padding: 25px 0 15px;
     margin-top: -20px;
 }
 
-.step-title-text a {
+#sbs-navbar .step-title-text a {
     display: block;
     color: #8a140e;
 }
 
-.step-title-text a:hover {
+#sbs-navbar .step-title-text a:hover {
     color: #8a140e;
 }
 
@@ -170,7 +170,10 @@
 
 a.open-popup-link,
 .woocommerce ul.products li.product .price,
-.product-name a
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.product-name a,
+.product-loop-remove a
 {
     color: #8a140e;
 }
@@ -180,11 +183,11 @@ a.open-popup-link,
     color: #8a140e;
 }
 
-#sbs-widget-sidebar-cart-totals td, #sbs-widget-sidebar-cart-totals tr {
+/*#sbs-widget-sidebar-cart-totals td, #sbs-widget-sidebar-cart-totals tr {
     max-width: 100%;
     padding: 0.857em 0.587em;
     font-weight: bold;
-}
+}*/
 
 #sbs-widget-sidebar-back-forward-buttons-container .sbs-store-back-forward-buttons > a,
 #sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a,

@@ -1,4 +1,4 @@
-/* SBS Package Selection Panes */
+#sbs-navbar /* SBS Package Selection Panes */
 
 .sbs-package-container {
   border: 2px solid #9acbf0;
@@ -67,28 +67,28 @@
     color: #ffffff !important;
 }
 
-.step-title {
+#sbs-navbar .step-title {
     background-color: #2481c8;
     padding: 25px 0 15px;
     margin-top: -20px;
 }
 
-.step-title:before {
+#sbs-navbar .step-title:before {
     border-color: #2481c8 transparent;
 }
 
 
-.step-title.active {
+#sbs-navbar .step-title.active {
     background-color: #084675;
     color: #ffffff;
     font-weight: 600;
 }
 
-.step-title.active:before {
+#sbs-navbar .step-title.active:before {
     border-color: #2481c8 transparent;
 }
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
     background-color: #084675;
     display: inline-block;
     color: #ffffff;
@@ -98,50 +98,54 @@
     line-height: 39px;
 }
 
-.step-index > span.step-number.inactive:before,
-.step-index > span.step-number.inactive:after
+#sbs-navbar .step-index > span.step-number.inactive:before,
+#sbs-navbar .step-index > span.step-number.inactive:after
 {
     border-color: #084675 transparent;
     background-color: #084675;
 }
 
-.step-index > span.step-number.active {
+#sbs-navbar .step-index > span.step-number.active {
     background-color: #2481c8;
     color: #ffffff;
 }
 
-.step-index > span.step-number.active:before,
-.step-index > span.step-number.active:after
+#sbs-navbar .step-index > span.step-number.active:before,
+#sbs-navbar .step-index > span.step-number.active:after
 {
     border-color: #2481c8 transparent;
     background-color: #2481c8;
 }
 
-.step-index span.step-number-before.active,
-.step-index span.step-number-before.active:after {
+#sbs-navbar .step-index span.step-number-before.active,
+#sbs-navbar .step-index span.step-number-before.active:after {
     border-color: #2481c8 transparent;
 }
 
-.step-index span.step-number-before.inactive,
-.step-index span.step-number-before.inactive:after {
+#sbs-navbar .step-index span.step-number-before.inactive,
+#sbs-navbar .step-index span.step-number-before.inactive:after {
     border-color: #084675 transparent;
 }
 
-.step-title a, a.sbs-change-package-btn {
+#sbs-navbar .step-title a, #sbs-widget-sidebar-cart-totals a.sbs-change-package-btn {
     color: white;
 }
 
-.step-title a:hover {
+#sbs-navbar .step-title a:hover {
     color: white;
 }
 
 .sbs-subcat-name {
     background-color: #084675;
-    color: #7dc3f8;
+    color: #7dc3f8 !important;
 }
 
+a.open-popup-link,
 .woocommerce ul.products li.product .price,
-.product-name a
+.woocommerce div.product p.price,
+.woocommerce div.product span.price,
+.product-name a,
+.product-loop-remove a
 {
     color: #34a3f7;
 }
