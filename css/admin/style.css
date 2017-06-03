@@ -101,3 +101,16 @@ div#sbs-order-container, div#sbs-pool-container {
   padding: 48px;
   float: left;
 }
+
+.sbs-display-thumbnail-wrap {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.sbs-display-thumbnail-item {
+  float: left;
+}
+
+.sbs-display-thumbnail-img {
+  text-align: center;
+}

@@ -1388,29 +1388,32 @@ function sbs_display_color_scheme_callback() {
 		</select>
 	</fieldset>
 
-	<p>
-		<a href="<?php echo esc_url( $colors[1]['image'] . '?width=600&height=500&inlineId=color-scheme-1' ) ?>" title="<?php echo esc_attr( $colors[1]['name'] ) ?>" class="thickbox" rel="color-schemes">
-			Preview
-		</a>
-	</p>
+	<div class="sbs-display-thumbnail-wrap">
+		<?php
+		foreach( $colors as $key => $color ):
+		if ( $key === 0 ) continue;
+		?>
+		<div class="sbs-display-thumbnail-item">
+		<?php if ( $key !== 1 ): ?>
 
-	<?php
-	foreach( $colors as $key => $color ):
-	if ( $key === 0 ) continue;
-	?>
+			<div class="sbs-display-thumbnail-img">
+				<a href="<?php echo esc_url( $color['image'] . '?width=600&height=500&inlineId=color-scheme-1' ) ?>" title="<?php echo esc_attr( $color['name'] ) ?>" class="thickbox" rel="color-schemes">
+					<img height="80" width="100" src="<?php echo esc_url( $color['image'] ) ?>" />
+				</a><br>
+				<small><?php echo esc_attr( $color['name'] ) ?></small>
+			</div>
 
-	<?php if ( $key !== 1 ): ?>
-	<a href="<?php echo esc_url( $color['image'] . '?width=600&height=500&inlineId=color-scheme-1' ) ?>" title="<?php echo esc_attr( $color['name'] ) ?>" class="thickbox" rel="color-schemes" style="display: none;">
-		<?php echo esc_attr( $color['name'] ) ?>
-	</a>
-	<?php endif ?>
+		<?php endif ?>
 
-	<div id="color-scheme-<?php echo $key ?>" style="display: none;">
-		<img src="<?php echo esc_url( $color['image'] ) ?>" alt="<?php echo esc_attr( $color['name'] ) ?>" />
+			<div id="color-scheme-<?php echo $key ?>" style="display: none;">
+				<img src="<?php echo esc_url( $color['image'] ) ?>" alt="<?php echo esc_attr( $color['name'] ) ?>" />
+			</div>
+
+		</div>
+		<?php
+		endforeach;
+		?>
 	</div>
-	<?php
-	endforeach;
-	?>
   <?php
 
   echo ob_get_clean();
