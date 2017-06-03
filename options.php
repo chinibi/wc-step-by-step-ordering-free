@@ -1398,9 +1398,9 @@ function sbs_display_color_scheme_callback() {
 
 			<div class="sbs-display-thumbnail-img">
 				<a href="<?php echo esc_url( $color['image'] . '?width=600&height=500&inlineId=color-scheme-1' ) ?>" title="<?php echo esc_attr( $color['name'] ) ?>" class="thickbox" rel="color-schemes">
-					<img height="80" width="100" src="<?php echo esc_url( $color['image'] ) ?>" />
-				</a><br>
-				<small><?php echo esc_attr( $color['name'] ) ?></small>
+					<img height="80" width="100" src="<?php echo esc_url( $color['image'] ) ?>" /><br>
+					<small><?php echo esc_attr( $color['name'] ) ?></small>
+				</a>
 			</div>
 
 		<?php endif ?>
@@ -1617,27 +1617,29 @@ function sbs_display_navbar_number_shape_callback() {
 		?>
 		</select>
 	</fieldset>
-	<p>
-		<a href="<?php echo esc_url( $styles[0]['image'] . '?width=600&height=500&inlineId=nav-num-0' ) ?>" title="<?php echo esc_attr( $styles[0]['name'] ) ?>" class="thickbox" rel="nav-num-shapes">
-			Preview
-		</a>
-	</p>
 
-	<?php
-	foreach( $styles as $key => $style ):
-	?>
-		<?php if ( $key !== 0 ): ?>
-		<a href="<?php echo esc_url( $style['image'] . '?width=600&height=500&inlineId=nav-num-' . $key ) ?>" title="<?php echo esc_attr( $style['name'] ) ?>" class="thickbox" rel="nav-num-shapes" style="display: none;">
-			<?php echo esc_attr( $style['name'] ) ?>
-		</a>
-		<?php endif ?>
+	<div class="sbs-display-thumbnail-wrap">
+		<?php
+		foreach( $styles as $key => $style ):
+		?>
+		<div class="sbs-display-thumbnail-item">
 
-		<div id="nav-num-<?php echo $key ?>" style="display: none;">
-			<img src="<?php echo esc_url( $style['image'] ) ?>" alt="<?php echo esc_attr( $style['name'] ) ?>" />
+			<div class="sbs-display-thumbnail-img">
+				<a href="<?php echo esc_url( $style['image'] . '?width=600&height=500&inlineId=nav-num-' . $key ) ?>" title="<?php echo esc_attr( $style['name'] ) ?>" class="thickbox" rel="nav-num-shapes">
+					<img width="100" src="<?php echo esc_url( $style['image'] ) ?>" /><br>
+					<small><?php echo esc_attr( $style['name'] ) ?></small>
+				</a>
+			</div>
+
+			<div id="nav-num-<?php echo $key ?>" style="display: none;">
+				<img src="<?php echo esc_url( $style['image'] ) ?>" alt="<?php echo esc_attr( $style['name'] ) ?>" />
+			</div>
+
 		</div>
-	<?php
-	endforeach;
-	?>
+		<?php
+		endforeach;
+		?>
+	</div>
 	<?php
 
   echo ob_get_clean();
@@ -1691,28 +1693,28 @@ function sbs_display_navbar_title_shape_callback() {
 		</select>
 	</fieldset>
 
-	<p>
-		<a href="<?php echo esc_url( $styles[0]['image'] . '?width=600&height=500&inlineId=nav-step-0' ) ?>" title="<?php echo esc_attr( $styles[0]['name'] ) ?>" class="thickbox" rel="nav-step-shapes">
-			Preview
-		</a>
-	</p>
+	<div class="sbs-display-thumbnail-wrap">
+		<?php
+		foreach( $styles as $key => $style ):
+		?>
+		<div class="sbs-display-thumbnail-item">
 
-	<?php
-	foreach( $styles as $key => $style ):
-	?>
-		<?php if ( $key !== 0 ): ?>
-		<a href="<?php echo esc_url( $style['image'] . '?width=600&height=500&inlineId=nav-step-' . $key ) ?>" title="<?php echo esc_attr( $style['name'] ) ?>" class="thickbox" rel="nav-step-shapes" style="display: none;">
-			<?php echo esc_attr( $style['name'] ) ?>
-		</a>
-		<?php endif ?>
+			<div class="sbs-display-thumbnail-img">
+				<a href="<?php echo esc_url( $style['image'] . '?width=600&height=500&inlineId=nav-step-' . $key ) ?>" title="<?php echo esc_attr( $style['name'] ) ?>" class="thickbox" rel="nav-step-shapes">
+					<img width="100" src="<?php echo esc_url( $style['image'] ) ?>" /><br>
+					<small><?php echo esc_attr( $style['name'] ) ?></small>
+				</a>
+			</div>
 
-		<div id="nav-step-<?php echo $key ?>" style="display: none;">
-			<img src="<?php echo esc_url( $style['image'] ) ?>" alt="<?php echo esc_attr( $style['name'] ) ?>" />
+			<div id="nav-step-<?php echo $key ?>" style="display: none;">
+				<img src="<?php echo esc_url( $style['image'] ) ?>" alt="<?php echo esc_attr( $style['name'] ) ?>" />
+			</div>
+
 		</div>
-	<?php
-	endforeach;
-	?>
-
+		<?php
+		endforeach;
+		?>
+	</div>
 	<?php
 
 	echo ob_get_clean();

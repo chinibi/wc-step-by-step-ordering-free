@@ -112,5 +112,7 @@ div#sbs-order-container, div#sbs-pool-container {
 }
 
 .sbs-display-thumbnail-img {
+  padding-left: 5px;
+  padding-right: 5px;
   text-align: center;
 }
