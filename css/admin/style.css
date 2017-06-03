@@ -109,6 +109,7 @@ div#sbs-order-container, div#sbs-pool-container {
 
 .sbs-display-thumbnail-item {
   float: left;
+  padding-bottom: 5px;
 }
 
 .sbs-display-thumbnail-img {
