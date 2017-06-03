@@ -26,21 +26,15 @@
     color: #000;
 }
 .sbs-widget-sidebar-subtotal {
-    background-color: #89e467;
+    background-color: #a8e892;
     color: black;
     border-top: 3px solid white;
 }
 
 .sbs-widget-sidebar-merch-credit {
-    background-color: #f8ebcc;
-    border-top: 3px solid white;
+    background-color: #a8e892;
+    /*border-top: 3px solid white;*/
     color: black;
-}
-
-.sbs-widget-sidebar-subtotal {
-    background-color: #89e467;
-    color: black;
-    border-top: 3px solid white;
 }
 
 .sbs-widget-sidebar-grand-total {

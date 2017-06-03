@@ -57,48 +57,11 @@ function sbs_select_package_and_clear_cart( $passed, $product_id, $quantity ) {
 add_action( 'woocommerce_add_to_cart_validation', 'sbs_select_package_and_clear_cart', 1, 3 );
 
 
-// function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
-//
-// 	global $woocommerce;
-//
-// 	if ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() && ! $product->is_sold_individually() ) {
-// 		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
-// 		$html .= 'Qty.' . woocommerce_quantity_input( array(), $product, false );
-// 		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
-// 		$html .= '</form>';
-//
-// 		return $html;
-// 	}
-//
-// 	elseif ( $product && $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
-// 		$remove_url = $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] );
-//
-// 		$html = '<form action="' . esc_url( $remove_url ) . '" class="cart" method="post" enctype="multipart/form-data">';
-// 		$html .= '<button type="submit" class="button alt">' . 'Remove' . '</button>';
-// 		$html .= '</form>';
-//
-// 		return $html;
-// 	}
-//
-// 	elseif ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() ) {
-// 		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
-// 		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
-// 		$html .= '</form>';
-//
-// 		return $html;
-// 	}
-//
-// 	return $html;
-//
-// }
-//
-// add_filter( 'woocommerce_loop_add_to_cart_link', 'sbs_woocommerce_loop_add_to_cart_link', 10, 2 );
-
 function sbs_render_checkout_sbs_navbar() {
 
   $all_categories = sbs_get_all_wc_categories();
 
-  $steps = sbs_get_full_step_order();
+  $steps = sbs_get_full_step_order( true );
 
   $current_step = count( $steps ) - 1;
 
@@ -208,3 +171,81 @@ function sbs_replace_woocommerce_template_loop_product_link_open() {
 }
 
 add_action( 'plugins_loaded', 'sbs_replace_woocommerce_template_loop_product_link_open' );
+
+
+function sbs_query_key_verification_server() {
+
+  $server_key = 'yOUCQ3ps66qnPCSez6Kf9MbM';
+  $server_url = 'http://plugin.stepbystepsys.com';
+  $item_reference = 'SBS Premium License';
+
+  $license_key = get_option('sbs_premium_key');
+
+  if ( empty( $license_key ) ) {
+    return array(
+      'verify_success' => false,
+      'response_success' => true,
+      'message' => 'No key provided.',
+			'data' => null
+    );
+  }
+
+  $check_api_params = array(
+    'slm_action' => 'slm_check',
+    'secret_key' => $server_key,
+    'license_key' => $license_key
+  );
+
+  $check_response = wp_remote_get( add_query_arg( $check_api_params, $server_url ), array( 'timeout' => 15 ) );
+
+  if ( is_wp_error( $check_response ) ) {
+    return array(
+      'verify_success' => true,
+      'response_success' => false,
+      'message' => 'The verification server was unable to respond.',
+			'data' => null
+    );
+  }
+
+  $check_response = json_decode( wp_remote_retrieve_body( $check_response ) );
+
+  if ( $check_response->status === 'active' ) {
+    return array(
+      'verify_success' => true,
+      'response_success' => true,
+      'message' => 'Key verified.',
+			'data' => $check_response
+    );
+  }
+  else {
+    return array(
+      'verify_success' => false,
+      'response_success' => true,
+      'message' => 'Key invalid or expired.',
+			'data' => $check_response
+    );
+  }
+
+}
+
+
+function sbs_has_valid_premium_key() {
+
+  $response = sbs_query_key_verification_server();
+  return $response['verify_success'] && $response['response_success'];
+
+}
+
+
+function sbs_daily_premium_key_check() {
+
+  if ( sbs_has_valid_premium_key() ) {
+    set_site_transient( 'sbs_premium_key_valid', 'true', 2 * DAY_IN_SECONDS );
+  } else {
+    set_site_transient( 'sbs_premium_key_valid', 'false', 2 * DAY_IN_SECONDS );
+  }
+
+}
+
+// Hook the premium key check to a WP daily cron job
+add_action( 'sbs_daily_event', 'sbs_daily_premium_key_check' );

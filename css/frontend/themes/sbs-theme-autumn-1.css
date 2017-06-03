@@ -23,7 +23,7 @@
 
 /* SBS Sidebar Calculator */
 
-.sbs-widget-sidebar-package {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-package {
     background-color: #8a140e;
     color: white;
     border-bottom: 3px solid white;
@@ -34,31 +34,25 @@
     font-size: .90em;
 }
 
-.sbs-widget-sidebar-subtotal {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-subtotal {
     background-color: #ffde8f;
     color: black;
     border-top: 3px solid white;
 }
 
-.sbs-widget-sidebar-merch-credit {
-    background-color: #b9b2b0;
-    border-top: 3px solid white;
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-merch-credit {
+    background-color: #ffde8f;
+    /*border-top: 3px solid white;*/
     color: black;
 }
 
-.sbs-widget-sidebar-subtotal {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-subtotal {
     background-color: #ffde8f;
     color: black;
     border-top: 3px solid white;
 }
 
-.sbs-widget-sidebar-merch-credit {
-    background-color: #666666;
-    border-top: 3px solid white;
-    color: white;
-}
-
-.sbs-widget-sidebar-grand-total {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-grand-total {
     font-size: 1em;
     background-color: #8a140e;
     color: white;

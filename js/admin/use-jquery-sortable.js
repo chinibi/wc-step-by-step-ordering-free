@@ -6,6 +6,14 @@
       nested: true,
       isValidTarget: function($item, container) {
 
+        if ( !sbsLicenseValid && $(container.el).is('.step-sortable') && $('#sbs-order').children().not('.placeholder, .dragged').length >= 2  ) {
+          return false;
+        }
+
+        if ( !sbsLicenseValid && $(container.el).is('.package-sortable') && $('#sbs-order').children().not('.placeholder, .dragged').length >= 1  ) {
+          return false;
+        }
+
         if ( $item.attr('parent-id') === '0' && ($(container.el).is('#sbs-order') || $(container.el).is('#sbs-pool')) ) {
           return true;
         }
@@ -25,6 +33,10 @@
         _super($item, container);
       }
     });
+
+    if ( !sbsLicenseValid ) {
+      $('.onf-sortable').sortable('disable');
+    }
 
   });
 })(jQuery);

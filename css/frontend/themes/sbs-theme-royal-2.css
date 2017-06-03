@@ -1,4 +1,4 @@
-#sbs-navbar /* SBS Package Selection Panes */
+/* SBS Package Selection Panes */
 
 .sbs-package-container {
   border: 2px solid #9acbf0;
@@ -33,21 +33,15 @@
 }
 
 .sbs-widget-sidebar-subtotal {
-    background-color: #9acbf0;
-    color: #084675;
+    background-color: #084675;
+    color: #72b7eb;
     border-top: 3px solid white;
 }
 
 .sbs-widget-sidebar-merch-credit {
     background-color: #084675;
-    border-top: 3px solid white;
+    /*border-top: 3px solid white;*/
     color: #72b7eb;
-}
-
-.sbs-widget-sidebar-subtotal {
-    background-color: #9acbf0;
-    color: #084675;
-    border-top: 3px solid white;
 }
 
 .sbs-widget-sidebar-grand-total {

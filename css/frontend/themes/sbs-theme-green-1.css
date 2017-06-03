@@ -16,34 +16,35 @@
 }
 
 /* SBS Sidebar Calculator */
-.sbs-widget-sidebar-package {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-package {
     background-color: #497b36;
     color: white;
     border-bottom: 3px solid white;
+}
+
+#sbs-widget-sidebar-cart-totals a.sbs-widget-sidebar-package,
+#sbs-widget-sidebar-cart-totals a.sbs-change-package-btn
+{
+  color: white;
 }
 
 #sbs-widget-sidebar-cart-totals {
     background-color: #d1d1d1;
 }
 
-.sbs-widget-sidebar-subtotal {
-    background-color: #c9eabe;
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-subtotal {
+    background-color: #f8ebcc;
     color: black;
     border-top: 3px solid white;
 }
 
-.sbs-widget-sidebar-merch-credit {
-    background-color: #d1d1d1;
-    border-top: 3px solid white;
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-merch-credit {
+    background-color: #f8ebcc;
+    /*border-top: 3px solid white;*/
     color: black;
-}
-.sbs-widget-sidebar-subtotal {
-    background-color: #c9eabe;
-    color: black;
-    border-top: 3px solid white;
 }
 
-.sbs-widget-sidebar-grand-total {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-grand-total {
     font-size: 1em;
     background-color: #497b36;
     color: white;
@@ -73,7 +74,7 @@
 }
 
 #sbs-navbar .step-index > span.step-number {
-    background-color: #c9eabe;
+    background-color: #f8ebcc;
     display: inline-block;
     font-size: 1.6em;
     /* border-radius: 100%; */
@@ -84,8 +85,8 @@
 #sbs-navbar .step-index > span.step-number.inactive:before,
 #sbs-navbar .step-index > span.step-number.inactive:after
 {
-    border-color: #c9eabe transparent;
-    background-color: #c9eabe;
+    border-color: #f8ebcc transparent;
+    background-color: #f8ebcc;
 }
 
 #sbs-navbar .step-index > span.step-number.active {
@@ -112,8 +113,7 @@
 }
 
 #sbs-navbar .step-title-text a,
-#sbs-navbar .step-title-text a:hover,
-#sbs-widget-sidebar-cart-totals a.sbs-change-package-btn
+#sbs-navbar .step-title-text a:hover
 {
   color: #497b36;
 }

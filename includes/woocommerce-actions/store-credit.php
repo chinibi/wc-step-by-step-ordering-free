@@ -13,6 +13,12 @@ function sbs_apply_merchandise_credit() {
 	// Get total value of all items in cart, except the package
 	$package = sbs_get_package_from_cart();
 
+  $license = sbs_check_license_cache();
+
+  if ( !$license ) {
+    return;
+  }
+
 	if ( isset( $package ) && $package['credit'] > 0 ) {
 
 		$cart_total = $woocommerce->cart->cart_contents_total - $package['item']['line_total'];

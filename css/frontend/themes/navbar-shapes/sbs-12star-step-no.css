@@ -2,14 +2,15 @@
  *  Source: https://css-tricks.com/examples/ShapesOfCSS/
  */
 
-.step-index > span.step-number {
+#sbs-navbar .step-index > span.step-number {
   height: 39px;
   width: 39px;
   border: none;
+  top: -10px;
 }
 
-.step-index > span.step-number:before,
-.step-index > span.step-number:after
+#sbs-navbar .step-index > span.step-number:before,
+#sbs-navbar .step-index > span.step-number:after
 {
   content: "";
   position: absolute;
@@ -20,7 +21,7 @@
   height: 39px;
 }
 
-.step-index > span.step-number:before {
+#sbs-navbar .step-index > span.step-number:before {
   -webkit-transform: rotate(30deg);
      -moz-transform: rotate(30deg);
       -ms-transform: rotate(30deg);
@@ -28,7 +29,7 @@
           transform: rotate(30deg);
 }
 
-.step-index > span.step-number:after {
+#sbs-navbar .step-index > span.step-number:after {
   -webkit-transform: rotate(60deg);
      -moz-transform: rotate(60deg);
       -ms-transform: rotate(60deg);

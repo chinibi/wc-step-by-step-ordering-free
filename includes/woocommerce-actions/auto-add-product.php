@@ -15,6 +15,12 @@ if ( !defined( 'ABSPATH' ) ) {
 
 function sbs_autoadd_products_to_cart( $passed, $product_id ) {
 
+  $license = sbs_check_license_cache();
+
+  if ( !$license ) {
+    return $passed;
+  }
+
   global $woocommerce;
 
   $package_cat = isset( get_option('sbs_package')['category'] ) ? (int) get_option('sbs_package')['category'] : null;

@@ -19,11 +19,14 @@ add_action( 'create_product_cat', 'sbs_save_product_cat_custom_meta', 10 );
 add_action( 'edited_product_cat', 'sbs_save_product_cat_custom_meta', 10 );
 
 function sbs_add_product_cat_custom_fields() {
+
+  $license = sbs_check_license_cache();
+
   ?>
   <div class="form-field">
-    <h2>Step-By-Step Additional Fields</h2>
+    <h2>Step-By-Step Additional Fields (Premium)</h2>
     <label for="sbs_either_or">Either-Or Category</label>
-    <input type="checkbox" name="sbs_either_or" id="sbs_either_or">
+    <input type="checkbox" name="sbs_either_or" id="sbs_either_or" <?php disabled( false, $license ) ?>>
     <p class="description">Customers may only have up to one product from this category per order.</p>
   </div>
   <?php
@@ -36,12 +39,12 @@ function sbs_edit_product_cat_custom_fields( $term ) {
 
   ?>
   <tr class="form-field">
-    <th scope="row" valign="top"><h2>Step-By-Step Additional Fields</h2></th>
+    <th scope="row" valign="top"><h2>Step-By-Step Additional Fields (Premium)</h2></th>
   </tr>
   <tr class="form-field">
     <th scope="row" valign="top"><label for="sbs_either_or">Either-Or Category</label></th>
     <td>
-      <input type="checkbox" name="sbs_either_or" id="sbs_either_or" <?php checked('on', $checked) ?>>
+      <input type="checkbox" name="sbs_either_or" id="sbs_either_or" <?php checked('on', $checked) ?> <?php disabled( false, $license ) ?>>
       <p class="description">Customers may only have up to one product from this category per order.</p>
     </td>
   </tr>
@@ -49,6 +52,12 @@ function sbs_edit_product_cat_custom_fields( $term ) {
 }
 
 function sbs_save_product_cat_custom_meta( $term_id ) {
+
+  $license = sbs_check_license_cache();
+
+  if ( !$license ) {
+    return;
+  }
 
   $checked = filter_input( INPUT_POST, 'sbs_either_or' );
   update_term_meta( $term_id, 'sbs_either_or', $checked );
@@ -59,6 +68,12 @@ function sbs_save_product_cat_custom_meta( $term_id ) {
 add_action( 'woocommerce_add_to_cart_validation', 'sbs_validate_either_or_product', 10, 2 );
 
 function sbs_validate_either_or_product( $passed, $product_id ) {
+
+  $license = sbs_check_license_cache();
+
+  if ( !$license ) {
+    return $passed;
+  }
 
   global $woocommerce;
   $categories = wp_get_post_terms( $product_id, 'product_cat' );

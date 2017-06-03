@@ -60,7 +60,9 @@ function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 
 	if ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() && ! $product->is_sold_individually() ) {
 		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
+    $html .= '<div class="loop-quantity-input">';
 		$html .= 'Qty.' . woocommerce_quantity_input( array(), $product, false );
+    $html .= '</div>';
 		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
 		$html .= '</form>';
 

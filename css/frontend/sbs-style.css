@@ -6,6 +6,10 @@
   color: red;
 }
 
+.center-text {
+  text-align: center;
+}
+
 /**
  *  General Element Styles
  *
@@ -28,7 +32,7 @@
 */
 #sbs-navbar {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-bottom: 30px;
 }
 
@@ -89,6 +93,7 @@
   background-color: #ddd;
   padding: 25px 0 15px;
   margin-top: -20px;
+  line-height: 1.75;
 }
 
 #sbs-navbar .step-title:before {
@@ -205,6 +210,10 @@ h1.step-by-step-title {
   max-width: 100%;
 }
 
+.sbs-package-thumbnail img {
+  width: 100%;
+}
+
 .sbs-package-title {
   font-size: 28px;
   font-weight: bold;
@@ -214,13 +223,44 @@ h1.step-by-step-title {
   padding: 20px;
 }
 
+.sbs-package-content.sbs-package-content-per-row-1 {
+  padding-left: 33%;
+  padding-right: 33%;
+}
+
+.sbs-package-content.sbs-package-content-per-row-2 {
+  padding-left: 33%;
+  padding-right: 33%;
+}
+
+.sbs-package-content.sbs-package-content-per-row-3 {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.sbs-package-content.sbs-package-content-wide-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
 @media (max-width: 768px) {
   .sbs-package-container {
     width: 100%;
   }
 
-  .sbs-package-content {
-    padding: 20px 4%;
+  .sbs-package-content.sbs-package-content-per-row-1 {
+    padding-left: 14%;
+    padding-right: 14%;
+  }
+
+  .sbs-package-content.sbs-package-content-per-row-2 {
+    padding-left: 14%;
+    padding-right: 14%;
+  }
+
+  .sbs-package-content.sbs-package-content-per-row-3 {
+    padding-left: 14%;
+    padding-right: 14%;
   }
 }
 
@@ -265,6 +305,18 @@ h1.step-by-step-title {
   padding: 0.8em;
 }
 
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-merch-credit-label td {
+  padding-bottom: 0;
+}
+
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-merch-credit-value td {
+  padding-top: 0;
+}
+
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-total-column {
+  white-space: nowrap;
+}
+
 #sbs-widget-sidebar-cart-totals td:not(:last-child) {
   border-right: none;
 }
@@ -273,7 +325,11 @@ h1.step-by-step-title {
   text-align: center;
 }
 
-.sbs-widget-sidebar-package {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-package {
+  white-space: nowrap;
+}
+
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-cat-name {
   white-space: nowrap;
 }
 
@@ -302,6 +358,10 @@ a.sbs-change-package-btn:hover {
 }
 
 /* Options and Fees Table */
+td.sbs-onf-desktop-add-to-cart {
+  white-space: nowrap;
+}
+
 .sbs-onf-mobile-add-to-cart {
   display: none;
 }
@@ -367,6 +427,10 @@ th.sbs-subcat-name[colspan="1"] {
 
 .product-loop-remove {
   margin-left: 0.5em;
+}
+
+.loop-quantity-input {
+  margin-bottom: 0.5em;
 }
 
 /* Checkout Page */

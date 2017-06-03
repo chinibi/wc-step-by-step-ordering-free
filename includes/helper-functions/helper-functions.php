@@ -60,7 +60,8 @@ function sbs_get_wc_products_by_category( $category_id ) {
 
   $args = array(
     'post_type' => 'product',
-    'product_cat' => get_term_by('id', $category_id, 'product_cat')->slug
+    'product_cat' => get_term_by('id', $category_id, 'product_cat')->slug,
+		'posts_per_page' => -1
   );
 
   $products = get_posts( $args );
@@ -240,7 +241,89 @@ function sbs_get_subcategories_from_parent( $parent_id ) {
 }
 
 /**
+ * Get a list of packages to be displayed on the package selection page
+ *
+ *	@param bool $slice (default false)
+ *           If true return only the first n package if no license is active where
+ *           n is the maximum number of steps allowed.
+ *
+ */
+
+function sbs_get_active_packages( $slice = false ) {
+
+	$package_order = get_option('sbs_package')['active'];
+
+	if ( !isset( $package_order ) ) return null;
+
+	$package_order = json_decode( $package_order );
+	$package_order = $package_order[0];
+
+	$license = sbs_check_license_cache();
+	if ( !$license && $slice ) {
+		$package_order = array_slice( $package_order, 0, 1 );
+	}
+
+	return $package_order;
+
+}
+
+/**
+ *	Check if the package selection page is active
+ *	@return bool
+ */
+
+function sbs_is_package_section_active() {
+
+	$packages = sbs_get_active_packages();
+	$enabled = isset( get_option('sbs_package')['enabled'] ) ? get_option('sbs_package')['enabled'] : '1';
+
+	return !empty( $packages ) && $enabled === '1';
+
+}
+
+/**
+ *	Get the main body step-by-step order, comprised of product categories to be
+ *	shown between package selection and checkout.
+ *
+ *	@param bool $slice (default false)
+ *           If true return only the first n steps if no license is active where
+ *           n is the maximum number of steps allowed.
+ *
+ *	@return Array of Step objects
+ *			(string) category_id of parent
+ *      (array) category_id of each child
+ */
+
+function sbs_get_step_order( $slice = false ) {
+	$step_order = get_option('step_order');
+
+	if ( empty( $step_order ) ) {
+		return;
+	}
+
+	$step_order = json_decode( $step_order );
+
+	// Clean up this array because the nesting library did some weird stuff when serializing
+	$step_order = $step_order[0];
+	foreach( $step_order as $step ) {
+		$step->children = $step->children[0];
+	}
+
+	$license = sbs_check_license_cache();
+	if ( !$license && $slice ) {
+		$step_order = array_slice( $step_order, 0, 2 );
+	}
+
+	return $step_order;
+}
+
+
+/**
  *	Get the complete step-by-step order, from package selection to checkout.
+ *
+ *	@param bool $slice (default false)
+ *           If true return only the first n steps if no license is active where
+ *           n is the maximum number of steps allowed.
  *
  *	@return Array of Step objects
  *			(string) name
@@ -248,21 +331,33 @@ function sbs_get_subcategories_from_parent( $parent_id ) {
  *			(string) type, Identifies the step type so the step-by-step shortcode knows how to correctly render that step.
  */
 
-function sbs_get_full_step_order() {
+function sbs_get_full_step_order( $slice = false ) {
 
-  $steps = sbs_get_step_order();
+  $steps = sbs_get_step_order( $slice );
+
+	if ( empty( $steps ) ) {
+		return;
+	}
+
   foreach( $steps as $step ) {
     $step->name = get_the_category_by_ID( $step->catid );
 		$step->type = 'main';
   }
   $steps_package = new stdClass();
-  $steps_package->name = 'Packages';
-	$steps_package->catid = get_option('sbs_package')['category'];
-	$steps_package->type = 'package';
+
+	if ( isset( get_option('sbs_package')['category'] ) ) {
+		$steps_package->name = 'Packages';
+		$steps_package->catid = get_option('sbs_package')['category'];
+		$steps_package->type = 'package';
+	}
+
   $steps_checkout = new stdClass();
   $steps_checkout->name = 'Checkout';
 	$steps_checkout->type = 'checkout';
-  array_unshift( $steps, $steps_package );
+
+	if ( !empty( $steps_package->catid ) ) {
+		array_unshift( $steps, $steps_package );
+	}
 
   if ( sbs_is_onf_section_active() ) {
 
@@ -288,9 +383,50 @@ function sbs_get_full_step_order() {
 
 function sbs_is_onf_section_active() {
 
+	$license = sbs_check_license_cache();
 	$category_selected = isset( get_option('sbs_onf')['category'] );
 	$activated = !isset( get_option('sbs_onf')['enabled'] ) || get_option('sbs_onf')['enabled'] === '1';
 
-	return $activated && $category_selected;
+	return $activated && $category_selected && $license;
+
+}
+
+function sbs_get_onf_order() {
+
+	$onf_order = get_option('sbs_onf')['order'];
+
+	if ( empty($onf_order) )
+		return null;
+
+	$onf_order = json_decode( $onf_order );
+
+	// Clean up this array because the nesting library did some weird stuff when serializing
+	$onf_order = $onf_order[0];
+	foreach( $onf_order as $onf ) {
+		$onf->children = $onf->children[0];
+	}
+
+	return $onf_order;
+
+}
+
+
+function sbs_check_license_cache() {
+
+	$trans = get_site_transient( 'sbs_premium_key_valid' );
+	return $trans === 'true';
+
+}
+
+
+function sbs_get_begin_url() {
+
+	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+	$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
+
+	$sbs_base_url = get_permalink( $sbs_page );
+	$package_base_url = get_permalink( $package_page );
+
+	return sbs_is_package_section_active() ? $package_base_url : $sbs_base_url . '?step=1';
 
 }

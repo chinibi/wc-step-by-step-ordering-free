@@ -25,7 +25,7 @@
     color: #8a140e;
 }
 
-.sbs-widget-sidebar-grand-total {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-grand-total {
     font-size: 1em;
     background-color: #ffde8f;
     color: #8a140e;
@@ -42,15 +42,15 @@
     color: white;
 }
 
-.sbs-widget-sidebar-subtotal {
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-subtotal {
     background-color: #8a140e;
     color: white;
     border-top: 3px solid white;
 }
 
-.sbs-widget-sidebar-merch-credit {
-    background-color: #666666;
-    border-top: 3px solid white;
+#sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-merch-credit {
+    background-color: #8a140e;
+    /*border-top: 3px solid white;*/
     color: white;
 }
 

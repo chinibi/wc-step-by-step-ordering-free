@@ -96,6 +96,12 @@ function sbs_req_required_products_requirement_met_so_far() {
 
   if ( !isset( $_GET['step'] ) ) return;
 
+  $license = sbs_check_license_cache();
+
+  if ( !$license ) {
+    return;
+  }
+
   $steps = sbs_get_full_step_order();
 
   $current_step = array_key_exists( $_GET['step'], $steps ) ? (int) $_GET['step'] : 0;
@@ -148,6 +154,12 @@ function sbs_req_required_products_requirement_met_so_far() {
 }
 
 function sbs_req_all_required_products_in_cart() {
+
+  $license = sbs_check_license_cache();
+
+  if ( !$license ) {
+    return;
+  }
 
 	$steps = sbs_get_full_step_order();
 

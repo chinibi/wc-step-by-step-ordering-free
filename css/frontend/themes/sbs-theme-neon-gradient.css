@@ -173,16 +173,24 @@ a.open-popup-link,
     border-color: #f4f877 transparent;
 }
 
-
-
 .sbs-widget-sidebar-merch-credit {
-    border-top: 3px solid white;
     color: #ffffff;
     background: #d0e4f7;
-    background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%);
-    background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
-    background: linear-gradient(to bottom, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 );
+}
+
+.sbs-widget-sidebar-merch-credit-label {
+  color: #137bd6;
+  background: -moz-linear-gradient(top, #fefcea 0%, #eadf8d 100%);
+  background: -webkit-linear-gradient(top, #fefcea 0%, #eadf8d 100%);
+  background: linear-gradient(to bottom, #fefcea 0%, #eadf8d 100%);
+}
+
+.sbs-widget-sidebar-merch-credit-value {
+  color: #137bd6;
+  background: -moz-linear-gradient(top, #eadf8d 0%, #f1da36 100%);
+  background: -webkit-linear-gradient(top, #eadf8d 0%, #f1da36 100%);
+  background: linear-gradient(to bottom, #eadf8d 0%, #f1da36 100%);
 }
 
 .sbs-widget-sidebar-subtotal {
@@ -231,9 +239,9 @@ a.open-popup-link,
     width: 49%;
     color: #7dc3f8;
     background: #d0e4f7;
-    background: -moz-linear-gradient(top, #d0e4f7 0%, #5772af 24%, #0837a5 50%, #5772af 79%, #87bcea 100%);
-    background: -webkit-linear-gradient(top, #d0e4f7 0%,#5772af 24%,#0837a5 50%,#5772af 79%,#87bcea 100%);
-    background: linear-gradient(to bottom, #d0e4f7 0%,#5772af 24%,#0837a5 50%,#5772af 79%,#87bcea 100%);
+    background: -moz-linear-gradient(top, #d0e4f7 0%, #73b1e7 24%, #0a77d5 50%, #539fe1 79%, #87bcea 100%);
+    background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
+    background: linear-gradient(to bottom, #d0e4f7 0%,#73b1e7 24%,#0a77d5 50%,#539fe1 79%,#87bcea 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d0e4f7', endColorstr='#87bcea',GradientType=0 );
 }
 

@@ -19,22 +19,22 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       return;
     }
 
-    // retrieve session data
-    // session_start();
+		$license = sbs_check_license_cache();
 
     // get woocommerce properties and methods
     global $woocommerce;
 
 		// TODO: Refactor for use with sbs_get_full_step_order() instead.
-    $categories = sbs_get_step_order();
+    $categories = sbs_get_step_order( true );
 
     $totals = array_map( array( $this, 'map_categories_to_widget_array_callback' ), $categories );
 
     // Prepend Package to $totals
     $package = sbs_get_package_from_cart();
 		$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
+		$package_enabled = sbs_is_package_section_active();
 
-    if ( isset( $package ) ) {
+    if ( isset( $package ) && $package_enabled ) {
       array_unshift( $totals, array(
         'cat_name' => $package['item']['data']->get_name() . '<br /><a class="sbs-change-package-btn" href="' . get_permalink( $package_page ) . '">Change Package</a>',
         'cat_total' => wc_price( $package['item']['line_total'] ),
@@ -79,12 +79,52 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       'css_class' => 'sbs-widget-sidebar-category'
     );
 
-    if ( isset( $package['credit'] ) && $package['credit'] > 0 ) {
-      $totals[] = array(
-        'cat_name' => isset(get_option('sbs_package')['merch-cred-label']) ? esc_html(get_option('sbs_package')['merch-cred-label']) : 'Merchandise Credit',
-        'cat_total' => wc_price(sbs_get_merchandise_credit_to_apply()) . ' of ' . wc_price( $package['credit'] ),
-        'css_class' => 'sbs-widget-sidebar-merch-credit'
-      );
+
+
+    if ( isset( $package['credit'] ) && $package['credit'] > 0 && $license ) {
+
+			if ( !isset( get_option('sbs_display')['merch-cred-display'] ) || get_option('sbs_display')['merch-cred-display'] === '1' ) {
+
+				$totals[] = array(
+					'cat_name' => isset(get_option('sbs_package')['merch-cred-label']) && $license ? esc_html(get_option('sbs_package')['merch-cred-label']) : 'Store Credit',
+					'cat_total' => null,
+					'css_class' => 'sbs-widget-sidebar-merch-credit sbs-widget-sidebar-merch-credit-label',
+					'cat_name_colspan' => '2',
+					'cat_total_style' => 'display: none;'
+				);
+
+				$totals[] = array(
+					'cat_name' => null,
+					'cat_total' => wc_price(sbs_get_merchandise_credit_to_apply()) . ' of ' . wc_price( $package['credit'] ),
+					'css_class' => 'sbs-widget-sidebar-merch-credit sbs-widget-sidebar-merch-credit-value',
+					'cat_total_colspan' => '2',
+					'cat_name_style' => 'display: none;'
+				);
+
+			}
+
+			elseif ( get_option('sbs_display')['merch-cred-display'] === '2' ) {
+
+				$totals[] = array(
+					'cat_name' => isset(get_option('sbs_package')['merch-cred-label']) ? esc_html(get_option('sbs_package')['merch-cred-label']) : 'Merchandise Credit',
+					'cat_total' => null,
+					'css_class' => 'sbs-widget-sidebar-merch-credit sbs-widget-sidebar-merch-credit-label',
+					'cat_name_colspan' => '2',
+					'cat_name_style' => 'text-align: center;',
+					'cat_total_style' => 'display: none;'
+				);
+
+				$totals[] = array(
+					'cat_name' => null,
+					'cat_total' => wc_price(sbs_get_merchandise_credit_to_apply()) . ' of ' . wc_price( $package['credit'] ),
+					'css_class' => 'sbs-widget-sidebar-merch-credit sbs-widget-sidebar-merch-credit-value',
+					'cat_total_colspan' => '2',
+					'cat_name_style' => 'display: none;',
+					'cat_total_style' => 'text-align: center;'
+				);
+
+			}
+
     }
 
     $totals[] = array(
@@ -126,16 +166,37 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
     ?>
     <table id="sbs-widget-sidebar-cart-totals">
-
+			<?php
+			$calc_title = isset( get_option('sbs_package')['label'] ) ? get_option('sbs_package')['label'] : 'Step-By-Step Ordering';
+			if ( !sbs_is_package_section_active() ) {
+			?>
+				<tr class="sbs-widget-sidebar-package">
+					<td colspan="2" class="sbs-widget-sidebar-cat-name center-text">
+						<strong><?php echo esc_html( $calc_title ) ?></strong>
+					</td>
+				</tr>
+			<?php
+			}
+			?>
       <?php
       foreach($totals as $key => $cat_info):
       ?>
         <tr class="<?php echo esc_attr( $cat_info['css_class'] ) ?>">
-          <td class="sbs-widget-sidebar-cat-name">
-            <strong><?php echo $cat_info['cat_name'] ?></strong>
+          <td
+						colspan="<?php echo isset( $cat_info['cat_name_colspan'] ) ? esc_attr( $cat_info['cat_name_colspan'] ) : null ?>"
+						class="sbs-widget-sidebar-cat-name"
+						style="<?php echo isset( $cat_info['cat_name_style'] ) ? $cat_info['cat_name_style'] : null ?>"
+						>
+            <strong>
+							<?php echo isset( $cat_info['cat_name'] ) ? $cat_info['cat_name'] : null ?>
+						</strong>
           </td>
-          <td data-cat="<?php echo esc_attr( $cat_info['cat_name'] ) ?>" class="sbs-widget-sidebar-total-column">
-            <?php echo $cat_info['cat_total'] ?>
+          <td
+						colspan="<?php echo isset( $cat_info['cat_total_colspan'] ) ? esc_attr( $cat_info['cat_total_colspan'] ) : null ?>"
+						data-cat="<?php echo esc_attr( $cat_info['cat_name'] ) ?>" class="sbs-widget-sidebar-total-column"
+						style="<?php echo isset( $cat_info['cat_total_style'] ) ? $cat_info['cat_total_style'] : null ?>"
+						>
+							<?php echo isset( $cat_info['cat_total'] ) ? $cat_info['cat_total'] : null ?>
           </td>
         </tr>
       <?php
@@ -145,12 +206,8 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     </table>
 
 		<div id="sbs-widget-sidebar-back-forward-buttons-container">
-	    <div class="sbs-store-back-forward-buttons">
-	      <?php echo sbs_previous_step_button( $current_step, count($steps) ) ?>
-	    </div>
-	    <div class="sbs-store-back-forward-buttons">
-	      <?php echo sbs_next_step_button( $current_step, count($steps) ) ?>
-	    </div>
+	    <?php echo sbs_previous_step_button( $current_step, count($steps) ) ?>
+	    <?php echo sbs_next_step_button( $current_step, count($steps) ) ?>
 	  </div>
 
   <?php

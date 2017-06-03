@@ -1,0 +1,31 @@
+#sbs-widget-sidebar-cart-totals td {
+  background-color: inherit;
+}
+
+table.woocommerce-cart-form__contents tr.checkout-package td,
+table.woocommerce-checkout-review-order-table tr.checkout-package td
+{
+  background-color: inherit;
+}
+
+#sbs-package-list .wp-post-image {
+  margin-bottom: 0;
+}
+
+.sbs-package-content {
+  padding-bottom: 50px;
+}
+
+dl.variation dt {
+  font-weight: normal;
+}
+
+#payment .place-order .button.sbs-checkout-return {
+  font-size: 1em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.sbs-package-content ul, .sbs-package-content ol {
+  margin-left: 0;
+}

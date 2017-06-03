@@ -23,7 +23,7 @@
 
 .sbs-widget-sidebar-merch-credit {
     background-color: #000000;
-    border-top: 3px solid white;
+    /*border-top: 3px solid white;*/
     color: white;
 }
 
@@ -127,7 +127,7 @@
 
 .sbs-subcat-name {
     background-color: #bbbbbb;
-    color: #555555;
+    color: black;
 }
 
 .woocommerce ul.products li.product .button,

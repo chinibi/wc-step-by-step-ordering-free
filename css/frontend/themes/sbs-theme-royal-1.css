@@ -1,4 +1,4 @@
-#sbs-navbar /* SBS Package Selection Panes */
+/* SBS Package Selection Panes */
 
 .sbs-package-container {
   border: 2px solid #9acbf0;
@@ -36,21 +36,15 @@
 }
 
 .sbs-widget-sidebar-subtotal {
-    background-color: #81a7c3;
-    color: black;
+    background-color: #2481c8;
+    color: white;
     border-top: 3px solid white;
 }
 
 .sbs-widget-sidebar-merch-credit {
     background-color: #2481c8;
-    border-top: 3px solid white;
+    /*border-top: 3px solid white;*/
     color: white;
-}
-
-.sbs-widget-sidebar-subtotal {
-    background-color: #81a7c3;
-    color: black;
-    border-top: 3px solid white;
 }
 
 .sbs-widget-sidebar-grand-total {

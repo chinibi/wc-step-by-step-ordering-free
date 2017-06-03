@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: WooCommerce Step By Step Ordering
+Plugin Name: Step-By-Step Ordering Ordering System for WooCommerce
 Plugin URI:  http://stepbystepsys.com
 Description: Guide customers through your customized ordering process. Requires WooCommerce.
-Version:     0.0.1
+Version:     1.0.6
 Author:      Trevor Pham, Andrew Lambros, The Dream Builders Company
 Author URI:  http://stepbystepsys.com
 License:     GPL2
@@ -12,7 +12,7 @@ Text Domain: wporg
 Domain Path: /languages
 */
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
@@ -20,17 +20,17 @@ if ( ! class_exists( 'StepByStepSystem' ) ):
 
 final class StepByStepSystem {
 
+	public $version = '0.0.1';
+
 	public function __construct() {
 		$this->includes();
 		$this->initialize();
 	}
 
 	private function includes() {
+
 		// Include helper functions
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/helper-functions/helper-functions.php' );
-
-		// Include WP Admin Options page
-		include_once( plugin_dir_path( __FILE__ ) . 'options.php' );
 
 		// Include SBS Ordering Shortcode
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-select-package.php' );
@@ -50,17 +50,26 @@ final class StepByStepSystem {
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/auto-add-product.php' );
 
 		// Include SBS Cart Totals Widget
-		include_once( plugin_dir_path( __FILE__) . 'includes/widgets/sbs-cart-totals.php' );
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/widgets/sbs-cart-totals.php' );
 
 		// Include additional AJAX Add To Cart functions
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
+
+		// Include WP Admin Options page
+		if ( is_admin() ) {
+			include_once( plugin_dir_path( __FILE__ ) . 'options.php' );
+		}
+
 	}
 
 
 	private function initialize() {
 
 		register_activation_hook( __FILE__, array( $this, 'plugin_activation' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'plugin_deactivation' ) );
+
 		add_action( 'wp_head', array( $this, 'sbs_define_ajax_url' ) );
+		add_action( 'admin_head', array( $this, 'sbs_define_ajax_url' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_enqueue_client_style_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_dequeue_third_party_scripts'), 20 );
 
@@ -70,6 +79,13 @@ final class StepByStepSystem {
 	public function plugin_activation() {
 
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/plugin/activation.php' );
+
+	}
+
+
+	public function plugin_deactivation() {
+
+		include_once( plugin_dir_path( __FILE__ ) . 'includes/plugin/deactivation.php' );
 
 	}
 
@@ -118,6 +134,7 @@ final class StepByStepSystem {
 	  ?>
 	  <script type="text/javascript">
 	    var sbsAjaxUrl = "<?php echo admin_url('admin-ajax.php') ?>";
+			var sbsLicenseValid = <?php echo sbs_check_license_cache() ? 'true' : 'false' ?>;
 	  </script>
 	  <?php
 	  echo ob_get_clean();
@@ -127,4 +144,4 @@ final class StepByStepSystem {
 
 endif;
 
-new StepByStepSystem();
+$stepbystepsys = new StepByStepSystem();

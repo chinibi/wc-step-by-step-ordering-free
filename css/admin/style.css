@@ -2,6 +2,14 @@
   clear: both;
 }
 
+.grayed-out-text {
+  color: rgb(144, 144, 144);
+}
+
+.sbs-buy-notice {
+  font-size: 1.3em;
+}
+
 .horizontal-stack {
   float: left;
   margin-right: 30px;
