@@ -1320,6 +1320,7 @@ function sbs_onf_order_callback() {
 function sbs_display_color_scheme_callback() {
 
 	$option = isset( get_option('sbs_display')['color-scheme'] ) ? get_option('sbs_display')['color-scheme'] : 1;
+	$image_dir = plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/';
 
 	$colors = array(
 		array(
@@ -1329,43 +1330,43 @@ function sbs_display_color_scheme_callback() {
 		array(
 			'name' => "Noir 1",
 			'premium' => false,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-noir-1.png' ),
+			'image' => $image_dir . 'sbs-theme-noir-1.png' ),
 		array(
 			'name' => "Royal 1",
 			'premium' => false,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-royal.png' ),
+			'image' => $image_dir . 'sbs-theme-royal.png' ),
 		array(
 			'name' => "Spring Green",
 			'premium' => true,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-green-1.png' ),
+			'image' => $image_dir . 'sbs-theme-green-1.png' ),
 		array(
 			'name' => "Aqua Green",
 			'premium' => true,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-green-2.png' ),
+			'image' => $image_dir . 'sbs-theme-green-2.png' ),
 		array(
 			'name' => "Autumn 1",
 			'premium' => true,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-autumn-1.png' ),
+			'image' => $image_dir . 'sbs-theme-autumn-1.png' ),
 		array(
 			'name' => "Autumn 2",
 			'premium' => true,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-autumn-2.jpg' ),
+			'image' => $image_dir . 'sbs-theme-autumn-2.jpg' ),
 		array(
 			'name' => "Neon",
 			'premium' => true,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-neon.png' ),
+			'image' => $image_dir . 'sbs-theme-neon.png' ),
 		array(
 			'name' => "Neon Gradient",
 			'premium' => true,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-neon-gradient.png' ),
+			'image' => $image_dir . 'sbs-theme-neon-gradient.png' ),
 		array(
 			'name' => "Noir 2",
 			'premium' => true,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-noir-2.png' ),
+			'image' => $image_dir . 'sbs-theme-noir-2.png' ),
 		array(
 			'name' => "Royal 2",
 			'premium' => true,
-			'image' => plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/sbs-theme-royal-2.png' )
+			'image' => $image_dir . 'sbs-theme-royal-2.png' )
 	);
 
 	$license = sbs_check_license_cache();
