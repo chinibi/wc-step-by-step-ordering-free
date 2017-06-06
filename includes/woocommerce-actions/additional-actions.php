@@ -175,8 +175,8 @@ add_action( 'plugins_loaded', 'sbs_replace_woocommerce_template_loop_product_lin
 
 function sbs_query_key_verification_server() {
 
-  $server_key = 'yOUCQ3ps66qnPCSez6Kf9MbM';
-  $server_url = 'http://plugin.stepbystepsys.com';
+  $server_key = 'sb4Oj2baaBvIp7gP67lNq370';
+  $server_url = 'http://stepbystepsys.com';
   $item_reference = 'SBS Premium License';
 
   $license_key = get_option('sbs_premium_key');

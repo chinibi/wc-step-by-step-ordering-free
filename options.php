@@ -97,6 +97,8 @@ function sbs_plugin_options_page() {
 		<?php endif ?>
   </div>
 
+	<?php add_filter( 'admin_footer_text', 'sbs_render_wp_admin_footer' ) ?>
+	<?php add_filter( 'update_footer', 'sbs_render_wp_admin_version', 100 ) ?>
   <?php
 }
 
@@ -192,6 +194,20 @@ function sbs_render_premium_key_page() {
 	<?php
 
 	return ob_get_clean();
+}
+
+function sbs_render_wp_admin_footer() {
+	ob_start();
+	?>
+	<p class="alignleft description">If you like the <strong>Step-By-Step Ordering System for WooCommerce</strong> please leave us a <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">5-star</a> rating.  Thanks for your support!</p>
+	<?php
+
+	return ob_get_clean();
+}
+
+function sbs_render_wp_admin_version() {
+	$version = get_option('sbs_version');
+	return '<p id="footer-upgrade" class="alignright">SBS Version ' . $version . '</p>';
 }
 
 /* ------------------------------------------------------------------------ *
@@ -586,12 +602,14 @@ function sbs_display_settings_sanitize( $input ) {
 		$category_desc_font = isset( get_option('sbs_display')['category-desc-font'] ) ? get_option('sbs_display')['category-desc-font'] : 1;
 		$nav_button_font = isset( get_option('sbs_display')['nav-button-font'] ) ? get_option('sbs_display')['nav-button-font'] : 1;
 		$navbar_font = isset( get_option('sbs_display')['navbar-font'] ) ? get_option('sbs_display')['navbar-font'] : 1;
+		$drop_shadow = isset( get_option('sbs_display')['drop-shadow'] ) ? get_option('sbs_display')['drop-shadow'] : false;
 
 		$input['calc-font'] = $calc_font;
 		$input['category-font'] = $category_font;
 		$input['category-desc-font'] = $category_desc_font;
 		$input['nav-button-font'] = $nav_button_font;
 		$input['navbar-font'] = $navbar_font;
+		$input['drop-shadow'] = $drop_shadow;
 	endif;
 
 	return $input;
@@ -1330,23 +1348,23 @@ function sbs_display_color_scheme_callback() {
 		array(
 			'name' => "Noir 1",
 			'premium' => false,
-			'image' => $image_dir . 'sbs-theme-noir-1.png' ),
+			'image' => $image_dir . 'sbs-theme-noir-1.jpg' ),
 		array(
 			'name' => "Royal 1",
 			'premium' => false,
-			'image' => $image_dir . 'sbs-theme-royal.png' ),
+			'image' => $image_dir . 'sbs-theme-royal-1.jpg' ),
 		array(
 			'name' => "Spring Green",
 			'premium' => true,
-			'image' => $image_dir . 'sbs-theme-green-1.png' ),
+			'image' => $image_dir . 'sbs-theme-green-1.jpg' ),
 		array(
 			'name' => "Aqua Green",
 			'premium' => true,
-			'image' => $image_dir . 'sbs-theme-green-2.png' ),
+			'image' => $image_dir . 'sbs-theme-green-2.jpg' ),
 		array(
 			'name' => "Autumn 1",
 			'premium' => true,
-			'image' => $image_dir . 'sbs-theme-autumn-1.png' ),
+			'image' => $image_dir . 'sbs-theme-autumn-1.jpg' ),
 		array(
 			'name' => "Autumn 2",
 			'premium' => true,
@@ -1354,19 +1372,19 @@ function sbs_display_color_scheme_callback() {
 		array(
 			'name' => "Neon",
 			'premium' => true,
-			'image' => $image_dir . 'sbs-theme-neon.png' ),
+			'image' => $image_dir . 'sbs-theme-neon.jpg' ),
 		array(
 			'name' => "Neon Gradient",
 			'premium' => true,
-			'image' => $image_dir . 'sbs-theme-neon-gradient.png' ),
+			'image' => $image_dir . 'sbs-theme-neon-gradient.jpg' ),
 		array(
 			'name' => "Noir 2",
 			'premium' => true,
-			'image' => $image_dir . 'sbs-theme-noir-2.png' ),
+			'image' => $image_dir . 'sbs-theme-noir-2.jpg' ),
 		array(
 			'name' => "Royal 2",
 			'premium' => true,
-			'image' => $image_dir . 'sbs-theme-royal-2.png' )
+			'image' => $image_dir . 'sbs-theme-royal-2.jpg' )
 	);
 
 	$license = sbs_check_license_cache();
@@ -1395,16 +1413,13 @@ function sbs_display_color_scheme_callback() {
 		if ( $key === 0 ) continue;
 		?>
 		<div class="sbs-display-thumbnail-item">
-		<?php if ( $key !== 1 ): ?>
 
 			<div class="sbs-display-thumbnail-img">
-				<a href="<?php echo esc_url( $color['image'] . '?width=600&height=500&inlineId=color-scheme-1' ) ?>" title="<?php echo esc_attr( $color['name'] ) ?>" class="thickbox" rel="color-schemes">
+				<a href="<?php echo esc_url( $color['image'] . '?width=600&height=500&inlineId=color-scheme-' . $key ) ?>" title="<?php echo esc_attr( $color['name'] ) ?>" class="thickbox" rel="color-schemes">
 					<img height="80" width="100" src="<?php echo esc_url( $color['image'] ) ?>" /><br>
 					<small><?php echo esc_attr( $color['name'] ) ?></small>
 				</a>
 			</div>
-
-		<?php endif ?>
 
 			<div id="color-scheme-<?php echo $key ?>" style="display: none;">
 				<img src="<?php echo esc_url( $color['image'] ) ?>" alt="<?php echo esc_attr( $color['name'] ) ?>" />
@@ -1537,14 +1552,22 @@ function sbs_display_fonts_callback() {
 
 
 function sbs_display_misc_callback() {
+	$license = sbs_check_license_cache();
 	$hover_effect = isset( get_option('sbs_display')['hover-effect'] ) ? get_option('sbs_display')['hover-effect'] : false;
+	$drop_shadow = isset( get_option('sbs_display')['drop-shadow'] ) ? get_option('sbs_display')['drop-shadow'] : false;
 
 	ob_start();
 	?>
-		<input type="checkbox" id="show_hover_effect" name="sbs_display[hover-effect]" value="1" <?php checked(1, $hover_effect) ?> />
-		<label for="show_hover_effect">
+	<fieldset>
+		<label>
+			<input type="checkbox" id="show_hover_effect" name="sbs_display[hover-effect]" value="1" <?php checked(1, $hover_effect) ?> />
 			SBS links turn different colors when moused over (varies by theme)
 		</label><br />
+		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+			<input type="checkbox" id="sbs_display[drop-shadow]" name="sbs_display[drop-shadow]" value="1" <?php checked( 1, $drop_shadow ); disabled( false, $license ); ?> />
+			Add drop shadows to SBS pages (Premium)
+		</label>
+	</fieldset>
 	<?php
 
 	echo ob_get_clean();
@@ -1724,8 +1747,8 @@ function sbs_display_navbar_title_shape_callback() {
 
 function sbs_premium_key_callback() {
 
-	$secret_key = 'yOUCQ3ps66qnPCSez6Kf9MbM';
-	$server_url = 'http://plugin.stepbystepsys.com';
+	$secret_key = 'sb4Oj2baaBvIp7gP67lNq370';
+	$server_url = 'http://stepbystepsys.com';
 	$item_reference = 'SBS Premium License';
 
 	/*** License activate button was clicked ***/
