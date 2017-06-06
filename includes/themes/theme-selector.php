@@ -330,6 +330,10 @@ if ( isset(get_option('sbs_display')['hover-effect'] ) && get_option('sbs_displa
 
 }
 
+if ( isset(get_option('sbs_display')['drop-shadow'] ) && get_option('sbs_display')['drop-shadow'] == '1' && $license ) {
+  wp_enqueue_style( 'sbs-drop-shadow', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/drop-shadows/sbs-drop-shadow.css'), array( 'sbs-style' ), filemtime( $themes_style_dir . 'drop-shadows/sbs-drop-shadow.css' ) );
+}
+
 // Navbar Title/Name Container Shape
 if ( $license ):
   switch( get_option('sbs_display')['nav-title-style'] ) {
