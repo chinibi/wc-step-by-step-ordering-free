@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Step-By-Step Ordering Ordering System for WooCommerce
+Plugin Name: Step-By-Step Ordering System for WooCommerce
 Plugin URI:  http://stepbystepsys.com
 Description: Guide customers through your customized ordering process. Requires WooCommerce.
 Version:     1.0.6
 Author:      Trevor Pham, Andrew Lambros, The Dream Builders Company
-Author URI:  http://stepbystepsys.com
+Author URI:  http://dreambuilders.co/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wporg
@@ -20,7 +20,7 @@ if ( ! class_exists( 'StepByStepSystem' ) ):
 
 final class StepByStepSystem {
 
-	public $version = '0.0.1';
+	public $version = '1.0.6';
 
 	public function __construct() {
 		$this->includes();
@@ -77,16 +77,12 @@ final class StepByStepSystem {
 
 
 	public function plugin_activation() {
-
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/plugin/activation.php' );
-
 	}
 
 
 	public function plugin_deactivation() {
-
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/plugin/deactivation.php' );
-
 	}
 
 
@@ -144,4 +140,4 @@ final class StepByStepSystem {
 
 endif;
 
-$stepbystepsys = new StepByStepSystem();
+new StepByStepSystem();
