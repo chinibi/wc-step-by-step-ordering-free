@@ -3,9 +3,7 @@
 /**
  *  Step-By-Step Plugin Activation Script
  */
-if ( $this->version != get_option('sbs_version') ) {
-  update_option( 'sbs_version', $this->version );
-}
+update_option( 'sbs_version', $this->version );
 
 // Schedule a daily WP cron job of all actions hooked to sbs_daily_event
 if ( ! wp_next_scheduled( 'sbs_daily_event' ) ) {
@@ -46,3 +44,39 @@ if ( !post_exists( 'Choose Package' ) ) {
  * Set default settings if none exist
  *
  */
+
+function sbs_add_default_settings() {
+
+  $sbs_general_defaults = array(
+    'page-name'               => get_page_by_title( 'Step-By-Step Ordering' )->ID,
+    'featured-items-position' => '2',
+    'featured-label'          => 'Featured Items',
+    'req-label-before'        => 'Select',
+    'req-label-after'         => '(Required)',
+    'opt-label-before'        => '',
+    'opt-label-after'         => '(Addons)'
+  );
+  add_option( 'sbs_general', $sbs_general_defaults );
+
+  add_option( 'step_order', '' );
+
+  $sbs_navbar_defaults = array(
+    'throttle-nav' => '2'
+  );
+  add_option( 'sbs_navbar', $sbs_navbar_defaults );
+
+  $sbs_package_defaults = array(
+    'enabled'          => '1',
+    'label'            => 'Step-By-Step Ordering',
+    'page-name'        => get_page_by_title( 'Choose Package' )->ID,
+    'category'         => '',
+    'clear-cart'       => '1',
+    'per-row'          => '3',
+    'add-to-cart-text' => 'Select Package',
+    'image-height'     => '',
+    'image-width'      => ''
+  );
+  add_option( 'sbs_package', $sbs_package_defaults );
+
+
+}
