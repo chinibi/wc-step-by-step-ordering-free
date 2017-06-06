@@ -40,7 +40,7 @@ function sbs_product_loop_quantity_in_cart() {
 function sbs_product_loop_mfp_modal() {
   global $product;
 
-  echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link">Learn More</a>';
+  echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link learn-more-link">Learn More</a>';
   echo '<div id="modal-product-' . $product->get_id() . '" class="woocommerce white-popup mfp-hide">';
   echo    '<div class="modal-left-side">';
   echo      '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
