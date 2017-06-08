@@ -131,7 +131,7 @@ function sbs_render_required_products( $category_id ) {
 		'post_type' => 'product',
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
-		'posts_per_page' => 12,
+		'posts_per_page' => -1,
 		'meta_key' => '_required_product',
 		'meta_value' => 'yes',
 		'orderby' => 'menu_order',
@@ -183,7 +183,7 @@ function sbs_render_featured_products( $current_step, $steps ) {
 		'post_type' => 'product',
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
-		'posts_per_page' => 12,
+		'posts_per_page' => -1,
 		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(

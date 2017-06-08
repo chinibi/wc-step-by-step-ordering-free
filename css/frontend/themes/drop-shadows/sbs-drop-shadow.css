@@ -1,6 +1,7 @@
 .sbs-package-container,
 .sbs-subcat-name,
-.woocommerce-LoopProduct-link img,
+.woocommerce ul.products li.product a img,
+.woocommerce-page ul.products li.product a img,
 .woocommerce ul.products li.product .button,
 .woocommerce a.button,
 .woocommerce a.button.alt,
@@ -9,19 +10,23 @@
 .woocommerce input.button.alt,
 .woocommerce-message,
 .woocommerce-info,
-.woocommerce-error,
-#sbs-widget-sidebar-cart-totals,
-.sbs-store-back-forward-buttons
+.woocommerce-error
 {
-  -webkit-box-shadow: 5px 5px 11px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 5px 5px 11px 0px rgba(0,0,0,0.5);
-  box-shadow: 5px 5px 11px 0px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 5px 5px 11px 0px rgba(0,0,0,0.5) !important;
+  -moz-box-shadow: 5px 5px 11px 0px rgba(0,0,0,0.5) !important;
+  box-shadow: 5px 5px 11px 0px rgba(0,0,0,0.5) !important;
+}
+
+#sbs-widget-sidebar-cart-totals {
+  -webkit-box-shadow: 3px 3px 11px 0px rgba(0,0,0,0.4) !important;
+  -moz-box-shadow: 3px 3px 11px 0px rgba(0,0,0,0.4 !important);
+  box-shadow: 3px 3px 11px 0px rgba(0,0,0,0.4) !important;
 }
 
 .sbs-options-and-fees .sbs-subcat-name {
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
 }
 
 .learn-more-link {
