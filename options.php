@@ -25,7 +25,7 @@ function sbs_load_custom_wp_admin_style() {
   // load custom jQuery UI scripts and styles
 	wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
   wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ) );
-  wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css' );
+  wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/style.css' ) );
 
 }
 add_action( 'admin_enqueue_scripts', 'sbs_load_custom_wp_admin_style' );
@@ -126,6 +126,7 @@ function sbs_render_active_tab($active_tab) {
 			echo sbs_render_admin_help_page();
 			break;
   }
+
 }
 
 
@@ -210,6 +211,20 @@ function sbs_render_wp_admin_version() {
 	return '<p id="footer-upgrade" class="alignright">SBS Version ' . $version . '</p>';
 }
 
+function sbs_admin_help_tooltip( $direction = 'top', $html = '' ) {
+	// Valid directions are 'top' and 'right'
+	ob_start();
+	?>
+	<div class="sbs-tooltip">
+		<span class="sbs-tooltip-icon"></span>
+		<span class="sbs-tooltiptext sbs-tooltip-<?php echo esc_attr($direction) ?>">
+			<?php echo $html ?>
+		</span>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+
 /* ------------------------------------------------------------------------ *
  * Setting Registration
  * ------------------------------------------------------------------------ */
@@ -277,7 +292,7 @@ function sbs_plugin_settings_init() {
 	);
 	add_settings_field(
 		'sbs_featured_position',
-		'Featured Items Position (Premium)',
+		'Featured Items Position (Premium)' . sbs_admin_help_tooltip( 'right', 'Display featured items at the beginning or end of pages.' ),
 		'sbs_featured_items_pos_callback',
 		'sbs_general',
 		'sbs_general'
@@ -293,14 +308,14 @@ function sbs_plugin_settings_init() {
   // SBS Step-By-Step Settings Fields
   add_settings_field(
     'step_order',
-    'Step-By-Step Builder',
+    'Step-By-Step Builder' . sbs_admin_help_tooltip('right', 'Determines the page order of the ordering process.'),
     'sbs_sbs_table_callback',
     'sbs_order_settings',
     'sbs_order_settings'
   );
 	add_settings_field(
 		'sbs_navbar_navigation',
-		'Navbar Navigation',
+		'Navbar Navigation' . sbs_admin_help_tooltip('right', 'The navbar contains navigable links in each step.  You can disallow skipping of steps here.'),
 		'sbs_navbar_navigation_callback',
 		'sbs_order_settings',
 		'sbs_order_settings'
@@ -411,7 +426,7 @@ function sbs_plugin_settings_init() {
 	);
 	add_settings_field(
 		'calc_widget',
-		'SBS Calculator Widget',
+		'SBS Calculator Widget' . sbs_admin_help_tooltip( 'right', 'A widget displaying price totals of items in the cart, listed by step.' ),
 		'sbs_display_calc_callback',
 		'sbs_display',
 		'sbs_display'
@@ -433,7 +448,7 @@ function sbs_plugin_settings_init() {
 
 	add_settings_field(
 		'sbs_premium_key',
-		'License Key',
+		'License Key' . sbs_admin_help_tooltip( 'right', 'Please enter the license key for this product to activate premium features.<br>An email was sent, with your license key, to your valid email after purchasing the premium version of this plugin.' ),
 		'sbs_premium_key_callback',
 		'sbs_premium',
 		'sbs_premium'
@@ -631,8 +646,13 @@ function sbs_page_name_callback() {
 	?>
 	<fieldset>
 		<label>
-			<p>The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.<br>
-			<strong>You may need to set this option again if you change the name of the page.</strong></p>
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.<br>
+				<strong>You may need to set this option again if you change the name of the page.</strong>'
+			);
+			?>
 			<select id="sbs_page_name" name="sbs_general[page-name]">
 				<option value="">(Select a Page)</option>
 				<?php
@@ -703,6 +723,12 @@ function sbs_req_feat_label_callback() {
 			<span>
 				<label>
 					<strong>"Required Items" Section Title:</strong>
+					<?php
+					echo sbs_admin_help_tooltip(
+						'top',
+						'Products with the "Required" attribute are displayed in their own sections.'
+					);
+					?>
 				</label><br />
 				<label>
 					Before Category Name:
@@ -716,6 +742,12 @@ function sbs_req_feat_label_callback() {
 			<span>
 				<label>
 					<strong>"Optional Items" Section Title:</strong>
+					<?php
+					echo sbs_admin_help_tooltip(
+						'top',
+						'Products that do not have the "Required" attribute are displayed separately from those that do.'
+					);
+					?>
 				</label><br />
 				<label>
 					Before Category Name:
@@ -729,6 +761,12 @@ function sbs_req_feat_label_callback() {
 			<span>
 				<label>
 					<strong>"Featured Items" Section Title:</strong>
+					<?php
+					echo sbs_admin_help_tooltip(
+						'top',
+						'Featured Products are products with the "Featured" tag selected from the Products list.'
+					);
+					?>
 				</label><br />
 				<label>
 					<input type="text" name="sbs_general[featured-label]" value="<?php echo $featured_label ?>" <?php disabled( false, $license ) ?> />
@@ -776,88 +814,83 @@ function sbs_sbs_table_callback() {
 	<?php if ( !$license ) { ?>
 	<p><strong style="color: red; font-size: 1.2em;">You may have up to two parent categories, or steps, active at a time in the free version of this plugin.<br>You can add as many categories as you would like after purchasing a license for the premium version <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong></p>
 	<?php } ?>
-	<div id="main-sortable-container">
+  <div class="sortable-container" id="sbs-order-container">
+    <h3>Your Ordering Process</h3>
+    <div class="fixed-item noselect">Package Selection</div>
+    <ul id="sbs-order" class="sortable step-sortable">
 
-
-	  <div class="sortable-container" id="sbs-order-container">
-	    <h3>Your Ordering Process</h3>
-	    <div class="fixed-item noselect">Package Selection</div>
-	    <ul id="sbs-order" class="sortable step-sortable">
-
-	      <?php
-				if ( isset( $step_order ) )
-				{
-	        foreach( $step_order as $category )
-					{
-					?>
-	          <li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
-	            <?php echo get_the_category_by_ID( $category->catid ) ?>
-
-							<ul>
-								<?php
-								foreach( $category->children as $child )
-								{
-								?>
-									<li class="sortable-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
-										<?php echo get_the_category_by_ID( $child->catid ) ?>
-									</li>
-								<?php
-								}
-								?>
-							</ul>
-
-	          </li>
-	        <?php
-	        }
-	      }
-				?>
-
-	    </ul>
-
-			<?php
-			if ( sbs_is_onf_section_active() )
+      <?php
+			if ( isset( $step_order ) )
 			{
+        foreach( $step_order as $category )
+				{
+				?>
+          <li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
+            <?php echo get_the_category_by_ID( $category->catid ) ?>
+
+						<ul>
+							<?php
+							foreach( $category->children as $child )
+							{
+							?>
+								<li class="sortable-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
+									<?php echo get_the_category_by_ID( $child->catid ) ?>
+								</li>
+							<?php
+							}
+							?>
+						</ul>
+
+          </li>
+        <?php
+        }
+      }
 			?>
-				<div class="fixed-item noselect">Options and Fees</div>
-			<?php
-			}
-			?>
 
-	    <div class="fixed-item noselect">Checkout</div>
-	  </div>
+    </ul>
 
-	  <div class="sortable-container" id="sbs-pool-container">
-	    <h3>Available Categories</h3>
-	    <ul id="sbs-pool" class="sortable">
-	      <?php foreach( $available_categories as $category ): ?>
+		<?php
+		if ( sbs_is_onf_section_active() )
+		{
+		?>
+			<div class="fixed-item noselect">Options and Fees</div>
+		<?php
+		}
+		?>
 
-					<?php if ( $category->category_parent === 0 ): ?>
+    <div class="fixed-item noselect">Checkout</div>
+  </div>
 
-	          <li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
-	            <?php echo $category->name ?>
+  <div class="sortable-container" id="sbs-pool-container">
+    <h3>Available Categories</h3>
+    <ul id="sbs-pool" class="sortable">
+      <?php foreach( $available_categories as $category ): ?>
 
-							<ul>
-								<?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
-								<?php if ( !empty( $children ) ): ?>
-									<?php foreach( $children as $child_id ): ?>
+				<?php if ( $category->category_parent === 0 ): ?>
 
-										<li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
-											<?php echo get_the_category_by_ID( $child_id ) ?>
-										</li>
+          <li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
+            <?php echo $category->name ?>
 
-									<?php endforeach; ?>
-								<?php endif; ?>
-							</ul>
+						<ul>
+							<?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
+							<?php if ( !empty( $children ) ): ?>
+								<?php foreach( $children as $child_id ): ?>
 
-	          </li>
+									<li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
+										<?php echo get_the_category_by_ID( $child_id ) ?>
+									</li>
 
-					<?php endif; ?>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</ul>
 
-	      <?php endforeach; ?>
-	    </ul>
-	  </div>
+          </li>
 
-	</div>
+				<?php endif; ?>
+
+      <?php endforeach; ?>
+    </ul>
+  </div>
 
   <input type="hidden" id="step_order" name="step_order" value="<?php echo esc_attr( get_option('step_order') ) ?>" />
   <?php
@@ -907,6 +940,12 @@ function sbs_package_enable_callback() {
 	?>
 	<fieldset>
 		<label>
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'If deactivated, the package page will be replaced with a notice that links to Step 1. You can link directly to Step 1 copying the link from the address bar or echoing sbs_get_begin_url( ) in your PHP code.'
+			);
+			?>
 			<select id="sbs_package[enabled]" name="sbs_package[enabled]">
 				<option value="1" <?php selected(1, $option) ?>>Activated</option>
 				<option value="0" <?php selected(0, $option) ?>>Deactivated</option>
@@ -928,7 +967,12 @@ function sbs_package_calc_label_callback() {
 	?>
 	<fieldset>
 		<label>
-			<p class="description">Appears if "Deactivated" was selected above.</p>
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'Appears if "Deactivated" was selected above.'
+			);
+			?>
 			<input style="width: 240px;" type="text" id="sbs_package[label]" name="sbs_package[label]" value="<?php echo $option ?>" <?php disabled( false, $license ) ?>/>
 		</label>
 	</fieldset>
@@ -948,8 +992,13 @@ function sbs_package_page_callback() {
 	?>
 	<fieldset>
 		<label>
-			<p>The page where the Select Packages page is located must be selected in order for navigation to work properly.<br>
-			<strong>You may need to set this option again if you change the name of the page.</strong></p>
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'The page where the Select Packages page is located must be selected in order for navigation to work properly.<br>
+				<strong>You may need to set this option again if you change the name of the page.</strong>'
+			);
+			?>
 			<select id="sbs_package[page-name]" name="sbs_package[page-name]">
 				<?php foreach( $pages as $page ): ?>
 				<option value="<?php echo esc_attr( $page->ID ) ?>" <?php echo selected( $page->ID, $option ) ?>>
@@ -971,10 +1020,13 @@ function sbs_package_category_callback() {
 	?>
 		<fieldset>
 			<label for="select-package-category">
-				<p>Select the WooCommerce product category your packages are assigned to.<br />
-				You must click Save Changes afterwards in order to refresh the package list.
-				</p>
-
+				<?php
+				echo sbs_admin_help_tooltip(
+					'top',
+					'Select the WooCommerce product category your packages are assigned to.<br />
+					You must click Save Changes afterwards in order to refresh the package list.'
+				);
+				?>
 				<select id="select-package-category" name="sbs_package[category]">
 					<option value="">Select One</option>
 					<?php
@@ -1008,6 +1060,12 @@ function sbs_package_merch_cred_callback() {
 	?>
 	<fieldset>
 		<label>
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'Any store credit the selected package has will be displayed on the calculator.'
+			);
+			?>
 			<input style="width: 240px;" type="text" name="sbs_package[merch-cred-label]" value="<?php echo $calc_label ?>" <?php disabled( false, $license ) ?>/>
 		</label>
 	</fieldset>
@@ -1112,6 +1170,12 @@ function sbs_package_atc_callback() {
 	?>
 	<fieldset>
 		<label>
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'Action taken when a package is added to the cart.'
+			);
+			?>
 			<select id="sbs_package[clear-cart]" name="sbs_package[clear-cart]">
 				<option value="1" <?php selected(1, $option) ?>>Clear the cart when a package is selected</option>
 				<option value="2" <?php selected(2, $option) ?>>Do not clear the cart when a package is selected</option>
@@ -1139,6 +1203,12 @@ function sbs_package_select_style_callback() {
 	?>
 	<fieldset>
 		<label class="<?php // echo !$license ? 'grayed-out-text' : null ?>">
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'Applies to desktop displays.  Mobile displays may collapse to one package per row.'
+			);
+			?>
 			Number of packages to display per row:
 			<select id="sbs-package-per-row" name="sbs_package[per-row]">
 		<?php
@@ -1155,13 +1225,26 @@ function sbs_package_select_style_callback() {
 		</label><br />
 
 		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'Customize the text on the Add To Cart button on packages.'
+			);
+			?>
 			"Add to Cart" Text (Premium):
 			<input type="text" id="sbs-package-add-cart-label" name="sbs_package[add-to-cart-text]" value="<?php echo $add_to_cart_text ?>" placeholder='Default: "Select Package"' <?php disabled( false, $license ) ?>/>
 		</label>
 
-		<p>Package Image Custom Size:</p>
-		<p class="description">Maximum image size is limited to the width of the package selection box, while maintaining aspect ratio.</p>
+		<p>
+			Package Image Custom Size:
+		</p>
 		<label>
+			<?php
+			echo sbs_admin_help_tooltip(
+				'top',
+				'Maximum image size is limited to the width of the package selection box, while maintaining aspect ratio.'
+			);
+			?>
 			Height (px):
 			<input type="number" min="0" step="1" id="sbs_package[image-height]" name="sbs_package[image-height]" value="<?php echo get_option('sbs_package')['image-height'] ?>">
 		</label>
@@ -1191,6 +1274,12 @@ function sbs_onf_enable_callback() {
 	?>
 		<fieldset>
 			<label>
+				<?php
+				echo sbs_admin_help_tooltip(
+					'top',
+					'If deactivated, removes the page from the ordering process.'
+				);
+				?>
 				<select id="sbs_onf[enabled]" name="sbs_onf[enabled]" <?php disabled( false, $category_defined && $license ) ?>>
 					<option value="1" <?php selected(1, $option) ?>>Activated</option>
 					<option value="0" <?php selected(0, $option) ?>>Deactivated</option>
@@ -1218,10 +1307,13 @@ function sbs_onf_category_callback() {
 	?>
 		<fieldset class="<?php echo !$license ? 'grayed-out-text' : null ?>">
 			<label>
-				<p>
-				Select the WooCommerce product category your Options and Fees items are located.<br />
-				Then click Save Changes to refresh the page.
-				</p>
+				<?php
+				echo sbs_admin_help_tooltip(
+					'top',
+					'Select the WooCommerce product category your Options and Fees items are located.<br />
+					Then click Save Changes to refresh the page.'
+				);
+				?>
 				<select id="select-package-category" name="sbs_onf[category]" <?php disabled( false, $license ) ?>>
 					<option value="">Select One</option>
 					<?php
@@ -1275,6 +1367,12 @@ function sbs_onf_order_callback() {
 
 	ob_start();
 	?>
+	<div class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+		<p>Create your Options and Fees page by dragging and dropping your items in the boxes below.</p>
+		<p>You can select from your subcategories of the parent category chosen to serve as Options.  Drag any desired categories from the
+		Available Categories column, and move them to the Your Ordering Process column.  You can change the order they are displayed by rearranging the order of items in the column.</p>
+		<p>To remove a category from the page just drag it back under the Available Categories column.</p>
+	</div>
 
 	<div class="sortable-container <?php echo !$license ? 'grayed-out-text' : null ?>" id="sbs-order-container">
 		<h3 class="<?php echo !$license ? 'grayed-out-text' : null ?>">Options and Fees Page Outline</h3>
@@ -1392,6 +1490,12 @@ function sbs_display_color_scheme_callback() {
   ob_start();
   ?>
 	<fieldset>
+		<?php
+		echo sbs_admin_help_tooltip(
+			'top',
+			'Colors buttons, navbars, headers, and the calculator with preset CSS themes.'
+		);
+		?>
 		<select id="sbs_display[color-scheme]" name="sbs_display[color-scheme]">
 		<?php
 		foreach( $colors as $key => $color )
@@ -1479,7 +1583,13 @@ function sbs_display_calc_callback() {
 					Show a vertical border separating the category column and the price column
 				</label><br>
 				<label>
-					Store Credit Display
+					Store Credit Display:
+					<?php
+					echo sbs_admin_help_tooltip(
+						'top',
+						'Select the text alignment of package store credit in the calculator, if any.'
+					);
+					?>
 					<select id="sbs_display[merch-cred-display]" name="sbs_display[merch-cred-display]">
 						<option value="1" <?php selected(1, $merch_cred_display_align) ?>>Align label and credit value left and right</option>
 						<option value="2" <?php selected(2, $merch_cred_display_align) ?>>Align label and credit value to the center</option>
@@ -1508,10 +1618,10 @@ function sbs_display_fonts_callback() {
 	);
 
 	$sections = array(
-		array( 'title' => 'Subcategory Name (Premium)', 'slug' => 'category-font', 'option' => $category_font ),
-		array( 'title' => 'Subcategory Description (Premium)', 'slug' => 'category-desc-font', 'option' => $category_desc_font ),
-		array( 'title' => 'Nav Buttons (Premium)', 'slug' => 'nav-button-font', 'option' => $nav_button_font ),
-		array( 'title' => 'Navbar (Premium)', 'slug' => 'navbar-font', 'option' => $navbar_font ),
+		array( 'title' => 'Subcategory Name (Premium)', 'slug' => 'category-font', 'option' => $category_font, 'tooltip' => 'Section names in each page.' ),
+		array( 'title' => 'Subcategory Description (Premium)', 'slug' => 'category-desc-font', 'option' => $category_desc_font, 'tooltip' => 'The description under each section name.' ),
+		array( 'title' => 'Nav Buttons (Premium)', 'slug' => 'nav-button-font', 'option' => $nav_button_font, 'tooltip' => 'The Back/Foward buttons on each page.' ),
+		array( 'title' => 'Navbar (Premium)', 'slug' => 'navbar-font', 'option' => $navbar_font, 'tooltip' => "The bar at the top of each page displaying the customer's progress during ordering." ),
 	);
 
 	$license = sbs_check_license_cache();
@@ -1525,7 +1635,15 @@ function sbs_display_fonts_callback() {
 	?>
 	<fieldset class="<?php echo !$license ? 'grayed-out-text' : null ?>">
 		<label>
-			<div><strong><?php echo $section['title'] ?></strong></div>
+			<div>
+				<strong><?php echo $section['title'] ?></strong>
+				<?php
+				echo sbs_admin_help_tooltip(
+					'top',
+					esc_html( $section['tooltip'] )
+				);
+				?>
+			</div>
 			<select id="sbs_display[<?php echo $section['slug'] ?>]" name="sbs_display[<?php echo $section['slug'] ?>]" <?php disabled( false, $license ) ?>>
 			<?php
 			foreach ( $fonts as $key => $font )
@@ -1626,6 +1744,12 @@ function sbs_display_navbar_number_shape_callback() {
   ob_start();
 	?>
 	<fieldset>
+		<?php
+		echo sbs_admin_help_tooltip(
+			'top',
+			'Change the shape of the step number in the navbar.'
+		);
+		?>
 		<select id="sbs_display[navbar-style]" name="sbs_display[navbar-style]">
 		<?php
 		foreach ( $styles as $key => $style )
@@ -1701,6 +1825,12 @@ function sbs_display_navbar_title_shape_callback() {
 	ob_start();
 	?>
 	<fieldset>
+		<?php
+		echo sbs_admin_help_tooltip(
+			'top',
+			'Change the shape of the step names in the navbar.'
+		);
+		?>
 		<select id="sbs_display[nav-title-style]" name="sbs_display[nav-title-style]">
 		<?php
 		foreach ($styles as $key => $style)
@@ -1860,8 +1990,6 @@ function sbs_premium_key_callback() {
 
 	if ( empty( $saved_license_key ) ) {
 
-		echo '<p class="description">Please enter the license key for this product to activate premium features.<br>An email was sent, with your license key, to your valid email after purchasing the premium version of this plugin.</p>';
-
 	}
 	else {
 
@@ -1965,6 +2093,10 @@ function sbs_render_admin_help_page() {
 	<div class="wrap">
 		<h3>Help</h3>
 		<p>This is the help section for the Step-By-Step Plugin.</p>
+		<div class="sbs-tooltip">
+			Help
+			<span class="sbs-tooltiptext sbs-tooltip-right">Tooltip Text</span>
+		</div>
 	</div>
 	<?php
 	echo ob_get_clean();

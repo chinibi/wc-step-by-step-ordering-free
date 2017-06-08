@@ -37,6 +37,12 @@ div.sortable-container {
   width: 30%;
 }
 
+@media (max-width: 767px) {
+  .sortable-container {
+    width: 75%;
+  }
+}
+
 ol.sortable, ul.sortable {
   padding-top: 25px;
   padding-bottom: 25px;
@@ -115,5 +121,127 @@ div#sbs-order-container, div#sbs-pool-container {
 .sbs-display-thumbnail-img {
   padding-left: 5px;
   padding-right: 5px;
+  text-align: center;
+}
+
+/* Tooltip container */
+.sbs-tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+  margin-right: 5px;
+}
+
+/* Tooltip text */
+
+@media (min-width: 769px) {
+  .sbs-tooltip .sbs-tooltiptext {
+    visibility: hidden;
+    width: 180px;
+    background-color: #555;
+    color: #fff;
+    text-align: left;
+    padding: 5px 13px;
+    border-radius: 6px;
+    font-size: 0.8em;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+
+    /* Fade in tooltip */
+    /*opacity: 0;
+    transition: opacity 1s;*/
+  }
+
+  .sbs-tooltip-top {
+    bottom: 125%;
+    left: 50%;
+    margin-left: -103px;
+  }
+
+  .sbs-tooltip-right {
+    top: -9px;
+    left: 150%;
+    font-weight: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  .sbs-tooltip .sbs-tooltiptext {
+    visibility: hidden;
+    background-color: #555;
+    color: #fff;
+    text-align: left;
+    margin: 0 auto;
+    padding: 10px 13px;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: normal;
+
+    width: 30%;
+    font-size: 1.2em;
+
+    /* Position the tooltip text */
+    position: fixed;
+    z-index: 1;
+    bottom: 2%;
+    left: 0;
+    right: 0;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+  }
+}
+
+@media (max-width: 767px) {
+  .sbs-tooltip .sbs-tooltiptext {
+    width: 60%;
+    font-size: 1em;
+  }
+}
+
+/* Tooltip arrow */
+@media (min-width: 769px) {
+  .sbs-tooltip-top::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+}
+
+/*.sbs-tooltip-right::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #555 transparent transparent;
+}*/
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.sbs-tooltip:hover .sbs-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.sbs-tooltip-icon::before {
+  content: "?";
+  font-size: 1em;
+  color: white;
+  background-color: #313131;
+  border-radius: 100%;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
   text-align: center;
 }
