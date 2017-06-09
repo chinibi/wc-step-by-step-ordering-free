@@ -10,17 +10,34 @@ if ( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
   exit;
 }
 
-// Delete all settings
-delete_option( 'sbs_general' );
-delete_option( 'step_order' );
-delete_option( 'sbs_navbar' );
-delete_option( 'sbs_package' );
-delete_option( 'sbs_onf' );
-delete_option( 'sbs_display' );
-delete_option( 'sbs_premium_key' );
-delete_site_transient( 'sbs_premium_key_valid' );
+// Remove cron jobs
+wp_clear_scheduled_hook( 'sbs_daily_event' );
 
-// Delete all custom post meta keys
-delete_post_meta_by_key( '_autoadd_product' );
-delete_post_meta_by_key( '_required_product' );
-delete_post_meta_by_key( '_merch_credit' );
+/**
+ * Delete all data if a SBS_REMOVE_ALL_DATA constant is set to true in
+ * wp-config.php.
+ */
+
+if ( defined( 'SBS_REMOVE_ALL_DATA' ) && SBS_REMOVE_ALL_DATA === true ) {
+  // Delete all settings
+  delete_option( 'sbs_general' );
+  delete_option( 'step_order' );
+  delete_option( 'sbs_navbar' );
+  delete_option( 'sbs_package' );
+  delete_option( 'sbs_onf' );
+  delete_option( 'sbs_display' );
+  delete_option( 'sbs_premium_key' );
+  delete_site_transient( 'sbs_premium_key_valid' );
+
+  // Delete all custom post meta keys
+  delete_post_meta_by_key( '_autoadd_product' );
+  delete_post_meta_by_key( '_required_product' );
+  delete_post_meta_by_key( '_merch_credit' );
+
+  // Remove all SBS posts
+  $sbs_ordering_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
+  $sbs_package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
+
+  wp_trash_post( $sbs_ordering_page );
+  wp_trash_post( $sbs_package_page );
+}
