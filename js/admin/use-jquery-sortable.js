@@ -1,6 +1,12 @@
 (function($) {
   $(document).ready(function() {
 
+    function serializeData() {
+      var data = $('#sbs-order').sortable('serialize').get();
+      var jsonString = JSON.stringify(data);
+      $('input#step_order').val(jsonString);
+    }
+
     var group = $('.sortable').sortable({
       group: 'sortable',
       nested: true,
@@ -26,10 +32,7 @@
 
       },
       onDrop: function($item, container, _super) {
-        var data = $('#sbs-order').sortable('serialize').get();
-        var jsonString = JSON.stringify(data);
-
-        $('input#step_order').val(jsonString);
+        serializeData();
         _super($item, container);
       }
     });
@@ -37,6 +40,39 @@
     if ( !sbsLicenseValid ) {
       $('.onf-sortable').sortable('disable');
     }
+
+    /**
+     * Buttons for moving sortables, in case drag and drop does not work.
+     */
+    $('.sbs-sortable-item-move-up').on('click touchend', function() {
+      $item = $(this).parent().parent();
+      $before = $item.prev();
+      if ($before) {
+        $item.insertBefore($before);
+        serializeData();
+      }
+    });
+
+    $('.sbs-sortable-item-move-down').on('click touchend', function() {
+      $item = $(this).parent().parent();
+      $next = $item.next();
+      if ($next) {
+        $item.insertAfter($next);
+        serializeData();
+      }
+    });
+
+    $('.sbs-sortable-item-add').on('click touchend', function() {
+      $item = $(this).parent().parent();
+      $item.detach().appendTo('#sbs-order');
+      serializeData();
+    });
+
+    $('.sbs-sortable-item-remove').on('click touchend', function() {
+      $item = $(this).parent().parent();
+      $item.detach().appendTo('#sbs-pool');
+      serializeData();
+    });
 
   });
 })(jQuery);

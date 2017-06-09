@@ -103,6 +103,22 @@ ol.sortable ul.sortable li.placeholder:before, ul.sortable li.placeholder:before
   border-right: none;
 }
 
+.sbs-sortable-item-add,
+.sbs-sortable-item-remove,
+.sbs-sortable-item-move-up,
+.sbs-sortable-item-move-down
+{
+  padding-left: 0.5em;
+}
+
+#sbs-order .sbs-sortable-item-add,
+#sbs-pool-container .sbs-sortable-item-remove,
+#sbs-pool-container .sbs-sortable-item-move-up,
+#sbs-pool-container .sbs-sortable-item-move-down
+{
+  display: none;
+}
+
 div#sbs-order-container, div#sbs-pool-container {
   padding: 48px;
   float: left;

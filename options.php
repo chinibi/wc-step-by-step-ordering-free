@@ -24,7 +24,7 @@ function sbs_load_custom_wp_admin_style() {
 
   // load custom jQuery UI scripts and styles
 	wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
-  wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ) );
+  wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ), filemtime( plugin_dir_path( __FILE__ ) . 'js/admin/use-jquery-sortable.js' ) );
   wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/style.css' ) );
 
 }
@@ -490,10 +490,12 @@ function sbs_sbs_description() {
   ob_start();
   ?>
 
-    <p>Create your ordering process by dragging and dropping your steps in the boxes below.</p>
-    <p>You can select from your Product Categories.  Drag any desired categories from the
-      Available Categories column, and move them to the Your Ordering Process column.</p>
-    <p>To remove a step from your ordering process just drag it back under the Available Categories column.</p>
+	<p>Create your ordering process by dragging and dropping (or touching the control buttons at the right side of each button) your steps in the boxes below.</p>
+	<p>You can select from your Product Categories.  Drag any desired categories from the
+	Available Categories column, and move them to the Your Ordering Process column.
+	You can also do this by touching the &#10133; button.
+	</p>
+	<p>To remove a step from your ordering process just drag it back under the Available Categories column. You can also do this by touching the &#10006; button.</p>
 
   <?php
   echo ob_get_clean();
@@ -827,7 +829,12 @@ function sbs_sbs_table_callback() {
 				?>
           <li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
             <?php echo get_the_category_by_ID( $category->catid ) ?>
-
+						<div class="alignright">
+							<span class="sbs-sortable-item-move-up">&#9650;</span>
+							<span class="sbs-sortable-item-move-down">&#9660;</span>
+							<span class="sbs-sortable-item-add">&#10133;</span>
+							<span class="sbs-sortable-item-remove">&#10006;</span>
+						</div>
 						<ul>
 							<?php
 							foreach( $category->children as $child )
@@ -835,12 +842,15 @@ function sbs_sbs_table_callback() {
 							?>
 								<li class="sortable-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
 									<?php echo get_the_category_by_ID( $child->catid ) ?>
+									<div class="alignright">
+										<span class="sbs-sortable-item-move-up">&#9650;</span>
+										<span class="sbs-sortable-item-move-down">&#9660;</span>
+									</div>
 								</li>
 							<?php
 							}
 							?>
 						</ul>
-
           </li>
         <?php
         }
@@ -870,7 +880,12 @@ function sbs_sbs_table_callback() {
 
           <li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
             <?php echo $category->name ?>
-
+						<div class="alignright">
+							<span class="sbs-sortable-item-move-up">&#9650;</span>
+							<span class="sbs-sortable-item-move-down">&#9660;</span>
+							<span class="sbs-sortable-item-add">&#10133;</span>
+							<span class="sbs-sortable-item-remove">&#10006;</span>
+						</div>
 						<ul>
 							<?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
 							<?php if ( !empty( $children ) ): ?>
@@ -878,6 +893,10 @@ function sbs_sbs_table_callback() {
 
 									<li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
 										<?php echo get_the_category_by_ID( $child_id ) ?>
+										<div class="alignright">
+											<span class="sbs-sortable-item-move-up">&#9650;</span>
+											<span class="sbs-sortable-item-move-down">&#9660;</span>
+										</div>
 									</li>
 
 								<?php endforeach; ?>
@@ -1108,7 +1127,7 @@ function sbs_package_tier_callback() {
 
 	<?php else: ?>
 		<p>
-			Drag packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
+			Drag (or touch the control buttons on the right side) packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
 			the order in which they are displayed.
 
 			<?php if ( !$license ) { ?>
@@ -1128,6 +1147,12 @@ function sbs_package_tier_callback() {
 					?>
 					<li data-catid="<?php echo $package->catid ?>" class="sortable-item">
 						<?php echo get_the_title( $package->catid ) ?>
+						<div class="alignright">
+							<span class="sbs-sortable-item-move-up">&#9650;</span>
+							<span class="sbs-sortable-item-move-down">&#9660;</span>
+							<span class="sbs-sortable-item-add">&#10133;</span>
+							<span class="sbs-sortable-item-remove">&#10006;</span>
+						</div>
 					</li>
 					<?php
 					}
@@ -1146,6 +1171,12 @@ function sbs_package_tier_callback() {
 					?>
 						<li data-catid="<?php echo $package->ID ?>" class="sortable-item">
 							<?php echo $package->post_title ?>
+							<div class="alignright">
+								<span class="sbs-sortable-item-move-up">&#9650;</span>
+								<span class="sbs-sortable-item-move-down">&#9660;</span>
+								<span class="sbs-sortable-item-add">&#10133;</span>
+								<span class="sbs-sortable-item-remove">&#10006;</span>
+							</div>
 						</li>
 					<?php
 					}
@@ -1368,10 +1399,10 @@ function sbs_onf_order_callback() {
 	ob_start();
 	?>
 	<div class="<?php echo !$license ? 'grayed-out-text' : null ?>">
-		<p>Create your Options and Fees page by dragging and dropping your items in the boxes below.</p>
+		<p>Create your Options and Fees page by dragging and dropping (or touching the control buttons on the right side of each item) your items in the boxes below.</p>
 		<p>You can select from your subcategories of the parent category chosen to serve as Options.  Drag any desired categories from the
-		Available Categories column, and move them to the Your Ordering Process column.  You can change the order they are displayed by rearranging the order of items in the column.</p>
-		<p>To remove a category from the page just drag it back under the Available Categories column.</p>
+		Available Categories column, and move them to the Your Ordering Process column.  You can also do this by touching the &#10133; button.  You can change the order they are displayed by rearranging the order of items in the column by drag and drop or arrow buttons.</p>
+		<p>To remove a category from the page just drag it back under the Available Categories column.  You can also do this by touching the &#10006; button.</p>
 	</div>
 
 	<div class="sortable-container <?php echo !$license ? 'grayed-out-text' : null ?>" id="sbs-order-container">
@@ -1386,7 +1417,12 @@ function sbs_onf_order_callback() {
 				?>
 					<li data-catid="<?php echo $category->catid ?>" class="sortable-item">
 						<?php echo get_the_category_by_ID( $category->catid ) ?>
-
+						<div class="alignright">
+							<span class="sbs-sortable-item-move-up">&#9650;</span>
+							<span class="sbs-sortable-item-move-down">&#9660;</span>
+							<span class="sbs-sortable-item-add">&#10133;</span>
+							<span class="sbs-sortable-item-remove">&#10006;</span>
+						</div>
 						<ul>
 							<?php
 							if ( !empty( $onf_order->children ) )
@@ -1396,6 +1432,12 @@ function sbs_onf_order_callback() {
 								?>
 									<li class="sortable-item" data-catid="<?php echo $child->catid ?>">
 										<?php echo get_the_category_by_ID( $child->catid ) ?>
+										<div class="alignright">
+											<span class="sbs-sortable-item-move-up">&#9650;</span>
+											<span class="sbs-sortable-item-move-down">&#9660;</span>
+											<span class="sbs-sortable-item-add">&#10133;</span>
+											<span class="sbs-sortable-item-remove">&#10006;</span>
+										</div>
 									</li>
 								<?php
 								}
@@ -1418,6 +1460,12 @@ function sbs_onf_order_callback() {
 			<?php foreach( $available_categories as $category ) { ?>
 							<li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
 								<?php echo $category->name ?>
+								<div class="alignright">
+									<span class="sbs-sortable-item-move-up">&#9650;</span>
+									<span class="sbs-sortable-item-move-down">&#9660;</span>
+									<span class="sbs-sortable-item-add">&#10133;</span>
+									<span class="sbs-sortable-item-remove">&#10006;</span>
+								</div>
 								<ul></ul>
 							</li>
 			<?php } ?>
