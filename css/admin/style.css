@@ -43,6 +43,12 @@ div.sortable-container {
   }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sortable-container {
+    width: 46%;
+  }
+}
+
 ol.sortable, ul.sortable {
   padding-top: 25px;
   padding-bottom: 25px;
@@ -103,6 +109,7 @@ ol.sortable ul.sortable li.placeholder:before, ul.sortable li.placeholder:before
   border-right: none;
 }
 
+/* Sortable button controls */
 .sbs-sortable-item-add,
 .sbs-sortable-item-remove,
 .sbs-sortable-item-move-up,
@@ -119,11 +126,37 @@ ol.sortable ul.sortable li.placeholder:before, ul.sortable li.placeholder:before
   display: none;
 }
 
+.sortable-item:first-child .sbs-sortable-item-move-up,
+.sortable-item:last-child .sbs-sortable-item-move-down
+{
+  display: none;
+}
+
+.sortable-item.sortable-nested-item .sbs-sortable-item-move-up,
+.sortable-item.sortable-nested-item .sbs-sortable-item-move-down
+{
+  display: inline;
+}
+
+.sortable-nested-item:first-child .sbs-sortable-item-move-up,
+.sortable-nested-item:last-child .sbs-sortable-item-move-down
+{
+  display: none;
+}
+
 div#sbs-order-container, div#sbs-pool-container {
   padding: 48px;
   float: left;
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  div#sbs-order-container, div#sbs-pool-container {
+    padding: 10px;
+    float: left;
+  }
+}
+
+/* Display theme thumbnails */
 .sbs-display-thumbnail-wrap {
   margin-top: 10px;
   margin-bottom: 10px;

@@ -835,17 +835,19 @@ function sbs_sbs_table_callback() {
 							<span class="sbs-sortable-item-add">&#10133;</span>
 							<span class="sbs-sortable-item-remove">&#10006;</span>
 						</div>
+						<div class="clearfix"></div>
 						<ul>
 							<?php
 							foreach( $category->children as $child )
 							{
 							?>
-								<li class="sortable-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
+								<li class="sortable-item sortable-nested-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
 									<?php echo get_the_category_by_ID( $child->catid ) ?>
 									<div class="alignright">
 										<span class="sbs-sortable-item-move-up">&#9650;</span>
 										<span class="sbs-sortable-item-move-down">&#9660;</span>
 									</div>
+									<div class="clearfix"></div>
 								</li>
 							<?php
 							}
@@ -886,6 +888,7 @@ function sbs_sbs_table_callback() {
 							<span class="sbs-sortable-item-add">&#10133;</span>
 							<span class="sbs-sortable-item-remove">&#10006;</span>
 						</div>
+						<div class="clearfix"></div>
 						<ul>
 							<?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
 							<?php if ( !empty( $children ) ): ?>
@@ -897,6 +900,7 @@ function sbs_sbs_table_callback() {
 											<span class="sbs-sortable-item-move-up">&#9650;</span>
 											<span class="sbs-sortable-item-move-down">&#9660;</span>
 										</div>
+										<div class="clearfix"></div>
 									</li>
 
 								<?php endforeach; ?>
@@ -1127,7 +1131,7 @@ function sbs_package_tier_callback() {
 
 	<?php else: ?>
 		<p>
-			Drag (or touch the control buttons on the right side) packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
+			Drag (or touch the control buttons on the right side of each item) packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
 			the order in which they are displayed.
 
 			<?php if ( !$license ) { ?>
@@ -1153,6 +1157,7 @@ function sbs_package_tier_callback() {
 							<span class="sbs-sortable-item-add">&#10133;</span>
 							<span class="sbs-sortable-item-remove">&#10006;</span>
 						</div>
+						<div class="clearfix"></div>
 					</li>
 					<?php
 					}
@@ -1177,6 +1182,7 @@ function sbs_package_tier_callback() {
 								<span class="sbs-sortable-item-add">&#10133;</span>
 								<span class="sbs-sortable-item-remove">&#10006;</span>
 							</div>
+							<div class="clearfix"></div>
 						</li>
 					<?php
 					}
@@ -1308,7 +1314,9 @@ function sbs_onf_enable_callback() {
 				<?php
 				echo sbs_admin_help_tooltip(
 					'top',
-					'If deactivated, removes the page from the ordering process.'
+					'If deactivated, removes the page from the ordering process.
+					If no subcategories are present in the Options and Fees Page Outline
+					the page not be included in the ordering process.'
 				);
 				?>
 				<select id="sbs_onf[enabled]" name="sbs_onf[enabled]" <?php disabled( false, $category_defined && $license ) ?>>
@@ -1423,6 +1431,7 @@ function sbs_onf_order_callback() {
 							<span class="sbs-sortable-item-add">&#10133;</span>
 							<span class="sbs-sortable-item-remove">&#10006;</span>
 						</div>
+						<div class="clearfix"></div>
 						<ul>
 							<?php
 							if ( !empty( $onf_order->children ) )
@@ -1438,6 +1447,7 @@ function sbs_onf_order_callback() {
 											<span class="sbs-sortable-item-add">&#10133;</span>
 											<span class="sbs-sortable-item-remove">&#10006;</span>
 										</div>
+										<div class="clearfix"></div>
 									</li>
 								<?php
 								}
@@ -1466,6 +1476,7 @@ function sbs_onf_order_callback() {
 									<span class="sbs-sortable-item-add">&#10133;</span>
 									<span class="sbs-sortable-item-remove">&#10006;</span>
 								</div>
+								<div class="clearfix"></div>
 								<ul></ul>
 							</li>
 			<?php } ?>
