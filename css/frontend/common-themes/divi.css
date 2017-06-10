@@ -1,3 +1,8 @@
+/* Main Content */
+#main-content {
+  padding-top: 25px;
+}
+
 /* Package Selection Page */
 .sbs-package-container {
   padding-bottom: 50px;
@@ -104,4 +109,9 @@ p.sbs-subcat-description:last-of-type {
 
 .mfp-content .woocommerce .quantity input.qty {
   height: 49px;
+}
+
+.mfp-content .woocommerce div.product form.cart .variations td select,
+.mfp-content .woocommerce div.product form.cart .variations td.label {
+  font-size: 18px;
 }
