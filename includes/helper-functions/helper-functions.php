@@ -386,8 +386,10 @@ function sbs_is_onf_section_active() {
 	$license = sbs_check_license_cache();
 	$category_selected = isset( get_option('sbs_onf')['category'] );
 	$activated = !isset( get_option('sbs_onf')['enabled'] ) || get_option('sbs_onf')['enabled'] === '1';
+	$subcategories = isset( get_option('sbs_onf')['order']) ? get_option('sbs_onf')['order'] : '[[]]';
+	$subcategories = json_decode( $subcategories )[0];
 
-	return $activated && $category_selected && $license;
+	return !empty($subcategories) && $activated && $category_selected && $license;
 
 }
 
