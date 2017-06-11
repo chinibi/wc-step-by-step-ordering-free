@@ -1154,7 +1154,7 @@ function sbs_package_tier_callback() {
 	ob_start();
 	?>
 
-	<?php if ( !isset( $package_cat_id ) ): ?>
+	<?php if ( empty( $package_cat_id ) ): ?>
 
 		<p>Select a package category above to begin.</p>
 
