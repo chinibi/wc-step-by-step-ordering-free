@@ -223,21 +223,6 @@ h1.step-by-step-title {
   padding: 20px;
 }
 
-.sbs-package-content.sbs-package-content-per-row-1 {
-  padding-left: 33%;
-  padding-right: 33%;
-}
-
-.sbs-package-content.sbs-package-content-per-row-2 {
-  padding-left: 33%;
-  padding-right: 33%;
-}
-
-.sbs-package-content.sbs-package-content-per-row-3 {
-  padding-left: 20%;
-  padding-right: 20%;
-}
-
 .sbs-package-content.sbs-package-content-wide-container {
   width: 60%;
   margin: 0 auto;
@@ -246,21 +231,6 @@ h1.step-by-step-title {
 @media (max-width: 768px) {
   .sbs-package-container {
     width: 100%;
-  }
-
-  .sbs-package-content.sbs-package-content-per-row-1 {
-    padding-left: 14%;
-    padding-right: 14%;
-  }
-
-  .sbs-package-content.sbs-package-content-per-row-2 {
-    padding-left: 14%;
-    padding-right: 14%;
-  }
-
-  .sbs-package-content.sbs-package-content-per-row-3 {
-    padding-left: 14%;
-    padding-right: 14%;
   }
 }
 
@@ -317,8 +287,16 @@ h1.step-by-step-title {
   white-space: nowrap;
 }
 
-#sbs-widget-sidebar-cart-totals td:not(:last-child) {
+#sbs-widget-sidebar-cart-totals td:not([colspan="2"]):not(:last-child) {
   border-right: none;
+}
+
+#sbs-widget-sidebar-cart-totals tr.sbs-widget-sidebar-merch-credit-label {
+  border-bottom: none;
+}
+
+#sbs-widget-sidebar-cart-totals tr.sbs-widget-sidebar-merch-credit-value {
+  border-top: none;
 }
 
 #sbs-widget-sidebar-back-forward-buttons-container td {
