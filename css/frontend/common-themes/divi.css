@@ -115,3 +115,8 @@ p.sbs-subcat-description:last-of-type {
 .mfp-content .woocommerce div.product form.cart .variations td.label {
   font-size: 18px;
 }
+
+/* Options and Fees table */
+.woocommerce.sbs-options-and-fees tr td {
+  padding: 15px 24px;
+}
