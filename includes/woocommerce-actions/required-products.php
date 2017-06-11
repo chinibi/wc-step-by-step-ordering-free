@@ -33,6 +33,12 @@ function sbs_req_get_required_products( $categories ) {
         'taxonomy' => 'product_cat',
         'field' => 'term_id',
         'terms' => $categories
+      ),
+      array(
+        'taxonomy' => 'product_visibility',
+        'field' => 'name',
+        'terms' => 'exclude-from-catalog',
+        'operator' => 'NOT IN'
       )
 		)
 	);

@@ -244,6 +244,17 @@ function sbs_render_optional_products( $category_id ) {
 		)
 	);
 
+	$featured_visible = isset( get_option('sbs_general')['featured-items-visibility'] ) ? get_option('sbs_general')['featured-items-visibility'] : '1';
+
+	if ( $featured_visible != '1' ) {
+		$req_args['tax_query'][] = array(
+			'taxonomy' => 'product_visibility',
+			'field'    => 'name',
+			'terms'    => 'featured',
+			'operator' => 'NOT IN'
+		);
+	}
+
 	$query = new WP_Query( $req_args );
 
 	$optional_products = sbs_req_get_optional_products( $category_id );
@@ -296,6 +307,17 @@ function sbs_render_product_category( $category_id ) {
 			)
 		)
 	);
+
+	$featured_visible = isset( get_option('sbs_general')['featured-items-visibility'] ) ? get_option('sbs_general')['featured-items-visibility'] : '1';
+
+	if ( $featured_visible != '1' ) {
+		$req_args['tax_query'][] = array(
+			'taxonomy' => 'product_visibility',
+			'field'    => 'name',
+			'terms'    => 'featured',
+			'operator' => 'NOT IN'
+		);
+	}
 
 	$query = new WP_Query( $req_args );
 

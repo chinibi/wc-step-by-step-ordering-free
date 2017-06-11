@@ -298,6 +298,13 @@ function sbs_plugin_settings_init() {
 		'sbs_general'
 	);
 	add_settings_field(
+		'sbs_featured_visibility',
+		'Featured Items Visibility' . sbs_admin_help_tooltip( 'right', 'Display featured products separately in their own section.' ),
+		'sbs_featured_items_vis_callback',
+		'sbs_general',
+		'sbs_general'
+	);
+	add_settings_field(
 		'sbs_required_featured_label',
 		'Featured and Required Section Labels (Premium)',
 		'sbs_req_feat_label_callback',
@@ -315,7 +322,7 @@ function sbs_plugin_settings_init() {
   );
 	add_settings_field(
 		'sbs_navbar_navigation',
-		'Navbar Navigation' . sbs_admin_help_tooltip('right', 'The navbar contains navigable links in each step.  You can disallow skipping of steps here.'),
+		'Navbar Navigation' . sbs_admin_help_tooltip('right', 'The step navbar contains navigable links in each step. You can disallow skipping of steps here.'),
 		'sbs_navbar_navigation_callback',
 		'sbs_order_settings',
 		'sbs_order_settings'
@@ -426,7 +433,7 @@ function sbs_plugin_settings_init() {
 	);
 	add_settings_field(
 		'calc_widget',
-		'SBS Calculator Widget' . sbs_admin_help_tooltip( 'right', 'A widget displaying price totals of items in the cart, listed by step.' ),
+		'SBS Calculator Widget' . sbs_admin_help_tooltip( 'right', 'Stylings for our widget displaying price totals of items in the cart, listed by step.' ),
 		'sbs_display_calc_callback',
 		'sbs_display',
 		'sbs_display'
@@ -448,7 +455,7 @@ function sbs_plugin_settings_init() {
 
 	add_settings_field(
 		'sbs_premium_key',
-		'License Key' . sbs_admin_help_tooltip( 'right', 'Please enter the license key for this product to activate premium features.<br>An email was sent, with your license key, to your valid email after purchasing the premium version of this plugin.' ),
+		'License Key' . sbs_admin_help_tooltip( 'right', 'Please enter the license key for this product to activate premium features.<br>An email is sent, with your license key, to your valid email after purchasing the premium version of this plugin. If you are a developer, you can purchase a multiple site license.' ),
 		'sbs_premium_key_callback',
 		'sbs_premium',
 		'sbs_premium'
@@ -651,8 +658,7 @@ function sbs_page_name_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.<br>
-				<strong>You may need to set this option again if you change the name of the page.</strong>'
+				'The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.'
 			);
 			?>
 			<select id="sbs_page_name" name="sbs_general[page-name]">
@@ -709,6 +715,30 @@ function sbs_featured_items_pos_callback() {
 
 }
 
+function sbs_featured_items_vis_callback() {
+
+	$option = isset( get_option('sbs_general')['featured-items-visibility'] ) ? get_option('sbs_general')['featured-items-visibility'] : 1;
+
+	$license = sbs_check_license_cache();
+
+	ob_start();
+	?>
+	<fieldset>
+		<label>
+			<input type="radio" name="sbs_general[featured-items-visibility]" value="1" <?php checked(1, $option) ?>>
+			Display featured products under both their parent category and the featured section.
+		</label><br>
+		<label>
+			<input type="radio" name="sbs_general[featured-items-visibility]" value="2" <?php checked(2, $option) ?>>
+			Display featured products in the featured section only.
+		</label>
+	</fieldset>
+	<?php
+
+	echo ob_get_clean();
+
+}
+
 function sbs_req_feat_label_callback() {
 
 	$featured_label = isset( get_option('sbs_general')['featured-label'] ) ? get_option('sbs_general')['featured-label'] : 'Featured Items';
@@ -728,7 +758,7 @@ function sbs_req_feat_label_callback() {
 					<?php
 					echo sbs_admin_help_tooltip(
 						'top',
-						'Products with the "Required" attribute are displayed in their own sections.'
+						'Products with the "Required" attribute are displayed in their own sections.  You can add text before and after the category name.'
 					);
 					?>
 				</label><br />
@@ -747,7 +777,7 @@ function sbs_req_feat_label_callback() {
 					<?php
 					echo sbs_admin_help_tooltip(
 						'top',
-						'Products that do not have the "Required" attribute are displayed separately from those that do.'
+						'Products that do not have the "Required" attribute are displayed separately from those that do. You can add text before and after the category name.'
 					);
 					?>
 				</label><br />
@@ -766,7 +796,7 @@ function sbs_req_feat_label_callback() {
 					<?php
 					echo sbs_admin_help_tooltip(
 						'top',
-						'Featured Products are products with the "Featured" tag selected from the Products list.'
+						'Featured Products are products with the "Featured" tag selected from the Products list.  You can name your featured section title anything you would like.'
 					);
 					?>
 				</label><br />
@@ -966,7 +996,7 @@ function sbs_package_enable_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'If deactivated, the package page will be replaced with a notice that links to Step 1. You can link directly to Step 1 copying the link from the address bar or echoing sbs_get_begin_url( ) in your PHP code.'
+				'Enables the use of packages for the SBS system.  If deactivated, the package page will be replaced with a notice that links to Step 1. You can link directly to Step 1 copying the link from the address bar or typing "echo sbs_get_begin_url()" in your PHP code.'
 			);
 			?>
 			<select id="sbs_package[enabled]" name="sbs_package[enabled]">
@@ -1018,8 +1048,7 @@ function sbs_package_page_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'The page where the Select Packages page is located must be selected in order for navigation to work properly.<br>
-				<strong>You may need to set this option again if you change the name of the page.</strong>'
+				'The page where the Select Packages page is located must be selected in order for navigation to work properly.'
 			);
 			?>
 			<select id="sbs_package[page-name]" name="sbs_package[page-name]">
@@ -1086,7 +1115,7 @@ function sbs_package_merch_cred_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'Any store credit the selected package has will be displayed on the calculator.'
+				'If your package has a store credit, the following text will be displayed on the widget calculator.  You can change this title to anything you would like.'
 			);
 			?>
 			<input style="width: 240px;" type="text" name="sbs_package[merch-cred-label]" value="<?php echo $calc_label ?>" <?php disabled( false, $license ) ?>/>
@@ -1210,7 +1239,7 @@ function sbs_package_atc_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'Action taken when a package is added to the cart.'
+				'When a package is selected or changed in the SBS system, this is the action take when a package is added to the cart. The default behavior is to clear the cart so the user has a fresh experience.'
 			);
 			?>
 			<select id="sbs_package[clear-cart]" name="sbs_package[clear-cart]">
@@ -1243,7 +1272,7 @@ function sbs_package_select_style_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'Applies to desktop displays.  Mobile displays may collapse to one package per row.'
+				'On your package selection page, select the amount of packages to display per row.  This applies to desktop displays. Mobile displays may collapse to one package per row.'
 			);
 			?>
 			Number of packages to display per row:
@@ -1314,9 +1343,7 @@ function sbs_onf_enable_callback() {
 				<?php
 				echo sbs_admin_help_tooltip(
 					'top',
-					'If deactivated, removes the page from the ordering process.
-					If no subcategories are present in the Options and Fees Page Outline
-					the page not be included in the ordering process.'
+					'If deactivated, the page is removed from the ordering process. If no subcategories are present in the Options and Fees Page Outline the page will not be included in the ordering process.'
 				);
 				?>
 				<select id="sbs_onf[enabled]" name="sbs_onf[enabled]" <?php disabled( false, $category_defined && $license ) ?>>
@@ -1677,10 +1704,10 @@ function sbs_display_fonts_callback() {
 	);
 
 	$sections = array(
-		array( 'title' => 'Subcategory Name (Premium)', 'slug' => 'category-font', 'option' => $category_font, 'tooltip' => 'Section names in each page.' ),
-		array( 'title' => 'Subcategory Description (Premium)', 'slug' => 'category-desc-font', 'option' => $category_desc_font, 'tooltip' => 'The description under each section name.' ),
-		array( 'title' => 'Nav Buttons (Premium)', 'slug' => 'nav-button-font', 'option' => $nav_button_font, 'tooltip' => 'The Back/Foward buttons on each page.' ),
-		array( 'title' => 'Navbar (Premium)', 'slug' => 'navbar-font', 'option' => $navbar_font, 'tooltip' => "The bar at the top of each page displaying the customer's progress during ordering." ),
+		array( 'title' => 'Subcategory Name (Premium)', 'slug' => 'category-font', 'option' => $category_font, 'tooltip' => 'Select section name fonts for displayed on each page.' ),
+		array( 'title' => 'Subcategory Description (Premium)', 'slug' => 'category-desc-font', 'option' => $category_desc_font, 'tooltip' => 'Select the font for the description under each section name.' ),
+		array( 'title' => 'Nav Buttons (Premium)', 'slug' => 'nav-button-font', 'option' => $nav_button_font, 'tooltip' => 'Select the font for the Back/Foward buttons on each page.' ),
+		array( 'title' => 'Navbar (Premium)', 'slug' => 'navbar-font', 'option' => $navbar_font, 'tooltip' => "Select the font for the bar at the top of each page displaying the customer's progress during ordering." ),
 	);
 
 	$license = sbs_check_license_cache();
