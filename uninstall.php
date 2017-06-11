@@ -20,6 +20,7 @@ wp_clear_scheduled_hook( 'sbs_daily_event' );
 
 if ( defined( 'SBS_REMOVE_ALL_DATA' ) && SBS_REMOVE_ALL_DATA === true ) {
   // Delete all settings
+  delete_option( 'sbs_version' );
   delete_option( 'sbs_general' );
   delete_option( 'step_order' );
   delete_option( 'sbs_navbar' );
@@ -38,6 +39,6 @@ if ( defined( 'SBS_REMOVE_ALL_DATA' ) && SBS_REMOVE_ALL_DATA === true ) {
   $sbs_ordering_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
   $sbs_package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
 
-  wp_trash_post( $sbs_ordering_page );
-  wp_trash_post( $sbs_package_page );
+  wp_delete_post( $sbs_ordering_page, true );
+  wp_delete_post( $sbs_package_page, true );
 }

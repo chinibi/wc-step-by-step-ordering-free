@@ -85,7 +85,6 @@ final class StepByStepSystem {
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/plugin/deactivation.php' );
 	}
 
-
 	public function sbs_enqueue_client_style_scripts() {
 
 		// Enqueue libraries
