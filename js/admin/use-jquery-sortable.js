@@ -64,6 +64,15 @@
 
     $('.sbs-sortable-item-add').on('click touchend', function() {
       $item = $(this).parent().parent();
+
+      if ( !sbsLicenseValid && $('.step-sortable').length && $('#sbs-order').children().length >= 2  ) {
+        return false;
+      }
+
+      if ( !sbsLicenseValid && $('.package-sortable').length && $('#sbs-order').children().length >= 1  ) {
+        return false;
+      }
+
       $item.detach().appendTo('#sbs-order');
       serializeData();
     });
