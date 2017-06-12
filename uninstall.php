@@ -16,6 +16,8 @@ wp_clear_scheduled_hook( 'sbs_daily_event' );
 /**
  * Delete all data if a SBS_REMOVE_ALL_DATA constant is set to true in
  * wp-config.php.
+ *
+ * Does not delete: Products, Categories
  */
 
 if ( defined( 'SBS_REMOVE_ALL_DATA' ) && SBS_REMOVE_ALL_DATA === true ) {

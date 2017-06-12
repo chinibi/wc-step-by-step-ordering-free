@@ -40,6 +40,29 @@ if ( !post_exists( 'Choose Package' ) ) {
   wp_insert_post( $page_data );
 }
 
+// Create default categories for Packages and OnF pages
+if ( get_option('sbs_package') === false && !term_exists( 'Packages', 'product_cat' ) ) {
+  $package_cat_id = wp_insert_term(
+    'Packages',
+    'product_cat',
+    array(
+      'description' => 'Begin your ordering process by choosing a package. You may choose one per order.',
+      'slug' => 'packages'
+    )
+  );
+}
+
+if ( get_option('sbs_onf') === false && !term_exists( 'Options and Fees', 'product_cat' ) ) {
+  $onf_cat_id = wp_insert_term(
+    'Options and Fees',
+    'product_cat',
+    array(
+      'description' => 'You can choose miscellaneous options and extras here.',
+      'slug' => 'options-and-fees'
+    )
+  );
+}
+
 /**
  * Set default settings if none exist
  *
@@ -74,4 +97,17 @@ $sbs_package_defaults = array(
   'image-height'     => '',
   'image-width'      => ''
 );
+
+if ( isset( $package_cat_id ) ) {
+  $sbs_package_defaults['category'] = $package_cat_id;
+}
 add_option( 'sbs_package', $sbs_package_defaults );
+
+$sbs_onf_defaults = array(
+  'category' => ''
+);
+
+if ( isset( $onf_cat_id ) ) {
+  $sbs_onf_defaults['category'] = $onf_cat_id;
+}
+add_option( 'sbs_onf', $sbs_onf_defaults );
