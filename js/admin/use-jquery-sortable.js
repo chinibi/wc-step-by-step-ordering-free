@@ -1,6 +1,10 @@
 (function($) {
   $(document).ready(function() {
 
+    if ( typeof sbsLicenseValid === 'undefined' ) {
+      return;
+    }
+
     function serializeData() {
       var data = $('#sbs-order').sortable('serialize').get();
       var jsonString = JSON.stringify(data);

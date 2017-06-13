@@ -22,10 +22,14 @@ function sbs_plugin_admin_add_page() {
 
 function sbs_load_custom_wp_admin_style() {
 
-  // load custom jQuery UI scripts and styles
-	wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
-  wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ), filemtime( plugin_dir_path( __FILE__ ) . 'js/admin/use-jquery-sortable.js' ) );
-  wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/style.css' ) );
+	global $pagenow;
+
+	if ( $pagenow === 'admin.php' && $_GET['page'] === 'stepbystepsys' ) {
+		// load custom jQuery UI scripts and styles
+		wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
+		wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ), filemtime( plugin_dir_path( __FILE__ ) . 'js/admin/use-jquery-sortable.js' ) );
+		wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/style.css' ) );
+	}
 
 }
 add_action( 'admin_enqueue_scripts', 'sbs_load_custom_wp_admin_style' );
@@ -490,7 +494,16 @@ function sbs_plugin_settings_init() {
  */
 
 function sbs_general_description() {
+	ob_start();
+	?>
+	<p>
+		Thank you for using the Step By Step Ordering System for Woo Commerce.  The
+		tabs above will help you configure the system for your needs.  For more
+		information, click on the <a href="<?php echo esc_url( admin_url('admin.php') . '?page=stepbystepsys&tab=help' )?>">Help</a> tab or <a href="http://stepbystepsys.com">visit our site</a>.
+	</p>
+	<?php
 
+	echo ob_get_clean();
 }
 
 function sbs_sbs_description() {
