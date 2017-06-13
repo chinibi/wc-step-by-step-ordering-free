@@ -19,7 +19,7 @@ http://stepbystepsys.com/wp-content/uploads/2017/06/admin-sidebar.png
 
 I. Packages
 1. When you installed the plugin, a Packages category was automatically created
-and is selected by default to display in the Package Selection Page.
+and is selected by default to display in the Choose Package Page.
 If you want a different category to do this, select the desired category
 under the Package Category field in Package Settings.
 http://stepbystepsys.com/wp-content/uploads/2017/06/package-category.png
@@ -27,11 +27,12 @@ http://stepbystepsys.com/wp-content/uploads/2017/06/package-category.png
 category is selected.
 http://stepbystepsys.com/wp-content/uploads/2017/06/new-product.png
 3. If you have purchased a premium license of this plugin you can assign store
-credit that will be applied when it's added to the cart.  You can set it in the product general settings.
+credit that will be applied when it's added to the cart.  You can set it in the
+ product general settings.
 http://stepbystepsys.com/wp-content/uploads/2017/06/package-product-custom-fields.png
 4. When you're done creating packages, go back to the package settings page
 and drag packages from the Available Packages column to Your Active Packages
-column to build the package selection page.  You can rearrange packages in the
+column to build the Choose Package page.  You can rearrange packages in the
 Your Active Packages column to change the order they're displayed.
 http://stepbystepsys.com/wp-content/uploads/2017/06/package-page-builder.png
 
@@ -40,7 +41,8 @@ II. Widgets
 To configure your sidebar in the ordering process:
 1. Go to the widgets section on your Wordpress Dashboard
 2. Add the WooCommerce Cart Totals widget to your sidebar.
-3. It is also recommended that you add the WooCommerce Cart Widget under the WooCommerce Cart Totals.
+3. It is also recommended that you add the WooCommerce Cart Widget under the
+WooCommerce Cart Totals.
 
 Add screen of widgets section with both items in right sidebar
 
@@ -75,20 +77,42 @@ box, it is recommended to take these steps if you are using one of the
 following themes:
 
 --Twenty Sixteen--
-It is recommended that a full-width template be used on the Package Selection
+It is recommended that a full-width template be used on the Choose Package
 page.  Since Twenty Sixteen does not come with a full-width template, download
 a child theme from our website, install it, then activate it.  Go to the package
 selection page in the Admin settings and choose the Full Width template on the
 right-hand sidebar.
-[[LINK TO DOWNLOAD PAGE HERE]]
+[[LINK TO DOWNLOAD PAGE]]
 
 --Twenty Seventeen--
 Twenty Seventeen does not come with a sidebar.  Download a child theme from our
-website, install it, then activate it.  Go to the Step-By-Step Ordering page
-in WP Admin and choose the Page with Sidebar template on the right-hand sidebar.
-[[LINK TO DOWNLOAD PAGE HERE]]
+website, install it, then activate it.  Go to the Ordering page in WP Admin and
+choose the Page with Sidebar template on the right-hand sidebar.
+[[LINK TO DOWNLOAD PAGE]]
 
 --Divi--
-The Package Selection and Checkout page works best on a full-width template.
+The Choose Package and Checkout page works best on a full-width template.
 The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template
 for main content and sidebar, respectively.
+
+--Storefront--
+The Choose Package page is best displayed on the Full width template, which
+you can select when you edit that page on the right-hand sidebar.  The default
+template is recommended for the Ordering page.
+
+== Step-By-Step Premium Upgrade ==
+If you like our plugin and would like to see more content from us please
+consider purchasing a license from us.  Premium users get additional features
+like unlimited steps, navigation options, required products, either-or products,
+package store credit, preset themes, and much more! You will also have access to
+our support team!
+
+After purchasing a license, a key will be sent to your provided email.  Enter
+this key into the input box in the Premium tab in the Step-By-Step Ordering
+settings and then click Activate.
+
+
+For more assistance with the Step-By-Step Ordering System for WooCommerce,
+please visit our site at http://stepbystepsys.com.
+
+Thank you for using our plugin!
