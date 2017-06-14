@@ -524,11 +524,21 @@ function sbs_render_sbs_navbar( $current_step, $steps ) {
 
 function sbs_woocommerce_step_by_step_ordering_shortcode() {
 
+	$license = sbs_check_license_cache();
+
   $current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 0;
 
   $all_categories = sbs_get_all_wc_categories();
 
 	$steps = sbs_get_full_step_order( true );
+
+	if ( !$license ) {
+		foreach( $steps as $step ) {
+			if ( !empty( $step->children ) ) {
+				 $step->children = array_slice( $step->children, 0, 2 );
+			}
+		}
+	}
 
 	if ( empty( $steps ) ) {
 		return '<div>This is the SBS Step-By-Step Ordering Page.  No ordering process has been set up yet; please access your admin settings and set up an ordering process.</div>';

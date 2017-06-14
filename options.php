@@ -671,7 +671,7 @@ function sbs_page_name_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.'
+				'The page where the Step-By-Step Ordering is located must be selected in order for navigation to work properly.<br>Page contents:<br>[sbs_woocommerce_step_by_step_ordering]'
 			);
 			?>
 			<select id="sbs_page_name" name="sbs_general[page-name]">
@@ -857,7 +857,9 @@ function sbs_sbs_table_callback() {
   ob_start();
   ?>
 	<?php if ( !$license ) { ?>
-	<p><strong style="color: red; font-size: 1.2em;">You may have up to two parent categories, or steps, active at a time in the free version of this plugin.<br>You can add as many categories as you would like after purchasing a license for the premium version <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong></p>
+	<p><strong style="color: red; font-size: 1.2em;">
+		You may have up to two parent categories, or steps, active at a time in the free version of this plugin. Only the first two subcategories in each step will be displayed.<br>You can add as many steps and subcategories as you would like after purchasing a license for the premium version <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a>
+	</strong></p>
 	<?php } ?>
   <div class="sortable-container" id="sbs-order-container">
     <h3>Your Ordering Process</h3>
@@ -879,13 +881,15 @@ function sbs_sbs_table_callback() {
 							<span class="sbs-sortable-item-remove">&#10006;</span>
 						</div>
 						<div class="clearfix"></div>
-						<ul>
+						<ul class="<?php echo !$license ? 'subcat-restricted' : null ?>">
 							<?php
 							foreach( $category->children as $child )
 							{
 							?>
 								<li class="sortable-item sortable-nested-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
-									<?php echo get_the_category_by_ID( $child->catid ) ?>
+									<span class="subcat-name">
+										<?php echo get_the_category_by_ID( $child->catid ) ?>
+									</span>
 									<div class="alignright">
 										<span class="sbs-sortable-item-move-up">&#9650;</span>
 										<span class="sbs-sortable-item-move-down">&#9660;</span>
@@ -1061,7 +1065,7 @@ function sbs_package_page_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'The page where the Select Packages page is located must be selected in order for navigation to work properly.'
+				'The page where the Select Packages page is located must be selected in order for navigation to work properly.<br>Page contents:<br>[sbs_select_package]'
 			);
 			?>
 			<select id="sbs_package[page-name]" name="sbs_package[page-name]">
@@ -2190,12 +2194,160 @@ function sbs_render_admin_help_page() {
 	ob_start();
 	?>
 	<div class="wrap">
-		<h3>Help</h3>
-		<p>This is the help section for the Step-By-Step Plugin.</p>
-		<div class="sbs-tooltip">
-			Help
-			<span class="sbs-tooltiptext sbs-tooltip-right">Tooltip Text</span>
-		</div>
+		<h2>Help</h2>
+
+		<h3>The Step-By-Step Ordering System For WooCommerce</h3>
+
+		<p>A configurable step-by-step ordering e-commerce ordering system to enhance what
+		you sell using WooCommerce.  Enhance your customer experience and drive more
+		sales to your online shopping.  To get started review the documentation below or visit our website at www.stepbystepsys.com</p>
+
+		<section>
+			<h4>Table of Contents</h4>
+			<ul>
+				<li><a href="#installation">Installation</a></li>
+				<li><a href="#packages">Packages</a></li>
+				<li><a href="#widgets">Widgets</a></li>
+				<li><a href="#stepbystep">Step-By-Step</a></li>
+				<li><a href="#onf">Options and Fees</a></li>
+				<li><a href="#themes">Themes</a></li>
+				<li><a href="#premium">Premium</a></li>
+			</ul>
+		</section>
+
+		<h3 id="installation">Installation</h3>
+
+		<ol>
+			<li>Install WooCommerce. WooCommerce is required for this plugin.</li>
+			<li>Install the Step-By-Step plugin.</li>
+			<li>Access the settings page found <a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/admin-sidebar.png">here</a>.</li>
+		</ol>
+
+		<h3 id="packages">Packages</h3>
+
+		<ol>
+			<li>
+				When you installed the plugin, a Packages category was automatically created
+				and is selected by default to display in the Choose Package Page.
+				If you want a different category to do this, select the desired category
+				under the Package Category field in Package Settings.
+				(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/package-category.png">View Image</a>)
+			</li>
+			<li>
+				Create some products. These will be your packages. Make sure the package
+				category is selected.
+				(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/new-product.png">View Image</a>)
+			</li>
+			<li>
+				If you have purchased a premium license of this plugin you can assign store
+				credit that will be applied when it's added to the cart.  You can set it in the product general settings.
+				(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/package-product-custom-fields.png">View Image</a>)
+			</li>
+			<li>
+				When you're done creating packages, go back to the package settings page
+				and drag packages from the Available Packages column to Your Active Packages
+				column to build the Choose Package page.  You can rearrange packages in the
+				Your Active Packages column to change the order they're displayed.
+				(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/package-page-builder.png">View Image</a>)
+			</li>
+		</ol>
+
+		<h3 id="widgets">Widgets</h3>
+
+		<p>To configure your sidebar in the ordering process:</p>
+		<ol>
+			<li>Go to the widgets section on your Wordpress Dashboard</li>
+			<li>Add the WooCommerce Cart Totals widget to your sidebar.</li>
+			<li>It is also recommended that you add the WooCommerce Cart Widget under the WooCommerce Cart Totals.</li>
+		</ol>
+		(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/widgets.png">View Image</a>)
+
+
+		<h3 id="stepbystep">Step By Step</h3>
+
+		(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-builder.png">View Image</a>)
+
+		<ol>
+			<li>The Step-By-Step is located under the Step-By-Step tab in the Step-By-Step
+			Ordering settings</li>
+			<li>Create product categories. Each page in the ordering process will display
+			one parent category, which will include their child categories.</li>
+			<li>To create child categories, make a new category and select the parent
+			category under the Parent field.</li>
+			<li>Go to the Step-By-Step settings page and drag categories into Your Ordering
+			Process.  You can rearrange the categories inside to change the order.</li>
+		</ol>
+
+		<h3 id="onf">Options and Fees (optional)</h3>
+
+		(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/onf-builder.png">View Image</a>)
+
+		<ol>
+			<li>This is an optional page you can create that displays products in a table
+			rather than a catalog.</li>
+			<li>A product category named Options and Fees was automatically created on
+			install.  This category is the default for the Options and Fees page.</li>
+			<li>If you wish a different category to serve this role go the Options and Fees
+			settings page and select the category you want and save.</li>
+			<li>Create child categories of the chosen Options and Fees category, and make
+			products belonging to those categories.</li>
+			<li>Drag and drop child categories from Available Categories to Options and Fees
+			Page Outline to build your Options and Fees page.</li>
+		</ol>
+
+		<h3 id="themes">WordPress Themes</h3>
+
+		<p>This plugin is configured to work with themes already compatible with
+		WooCommerce.  While the plugin is fully functional with these themes out of the
+		box, it is recommended to take these steps if you are using one of the
+		following themes:</p>
+
+		<h4>--Twenty Sixteen--</h4>
+
+		<p>It is recommended that a full-width template be used on the Choose Package
+		page.  Since Twenty Sixteen does not come with a full-width template, download
+		a child theme from our website, install it, then activate it.  Go to the package
+		selection page in the Admin settings and choose the Full Width template on the
+		right-hand sidebar.</p>
+		[[LINK TO DOWNLOAD PAGE]]
+
+		<h4>--Twenty Seventeen--</h4>
+
+		<p>Twenty Seventeen does not come with a sidebar.  Download a child theme from our
+		website, install it, then activate it.  Go to the Ordering page in WP Admin and
+		choose the Page with Sidebar template on the right-hand sidebar.</p>
+		[[LINK TO DOWNLOAD PAGE]]
+
+		<h4>--Divi--</h4>
+
+		<p>The Choose Package and Checkout page works best on a full-width template.
+		The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template
+		for main content and sidebar, respectively.</p>
+
+		<h4>--Storefront--</h4>
+
+		<p>The Choose Package page is best displayed on the Full width template, which
+		you can select when you edit that page on the right-hand sidebar.  The default
+		template is recommended for the Ordering page.</p>
+
+
+		<h3 id="premium">== Step-By-Step Premium Upgrade ==</h3>
+
+		<p>If you like our plugin and would like to see more content from us please
+		consider purchasing a license from us.  Premium users get additional features
+		like unlimited steps, navigation options, required products, either-or products,
+		package store credit, preset themes, and much more! You will also have access to
+		our support team!</p>
+
+		<p>After purchasing a license, a key will be sent to your provided email.  Enter
+		this key into the input box in the Premium tab in the Step-By-Step Ordering
+		settings and then click Activate.</p>
+
+		<p>For more assistance and premium support with the Step-By-Step Ordering System for WooCommerce,
+		please visit our site at <a target="_blank" rel="noopener noreferrer" href="http://stepbystepsys.com">http://stepbystepsys.com</a>.</p>
+
+		<p>Thank you for using our plugin!</p>
+
 	</div>
 	<?php
 	echo ob_get_clean();
