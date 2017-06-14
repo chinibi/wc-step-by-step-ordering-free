@@ -81,6 +81,14 @@ li.sortable-item {
   line-height: 2em;
 }
 
+.subcat-restricted li:nth-child(n+3) .subcat-name {
+  color: rgb(144, 144, 144);
+}
+
+.subcat-restricted li:nth-child(n+3) .subcat-name::after {
+  content: "(Inactive)";
+}
+
 body.dragging, body.dragging * {
   cursor: move !important;
 }
@@ -186,7 +194,7 @@ div#sbs-order-container, div#sbs-pool-container {
 @media (min-width: 769px) {
   .sbs-tooltip .sbs-tooltiptext {
     visibility: hidden;
-    width: 180px;
+    min-width: 180px;
     background-color: #555;
     color: #fff;
     text-align: left;
@@ -253,7 +261,7 @@ div#sbs-order-container, div#sbs-pool-container {
 
 /* Tooltip arrow */
 @media (min-width: 769px) {
-  .sbs-tooltip-top::after {
+  /*.sbs-tooltip-top::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -262,7 +270,7 @@ div#sbs-order-container, div#sbs-pool-container {
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;
-  }
+  }*/
 }
 
 /*.sbs-tooltip-right::after {
