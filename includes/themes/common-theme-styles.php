@@ -25,3 +25,9 @@ if ( wp_get_theme()->get('Name') == 'Divi' || wp_get_theme()->get('Template') ==
   wp_enqueue_style( 'sbs-divi', plugins_url( '/wc-step-by-step-ordering/css/frontend/common-themes/divi.css' ), array( 'sbs-style', 'divi-fonts', 'divi-style', 'et-shortcodes-css', 'et-shortcodes-responsive-css' ), filemtime( $common_themes_dir . 'divi.css' ) );
 
 }
+
+if ( wp_get_theme()->get('Name') == 'Evolution' || wp_get_theme()->get('Template') == 'Evolution' ) {
+
+  wp_enqueue_style( 'sbs-divi', plugins_url( '/wc-step-by-step-ordering/css/frontend/common-themes/evolution.css' ), array( 'sbs-style', 'ual-style-css', 'et-gf-', 'et-shortcodes-css', 'et_page_templates' ), filemtime( $common_themes_dir . 'divi.css' ) );
+
+}

@@ -86,7 +86,7 @@ li.sortable-item {
 }
 
 .subcat-restricted li:nth-child(n+3) .subcat-name::after {
-  content: "(Inactive)";
+  content: "(Inactive, Upgrade to Premium to unlock)";
 }
 
 body.dragging, body.dragging * {

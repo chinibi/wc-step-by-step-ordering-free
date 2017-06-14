@@ -268,6 +268,7 @@ h1.step-by-step-title {
 
 /* Cart Total Calculator Base Style */
 #sbs-widget-sidebar-cart-totals {
+  width: 100%;
   font-size: 0.9em;
 }
 
@@ -336,6 +337,14 @@ a.sbs-change-package-btn:hover {
 }
 
 /* Options and Fees Table */
+table.sbs-options-and-fees {
+  width: 100%;
+}
+
+.sbs-options-and-fees td {
+  padding: 1em;
+}
+
 td.sbs-onf-desktop-add-to-cart {
   white-space: nowrap;
 }

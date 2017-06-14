@@ -1,0 +1,18 @@
+#sbs-widget-sidebar-cart-totals strong {
+  color: inherit;
+}
+
+.mfp-wrap .mfp-container button:hover {
+  color: black !important;
+}
+
+.post ul.woocommerce-error,
+.post ul.woocommerce-message,
+.post ul.woocommerce-info
+{
+  padding: 1em 2em 1em 3.5em;
+}
+
+.sbs-package-container {
+  padding-bottom: 40px;
+}
