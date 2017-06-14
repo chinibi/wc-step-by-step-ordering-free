@@ -296,7 +296,7 @@ function sbs_plugin_settings_init() {
 	);
 	add_settings_field(
 		'sbs_featured_position',
-		'Featured Items Position (Premium)' . sbs_admin_help_tooltip( 'right', 'Display featured items at the beginning or end of pages.' ),
+		'Featured Items Position ' . sbs_premium_site_link() . sbs_admin_help_tooltip( 'right', 'Display featured items at the beginning or end of pages.' ),
 		'sbs_featured_items_pos_callback',
 		'sbs_general',
 		'sbs_general'
@@ -310,7 +310,7 @@ function sbs_plugin_settings_init() {
 	);
 	add_settings_field(
 		'sbs_required_featured_label',
-		'Featured and Required Section Labels (Premium)',
+		'Featured and Required Section Labels ' . sbs_premium_site_link(),
 		'sbs_req_feat_label_callback',
 		'sbs_general',
 		'sbs_general'
@@ -342,7 +342,7 @@ function sbs_plugin_settings_init() {
 	);
 	add_settings_field(
 		'sbs_package_calc_label',
-		'Calculator Widget Label (Premium)',
+		'Calculator Widget Label ' . sbs_premium_site_link(),
 		'sbs_package_calc_label_callback',
 		'sbs_package_settings',
 		'sbs_package_settings'
@@ -384,7 +384,7 @@ function sbs_plugin_settings_init() {
 	);
 	add_settings_field(
 		'sbs_package_merch_cred',
-		'"Store Credit" Calculator Widget Label (Premium)',
+		'"Store Credit" Calculator Widget Label ' . sbs_premium_site_link(),
 		'sbs_package_merch_cred_callback',
 		'sbs_package_settings',
 		'sbs_package_settings'
@@ -657,6 +657,13 @@ function sbs_display_settings_sanitize( $input ) {
  *  Options Form Output Callbacks
  *
  */
+function sbs_premium_site_link() {
+	ob_start();
+	?>
+	(<a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Premium</a>)
+	<?php
+	return ob_get_clean();
+}
 
 function sbs_page_name_callback() {
 
@@ -986,12 +993,12 @@ function sbs_navbar_navigation_callback() {
 		</label><br />
 		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
 			<input type="radio" id="step_navbar_navigation_1" name="sbs_navbar[throttle-nav]" value="1" <?php checked( 1, $option ) ?> <?php disabled( false, $license ) ?>/>
-			Only allow navigation one step at a time in any direction <?php echo !$license ? ' (Premium)' : null ?>
+			Only allow navigation one step at a time in any direction <?php echo !$license ? sbs_premium_site_link() : null ?>
 		</label><br />
 
 		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
 			<input type="radio" id="step_navbar_navigation_3" name="sbs_navbar[throttle-nav]" value="3" <?php checked( 3, $option ) ?> <?php disabled( false, $license ) ?>/>
-			Users may freely navigate, skipping any step they'd like. <?php echo !$license ? ' (Premium)' : null ?>
+			Users may freely navigate, skipping any step they'd like. <?php echo !$license ? sbs_premium_site_link() : null ?>
 		</label><br />
 	</fieldset>
 
@@ -1314,7 +1321,7 @@ function sbs_package_select_style_callback() {
 				'Customize the text on the Add To Cart button on packages.'
 			);
 			?>
-			"Add to Cart" Text (Premium):
+			"Add to Cart" Text <?php echo sbs_premium_site_link() ?>:
 			<input type="text" id="sbs-package-add-cart-label" name="sbs_package[add-to-cart-text]" value="<?php echo $add_to_cart_text ?>" placeholder='Default: "Select Package"' <?php disabled( false, $license ) ?>/>
 		</label>
 
@@ -1606,7 +1613,7 @@ function sbs_display_color_scheme_callback() {
 		?>
 	    <option value="<?php echo $key + 1 ?>" <?php echo selected( $key + 1, $option, false ) ?> <?php disabled( true, $color['premium'] && !$license ) ?>>
 				<?php echo esc_html( $color['name'] ) ?>
-				<?php echo $color['premium'] ? ' (Premium)' : null ?>
+				<?php echo $color['premium'] ? ' ' . sbs_premium_site_link() : null ?>
 			</option>
 		<?php
 		}
@@ -1662,7 +1669,7 @@ function sbs_display_calc_callback() {
 		<div>
 			<fieldset class="<?php echo !$license ? 'grayed-out-text' : null ?>">
 				<label>
-					<p><strong>Font Family (Premium)</strong></p>
+					<p><strong>Font Family <?php echo sbs_premium_site_link() ?></strong></p>
 					<select id="sbs_display[calc-font]" name="sbs_display[calc-font]" <?php disabled( false, $license ) ?>>
 					<?php
 					foreach( $fonts as $key => $font )
@@ -1721,10 +1728,10 @@ function sbs_display_fonts_callback() {
 	);
 
 	$sections = array(
-		array( 'title' => 'Subcategory Name (Premium)', 'slug' => 'category-font', 'option' => $category_font, 'tooltip' => 'Select section name fonts for displayed on each page.' ),
-		array( 'title' => 'Subcategory Description (Premium)', 'slug' => 'category-desc-font', 'option' => $category_desc_font, 'tooltip' => 'Select the font for the description under each section name.' ),
-		array( 'title' => 'Nav Buttons (Premium)', 'slug' => 'nav-button-font', 'option' => $nav_button_font, 'tooltip' => 'Select the font for the Back/Foward buttons on each page.' ),
-		array( 'title' => 'Navbar (Premium)', 'slug' => 'navbar-font', 'option' => $navbar_font, 'tooltip' => "Select the font for the bar at the top of each page displaying the customer's progress during ordering." ),
+		array( 'title' => 'Subcategory Name ' . sbs_premium_site_link(), 'slug' => 'category-font', 'option' => $category_font, 'tooltip' => 'Select section name fonts for displayed on each page.' ),
+		array( 'title' => 'Subcategory Description ' . sbs_premium_site_link(), 'slug' => 'category-desc-font', 'option' => $category_desc_font, 'tooltip' => 'Select the font for the description under each section name.' ),
+		array( 'title' => 'Nav Buttons ' . sbs_premium_site_link(), 'slug' => 'nav-button-font', 'option' => $nav_button_font, 'tooltip' => 'Select the font for the Back/Foward buttons on each page.' ),
+		array( 'title' => 'Navbar ' . sbs_premium_site_link(), 'slug' => 'navbar-font', 'option' => $navbar_font, 'tooltip' => "Select the font for the bar at the top of each page displaying the customer's progress during ordering." ),
 	);
 
 	$license = sbs_check_license_cache();
@@ -1786,7 +1793,7 @@ function sbs_display_misc_callback() {
 		</label><br />
 		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
 			<input type="checkbox" id="sbs_display[drop-shadow]" name="sbs_display[drop-shadow]" value="1" <?php checked( 1, $drop_shadow ); disabled( false, $license ); ?> />
-			Add drop shadows to SBS pages (Premium)
+			Add drop shadows to SBS pages <?php echo sbs_premium_site_link() ?>
 		</label>
 	</fieldset>
 	<?php
@@ -1861,7 +1868,7 @@ function sbs_display_navbar_number_shape_callback() {
 		?>
 			<option value="<?php echo $index ?>" <?php echo selected( $index, $number_style, false) ?> <?php disabled( true, $style['premium'] && !$license ) ?>>
 				<?php echo $style['name'] ?>
-				<?php echo $style['premium'] && !$license ? ' (Premium)' : null ?>
+				<?php echo $style['premium'] && !$license ? ' ' . sbs_premium_site_link() : null ?>
 			</option>
   	<?php
 		}
@@ -1942,7 +1949,7 @@ function sbs_display_navbar_title_shape_callback() {
 		?>
 			<option value="<?php echo $index ?>" <?php selected( $index, $title_style ) ?> <?php disabled( true, $style['premium'] && !$license ) ?>>
 				<?php echo $style['name'] ?>
-				<?php echo $style['premium'] && !$license ? ' (Premium)' : null ?>
+				<?php echo $style['premium'] && !$license ? ' ' . sbs_premium_site_link() : null ?>
 			</option>
 		<?php
 		}
@@ -2193,7 +2200,7 @@ function sbs_premium_key_callback() {
 function sbs_render_admin_help_page() {
 	ob_start();
 	?>
-	<div class="wrap">
+	<div class="wrap" style="max-width: 1080px">
 		<h2>Help</h2>
 
 		<h3>The Step-By-Step Ordering System For WooCommerce</h3>
@@ -2203,8 +2210,8 @@ function sbs_render_admin_help_page() {
 		sales to your online shopping.  To get started review the documentation below or visit our website at www.stepbystepsys.com</p>
 
 		<section>
-			<h4>Table of Contents</h4>
-			<ul>
+			<h3>Table of Contents</h3>
+			<ul style="list-style-type: square; padding-left: 40px;">
 				<li><a href="#installation">Installation</a></li>
 				<li><a href="#packages">Packages</a></li>
 				<li><a href="#widgets">Widgets</a></li>
