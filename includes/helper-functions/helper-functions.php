@@ -251,7 +251,7 @@ function sbs_get_subcategories_from_parent( $parent_id ) {
 
 function sbs_get_active_packages( $slice = false ) {
 
-	$package_order = get_option('sbs_package')['active'];
+	$package_order = isset( get_option('sbs_package')['active'] ) ? get_option('sbs_package')['active'] : null;
 
 	if ( !isset( $package_order ) ) return null;
 

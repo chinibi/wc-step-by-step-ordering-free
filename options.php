@@ -53,9 +53,25 @@ function sbs_admin_settings_notices() {
 
 	$license = sbs_check_license_cache();
 	$key = get_option('sbs_premium_key');
+
+	global $pagenow;
+	$is_woocommerce_or_front_page = false;
+
+	if ( $pagenow === 'index.php' ||
+			 ( isset( $_GET['page'] ) && $_GET['page'] === 'stepbystepsys' ) ||
+			 ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'product' ) ||
+			 ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'shop_order' ) ||
+			 ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'shop_coupon' ) ||
+			 ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-reports' ) ||
+			 ( isset( $_GET['post_type'] ) && $_GET['page'] === 'wc-settings' ) ||
+			 ( isset( $_GET['post_type'] ) && $_GET['page'] === 'wc-status' )
+		 ) {
+		$is_woocommerce_or_front_page = true;
+	}
+
 	$current_admin_page = isset( $_GET['page'] ) ? $_GET['page'] : false;
 
-	if ( $current_admin_page !== 'stepbystepsys' || isset($_REQUEST['activate_license']) ) {
+	if ( !$is_woocommerce_or_front_page || isset($_REQUEST['activate_license']) ) {
 		return;
 	}
 
@@ -66,7 +82,7 @@ function sbs_admin_settings_notices() {
 	}
 	elseif( !$license && empty( $key ) ) {
 		echo '<div class="notice notice-info is-dismissible">';
-		echo '<p class="sbs-buy-notice">This is the free version of the <strong>Step-By-Step Plugin</strong>.  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">purchasing a license</a></strong>, which will unlock additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more!  You will also have access to our <strong>support team</strong>!</p>';
+		echo '<p class="sbs-buy-notice">Thank you for using <strong>Step-By-Step Ordering for WooCommerce</strong>.  Although this is a fully functional plugin that will enhance your customer\'s shopping experience, our premium version of this plugin offers so much more!  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">purchasing a license</a></strong>, which will unlock additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more!  You will also have access to our <strong>support team</strong>!</p>';
 		echo '</div>';
 	}
 
@@ -1302,7 +1318,7 @@ function sbs_package_select_style_callback() {
 	ob_start();
 	?>
 	<fieldset>
-		<label class="<?php // echo !$license ? 'grayed-out-text' : null ?>">
+		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
@@ -2229,6 +2245,7 @@ function sbs_render_admin_help_page() {
 				<li><a href="#onf">Options and Fees</a></li>
 				<li><a href="#themes">Themes</a></li>
 				<li><a href="#premium">Premium</a></li>
+        <li><a href="#uninstall">Uninstalling</a></li>
 			</ul>
 		</section>
 
@@ -2360,10 +2377,25 @@ function sbs_render_admin_help_page() {
 		this key into the input box in the Premium tab in the Step-By-Step Ordering
 		settings and then click Activate.</p>
 
-		<p>For more assistance and premium support with the Step-By-Step Ordering System for WooCommerce,
-		please visit our site at <a target="_blank" rel="noopener noreferrer" href="http://stepbystepsys.com">http://stepbystepsys.com</a>.</p>
 
-		<p>Thank you for using our plugin!</p>
+    <h3 id="uninstall">Uninstalling</h3>
+    <p>If you wish to disable this plugin's functionality you can deactivate it in
+    the plugin settings.  If you wish to completely remove this plugin, deactivate
+    it, then click the Delete button.</p>
+    <p>By default all settings, custom fields, and custom metas are not deleted
+    on uninstall.  If you wish to remove all Step-By-Step data, add this line to
+    your wp-config.php file:</p>
+    <pre>define( 'SBS_REMOVE_ALL_DATA', true );</pre>
+    <p>This will delete any content created by the Step-By-Step plugin, including
+    the Package and Step-By-Step Ordering pages, all settings, and post metas.
+    Products and Categories will not be removed.</p>
+
+    <div style="margin-top: 40px">
+      <p>For more assistance and premium support with the Step-By-Step Ordering System for WooCommerce,
+      please visit our site at <a target="_blank" rel="noopener noreferrer" href="http://stepbystepsys.com">http://stepbystepsys.com</a>.</p>
+
+      <p>Thank you for using our plugin!</p>
+    </div>
 
 	</div>
 	<?php

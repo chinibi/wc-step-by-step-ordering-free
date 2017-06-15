@@ -91,6 +91,7 @@ $sbs_package_defaults = array(
   'label'            => 'Step-By-Step Ordering',
   'page-name'        => get_page_by_title( 'Choose Package' )->ID,
   'category'         => '',
+  'active'           => '',
   'clear-cart'       => '1',
   'per-row'          => '1',
   'add-to-cart-text' => 'Select Package',
