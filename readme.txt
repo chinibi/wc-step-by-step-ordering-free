@@ -111,6 +111,21 @@ After purchasing a license, a key will be sent to your provided email.  Enter
 this key into the input box in the Premium tab in the Step-By-Step Ordering
 settings and then click Activate.
 
+== Uninstalling ==
+If you wish to disable this plugin's functionality you can deactivate it in
+the plugin settings.  If you wish to completely remove this plugin, deactivate
+it, then click the Delete button.
+
+By default all settings, custom fields, and custom metas are not deleted
+on uninstall.  If you wish to remove all Step-By-Step data, add this line to
+your wp-config.php file:
+
+define( 'SBS_REMOVE_ALL_DATA', true );
+
+This will delete any content created by the Step-By-Step plugin, including
+the Package and Step-By-Step Ordering pages, all settings, and post metas.
+Products and Categories will not be removed.
+
 
 For more assistance with the Step-By-Step Ordering System for WooCommerce,
 please visit our site at http://stepbystepsys.com.
