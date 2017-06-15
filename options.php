@@ -63,8 +63,9 @@ function sbs_admin_settings_notices() {
 			 ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'shop_order' ) ||
 			 ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'shop_coupon' ) ||
 			 ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-reports' ) ||
-			 ( isset( $_GET['post_type'] ) && $_GET['page'] === 'wc-settings' ) ||
-			 ( isset( $_GET['post_type'] ) && $_GET['page'] === 'wc-status' )
+			 ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' ) ||
+			 ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-status' ) ||
+       ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-addons' )
 		 ) {
 		$is_woocommerce_or_front_page = true;
 	}
