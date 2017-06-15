@@ -497,7 +497,7 @@ function sbs_general_description() {
 	ob_start();
 	?>
 	<p>
-		Thank you for using the Step By Step Ordering System for Woo Commerce.  The
+		Thank you for using the Step By Step Ordering System for WooCommerce.  The
 		tabs above will help you configure the system for your needs.  For more
 		information, click on the <a href="<?php echo esc_url( admin_url('admin.php') . '?page=stepbystepsys&tab=help' )?>">Help</a> tab or <a href="http://stepbystepsys.com">visit our site</a>.
 	</p>
