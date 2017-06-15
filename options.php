@@ -55,7 +55,7 @@ function sbs_admin_settings_notices() {
 	$key = get_option('sbs_premium_key');
 	$current_admin_page = isset( $_GET['page'] ) ? $_GET['page'] : false;
 
-	if ( $current_admin_page !== 'stepbystepsys' ) {
+	if ( $current_admin_page !== 'stepbystepsys' || isset($_REQUEST['activate_license']) ) {
 		return;
 	}
 
@@ -606,10 +606,12 @@ function sbs_package_settings_sanitize( $input ) {
 		$title_label = isset( get_option('sbs_package')['label'] ) ? get_option('sbs_package')['label'] : 'Step-By-Step Ordering';
 		$calc_label = isset( get_option('sbs_package')['merch-cred-label'] ) ? get_option('sbs_package')['merch-cred-label'] : 'Merchandise Credit';
 		$add_to_cart_text = isset( get_option('sbs_package')['add-to-cart-text'] ) ? get_option('sbs_package')['add-to-cart-text'] : 'Select Package';
+		$per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : '1';
 
 		$input['label'] = $title_label;
 		$input['merch-cred-label'] = $calc_label;
 		$input['add-to-cart-text'] = $add_to_cart_text;
+		$input['per-row'] = $per_row;
 	endif;
 
 	return $input;
@@ -840,6 +842,7 @@ function sbs_sbs_table_callback() {
 
 	// Categories listed in the ordering process should not be listed in Available Categories
 	// to prevent duplication
+
 	$available_categories = array_filter( $available_categories, function( $category ) {
 
 		$step_order = sbs_get_step_order( true );
@@ -847,6 +850,10 @@ function sbs_sbs_table_callback() {
 		$option_cat = isset( get_option('sbs_onf')['category'] ) ? get_option('sbs_onf')['category'] : null;
 
 		$flat_step_order = array();
+
+		if ( empty( $step_order ) ) {
+			return true;
+		}
 
 		foreach( $step_order as $step ) {
 			$flat_step_order[] = $step->catid;
@@ -1154,24 +1161,27 @@ function sbs_package_merch_cred_callback() {
 function sbs_package_tier_callback() {
 
 	$package_cat_id = get_option('sbs_package')['category'];
-	$all_packages = sbs_get_wc_products_by_category( $package_cat_id );
-	$active_packages = sbs_get_active_packages( true );
 
-	$available_packages = array_filter( $all_packages, function( $package ) {
-
+	if ( !empty( $package_cat_id ) ) {
+		$all_packages = sbs_get_wc_products_by_category( $package_cat_id );
 		$active_packages = sbs_get_active_packages( true );
 
-		if ( isset( $active_packages ) ) {
-			$active_packages = array_map( function( $package ) {
-				return $package->catid;
-			}, $active_packages);
-		} else {
-			$active_packages = array();
-		}
+		$available_packages = array_filter( $all_packages, function( $package ) {
 
-		return !in_array( $package->ID, $active_packages );
+			$active_packages = sbs_get_active_packages( true );
 
-	} );
+			if ( isset( $active_packages ) ) {
+				$active_packages = array_map( function( $package ) {
+					return $package->catid;
+				}, $active_packages);
+			} else {
+				$active_packages = array();
+			}
+
+			return !in_array( $package->ID, $active_packages );
+
+		} );
+	}
 
 	$license = sbs_check_license_cache();
 
@@ -1281,9 +1291,9 @@ function sbs_package_atc_callback() {
 
 function sbs_package_select_style_callback() {
 
-	$per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : 3;
+	$per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : 1;
 
-	$per_row_options = array( 1, 2, 3, 4, 5);
+	$per_row_options = array( 1, 2, 3, 4, 5 );
 
 	$add_to_cart_text = isset( get_option('sbs_package')['add-to-cart-text'] ) ? get_option('sbs_package')['add-to-cart-text'] : 'Select Package';
 
@@ -1300,18 +1310,18 @@ function sbs_package_select_style_callback() {
 			);
 			?>
 			Number of packages to display per row:
-			<select id="sbs-package-per-row" name="sbs_package[per-row]">
-		<?php
-		foreach ( $per_row_options as $option )
-		{
-		?>
-			<option value="<?php echo $option ?>" <?php selected( $option, $per_row ) ?>>
-				<?php echo $option ?>
-			</option>
-		<?php
-		}
-		?>
-		</select>
+			<select id="sbs-package-per-row" name="sbs_package[per-row]" <?php disabled( true, !$license ) ?>>
+			<?php
+			foreach ( $per_row_options as $option )
+			{
+			?>
+				<option value="<?php echo $option ?>" <?php selected( $option, $per_row ) ?>>
+					<?php echo $option ?>
+				</option>
+			<?php
+			}
+			?>
+			</select>
 		</label><br />
 
 		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
@@ -1431,7 +1441,7 @@ function sbs_onf_order_callback() {
 	$onf_category = get_option('sbs_onf')['category'];
 	$onf_order = sbs_get_onf_order();
 
-	if ( !isset( $onf_category ) ) {
+	if ( empty( $onf_category ) ) {
 		echo '<p>Select a product category above to begin.</p>';
 		return;
 	}

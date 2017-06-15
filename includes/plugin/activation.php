@@ -92,7 +92,7 @@ $sbs_package_defaults = array(
   'page-name'        => get_page_by_title( 'Choose Package' )->ID,
   'category'         => '',
   'clear-cart'       => '1',
-  'per-row'          => '3',
+  'per-row'          => '1',
   'add-to-cart-text' => 'Select Package',
   'image-height'     => '',
   'image-width'      => ''
@@ -104,7 +104,8 @@ if ( isset( $package_cat_id ) ) {
 add_option( 'sbs_package', $sbs_package_defaults );
 
 $sbs_onf_defaults = array(
-  'category' => ''
+  'category' => '',
+  'order' => ''
 );
 
 if ( isset( $onf_cat_id ) ) {

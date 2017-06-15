@@ -38,8 +38,8 @@ if ( defined( 'SBS_REMOVE_ALL_DATA' ) && SBS_REMOVE_ALL_DATA === true ) {
   delete_post_meta_by_key( '_merch_credit' );
 
   // Remove all SBS posts
-  $sbs_ordering_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
-  $sbs_package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
+  $sbs_ordering_page = get_option('sbs_general')['page-name'];
+  $sbs_package_page = get_option('sbs_package')['page-name'];
 
   wp_delete_post( $sbs_ordering_page, true );
   wp_delete_post( $sbs_package_page, true );
