@@ -28,6 +28,7 @@ function sbs_load_custom_wp_admin_style() {
 		// load custom jQuery UI scripts and styles
 		wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
 		wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ), filemtime( plugin_dir_path( __FILE__ ) . 'js/admin/use-jquery-sortable.js' ) );
+    wp_enqueue_style( 'bootstrap', plugin_dir_url( __FILE__ ) . 'css/admin/bootstrap.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/bootstrap.css' ) );
 		wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/style.css' ) );
 	}
 
@@ -57,8 +58,7 @@ function sbs_admin_settings_notices() {
 	global $pagenow;
 	$is_woocommerce_or_front_page = false;
 
-	if ( $pagenow === 'index.php' ||
-			 ( isset( $_GET['page'] ) && $_GET['page'] === 'stepbystepsys' ) ||
+	if ( ( isset( $_GET['page'] ) && $_GET['page'] === 'stepbystepsys' ) ||
 			 ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'product' ) ||
 			 ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'shop_order' ) ||
 			 ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'shop_coupon' ) ||
@@ -152,11 +152,21 @@ function sbs_render_active_tab($active_tab) {
 
 
 function sbs_render_general_options() {
+  $image_src = plugin_dir_url( __FILE__ ) . 'assets/admin/side-banner.png';
   ob_start();
   ?>
-    <?php settings_fields('sbs_general') ?>
-    <?php do_settings_sections('sbs_general') ?>
-		<?php submit_button() ?>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9">
+        <?php settings_fields('sbs_general') ?>
+        <?php do_settings_sections('sbs_general') ?>
+        <?php submit_button() ?>
+      </div>
+      <div class="col-sm-3 sidebar-banner-container">
+        <img class="sidebar-banner" src="<?php echo esc_url( $image_src ) ?>" />
+      </div>
+    </div>
+  </div>
   <?php
 
   return ob_get_clean();
