@@ -87,5 +87,12 @@
       serializeData();
     });
 
+    if ( !sbsLicenseValid && $('#sbs-order-container').length ) {
+      $('.sbs-sortable-item-add').off();
+      $('.sbs-sortable-item-remove').off();
+      $('.sbs-sortable-item-move-up').off();
+      $('.sbs-sortable-item-move-down').off();
+    }
+
   });
 })(jQuery);

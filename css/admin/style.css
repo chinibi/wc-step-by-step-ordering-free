@@ -10,6 +10,12 @@
   font-size: 1.3em;
 }
 
+@media (max-width: 575px) {
+  .sbs-buy-notice {
+    font-size: 1em;
+  }
+}
+
 .horizontal-stack {
   float: left;
   margin-right: 30px;
@@ -32,6 +38,25 @@
   max-width: 269px;
 }
 
+.mobile-upsell-notice {
+  text-align: center;
+  border: 1px solid #5773d2;
+  background-color: #fff;
+  padding: 16px
+}
+
+.mobile-upsell-link {
+  display: inline-block;
+  background-color: #39479e;
+  color: white;
+  text-decoration: none;
+  padding: 12px;
+  font-size: 1.2em;
+  border-radius: 4px;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
 @media (max-width: 575px) {
   .sidebar-banner {
     display: block;
@@ -40,19 +65,28 @@
   }
 }
 
+.sidebar-banner-link {
+  text-decoration: none;
+}
+
+.sidebar-banner-link:focus {
+  box-shadow: none;
+}
+
 div.sortable-container {
   /*overflow: auto;*/
 }
 
-#main-sortable-container {
+/*#main-sortable-container {
   display: flex;
-}
+}*/
 
 .sortable-container {
-  width: 30%;
+  width: 80%;
+  margin: 0 auto;
 }
 
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
   .sortable-container {
     width: 75%;
   }
@@ -60,9 +94,9 @@ div.sortable-container {
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .sortable-container {
-    width: 46%;
+    width: 44%;
   }
-}
+}*/
 
 ol.sortable, ul.sortable {
   padding-top: 25px;

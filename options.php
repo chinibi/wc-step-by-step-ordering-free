@@ -92,7 +92,8 @@ add_action( 'admin_notices', 'sbs_admin_settings_notices' );
 
 
 function sbs_plugin_options_page() {
-
+  $license = sbs_check_license_cache();
+  $banner_image_src = plugin_dir_url( __FILE__ ) . 'assets/admin/side-banner.png';
   $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general_options';
   ?>
 
@@ -109,13 +110,42 @@ function sbs_plugin_options_page() {
 			<a href="?page=stepbystepsys&tab=help" class="nav-tab <?php echo $active_tab === 'help' ? 'nav-tab-active' : null ?>">Help</a>
     </h2>
 
-		<?php if ( $active_tab !== 'sbs_premium' ): ?>
-	    <form action="<?php echo esc_url('options.php') ?>" method="post">
-	      <?php sbs_render_active_tab($active_tab) ?>
-	    </form>
-		<?php else: ?>
-			<?php sbs_render_active_tab($active_tab) ?>
-		<?php endif ?>
+    <?php if ( $license || isset( $_REQUEST['activate_license'] ) ): ?>
+
+      <?php if ( $active_tab !== 'sbs_premium' ): ?>
+        <form action="<?php echo esc_url('options.php') ?>" method="post">
+          <?php sbs_render_active_tab($active_tab) ?>
+        </form>
+      <?php else: ?>
+        <?php sbs_render_active_tab($active_tab) ?>
+      <?php endif ?>
+
+    <?php else: ?>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-9">
+            <?php if ( $active_tab !== 'sbs_premium' ): ?>
+              <form action="<?php echo esc_url('options.php') ?>" method="post">
+                <?php sbs_render_active_tab($active_tab) ?>
+              </form>
+            <?php else: ?>
+              <?php sbs_render_active_tab($active_tab) ?>
+            <?php endif ?>
+          </div>
+          <div class="col-sm-3">
+            <div style="text-align: center;">
+              <a class="sidebar-banner-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">
+                <img class="sidebar-banner" src="<?php echo esc_url( $banner_image_src ) ?>" />
+              </a><br>
+              Want to remove this ad?<br>
+              <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Get Premium</a></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <?php endif; ?>
+
   </div>
 
 	<?php add_filter( 'admin_footer_text', 'sbs_render_wp_admin_footer' ) ?>
@@ -152,21 +182,11 @@ function sbs_render_active_tab($active_tab) {
 
 
 function sbs_render_general_options() {
-  $image_src = plugin_dir_url( __FILE__ ) . 'assets/admin/side-banner.png';
   ob_start();
   ?>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-9">
-        <?php settings_fields('sbs_general') ?>
-        <?php do_settings_sections('sbs_general') ?>
-        <?php submit_button() ?>
-      </div>
-      <div class="col-sm-3 sidebar-banner-container">
-        <img class="sidebar-banner" src="<?php echo esc_url( $image_src ) ?>" />
-      </div>
-    </div>
-  </div>
+    <?php settings_fields('sbs_general') ?>
+    <?php do_settings_sections('sbs_general') ?>
+    <?php submit_button() ?>
   <?php
 
   return ob_get_clean();
@@ -521,6 +541,8 @@ function sbs_plugin_settings_init() {
  */
 
 function sbs_general_description() {
+  $license = sbs_check_license_cache();
+
 	ob_start();
 	?>
 	<p>
@@ -528,27 +550,73 @@ function sbs_general_description() {
 		tabs above will help you configure the system for your needs.  For more
 		information, click on the <a href="<?php echo esc_url( admin_url('admin.php') . '?page=stepbystepsys&tab=help' )?>">Help</a> tab or <a href="http://stepbystepsys.com">visit our site</a>.
 	</p>
+  <?php if ( !$license ): ?>
+    <div class="hidden-sm hidden-md hidden-lg">
+      <div class="container mobile-upsell-notice">
+        <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+        <ul>
+          <li>Unlimited Steps</li>
+          <li>Unlimited Packages</li>
+          <li>Store Credit</li>
+          <li>Required Products</li>
+          <li>Either/Or Products</li>
+          <li>Auto-Add Products</li>
+          <li>Color Schemes</li>
+          <li>Multiple Nav Shapes</li>
+          <li>Custom Labels</li>
+          <li>Options and Fees Page</li>
+          <li>Shadow Effects</li>
+          <li>Premium Support</li>
+        </ul>
+        <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+      </div>
+    </div>
+  <?php endif ?>
 	<?php
 
 	echo ob_get_clean();
 }
 
 function sbs_sbs_description() {
+  $license = sbs_check_license_cache();
+
   ob_start();
   ?>
-
 	<p>Create your ordering process by dragging and dropping (or touching the control buttons at the right side of each button) your steps in the boxes below.</p>
 	<p>You can select from your Product Categories.  Drag any desired categories from the
 	Available Categories column, and move them to the Your Ordering Process column.
 	You can also do this by touching the &#10133; button.
 	</p>
 	<p>To remove a step from your ordering process just drag it back under the Available Categories column. You can also do this by touching the &#10006; button.</p>
-
+  <?php if ( !$license ): ?>
+    <div class="hidden-sm hidden-md hidden-lg">
+      <div class="container mobile-upsell-notice">
+        <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+        <ul>
+          <li>Unlimited Steps</li>
+          <li>Unlimited Packages</li>
+          <li>Store Credit</li>
+          <li>Required Products</li>
+          <li>Either/Or Products</li>
+          <li>Auto-Add Products</li>
+          <li>Color Schemes</li>
+          <li>Multiple Nav Shapes</li>
+          <li>Custom Labels</li>
+          <li>Options and Fees Page</li>
+          <li>Shadow Effects</li>
+          <li>Premium Support</li>
+        </ul>
+        <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+      </div>
+    </div>
+  <?php endif ?>
   <?php
   echo ob_get_clean();
 }
 
 function sbs_package_description() {
+  $license = sbs_check_license_cache();
+
 	ob_start();
 	?>
 		<p>
@@ -564,13 +632,34 @@ function sbs_package_description() {
 		<p>
 			If you don't wish to use packages, select Deactivated from the drop down menu.
 		</p>
+    <?php if ( !$license ): ?>
+      <div class="hidden-sm hidden-md hidden-lg">
+        <div class="container mobile-upsell-notice">
+          <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+          <ul>
+            <li>Unlimited Steps</li>
+            <li>Unlimited Packages</li>
+            <li>Store Credit</li>
+            <li>Required Products</li>
+            <li>Either/Or Products</li>
+            <li>Auto-Add Products</li>
+            <li>Color Schemes</li>
+            <li>Multiple Nav Shapes</li>
+            <li>Custom Labels</li>
+            <li>Options and Fees Page</li>
+            <li>Shadow Effects</li>
+            <li>Premium Support</li>
+          </ul>
+          <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+        </div>
+      </div>
+    <?php endif ?>
 	<?php
 	echo ob_get_clean();
 }
 
 function sbs_onf_description() {
-
-	$license = sbs_check_license_cache();
+	$license = sbs_check_license_cache() || isset( $_REQUEST['activate_license'] );
 	ob_start();
 	?>
 		<p>
@@ -580,18 +669,73 @@ function sbs_onf_description() {
 			<br><strong style="color: red; font-size: 1.2em;">A premium license is required to access this section.  You can purchase one <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong>
 			<?php endif ?>
 		</p>
+
+    <?php if ( !$license ): ?>
+      <div class="hidden-sm hidden-md hidden-lg">
+        <div class="container mobile-upsell-notice">
+          <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+          <ul>
+            <li>Unlimited Steps</li>
+            <li>Unlimited Packages</li>
+            <li>Store Credit</li>
+            <li>Required Products</li>
+            <li>Either/Or Products</li>
+            <li>Auto-Add Products</li>
+            <li>Color Schemes</li>
+            <li>Multiple Nav Shapes</li>
+            <li>Custom Labels</li>
+            <li>Options and Fees Page</li>
+            <li>Shadow Effects</li>
+            <li>Premium Support</li>
+          </ul>
+          <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+        </div>
+      </div>
+    <?php endif ?>
 	<?php
 	echo ob_get_clean();
 }
 
 function sbs_display_description() {
-  echo '<p>Customize the appearance of the ordering process with preset styles and themes.</p>';
+  $license = sbs_check_license_cache();
+  ob_start();
+  ?>
+  <p>
+    Customize the appearance of the ordering process with preset styles and themes.
+  </p>
+  <?php if ( !$license ): ?>
+    <div class="hidden-sm hidden-md hidden-lg">
+      <div class="container mobile-upsell-notice">
+        <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+        <ul>
+          <li>Unlimited Steps</li>
+          <li>Unlimited Packages</li>
+          <li>Store Credit</li>
+          <li>Required Products</li>
+          <li>Either/Or Products</li>
+          <li>Auto-Add Products</li>
+          <li>Color Schemes</li>
+          <li>Multiple Nav Shapes</li>
+          <li>Custom Labels</li>
+          <li>Options and Fees Page</li>
+          <li>Shadow Effects</li>
+          <li>Premium Support</li>
+        </ul>
+        <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+      </div>
+    </div>
+  <?php endif ?>
+  <?php
+  echo ob_get_clean();
 }
 
 function sbs_premium_description() {
 	$license = sbs_check_license_cache();
 
-	if ( !$license ) {
+  if ( $license || isset( $_REQUEST['activate_license'] ) ) {
+    echo null;
+  }
+	else {
 		echo '<p style="font-size: 1.1em;"><strong>Unlock the full version of this plugin by purchasing a license on <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">our website</a>. Enter the key sent to your valid email address.</strong></p>';
 	}
 
@@ -902,105 +1046,117 @@ function sbs_sbs_table_callback() {
 		You may have up to two parent categories, or steps, active at a time in the free version of this plugin. Only the first two subcategories in each step will be displayed.<br>You can add as many steps and subcategories as you would like after purchasing a license for the premium version <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a>
 	</strong></p>
 	<?php } ?>
-  <div class="sortable-container" id="sbs-order-container">
-    <h3>Your Ordering Process</h3>
-    <div class="fixed-item noselect">Package Selection</div>
-    <ul id="sbs-order" class="sortable step-sortable">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
 
-      <?php
-			if ( isset( $step_order ) )
-			{
-        foreach( $step_order as $category )
-				{
-				?>
-          <li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
-            <?php echo get_the_category_by_ID( $category->catid ) ?>
-						<div class="alignright">
-							<span class="sbs-sortable-item-move-up">&#9650;</span>
-							<span class="sbs-sortable-item-move-down">&#9660;</span>
-							<span class="sbs-sortable-item-add">&#10133;</span>
-							<span class="sbs-sortable-item-remove">&#10006;</span>
-						</div>
-						<div class="clearfix"></div>
-						<ul class="<?php echo !$license ? 'subcat-restricted' : null ?>">
-							<?php
-							foreach( $category->children as $child )
-							{
-							?>
-								<li class="sortable-item sortable-nested-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
-									<span class="subcat-name">
-										<?php echo get_the_category_by_ID( $child->catid ) ?>
-									</span>
-									<div class="alignright">
-										<span class="sbs-sortable-item-move-up">&#9650;</span>
-										<span class="sbs-sortable-item-move-down">&#9660;</span>
-									</div>
-									<div class="clearfix"></div>
-								</li>
-							<?php
-							}
-							?>
-						</ul>
-          </li>
-        <?php
-        }
-      }
-			?>
+        <div class="sortable-container" id="sbs-order-container">
+          <h3>Your Ordering Process</h3>
+          <div class="fixed-item noselect">Package Selection</div>
+          <ul id="sbs-order" class="sortable step-sortable">
 
-    </ul>
+            <?php
+            if ( isset( $step_order ) )
+            {
+              foreach( $step_order as $category )
+              {
+              ?>
+                <li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
+                  <?php echo get_the_category_by_ID( $category->catid ) ?>
+                  <div class="alignright">
+                    <span class="sbs-sortable-item-move-up">&#9650;</span>
+                    <span class="sbs-sortable-item-move-down">&#9660;</span>
+                    <span class="sbs-sortable-item-add">&#10133;</span>
+                    <span class="sbs-sortable-item-remove">&#10006;</span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <ul class="<?php echo !$license ? 'subcat-restricted' : null ?>">
+                    <?php
+                    foreach( $category->children as $child )
+                    {
+                    ?>
+                      <li class="sortable-item sortable-nested-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
+                        <span class="subcat-name">
+                          <?php echo get_the_category_by_ID( $child->catid ) ?>
+                        </span>
+                        <div class="alignright">
+                          <span class="sbs-sortable-item-move-up">&#9650;</span>
+                          <span class="sbs-sortable-item-move-down">&#9660;</span>
+                        </div>
+                        <div class="clearfix"></div>
+                      </li>
+                    <?php
+                    }
+                    ?>
+                  </ul>
+                </li>
+              <?php
+              }
+            }
+            ?>
 
-		<?php
-		if ( sbs_is_onf_section_active() )
-		{
-		?>
-			<div class="fixed-item noselect">Options and Fees</div>
-		<?php
-		}
-		?>
+          </ul>
 
-    <div class="fixed-item noselect">Checkout</div>
-  </div>
+          <?php
+          if ( sbs_is_onf_section_active() )
+          {
+          ?>
+            <div class="fixed-item noselect">Options and Fees</div>
+          <?php
+          }
+          ?>
 
-  <div class="sortable-container" id="sbs-pool-container">
-    <h3>Available Categories</h3>
-    <ul id="sbs-pool" class="sortable">
-      <?php foreach( $available_categories as $category ): ?>
+          <div class="fixed-item noselect">Checkout</div>
+        </div>
 
-				<?php if ( $category->category_parent === 0 ): ?>
+      </div>
 
-          <li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
-            <?php echo $category->name ?>
-						<div class="alignright">
-							<span class="sbs-sortable-item-move-up">&#9650;</span>
-							<span class="sbs-sortable-item-move-down">&#9660;</span>
-							<span class="sbs-sortable-item-add">&#10133;</span>
-							<span class="sbs-sortable-item-remove">&#10006;</span>
-						</div>
-						<div class="clearfix"></div>
-						<ul>
-							<?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
-							<?php if ( !empty( $children ) ): ?>
-								<?php foreach( $children as $child_id ): ?>
+      <div class="col-sm-6">
 
-									<li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
-										<?php echo get_the_category_by_ID( $child_id ) ?>
-										<div class="alignright">
-											<span class="sbs-sortable-item-move-up">&#9650;</span>
-											<span class="sbs-sortable-item-move-down">&#9660;</span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
+        <div class="sortable-container" id="sbs-pool-container">
+          <h3>Available Categories</h3>
+          <ul id="sbs-pool" class="sortable">
+            <?php foreach( $available_categories as $category ): ?>
 
-								<?php endforeach; ?>
-							<?php endif; ?>
-						</ul>
+              <?php if ( $category->category_parent === 0 ): ?>
 
-          </li>
+                <li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
+                  <?php echo $category->name ?>
+                  <div class="alignright">
+                    <span class="sbs-sortable-item-move-up">&#9650;</span>
+                    <span class="sbs-sortable-item-move-down">&#9660;</span>
+                    <span class="sbs-sortable-item-add">&#10133;</span>
+                    <span class="sbs-sortable-item-remove">&#10006;</span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <ul>
+                    <?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
+                    <?php if ( !empty( $children ) ): ?>
+                      <?php foreach( $children as $child_id ): ?>
 
-				<?php endif; ?>
+                        <li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
+                          <?php echo get_the_category_by_ID( $child_id ) ?>
+                          <div class="alignright">
+                            <span class="sbs-sortable-item-move-up">&#9650;</span>
+                            <span class="sbs-sortable-item-move-down">&#9660;</span>
+                          </div>
+                          <div class="clearfix"></div>
+                        </li>
 
-      <?php endforeach; ?>
-    </ul>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                  </ul>
+
+                </li>
+
+              <?php endif; ?>
+
+            <?php endforeach; ?>
+          </ul>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <input type="hidden" id="step_order" name="step_order" value="<?php echo esc_attr( get_option('step_order') ) ?>" />
@@ -1229,57 +1385,68 @@ function sbs_package_tier_callback() {
 				<strong style="color: red; font-size: 1.2em;">You may have up to one package in the free version of this plugin.<br>You can add as many packages as you would like after purchasing a license for the premium version of this plugin <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong>
 			<?php } ?>
 		</p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
 
-		<div class="sortable-container" id="sbs-order-container">
-			<h3>Your Active Packages</h3>
-			<ul id="sbs-order" class="sortable package-sortable">
-				<?php
-				if ( isset( $active_packages ) )
-				{
-					foreach( $active_packages as $package )
-					{
-					?>
-					<li data-catid="<?php echo $package->catid ?>" class="sortable-item">
-						<?php echo get_the_title( $package->catid ) ?>
-						<div class="alignright">
-							<span class="sbs-sortable-item-move-up">&#9650;</span>
-							<span class="sbs-sortable-item-move-down">&#9660;</span>
-							<span class="sbs-sortable-item-add">&#10133;</span>
-							<span class="sbs-sortable-item-remove">&#10006;</span>
-						</div>
-						<div class="clearfix"></div>
-					</li>
-					<?php
-					}
-				}
-				?>
-			</ul>
-		</div>
+          <div class="sortable-container" id="sbs-order-container">
+            <h3>Active Packages</h3>
+            <ul id="sbs-order" class="sortable package-sortable">
+              <?php
+              if ( isset( $active_packages ) )
+              {
+                foreach( $active_packages as $package )
+                {
+                ?>
+                <li data-catid="<?php echo $package->catid ?>" class="sortable-item">
+                  <?php echo get_the_title( $package->catid ) ?>
+                  <div class="alignright">
+                    <span class="sbs-sortable-item-move-up">&#9650;</span>
+                    <span class="sbs-sortable-item-move-down">&#9660;</span>
+                    <span class="sbs-sortable-item-add">&#10133;</span>
+                    <span class="sbs-sortable-item-remove">&#10006;</span>
+                  </div>
+                  <div class="clearfix"></div>
+                </li>
+                <?php
+                }
+              }
+              ?>
+            </ul>
+          </div>
 
-		<div class="sortable-container" id="sbs-pool-container">
-			<h3>Available Packages</h3>
-			<ul id="sbs-pool" class="sortable">
-				<?php
-				if ( isset( $package_cat_id ) ) {
-					foreach( $available_packages as $package )
-					{
-					?>
-						<li data-catid="<?php echo $package->ID ?>" class="sortable-item">
-							<?php echo $package->post_title ?>
-							<div class="alignright">
-								<span class="sbs-sortable-item-move-up">&#9650;</span>
-								<span class="sbs-sortable-item-move-down">&#9660;</span>
-								<span class="sbs-sortable-item-add">&#10133;</span>
-								<span class="sbs-sortable-item-remove">&#10006;</span>
-							</div>
-							<div class="clearfix"></div>
-						</li>
-					<?php
-					}
-				}
-				?>
-			</ul>
-		</div>
+        </div>
+
+        <div class="col-sm-6">
+
+          <div class="sortable-container" id="sbs-pool-container">
+            <h3>Available Packages</h3>
+            <ul id="sbs-pool" class="sortable">
+              <?php
+              if ( isset( $package_cat_id ) ) {
+                foreach( $available_packages as $package )
+                {
+                ?>
+                  <li data-catid="<?php echo $package->ID ?>" class="sortable-item">
+                    <?php echo $package->post_title ?>
+                    <div class="alignright">
+                      <span class="sbs-sortable-item-move-up">&#9650;</span>
+                      <span class="sbs-sortable-item-move-down">&#9660;</span>
+                      <span class="sbs-sortable-item-add">&#10133;</span>
+                      <span class="sbs-sortable-item-remove">&#10006;</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </li>
+                <?php
+                }
+              }
+              ?>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
 
 		<input type="hidden" id="step_order" name="sbs_package[active]" value="<?php echo esc_attr( get_option('sbs_package')['active'] ) ?>" />
 
@@ -1501,75 +1668,86 @@ function sbs_onf_order_callback() {
 		<p>To remove a category from the page just drag it back under the Available Categories column.  You can also do this by touching the &#10006; button.</p>
 	</div>
 
-	<div class="sortable-container <?php echo !$license ? 'grayed-out-text' : null ?>" id="sbs-order-container">
-		<h3 class="<?php echo !$license ? 'grayed-out-text' : null ?>">Options and Fees Page Outline</h3>
-		<ul id="sbs-order" class="sortable onf-sortable">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6">
 
-			<?php
-			if ( $onf_order )
-			{
-				foreach( $onf_order as $category )
-				{
-				?>
-					<li data-catid="<?php echo $category->catid ?>" class="sortable-item">
-						<?php echo get_the_category_by_ID( $category->catid ) ?>
-						<div class="alignright">
-							<span class="sbs-sortable-item-move-up">&#9650;</span>
-							<span class="sbs-sortable-item-move-down">&#9660;</span>
-							<span class="sbs-sortable-item-add">&#10133;</span>
-							<span class="sbs-sortable-item-remove">&#10006;</span>
-						</div>
-						<div class="clearfix"></div>
-						<ul>
-							<?php
-							if ( !empty( $onf_order->children ) )
-							{
-								foreach( $category->children as $child )
-								{
-								?>
-									<li class="sortable-item" data-catid="<?php echo $child->catid ?>">
-										<?php echo get_the_category_by_ID( $child->catid ) ?>
-										<div class="alignright">
-											<span class="sbs-sortable-item-move-up">&#9650;</span>
-											<span class="sbs-sortable-item-move-down">&#9660;</span>
-											<span class="sbs-sortable-item-add">&#10133;</span>
-											<span class="sbs-sortable-item-remove">&#10006;</span>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-								<?php
-								}
-							}
-							?>
-						</ul>
+        <div class="sortable-container <?php echo !$license ? 'grayed-out-text' : null ?>" id="sbs-order-container">
+          <h3 class="<?php echo !$license ? 'grayed-out-text' : null ?>">Options and Fees Page Outline</h3>
+          <ul id="sbs-order" class="sortable onf-sortable">
 
-					</li>
-				<?php
-				}
-			}
-			?>
+            <?php
+            if ( $onf_order )
+            {
+              foreach( $onf_order as $category )
+              {
+              ?>
+                <li data-catid="<?php echo $category->catid ?>" class="sortable-item">
+                  <?php echo get_the_category_by_ID( $category->catid ) ?>
+                  <div class="alignright">
+                    <span class="sbs-sortable-item-move-up">&#9650;</span>
+                    <span class="sbs-sortable-item-move-down">&#9660;</span>
+                    <span class="sbs-sortable-item-add">&#10133;</span>
+                    <span class="sbs-sortable-item-remove">&#10006;</span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <ul>
+                    <?php
+                    if ( !empty( $onf_order->children ) )
+                    {
+                      foreach( $category->children as $child )
+                      {
+                      ?>
+                        <li class="sortable-item" data-catid="<?php echo $child->catid ?>">
+                          <?php echo get_the_category_by_ID( $child->catid ) ?>
+                          <div class="alignright">
+                            <span class="sbs-sortable-item-move-up">&#9650;</span>
+                            <span class="sbs-sortable-item-move-down">&#9660;</span>
+                            <span class="sbs-sortable-item-add">&#10133;</span>
+                            <span class="sbs-sortable-item-remove">&#10006;</span>
+                          </div>
+                          <div class="clearfix"></div>
+                        </li>
+                      <?php
+                      }
+                    }
+                    ?>
+                  </ul>
 
-		</ul>
-	</div>
+                </li>
+              <?php
+              }
+            }
+            ?>
 
-	<div class="sortable-container <?php echo !$license ? 'grayed-out-text' : null ?>" id="sbs-pool-container">
-		<h3 class="<?php echo !$license ? 'grayed-out-text' : null ?>">Available Categories</h3>
-		<ul id="sbs-pool" class="sortable onf-sortable">
-			<?php foreach( $available_categories as $category ) { ?>
-							<li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
-								<?php echo $category->name ?>
-								<div class="alignright">
-									<span class="sbs-sortable-item-move-up">&#9650;</span>
-									<span class="sbs-sortable-item-move-down">&#9660;</span>
-									<span class="sbs-sortable-item-add">&#10133;</span>
-									<span class="sbs-sortable-item-remove">&#10006;</span>
-								</div>
-								<div class="clearfix"></div>
-								<ul></ul>
-							</li>
-			<?php } ?>
-		</ul>
-	</div>
+          </ul>
+        </div>
+
+      </div>
+      <div class="col-sm-6">
+
+        <div class="sortable-container <?php echo !$license ? 'grayed-out-text' : null ?>" id="sbs-pool-container">
+          <h3 class="<?php echo !$license ? 'grayed-out-text' : null ?>">Available Categories</h3>
+          <ul id="sbs-pool" class="sortable onf-sortable">
+            <?php foreach( $available_categories as $category ) { ?>
+              <li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
+                <?php echo $category->name ?>
+                <div class="alignright">
+                  <span class="sbs-sortable-item-move-up">&#9650;</span>
+                  <span class="sbs-sortable-item-move-down">&#9660;</span>
+                  <span class="sbs-sortable-item-add">&#10133;</span>
+                  <span class="sbs-sortable-item-remove">&#10006;</span>
+                </div>
+                <div class="clearfix"></div>
+                <ul></ul>
+              </li>
+            <?php } ?>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 	<input type="hidden" id="step_order" name="sbs_onf[order]" value="<?php echo esc_attr( get_option('sbs_onf')['order'] ) ?>" />
 
@@ -2185,8 +2363,6 @@ function sbs_premium_key_callback() {
 			</label>
 		</fieldset>
 	</form>
-
-	<p class="description"><?php // echo sbs_check_license_cache() ? 'Cache valid' : 'Cache invalid' ?></p>
 
 	<?php if ( isset( $check_response ) && isset( $check_response['data'] ) ) { ?>
 	<table>
