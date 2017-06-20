@@ -2244,7 +2244,7 @@ function sbs_premium_key_callback() {
 			if($license_data->result == 'success'){//Success was returned for the license activation
 
 					//Uncomment the followng line to see the message that returned from the license server
-					echo '<p style="color: red;"><strong>' . $license_data->message . '</strong></p>';
+					echo '<p style="color: green;"><strong>' . $license_data->message . '</strong></p>';
 
 					//Save the license key in the options table
 					update_option('sbs_premium_key', $license_key);
@@ -2573,7 +2573,7 @@ function sbs_render_admin_help_page() {
     on uninstall.  If you wish to remove all Step-By-Step data, add this line to
     your wp-config.php file:</p>
     <pre>define( 'SBS_REMOVE_ALL_DATA', true );</pre>
-    <p>This will delete any content created by the Step-By-Step plugin, including
+    <p>This will delete any content created by the Step-By-Step plugin when you uninstall, including
     the Package and Step-By-Step Ordering pages, all settings, and post metas.
     Products and Categories will not be removed.</p>
 
