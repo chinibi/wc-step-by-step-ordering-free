@@ -1,0 +1,164 @@
+Step-by-Step Ordering System for WooCommerce
+Terms and Conditions
+
+1. Plugin Description and Licensing:
+
+Step-by-Step Ordering System for WooCommerce is an addon product that works in
+conjunction with the WooCommerce system for WordPress. This plugin is created
+and owned by The Dream Builders Company, and not owned or or operated by
+WooCommerce. All extensions, unless otherwise stated, are licensed under the
+GNU General Public License (http://www.gnu.org/licenses/gpl.html) version 2.0
+or later.
+
+2. Warranty:
+
+Plugins sold and distributed by The Dream Builders Company are done so in the
+hope that they will be useful, however, we are not responsible for your
+personal success or fitness of use of the product. We offer a strong support
+system and will do our utmost to offer you help, guidelines and suggestions,
+and we warranty our work to ensure our code is well written and functions to
+the best of its ability.
+
+3. Functionality:
+
+The Step-by-Step Ordering System for WooCommerce has been tested on a number
+of WordPress themes, including a standard clean install of WordPress, standard
+WordPress themes, standard WooCommerce themes, WooCommerce Storefront, and
+various themes from the WordPress Repository.  This plug-in is designed to be
+compatible with any themes that support WooCommerce functionality.
+
+Because the number and variety of plugins is vast and wide, we cannot
+guarantee the plugin will function with all third-party plugins and themes of
+every or any kind. Therefore, we do not assume responsibility and will not be
+held responsible for any conflicts or compatibility issues that may occur due
+to third-party software. We assume no responsibility for any data loss as a
+result of installing or using the The Step-by-Step Ordering System. Should
+conflicts occur with third-party software, we are happy to provide support at
+our discretion as we are ready, willing or able to do so.
+
+4. Support:
+
+We do our utmost to offer only the best products possible. However, as with
+any software application, the  Step-by-Step Ordering System for WooCommerce is
+utilized and/or sold "as is" and without guaranteed warranty, meaning the
+product may not function exactly as you would like, or that it will be
+completely compatible with all third-party components and plugins.  Support
+for the  Step-by-Step Ordering System for WooCommerce is sold and distributed
+by The Dream Builders Company is only available for those who have an active,
+paid premium extension license. For those of you who choose to use the fully
+functional light version of the plugin, we offer online documentation and
+support info directly in the plugin settings and on our website at
+http://stepbystepsys.com
+
+Support and updates are granted for one year after the original purchase
+based on the license you have purchased. After one year is completed, the
+purchaser must renew their license in order to continue receiving support and
+updates for the items purchased. For purchases that include an automatically
+renewing subscription, support will be provided for as long as the
+subscription remains active.
+
+Support and updates for the  Step-by-Step Ordering System for WooCommerce
+will be provided as long as the plugin is actively in development. Should any
+one of the following occur, The Dream Builders Company will no longer be
+responsible for providing support for the Step-by-Step Ordering System:
+
+• The Step-by-Step Ordering System is no longer actively developed as a
+viable product under The Dream Builders Company.
+
+• The Dream Builders Company (or any parent company) is purchased or bought
+out by another company.
+
+• WordPress is no longer actively developed.
+
+While we attempt to provide the best support possible for our plugins, The
+Dream Builders Company cannot and does not guarantee that any particular
+support query can, or will be answered to the exact extent, or within a
+timeframe that the inquirer is completely satisfied.
+
+5. Automatic Updates:
+
+Automatic updates are available to license holders who have an active and
+valid subscription and license key. Automatic updates are available for the
+Step-by-Step Ordering System for WooCommerce and will continue to be
+available as long as the license key generated from the purchase is valid and
+active.  The plugin will provide you with a notice that an update is
+available when present.  As with all plugins, make sure you backup all your
+site before implementing new installs.  The light version of the plugin will
+also present you with updates (when available).
+
+*6. Plugin Delivery:
+
+After we have processed your payment successfully, you will receive an email
+with your order number and other purchase information. Your license key is
+available in your account area along with your plugin downloads. You can
+download the plugin by logging into the account created for you when
+purchasing the plugin and clicking on the appropriate link.  Should you not
+receive an email containing your information, you can contact us directly
+through our website.
+
+Access to re-download purchased files will be granted so long as your license
+key is valid. If a license key expires, download access to the associated
+files will be restricted and/or discontinued until such time as the license
+key is renewed. All customers are given 30-day notice to renew prior to
+expiration date.
+
+7. Ownership:
+
+All plugins are property of The Dream Builders Company. Claiming any type of
+intellectual or exclusive ownership rights of our products is strictly
+prohibited.  Our plugin is provided "as is.” We are not liable for any
+damages, including but not limited to, direct, indirect, special, incidental
+or consequential damages or losses that occur due to the use or inability to
+use our plugins.
+
+8. Website & Plugin Content:
+
+All content found on this site and throughout the plugin including images,
+documentation, support queries and any other information is property of The
+Dream Builders Company and may not be copied, distributed or redistributed
+without permission or consent.
+
+9. Price Changes:
+
+The Dream Builders Company reserves the right to modify, change, cancel or
+upgrade a plugin subscription and/or license key without prior notice or
+consent. Prices of all products are subject to change without prior notice or
+consent.
+
+10. Refund Policy:
+
+At the Dream Builders Company, we firmly believe in and stand behind our
+product 100%, but we understand that with software or applications of any
+kind, they may not work perfectly for everyone all of the time. If you are
+unhappy with your purchase, or you have an issue that we are unable to
+resolve that makes the system unusable, we will consider offering a refund.
+Refunds will be offered only at our sole discretion and must meet all of the
+following conditions fully:
+
+• You are within the first 30 days of the purchase of the plugin.
+• Your issue(s) comes from not being able to install the plugin properly or
+get the plugin to perform its basic functions.
+• You have attempted to resolve your issue(s) with our support team.
+
+* Please Note:  No refunds will be granted after the first 30 days of the
+original purchase whatsoever.
+* Also Note:  Issues caused by 3rd party plugins, themes or other software
+will NOT provide grounds for a refund.
+
+11. Email:
+The Dream Builders Company and/or The  Step-by-Step Ordering System for
+WooCommerce may occasionally send you emails related to the purchase of
+product(s) from our company. We may also send you occasional emails or
+information related to updates, promotions, or news. We will never sell or
+release your information to any third party vendors. You may opt out of these
+emails at any time without penalty.
+
+12. License Agreement
+By purchasing our product(s), you indicate and consent that you have read and
+agree to the Terms & Conditions listed and detailed on this page. We reserve
+the right to change or modify the current Terms and Conditions without prior
+notice or consent.
+
+13. Severability
+If any part of this agreement is declared unenforceable or invalid, all
+remaining clauses in this agreement shall remain binding on the customer.
