@@ -27,6 +27,8 @@ function sbs_get_product_parent_category( $product_id ) {
       return $category;
   }
 
+  return (object) array( 'term_id' => 0 );
+
 }
 
 /**

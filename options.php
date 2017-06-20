@@ -2336,10 +2336,10 @@ function sbs_premium_key_callback() {
 			// $check_response = json_decode( wp_remote_retrieve_body( $check_response ) );
 
 			if ( $check_response['verify_success'] && $check_response['response_success'] ) {
-				echo '<p class="description">Product key verified and premium features unlocked.</p>';
+				echo '<p class="description" style="color: green;">Product key verified and premium features unlocked.</p>';
 			}
 			else {
-				echo '<p class="description">Your product key is invalid or has expired.</p>';
+				echo '<p class="description" style="color: red;">Your product key is invalid or has expired.</p>';
 			}
 
 		}
