@@ -240,9 +240,9 @@ function sbs_has_valid_premium_key() {
 function sbs_daily_premium_key_check() {
 
   if ( sbs_has_valid_premium_key() ) {
-    set_site_transient( 'sbs_premium_key_valid', 'true', 2 * DAY_IN_SECONDS );
+    update_option( 'sbs_premium_key_valid', 'true' );
   } else {
-    set_site_transient( 'sbs_premium_key_valid', 'false', 2 * DAY_IN_SECONDS );
+    update_option( 'sbs_premium_key_valid', 'false' );
   }
 
 }

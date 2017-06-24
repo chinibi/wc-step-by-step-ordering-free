@@ -18,7 +18,7 @@ if ( $license ):
       wp_enqueue_style( 'sbs-theme-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-theme-default.css' ), array( 'sbs-style' ), filemtime( $themes_style_dir . 'sbs-theme-default.css' ) );
       break;
     case 2: // Grayscale "Noir 1"
-      wp_enqueue_style( 'sbs-theme-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-theme-noir-1.css' ), array( 'sbs-style' ), filemtime( $themes_style_dir . 'sbs-theme-nor-1.css' ) );
+      wp_enqueue_style( 'sbs-theme-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-theme-noir-1.css' ), array( 'sbs-style' ), filemtime( $themes_style_dir . 'sbs-theme-noir-1.css' ) );
       break;
     case 3: // Blue "Royal 1"
       wp_enqueue_style( 'sbs-theme-color', plugins_url( '/wc-step-by-step-ordering/css/frontend/themes/sbs-theme-royal-1.css' ), array( 'sbs-style' ), filemtime( $themes_style_dir . 'sbs-theme-royal-1.css' ) );

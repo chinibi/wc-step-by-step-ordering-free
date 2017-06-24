@@ -260,6 +260,11 @@ function sbs_get_active_packages( $slice = false ) {
 	$package_order = json_decode( $package_order );
 	$package_order = $package_order[0];
 
+  // Filter out deleted products
+  $package_order = array_filter( $package_order, function( $package ) {
+    return wc_get_product( $package->catid );
+  } );
+
 	$license = sbs_check_license_cache();
 	if ( !$license && $slice ) {
 		$package_order = array_slice( $package_order, 0, 1 );
@@ -310,6 +315,18 @@ function sbs_get_step_order( $slice = false ) {
 	foreach( $step_order as $step ) {
 		$step->children = $step->children[0];
 	}
+
+  // Filter out any deleted categories
+  $step_order = array_filter( $step_order, function( $step ) {
+    return term_exists( $step->catid, 'product_cat' );
+  });
+  foreach( $step_order as $step ) {
+    if ( isset( $step->children ) ) {
+      array_filter( $step->children, function( $child ) {
+        return term_exists( $child->catid, 'product_cat' );
+      });
+    }
+  }
 
 	$license = sbs_check_license_cache();
 	if ( !$license && $slice ) {
@@ -410,6 +427,11 @@ function sbs_get_onf_order() {
 		$onf->children = $onf->children[0];
 	}
 
+  // Filter out any deleted categories
+  $onf_order = array_filter( $onf_order, function( $onf ) {
+    return term_exists( $onf->catid, 'product_cat' );
+  });
+
 	return $onf_order;
 
 }
@@ -417,7 +439,7 @@ function sbs_get_onf_order() {
 
 function sbs_check_license_cache() {
 
-	$trans = get_site_transient( 'sbs_premium_key_valid' );
+	$trans = get_option( 'sbs_premium_key_valid' );
 	return $trans === 'true';
 
 }

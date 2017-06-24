@@ -108,7 +108,7 @@ function sbs_req_required_products_requirement_met_so_far() {
     return;
   }
 
-  $steps = sbs_get_full_step_order();
+  $steps = sbs_get_full_step_order( true );
 
   $current_step = array_key_exists( $_GET['step'], $steps ) ? (int) $_GET['step'] : 0;
 
@@ -167,7 +167,7 @@ function sbs_req_all_required_products_in_cart() {
     return;
   }
 
-	$steps = sbs_get_full_step_order();
+	$steps = sbs_get_full_step_order( true );
 
 	$current_step = count( $steps ) - 1;
 

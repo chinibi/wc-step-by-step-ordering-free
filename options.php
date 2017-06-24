@@ -1033,6 +1033,7 @@ function sbs_sbs_table_callback() {
 			}
 		}
 
+    // Do not list categories that are selected in the SBS order, is the package category, or the options and fees category
 		return !in_array( $category->term_id, $flat_step_order ) && $category->term_id != $package_cat && $category->term_id != $option_cat;
 
 	} );
@@ -2248,7 +2249,7 @@ function sbs_premium_key_callback() {
 
 					//Save the license key in the options table
 					update_option('sbs_premium_key', $license_key);
-					set_site_transient( 'sbs_premium_key_valid', 'true', 2 * DAY_IN_SECONDS  );
+					update_option( 'sbs_premium_key_valid', 'true' );
 			}
 			else{
 					//Show error to the user. Probably entered incorrect license key.
@@ -2298,8 +2299,8 @@ function sbs_premium_key_callback() {
 					echo '<p style="color: red;"><strong>' . $license_data->message . '</strong></p>';
 
 					//Remove the licensse key from the options table. It will need to be activated again.
-					update_option('sbs_premium_key', '');
-					set_site_transient( 'sbs_premium_key_valid', 'false' );
+					update_option( 'sbs_premium_key', '' );
+					update_option( 'sbs_premium_key_valid', 'false' );
 			}
 			else{
 					//Show error to the user. Probably entered incorrect license key.
