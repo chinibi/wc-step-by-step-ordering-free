@@ -21,7 +21,7 @@ $(document).ready(function() {
     if (variationID) {
       var productVariations = $(this.form).data('product_variations');
       for (var i = 0; i < productVariations.length; i++) {
-        if (productVariations[i].id === variationID) {
+        if (productVariations[i].id === variationID || productVariations[i].variation_id === variationID) {
           variationImage = productVariations[i].image;
           break;
         }
