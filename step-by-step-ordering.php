@@ -104,7 +104,7 @@ final class StepByStepSystem {
 		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
 		wp_enqueue_script( 'sbs-init-magnific-popup', plugins_url( '/js/frontend/sbs-init-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
 		wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
-		wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
+		wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery' ) );
 		wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );
 
 	}
