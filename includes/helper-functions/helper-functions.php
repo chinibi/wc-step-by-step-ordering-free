@@ -322,7 +322,7 @@ function sbs_get_step_order( $slice = false ) {
   });
   foreach( $step_order as $step ) {
     if ( isset( $step->children ) ) {
-      array_filter( $step->children, function( $child ) {
+      $step->children = array_filter( $step->children, function( $child ) {
         return term_exists( $child->catid, 'product_cat' );
       });
     }

@@ -532,16 +532,16 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
 
 	$steps = sbs_get_full_step_order( true );
 
+  if ( empty( $steps ) ) {
+    return '<div>This is the SBS Step-By-Step Ordering Page.  No ordering process has been set up yet; please access your admin settings and set up an ordering process.</div>';
+  }
+
 	if ( !$license ) {
 		foreach( $steps as $step ) {
 			if ( !empty( $step->children ) ) {
 				 $step->children = array_slice( $step->children, 0, 2 );
 			}
 		}
-	}
-
-	if ( empty( $steps ) ) {
-		return '<div>This is the SBS Step-By-Step Ordering Page.  No ordering process has been set up yet; please access your admin settings and set up an ordering process.</div>';
 	}
 
   // Default to step 0 if an invalid step was requested

@@ -71,10 +71,10 @@ function sbs_req_get_optional_products( $categories ) {
 
 	$posts = get_posts( $args );
 
-	$results = array_map( function( $post ) {
+	$results = array_filter( $posts, function( $post ) {
 		if ( get_post_meta( $post->ID, '_required_product', true) !== 'yes' )
 			return wc_get_product( $post->ID );
-	}, $posts);
+	} );
 
 	return $results;
 
@@ -109,6 +109,10 @@ function sbs_req_required_products_requirement_met_so_far() {
   }
 
   $steps = sbs_get_full_step_order( true );
+
+  if ( empty( $steps ) ) {
+    return;
+  }
 
   $current_step = array_key_exists( $_GET['step'], $steps ) ? (int) $_GET['step'] : 0;
 
