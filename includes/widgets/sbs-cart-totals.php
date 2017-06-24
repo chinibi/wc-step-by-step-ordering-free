@@ -14,8 +14,12 @@ class SBS_WC_Cart_Totals extends WP_Widget {
   }
 
   public function widget( $args, $instance ) {
+
+    // Generate the Steps array
+    $steps = sbs_get_step_order( true );
+
     // render only on WooCommerce shop pages and not on Cart and Checkout pages
-    if ( is_cart() || is_checkout() || !isset($_GET['step']) ) {
+    if ( is_cart() || is_checkout() || !isset($_GET['step']) || empty( $steps ) ) {
       return;
     }
 
@@ -27,7 +31,9 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 		// TODO: Refactor for use with sbs_get_full_step_order() instead.
     $categories = sbs_get_step_order( true );
 
-    $totals = array_map( array( $this, 'map_categories_to_widget_array_callback' ), $categories );
+    if ( !empty( $categories ) ) {
+      $totals = array_map( array( $this, 'map_categories_to_widget_array_callback' ), $categories );
+    }
 
     // Prepend Package to $totals
     $package = sbs_get_package_from_cart();
@@ -136,33 +142,35 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 		// Generate Previous/Next Step Buttons
 		$current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 0;
 
-	  $all_categories = sbs_get_all_wc_categories();
+	  // $all_categories = sbs_get_all_wc_categories();
 
-	  // Generate the Steps array
-	  $steps = sbs_get_step_order();
-	  foreach( $steps as $step ) {
-	    $step->name = get_the_category_by_ID( $step->catid );
-	  }
-	  $steps_package = new stdClass();
-	  $steps_package->name = 'Packages';
-	  $steps_checkout = new stdClass();
-	  $steps_checkout->name = 'Checkout';
-	  array_unshift( $steps, $steps_package );
-
-		if ( sbs_is_onf_section_active() ) {
-
-			$steps_onf = new stdClass();
-			$steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
-			array_push( $steps, $steps_onf );
-
-		}
-
-	  array_push( $steps, $steps_checkout );
-
-	  // Default to step 0 if an invalid step was requested
-	  if ( !array_key_exists( $current_step, $steps ) ) {
-	    $current_step = 0;
-	  }
+    // if ( !empty( $steps ) ) {
+    //   print_r( $steps );
+    //   foreach( $steps as $step ) {
+    //     $step->name = get_the_category_by_ID( $step->catid );
+    //   }
+    //
+    //   $steps_package = new stdClass();
+    //   $steps_package->name = 'Packages';
+    //   $steps_checkout = new stdClass();
+    //   $steps_checkout->name = 'Checkout';
+    //   array_unshift( $steps, $steps_package );
+    //
+    //   if ( sbs_is_onf_section_active() ) {
+    //
+    //     $steps_onf = new stdClass();
+    //     $steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
+    //     array_push( $steps, $steps_onf );
+    //
+    //   }
+    //
+    //   array_push( $steps, $steps_checkout );
+    //
+    //   // Default to step 0 if an invalid step was requested
+    //   if ( !array_key_exists( $current_step, $steps ) ) {
+    //     $current_step = 0;
+    //   }
+    // }
 
     ?>
     <table id="sbs-widget-sidebar-cart-totals">
