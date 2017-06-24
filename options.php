@@ -1022,6 +1022,10 @@ function sbs_sbs_table_callback() {
 
 		$flat_step_order = array();
 
+    if ( $category->term_id == $package_cat || $category->term_id == $option_cat ) {
+      return false;
+    }
+
 		if ( empty( $step_order ) ) {
 			return true;
 		}
@@ -1663,6 +1667,7 @@ function sbs_onf_order_callback() {
 	ob_start();
 	?>
 	<div class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+    <p>Begin by creating subcategories of your selected parent category above.  They will appear in the Available Categories box below.</p>
 		<p>Create your Options and Fees page by dragging and dropping (or touching the control buttons on the right side of each item) your items in the boxes below.</p>
 		<p>You can select from your subcategories of the parent category chosen to serve as Options.  Drag any desired categories from the
 		Available Categories column, and move them to the Your Ordering Process column.  You can also do this by touching the &#10133; button.  You can change the order they are displayed by rearranging the order of items in the column by drag and drop or arrow buttons.</p>
