@@ -29,7 +29,7 @@
 }
 
 #sbs-widget-sidebar-cart-totals {
-    background-color: #d1d1d1;
+    background-color: #b8f7d3;
 }
 
 #sbs-widget-sidebar-cart-totals .sbs-widget-sidebar-subtotal {
@@ -52,7 +52,7 @@
 }
 
 #sbs-navbar .step-title {
-    background-color: #d1d1d1;
+    background-color: #b8f7d3;
     padding: 25px 0 15px;
     margin-top: -20px;
 }
@@ -126,6 +126,10 @@
   color: #497b36;
 }
 
+.sbs-store-back-forward-buttons {
+  background-color: #b8f7d3;
+}
+
 .woocommerce-message {
     background-color: #497b36;
     color: white;
@@ -161,4 +165,9 @@ a.open-popup-link,
 .product-loop-remove a
 {
     color: #497b36;
+}
+
+/* Options Step */
+.sbs-options-and-fees .required td {
+    background-color: #c3ffc5;
 }

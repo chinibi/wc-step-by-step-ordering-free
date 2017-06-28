@@ -212,7 +212,7 @@ function sbs_req_all_required_products_in_cart() {
 		$redirect_url = $base_url . '?step=' . $earliest_step_failed;
 
 		wc_add_notice(
-			sprintf('<strong>You must add required products to the cart before you can checkout.  <a href="%s">Click here</a> to pick required products.',
+			sprintf('You must add required products to the cart before you can checkout.  <a href="%s">Click here</a> to pick required products.',
 				esc_url( $redirect_url )
 			),
 			'error'

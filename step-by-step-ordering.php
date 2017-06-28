@@ -32,28 +32,31 @@ final class StepByStepSystem {
 		// Include helper functions
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/helper-functions/helper-functions.php' );
 
-		// Include SBS Ordering Shortcode
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-select-package.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-options-and-fees.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
+    if ( !is_admin() ) {
+      // Include SBS Ordering Shortcode
+      include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-select-package.php' );
+      include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-options-and-fees.php' );
+      include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
 
-		// Include WooCommerce template and action overrides
-		include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-template-override.php' );
+      // Include WooCommerce template and action overrides
+      include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-template-override.php' );
 
-		// Include additions to WooCommerce actions
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/additional-actions.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-loop.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/sbs-product-custom-fields.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/product-cat-either-or.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/store-credit.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/required-products.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/auto-add-product.php' );
+      // Include additions to WooCommerce actions
+      include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-loop.php' );
+
+      // Include additional AJAX Add To Cart functions
+      include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
+    }
+
+    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/sbs-product-custom-fields.php' );
+    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/product-cat-either-or.php' );
+    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/store-credit.php' );
+    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/required-products.php' );
+    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/auto-add-product.php' );
+    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/additional-actions.php' );
 
 		// Include SBS Cart Totals Widget
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/widgets/sbs-cart-totals.php' );
-
-		// Include additional AJAX Add To Cart functions
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
 
 		// Include WP Admin Options page
 		if ( is_admin() ) {
@@ -105,7 +108,10 @@ final class StepByStepSystem {
 		wp_enqueue_script( 'sbs-init-magnific-popup', plugins_url( '/js/frontend/sbs-init-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
 		wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
 		wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery' ) );
-		wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );
+
+    if ( ! (is_cart() || is_checkout()) ) {
+      wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );
+    }
 
 	}
 

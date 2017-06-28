@@ -176,6 +176,6 @@ a.open-popup-link,
     color: #084675;
 }
 
-.sbs-options-and-fees .required {
-    background-color: #e6f0f8;
+.sbs-options-and-fees .required td {
+    background-color: #dee8f1;
 }

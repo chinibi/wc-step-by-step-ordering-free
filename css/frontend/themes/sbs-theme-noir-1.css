@@ -156,3 +156,8 @@ a.open-popup-link,
     text-align: right;
     color: #666666;
 }
+
+/* Options Page */
+.sbs-options-and-fees .required td {
+    background-color: #dcdcdc;
+}

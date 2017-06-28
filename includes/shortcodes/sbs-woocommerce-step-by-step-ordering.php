@@ -184,6 +184,7 @@ function sbs_render_featured_products( $current_step, $steps ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => -1,
+    'order' => 'ASC',
 		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
@@ -234,6 +235,7 @@ function sbs_render_optional_products( $category_id ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => -1,
+    'order' => 'ASC',
 		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
@@ -298,6 +300,7 @@ function sbs_render_product_category( $category_id ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => -1,
+    'order' => 'ASC',
 		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
@@ -526,7 +529,12 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
 
 	$license = sbs_check_license_cache();
 
-  $current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 0;
+  $active_packages = sbs_get_active_packages();
+  $packages_enabled = get_option('sbs_package')['enabled'];
+
+  $default_step = empty( $active_packages ) || !$packages_enabled ? 1 : 0;
+
+  $current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : $default_step;
 
   $all_categories = sbs_get_all_wc_categories();
 

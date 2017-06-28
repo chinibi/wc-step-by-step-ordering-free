@@ -110,6 +110,10 @@
   color: #497b36;
 }
 
+.sbs-store-back-forward-buttons {
+  background-color: #f8ebcc;
+}
+
 #sbs-widget-sidebar-cart-totals a.sbs-change-package-btn {
   color: white;
 }
@@ -149,4 +153,9 @@ a.open-popup-link,
 .product-loop-remove a
 {
     color: #497b36;
+}
+
+/* Options Step */
+.sbs-options-and-fees .required td {
+    background-color: #c3ffc5;
 }

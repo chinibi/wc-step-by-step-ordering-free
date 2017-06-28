@@ -137,8 +137,19 @@ function sbs_plugin_options_page() {
               <a class="sidebar-banner-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">
                 <img class="sidebar-banner" src="<?php echo esc_url( $banner_image_src ) ?>" />
               </a><br>
-              Want to remove this ad?<br>
-              <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Get Premium</a></strong>
+              <section>
+                Want to remove this ad?<br>
+                <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Get Premium</a></strong><br>
+              </section>
+              <section style="margin-top: 3em;">
+                <strong style="margin-bottom: 2em;">If you like working with the<br>Step-By-Step Ordering System For WooCommerce,<br>your donations are greatly appreciated!</strong>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                  <input type="hidden" name="cmd" value="_s-xclick">
+                  <input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
+                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+              </section>
             </div>
           </div>
         </div>
@@ -551,6 +562,13 @@ function sbs_general_description() {
 		information, click on the <a href="<?php echo esc_url( admin_url('admin.php') . '?page=stepbystepsys&tab=help' )?>">Help</a> tab or <a href="http://stepbystepsys.com">visit our site</a>.
 	</p>
   <?php if ( !$license ): ?>
+    <p>If you like working with Step-By-Step Ordering System for WooCommerce, you can donate to us by clicking the PayPal link below.</p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
     <div class="hidden-sm hidden-md hidden-lg">
       <div class="container mobile-upsell-notice">
         <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
@@ -588,6 +606,7 @@ function sbs_sbs_description() {
 	You can also do this by touching the &#10133; button.
 	</p>
 	<p>To remove a step from your ordering process just drag it back under the Available Categories column. You can also do this by touching the &#10006; button.</p>
+  <p><strong>Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.</strong> (<a rel="nofollow noreferrer" target="_blank" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png">Example</a>)</p>
   <?php if ( !$license ): ?>
     <div class="hidden-sm hidden-md hidden-lg">
       <div class="container mobile-upsell-notice">
@@ -1541,7 +1560,7 @@ function sbs_package_select_style_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'Maximum image size is limited to the width of the package selection box, while maintaining aspect ratio.'
+				'Maximum image size is limited by the width of the package selection box and the original image size.'
 			);
 			?>
 			Height (px):
@@ -1672,6 +1691,7 @@ function sbs_onf_order_callback() {
 		<p>You can select from your subcategories of the parent category chosen to serve as Options.  Drag any desired categories from the
 		Available Categories column, and move them to the Your Ordering Process column.  You can also do this by touching the &#10133; button.  You can change the order they are displayed by rearranging the order of items in the column by drag and drop or arrow buttons.</p>
 		<p>To remove a category from the page just drag it back under the Available Categories column.  You can also do this by touching the &#10006; button.</p>
+    <p><strong>Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.</strong> (<a rel="nofollow noreferrer" target="_blank" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png">Example</a>)</p>
 	</div>
 
   <div class="container-fluid">
@@ -2426,7 +2446,7 @@ function sbs_render_admin_help_page() {
 
 		<p>A configurable step-by-step ordering e-commerce ordering system to enhance what
 		you sell using WooCommerce.  Enhance your customer experience and drive more
-		sales to your online shopping.  To get started review the documentation below or visit our website at www.stepbystepsys.com</p>
+		sales to your online shopping.  To get started review the documentation below or visit our website at <a rel="nofollow noreferrer" target="_blank" href="http://stepbystepsys.com">http://stepbystepsys.com</a>.</p>
 
 		<section>
 			<h3>Table of Contents</h3>
@@ -2501,6 +2521,8 @@ function sbs_render_admin_help_page() {
 			one parent category, which will include their child categories.</li>
 			<li>To create child categories, make a new category and select the parent
 			category under the Parent field.</li>
+      <li><strong>Assign a parent and child category to each product.
+      This is needed for Step-By-Step to function correctly.</strong></li>
 			<li>Go to the Step-By-Step settings page and drag categories into Your Ordering
 			Process.  You can rearrange the categories inside to change the order.</li>
 		</ol>
@@ -2517,7 +2539,9 @@ function sbs_render_admin_help_page() {
 			<li>If you wish a different category to serve this role go the Options and Fees
 			settings page and select the category you want and save.</li>
 			<li>Create child categories of the chosen Options and Fees category, and make
-			products belonging to those categories.</li>
+			products belonging to those categories. <strong>Assign a
+      parent and child category to each product. This is needed for Step-By-Step
+      to function correctly.</strong></li>
 			<li>Drag and drop child categories from Available Categories to Options and Fees
 			Page Outline to build your Options and Fees page.</li>
 		</ol>

@@ -253,3 +253,8 @@ a.open-popup-link,
 .sbs-store-back-forward-buttons > a:hover {
     color: #f4f877;
 }
+
+/* Options Step */
+.sbs-options-and-fees .required td {
+    background-color: #f3f0ac;
+}

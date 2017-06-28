@@ -34,6 +34,7 @@ function sbs_add_product_cat_custom_fields() {
 
 function sbs_edit_product_cat_custom_fields( $term ) {
 
+  $license = sbs_check_license_cache();
   $term_id = $term->term_id;
   $checked = get_term_meta( $term_id, 'sbs_either_or', true );
 

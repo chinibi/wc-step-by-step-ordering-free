@@ -1,5 +1,5 @@
 === Step-By-Step Ordering System for WooCommerce ===
-Contributors: The Dream Builders Company, Trevor Pham, Andrew Lambros
+Contributors: trevorpham
 Requires at least: 4.4.0
 Tested up to: 4.8.0
 Stable tag: 1.0.6
@@ -54,7 +54,10 @@ Ordering settings
 one parent category, which will include their child categories.
 3. To create child categories, make a new category and select the parent
 category under the Parent field.
-4. Go to the Step-By-Step settings page and drag categories into Your Ordering
+4. To display products, assign **both** a parent and child category to each
+product.  This is needed for Step-By-Step to function correctly.
+http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png
+5. Go to the Step-By-Step settings page and drag categories into Your Ordering
 Process.  You can rearrange the categories inside to change the order.
 
 IV. Options and Fees (optional)
@@ -66,9 +69,13 @@ install.  This category is the default for the Options and Fees page.
 3. If you wish a different category to serve this role go the Options and Fees
 settings page and select the category you want and save.
 4. Create child categories of the chosen Options and Fees category, and make
-products belonging to those categories.
+products belonging to those categories. Assign **both** a parent and child
+category to each product.  This is needed for Step-By-Step to function
+correctly.
+http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png
 5. Drag and drop child categories from Available Categories to Options and Fees
 Page Outline to build your Options and Fees page.
+6. To display products,
 
 V. WordPress Themes
 This plugin is configured to work with themes already compatible with
@@ -120,7 +127,7 @@ By default all settings, custom fields, and custom metas are not deleted
 on uninstall.  If you wish to remove all Step-By-Step data, add this line to
 your wp-config.php file:
 
-define( 'SBS_REMOVE_ALL_DATA', true );
+"define( 'SBS_REMOVE_ALL_DATA', true );"
 
 This will delete any content created by the Step-By-Step plugin, including
 the Package and Step-By-Step Ordering pages, all settings, and post metas.
@@ -131,3 +138,7 @@ For more assistance with the Step-By-Step Ordering System for WooCommerce,
 please visit our site at http://stepbystepsys.com.
 
 Thank you for using our plugin!
+
+== Changelog ==
+= v1.0.6 =
+* Official Public Release

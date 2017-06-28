@@ -211,7 +211,7 @@ h1.step-by-step-title {
 }
 
 .sbs-package-thumbnail img {
-  width: 100%;
+  max-width: 100%;
 }
 
 .sbs-package-title {

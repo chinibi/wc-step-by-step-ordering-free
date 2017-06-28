@@ -18,8 +18,10 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     // Generate the Steps array
     $steps = sbs_get_step_order( true );
 
-    // render only on WooCommerce shop pages and not on Cart and Checkout pages
-    if ( is_cart() || is_checkout() || !isset($_GET['step']) || empty( $steps ) ) {
+    $step_by_step_page = (int) get_option('sbs_general')['page-name'];
+
+    // render only on the Step-By-Step Ordering page
+    if ( !is_page( $step_by_step_page ) || empty( $steps ) ) {
       return;
     }
 
@@ -140,7 +142,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     );
 
 		// Generate Previous/Next Step Buttons
-		$current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 0;
+		$current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 1;
 
 	  // $all_categories = sbs_get_all_wc_categories();
 

@@ -100,7 +100,7 @@ $sbs_package_defaults = array(
 );
 
 if ( isset( $package_cat_id ) ) {
-  $sbs_package_defaults['category'] = $package_cat_id;
+  $sbs_package_defaults['category'] = $package_cat_id->term_id;
 }
 add_option( 'sbs_package', $sbs_package_defaults );
 
@@ -110,6 +110,6 @@ $sbs_onf_defaults = array(
 );
 
 if ( isset( $onf_cat_id ) ) {
-  $sbs_onf_defaults['category'] = $onf_cat_id;
+  $sbs_onf_defaults['category'] = $onf_cat_id->term_id;
 }
 add_option( 'sbs_onf', $sbs_onf_defaults );

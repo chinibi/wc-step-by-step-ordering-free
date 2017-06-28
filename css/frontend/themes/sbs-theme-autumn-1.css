@@ -143,6 +143,7 @@
 
 .sbs-subcat-name {
     background-color: #ffde8f;
+    color: #8a140e !important;
     margin-top: 20px;
     padding-top: 10px;
     padding-left: 6px;
@@ -189,4 +190,13 @@ a.open-popup-link,
 #sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a:hover
 {
   color: #8a140e;
+}
+
+.sbs-store-back-forward-buttons {
+  background-color: #ffde8f;
+}
+
+/* Options Step */
+.sbs-options-and-fees .required td {
+    background-color: #ffc3c4;
 }

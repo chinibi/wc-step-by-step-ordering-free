@@ -255,7 +255,7 @@ function sbs_get_active_packages( $slice = false ) {
 
 	$package_order = isset( get_option('sbs_package')['active'] ) ? get_option('sbs_package')['active'] : null;
 
-	if ( !isset( $package_order ) ) return null;
+	if ( empty( $package_order ) ) return null;
 
 	$package_order = json_decode( $package_order );
 	$package_order = $package_order[0];
@@ -364,19 +364,19 @@ function sbs_get_full_step_order( $slice = false ) {
   }
   $steps_package = new stdClass();
 
-	if ( isset( get_option('sbs_package')['category'] ) ) {
+	//if ( isset( get_option('sbs_package')['category'] ) ) {
 		$steps_package->name = 'Packages';
 		$steps_package->catid = get_option('sbs_package')['category'];
 		$steps_package->type = 'package';
-	}
+	//}
 
   $steps_checkout = new stdClass();
   $steps_checkout->name = 'Checkout';
 	$steps_checkout->type = 'checkout';
 
-	if ( !empty( $steps_package->catid ) ) {
+	//if ( !empty( $steps_package->catid ) ) {
 		array_unshift( $steps, $steps_package );
-	}
+	//}
 
   if ( sbs_is_onf_section_active() ) {
 
