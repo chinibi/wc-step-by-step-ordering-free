@@ -90,24 +90,23 @@ final class StepByStepSystem {
 
 	public function sbs_enqueue_client_style_scripts() {
 
-		// Enqueue libraries
-		wp_enqueue_style( 'magnific-popup-style', plugins_url( '/css/frontend/magnific-popup.css', __FILE__ ) );
-
-		wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
-		wp_enqueue_script( 'magnific-popupjs', plugins_url( '/js/frontend/magnific-popup.min.js', __FILE__ ), array( 'jquery' ) );
-		wp_enqueue_script( 'zoom', plugins_url( '/js/frontend/zoom.min.js', __FILE__ ), array( 'jquery' ) );
-
 		// Enqueue custom stylesheets
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/main-style.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/common-theme-styles.php' );
 		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/theme-selector.php' );
 
-		// Enqueue custom scripts
-
-		wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
-		wp_enqueue_script( 'sbs-init-magnific-popup', plugins_url( '/js/frontend/sbs-init-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
-		wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
-		wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery' ) );
+    if ( is_sbs() || get_option('sbs_general')['ui-outside-sbs'] === 'yes' ) {
+      // Enqueue custom scripts
+      wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
+      wp_enqueue_script( 'sbs-init-magnific-popup', plugins_url( '/js/frontend/sbs-init-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
+      wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
+      wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery' ) );
+      // Enqueue libraries
+      wp_enqueue_style( 'magnific-popup-style', plugins_url( '/css/frontend/magnific-popup.css', __FILE__ ) );
+      wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
+      wp_enqueue_script( 'magnific-popupjs', plugins_url( '/js/frontend/magnific-popup.min.js', __FILE__ ), array( 'jquery' ) );
+      wp_enqueue_script( 'zoom', plugins_url( '/js/frontend/zoom.min.js', __FILE__ ), array( 'jquery' ) );
+    }
 
     if ( ! (is_cart() || is_checkout()) ) {
       wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );

@@ -172,6 +172,26 @@ function sbs_replace_woocommerce_template_loop_product_link_open() {
 
 add_action( 'plugins_loaded', 'sbs_replace_woocommerce_template_loop_product_link_open' );
 
+/**
+ * Hide the placeholder product image if option is enabled
+ *
+ */
+if ( isset( get_option('sbs_general')['hide-placeholder-images'] ) && get_option('sbs_general')['hide-placeholder-images'] === 'yes' ) {
+  // Fix for Divi theme causing the Sale badge to overlap price and name
+  if ( wp_get_theme()->get('Name') == 'Divi' || wp_get_theme()->get('Template') == 'Divi' ) {
+    add_filter('woocommerce_sale_flash', '__return_false');
+  }
+
+  add_action( 'init', 'sbs_custom_fix_thumbnail' );
+
+  function sbs_custom_fix_thumbnail() {
+    add_filter('woocommerce_placeholder_img_src', 'sbs_custom_woocommerce_placeholder_img_src');
+
+  	function sbs_custom_woocommerce_placeholder_img_src( $src ) {
+    	return plugins_url( '/wc-step-by-step-ordering/assets/frontend/transparent_spacer.png' );
+  	}
+  }
+}
 
 function sbs_query_key_verification_server() {
 

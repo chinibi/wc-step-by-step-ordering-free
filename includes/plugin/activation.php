@@ -70,6 +70,8 @@ if ( get_option('sbs_onf') === false && !term_exists( 'Options and Fees', 'produ
 
 $sbs_general_defaults = array(
   'page-name'               => get_page_by_title( 'Step-By-Step Ordering' )->ID,
+  'ui-outside-sbs'          => 'no',
+  'hide-placeholder-images' => 'no',
   'featured-items-position' => '2',
   'featured-label'          => 'Featured Items',
   'req-label-before'        => 'Select',

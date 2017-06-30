@@ -262,7 +262,7 @@ function sbs_render_premium_key_page() {
 function sbs_render_wp_admin_footer() {
 	ob_start();
 	?>
-	<p class="alignleft description">If you like the <strong>Step-By-Step Ordering System for WooCommerce</strong> please leave us a <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">5-star</a> rating.  Thanks for your support!</p>
+	<p class="alignleft description">If you like the <strong>Step-By-Step Ordering System for WooCommerce</strong> please leave us a <a rel="noopener noreferrer" target="_blank" href="https://wordpress.org/plugins/step-by-step-ordering-system-for-woocommerce">5-star</a> rating.  Thanks for your support!</p>
 	<?php
 
 	return ob_get_clean();
@@ -352,6 +352,20 @@ function sbs_plugin_settings_init() {
 		'sbs_general',
 		'sbs_general'
 	);
+  add_settings_field(
+    'sbs_ui_outside_sbs',
+    'Enable Catalog Pop-Ups Outside of Step-By-Step',
+    'sbs_apply_sbs_ui_outside_sbs_pages_callback',
+    'sbs_general',
+    'sbs_general'
+  );
+  add_settings_field(
+    'sbs_hide_product_placeholder_image',
+    'Hide Product Placeholder Images',
+    'sbs_hide_product_placeholder_image_callback',
+    'sbs_general',
+    'sbs_general'
+  );
 	add_settings_field(
 		'sbs_featured_position',
 		'Featured Items Position ' . sbs_premium_site_link() . sbs_admin_help_tooltip( 'right', 'Display featured items at the beginning or end of pages.' ),
@@ -531,7 +545,6 @@ function sbs_plugin_settings_init() {
   // );
 
 	register_setting('sbs_general', 'sbs_general', 'sbs_general_settings_sanitize');
-  register_setting('sbs_general', 'sbs_ui_feature');
   register_setting('sbs_order_settings', 'step_order');
 	register_setting('sbs_order_settings', 'sbs_navbar', 'sbs_navbar_settings_sanitize');
 	register_setting('sbs_package_settings', 'sbs_package', 'sbs_package_settings_sanitize');
@@ -901,6 +914,50 @@ function sbs_widgets_callback() {
 	<?php
 
 	echo ob_get_clean();
+}
+
+function sbs_apply_sbs_ui_outside_sbs_pages_callback() {
+  $option = isset( get_option('sbs_general')['ui-outside-sbs'] ) ? get_option('sbs_general')['ui-outside-sbs'] : 'no';
+
+  ob_start();
+  ?>
+  <fieldset>
+    <label>
+      <?php echo sbs_admin_help_tooltip(
+        'top',
+        'Clicking product images in catalogs opens a popup window instead of opening a new page.  If enabled, this will apply to all WooCommerce shop pages, not just Step-By-Step.'
+      ); ?>
+      <select name="sbs_general[ui-outside-sbs]">
+        <option value="no" <?php selected('no', $option) ?>>Disabled</option>
+        <option value="yes" <?php selected('yes', $option) ?>>Enabled</option>
+      </select>
+    </label>
+  </fieldset>
+  <?php
+
+  echo ob_get_clean();
+}
+
+function sbs_hide_product_placeholder_image_callback() {
+  $option = isset( get_option('sbs_general')['hide-placeholder-images'] ) ? get_option('sbs_general')['hide-placeholder-images'] : 'no';
+
+  ob_start();
+  ?>
+  <fieldset>
+    <label>
+      <?php echo sbs_admin_help_tooltip(
+        'top',
+        'If enabled, products without images assigned to them will not display a placeholder image.'
+      ); ?>
+      <select name="sbs_general[hide-placeholder-images]">
+        <option value="no" <?php selected('no', $option) ?>>Disabled</option>
+        <option value="yes" <?php selected('yes', $option) ?>>Enabled</option>
+      </select>
+    </label>
+  </fieldset>
+  <?php
+
+  echo ob_get_clean();
 }
 
 function sbs_featured_items_pos_callback() {
@@ -1689,7 +1746,8 @@ function sbs_onf_order_callback() {
     <p>Begin by creating subcategories of your selected parent category above.  They will appear in the Available Categories box below.</p>
 		<p>Create your Options and Fees page by dragging and dropping (or touching the control buttons on the right side of each item) your items in the boxes below.</p>
 		<p>You can select from your subcategories of the parent category chosen to serve as Options.  Drag any desired categories from the
-		Available Categories column, and move them to the Your Ordering Process column.  You can also do this by touching the &#10133; button.  You can change the order they are displayed by rearranging the order of items in the column by drag and drop or arrow buttons.</p>
+		Available Categories column,<br>and move them to the Your Ordering Process column.  You can also do this by touching the &#10133; button.</p>
+    <p>You can change the order categories are displayed by rearranging the order of items in the column by drag and drop or arrow buttons.</p>
 		<p>To remove a category from the page just drag it back under the Available Categories column.  You can also do this by touching the &#10006; button.</p>
     <p><strong>Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.</strong> (<a rel="nofollow noreferrer" target="_blank" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png">Example</a>)</p>
 	</div>

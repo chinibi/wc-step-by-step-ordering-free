@@ -19,6 +19,7 @@ function sbs_render_package_selection_box( $product_id, $per_row ) {
   ob_start();
   ?>
   <div class="sbs-package-container woocommerce">
+    <?php if ( $package->get_image( 'shop_thumbnail', array(), false ) && get_option('sbs_general')['hide-placeholder-images'] ): ?>
     <div class="sbs-package-thumbnail">
       <?php
       $package_image_height = isset( get_option('sbs_package')['image-height'] ) ? get_option('sbs_package')['image-height'] : null;
@@ -31,6 +32,7 @@ function sbs_render_package_selection_box( $product_id, $per_row ) {
       }
       ?>
     </div>
+    <?php endif ?>
     <div class="sbs-package-title">
       <?php echo $package->get_name() ?>
     </div>

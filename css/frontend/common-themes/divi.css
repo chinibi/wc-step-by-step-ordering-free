@@ -75,6 +75,18 @@
 
 /* Main Step-By-Step Product Loop */
 
+.woocommerce.columns-1 ul.products li.product a img {
+  margin: 0 auto 9px !important;
+}
+
+.woocommerce.columns-1 ul.products li.product a img {
+  width: auto;
+}
+
+.woocommerce.columns-1 ul.products li.product {
+  text-align: center;
+}
+
 @media (min-width: 981px) and (max-width: 1200px) {
   .woocommerce ul.products a.button,
   .woocommerce ul.products button.alt,
@@ -131,6 +143,13 @@
 
 p.sbs-subcat-description:last-of-type {
   padding-bottom: 1em;
+}
+
+/* Magnific Popup */
+.woocommerce  div.product.modal-right-side-full form.cart div.quantity,
+.woocommerce  div.product.modal-right-side-full form.cart .button
+{
+  float: none;
 }
 
 /* Calculator Widget */

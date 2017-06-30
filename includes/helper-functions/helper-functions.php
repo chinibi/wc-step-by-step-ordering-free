@@ -436,6 +436,28 @@ function sbs_get_onf_order() {
 
 }
 
+/**
+ * Checks if the current page is an SBS Page, which is either the Choose Package
+ * or the Ordering page.
+ *
+ * @return bool
+ */
+function is_sbs() {
+  $package_page = get_option('sbs_package')['page-name'];
+  $main_pages = get_option('sbs_general')['page-name'];
+  $sbs_pages = array(
+    $package_page,
+    $main_pages
+  );
+
+  foreach( $sbs_pages as $sbs_page ) {
+    if ( is_page( $sbs_page ) ) {
+      return true;
+    }
+  }
+  return false;
+}
+
 
 function sbs_check_license_cache() {
 

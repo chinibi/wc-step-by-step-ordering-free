@@ -19,6 +19,10 @@ if ( wp_get_theme()->get('Name') == 'Divi' || wp_get_theme()->get('Template') ==
 
 function sbs_product_loop_quantity_in_cart() {
 
+  if ( !is_sbs() && get_option('sbs_general')['ui-outside-sbs'] === 'no' ) {
+    return;
+  }
+
   global $woocommerce;
   global $product;
 
@@ -38,23 +42,45 @@ function sbs_product_loop_quantity_in_cart() {
 
 
 function sbs_product_loop_mfp_modal() {
+
+  if ( !is_sbs() && get_option('sbs_general')['ui-outside-sbs'] === 'no' ) {
+    return;
+  }
+
   global $product;
 
-  echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link learn-more-link">Learn More</a>';
-  echo '<div id="modal-product-' . $product->get_id() . '" class="woocommerce white-popup mfp-hide">';
-  echo    '<div class="modal-left-side">';
-  echo      '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
-  echo    '</div>';
-  echo    '<div class="modal-right-side single-product product">';
+  if ( $product->get_image( 'shop_thumbnail', array(), false ) ) {
+    echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link learn-more-link">Learn More</a>';
+    echo '<div id="modal-product-' . $product->get_id() . '" class="woocommerce white-popup mfp-hide">';
+    echo    '<div class="modal-left-side">';
+    echo      '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
+    echo    '</div>';
+    echo    '<div class="modal-right-side single-product product">';
 
-  do_action( 'woocommerce_single_product_summary' );
+    do_action( 'woocommerce_single_product_summary' );
 
-  echo    '</div>';
-  echo '</div>';
+    echo    '</div>';
+    echo '</div>';
+  }
+  else {
+    echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link learn-more-link">Learn More</a>';
+    echo '<div id="modal-product-' . $product->get_id() . '" class="woocommerce white-popup mfp-hide">';
+    echo    '<div class="modal-right-side modal-right-side-full single-product product">';
+
+    do_action( 'woocommerce_single_product_summary' );
+
+    echo    '</div>';
+    echo '</div>';
+  }
+
 }
 
 
 function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
+
+  if ( !is_sbs() && get_option('sbs_general')['ui-outside-sbs'] === 'no' ) {
+    return $html;
+  }
 
 	global $woocommerce;
 
@@ -93,6 +119,10 @@ function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 
 
 function sbs_product_loop_add_to_cart_link( $html, $product ) {
+
+  if ( !is_sbs() && get_option('sbs_general')['ui-outside-sbs'] === 'no' ) {
+    return $html;
+  }
 
   if ( ! $product->is_type('simple') ) {
     return sprintf( '<a rel="nofollow" data-quantity="%s" data-product_id="%s" data-product_sku="%s" data-mfp-src="#modal-product-%s" class="%s open-popup-link">%s</a><br>',

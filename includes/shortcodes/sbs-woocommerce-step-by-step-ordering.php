@@ -121,7 +121,7 @@ function sbs_next_step_button( $current_step, $step_count ) {
 }
 
 
-function sbs_render_required_products( $category_id ) {
+function sbs_render_required_products( $category_id, $columns ) {
 
 	// $title = isset( get_option('sbs_step_section_label')['req-label-' . $current_step] ) ? get_option('sbs_step_section_label')['req-label-' . $current_step] . ' (Required)' : 'Featured Items';
 
@@ -155,7 +155,7 @@ function sbs_render_required_products( $category_id ) {
 
 		echo '<h3 class="sbs-subcat-name">' . esc_html( $required_label_before ) . ' ' . $sub_term['name'] . ' ' . esc_html( $required_label_after ) . '</h3>';
 		echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
-		echo '<div class="woocommerce columns-4">';
+		echo '<div class="woocommerce columns-' . $columns . '">';
 		woocommerce_product_loop_start();
 
 		while ( $query->have_posts() ):
@@ -175,7 +175,7 @@ function sbs_render_required_products( $category_id ) {
 
 }
 
-function sbs_render_featured_products( $current_step, $steps ) {
+function sbs_render_featured_products( $current_step, $steps, $columns ) {
 
 	$title = isset( get_option('sbs_general')['featured-label'] ) ? get_option('sbs_general')['featured-label'] : 'Featured Items';
 
@@ -206,7 +206,7 @@ function sbs_render_featured_products( $current_step, $steps ) {
 	if ( $query->have_posts() ):
 
 		echo '<h3 class="sbs-subcat-name">' . $title . '</h3>';
-		echo '<div class="woocommerce columns-4">';
+		echo '<div class="woocommerce columns-' . $columns . '">';
 		woocommerce_product_loop_start();
 
 		while ( $query->have_posts() ):
@@ -226,7 +226,7 @@ function sbs_render_featured_products( $current_step, $steps ) {
 }
 
 
-function sbs_render_optional_products( $category_id ) {
+function sbs_render_optional_products( $category_id, $columns ) {
 
 	$sub_term = get_term_by('id', $category_id, 'product_cat', 'ARRAY_A');
 
@@ -268,7 +268,7 @@ function sbs_render_optional_products( $category_id ) {
 
 		echo '<h3 class="sbs-subcat-name">' . esc_html( $optional_label_before ) . ' ' . $sub_term['name'] . ' ' . esc_html( $optional_label_after ) . '</h3>';
 		echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
-		echo '<div class="woocommerce columns-4">';
+		echo '<div class="woocommerce columns-' . $columns . '">';
 		woocommerce_product_loop_start();
 
 		while ( $query->have_posts() ):
@@ -349,7 +349,7 @@ function sbs_render_product_category( $category_id ) {
 }
 
 
-function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
+function sbs_render_step_by_step_ordering_content( $current_step, $steps, $columns ) {
 
 	global $woocommerce;
 
@@ -373,7 +373,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
 		echo '<p>' . $cat_term['description'] . '</p>';
 
 		if ( isset( get_option('sbs_general')['featured-items-position'] ) && get_option('sbs_general')['featured-items-position'] === '1' ) {
-			sbs_render_featured_products( $current_step, $steps );
+			sbs_render_featured_products( $current_step, $steps, $columns );
 		}
 
     if ( !empty( $steps[$current_step]->children ) ) {
@@ -381,11 +381,11 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
       foreach( $steps[$current_step]->children as $subcategory ) {
 
 				if ( $license ) {
-					sbs_render_required_products( $subcategory->catid );
-					sbs_render_optional_products( $subcategory->catid );
+					sbs_render_required_products( $subcategory->catid, $columns );
+					sbs_render_optional_products( $subcategory->catid, $columns );
 				}
 				else {
-					sbs_render_product_category( $subcategory->catid );
+					sbs_render_product_category( $subcategory->catid, $columns );
 				}
 
       }
@@ -393,7 +393,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps ) {
     }
 
 		if ( !isset( get_option('sbs_general')['featured-items-position'] ) || get_option('sbs_general')['featured-items-position'] === '2' ) {
-			sbs_render_featured_products( $current_step, $steps );
+			sbs_render_featured_products( $current_step, $steps, $columns );
 		}
 
     return;
@@ -525,7 +525,18 @@ function sbs_render_sbs_navbar( $current_step, $steps ) {
 }
 
 
-function sbs_woocommerce_step_by_step_ordering_shortcode() {
+function sbs_woocommerce_step_by_step_ordering_shortcode( $atts = [] ) {
+
+  // Set default shortcode attributes
+  $atts = shortcode_atts(
+    array(
+      'columns' => '4'
+    ), $atts, 'sbs_woocommerce_step_by_step_ordering'
+  );
+  $columns = $atts['columns'];
+  add_filter( 'loop_shop_columns', function( $cols ) use ( $columns ) {
+    return $columns;
+  }, 10 );
 
 	$license = sbs_check_license_cache();
 
@@ -577,7 +588,7 @@ function sbs_woocommerce_step_by_step_ordering_shortcode() {
   ?>
 
   <div>
-    <?php sbs_render_step_by_step_ordering_content( $current_step, $steps ) ?>
+    <?php sbs_render_step_by_step_ordering_content( $current_step, $steps, $columns ) ?>
   </div>
 
   <?php

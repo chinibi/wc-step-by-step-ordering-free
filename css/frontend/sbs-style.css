@@ -149,6 +149,11 @@ h1.step-by-step-title {
   width: 48%;
 }
 
+.modal-right-side-full {
+  text-align: center;
+  margin: 0 auto;
+}
+
 .mfp-content .product_meta {
   display: none; /* Do not show categories on modal popups */
 }
