@@ -23,9 +23,15 @@ final class StepByStepSystem {
 	public $version = '1.0.6';
 
 	public function __construct() {
+    $this->define_constants();
 		$this->includes();
 		$this->initialize();
 	}
+
+  private function define_constants() {
+    define( 'SBS_ABSPATH', dirname( __FILE__ ) . '/' );
+    define( 'SBS_VERSION', $this->version );
+  }
 
 	private function includes() {
 
