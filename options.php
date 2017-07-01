@@ -1548,7 +1548,7 @@ function sbs_package_atc_callback() {
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
-				'When a package is selected or changed in the SBS system, this is the action take when a package is added to the cart. The default behavior is to clear the cart so the user has a fresh experience.'
+				'When a package is selected or changed in the SBS system, this is the action taken when a package is added to the cart. The default behavior is to clear the cart so the user has a fresh experience.'
 			);
 			?>
 			<select id="sbs_package[clear-cart]" name="sbs_package[clear-cart]">
