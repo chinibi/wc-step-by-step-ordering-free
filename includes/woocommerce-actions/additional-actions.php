@@ -173,7 +173,8 @@ function sbs_replace_woocommerce_template_loop_product_link_open() {
 add_action( 'plugins_loaded', 'sbs_replace_woocommerce_template_loop_product_link_open' );
 
 /**
- * Hide the placeholder product image if option is enabled
+ * Replace the default WC product placeholder image with a blank transparent
+ * spacer if option is enabled
  *
  */
 if ( isset( get_option('sbs_general')['hide-placeholder-images'] ) && get_option('sbs_general')['hide-placeholder-images'] === 'yes' ) {
@@ -188,7 +189,7 @@ if ( isset( get_option('sbs_general')['hide-placeholder-images'] ) && get_option
     add_filter('woocommerce_placeholder_img_src', 'sbs_custom_woocommerce_placeholder_img_src');
 
   	function sbs_custom_woocommerce_placeholder_img_src( $src ) {
-    	return plugins_url( '/wc-step-by-step-ordering/assets/frontend/transparent_spacer.png' );
+    	return plugins_url( 'assets/frontend/transparent_spacer.png', SBS_PLUGIN_FILE );
   	}
   }
 }

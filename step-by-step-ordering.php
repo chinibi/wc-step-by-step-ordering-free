@@ -29,6 +29,7 @@ final class StepByStepSystem {
 	}
 
   private function define_constants() {
+    define( 'SBS_PLUGIN_FILE', __FILE__ );
     define( 'SBS_ABSPATH', dirname( __FILE__ ) . '/' );
     define( 'SBS_VERSION', $this->version );
   }
@@ -36,37 +37,37 @@ final class StepByStepSystem {
 	private function includes() {
 
 		// Include helper functions
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/helper-functions/helper-functions.php' );
+		include_once( SBS_ABSPATH . 'includes/helper-functions/helper-functions.php' );
 
     if ( !is_admin() ) {
       // Include SBS Ordering Shortcode
-      include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-select-package.php' );
-      include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-options-and-fees.php' );
-      include_once( plugin_dir_path( __FILE__ ) . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
+      include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-select-package.php' );
+      include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-options-and-fees.php' );
+      include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
 
       // Include WooCommerce template and action overrides
-      include_once( plugin_dir_path( __FILE__ ) . 'woocommerce/plugin-template-override.php' );
+      include_once( SBS_ABSPATH . 'woocommerce/plugin-template-override.php' );
 
       // Include additions to WooCommerce actions
-      include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-loop.php' );
+      include_once( SBS_ABSPATH . 'includes/woocommerce-actions/add-to-cart-loop.php' );
 
       // Include additional AJAX Add To Cart functions
-      include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
+      include_once( SBS_ABSPATH . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
     }
 
-    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/sbs-product-custom-fields.php' );
-    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/product-cat-either-or.php' );
-    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/store-credit.php' );
-    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/required-products.php' );
-    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/auto-add-product.php' );
-    include_once( plugin_dir_path( __FILE__ ) . 'includes/woocommerce-actions/additional-actions.php' );
+    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/sbs-product-custom-fields.php' );
+    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/product-cat-either-or.php' );
+    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/store-credit.php' );
+    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/required-products.php' );
+    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/auto-add-product.php' );
+    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/additional-actions.php' );
 
 		// Include SBS Cart Totals Widget
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/widgets/sbs-cart-totals.php' );
+		include_once( SBS_ABSPATH . 'includes/widgets/sbs-cart-totals.php' );
 
 		// Include WP Admin Options page
 		if ( is_admin() ) {
-			include_once( plugin_dir_path( __FILE__ ) . 'options.php' );
+			include_once( SBS_ABSPATH . 'options.php' );
 		}
 
 	}
@@ -86,20 +87,20 @@ final class StepByStepSystem {
 
 
 	public function plugin_activation() {
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/plugin/activation.php' );
+		include_once( SBS_ABSPATH . 'includes/plugin/activation.php' );
 	}
 
 
 	public function plugin_deactivation() {
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/plugin/deactivation.php' );
+		include_once( SBS_ABSPATH . 'includes/plugin/deactivation.php' );
 	}
 
 	public function sbs_enqueue_client_style_scripts() {
 
 		// Enqueue custom stylesheets
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/main-style.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/common-theme-styles.php' );
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/theme-selector.php' );
+		include_once( SBS_ABSPATH . 'includes/themes/main-style.php' );
+		include_once( SBS_ABSPATH . 'includes/themes/common-theme-styles.php' );
+		include_once( SBS_ABSPATH . 'includes/themes/theme-selector.php' );
 
     if ( is_sbs() || get_option('sbs_general')['ui-outside-sbs'] === 'yes' ) {
       // Enqueue custom scripts
@@ -123,14 +124,14 @@ final class StepByStepSystem {
 
 	public function sbs_dequeue_third_party_scripts() {
 
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/common-theme-styles-dequeue.php' );
+		include_once( SBS_ABSPATH . 'includes/themes/common-theme-styles-dequeue.php' );
 
 	}
 
 
 	public function sbs_enqueue_preset_themes() {
 
-		include_once( plugin_dir_path( __FILE__ ) . 'includes/themes/theme-selector.php' );
+		include_once( SBS_ABSPATH . 'includes/themes/theme-selector.php' );
 
 	}
 
