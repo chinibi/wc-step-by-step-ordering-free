@@ -35,7 +35,6 @@ final class StepByStepSystem {
   }
 
 	private function includes() {
-
 		// Include helper functions
 		include_once( SBS_ABSPATH . 'includes/helper-functions/helper-functions.php' );
 
@@ -69,12 +68,9 @@ final class StepByStepSystem {
 		if ( is_admin() ) {
 			include_once( SBS_ABSPATH . 'options.php' );
 		}
-
 	}
 
-
 	private function initialize() {
-
 		register_activation_hook( __FILE__, array( $this, 'plugin_activation' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'plugin_deactivation' ) );
 
@@ -82,7 +78,6 @@ final class StepByStepSystem {
 		add_action( 'admin_head', array( $this, 'sbs_define_ajax_url' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_enqueue_client_style_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_dequeue_third_party_scripts'), 20 );
-
 	}
 
 
@@ -96,12 +91,12 @@ final class StepByStepSystem {
 	}
 
 	public function sbs_enqueue_client_style_scripts() {
-
 		// Enqueue custom stylesheets
 		include_once( SBS_ABSPATH . 'includes/themes/main-style.php' );
 		include_once( SBS_ABSPATH . 'includes/themes/common-theme-styles.php' );
 		include_once( SBS_ABSPATH . 'includes/themes/theme-selector.php' );
 
+    // Scripts to be enqueued only on SBS pages or with setting override.
     if ( is_sbs() || get_option('sbs_general')['ui-outside-sbs'] === 'yes' ) {
       // Enqueue custom scripts
       wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
@@ -118,23 +113,15 @@ final class StepByStepSystem {
     if ( ! (is_cart() || is_checkout()) ) {
       wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );
     }
-
 	}
-
 
 	public function sbs_dequeue_third_party_scripts() {
-
 		include_once( SBS_ABSPATH . 'includes/themes/common-theme-styles-dequeue.php' );
-
 	}
-
 
 	public function sbs_enqueue_preset_themes() {
-
 		include_once( SBS_ABSPATH . 'includes/themes/theme-selector.php' );
-
 	}
-
 
 	public function sbs_define_ajax_url() {
 	  ob_start();
