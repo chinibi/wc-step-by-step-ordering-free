@@ -1,24 +1,25 @@
 === Step-By-Step Ordering System for WooCommerce ===
-Contributors: trevorpham, dreambuilders
+Contributors: dreambuilders, trevorpham
 Tags: woocommerce, catalog, ordering, step-by-step, customizable, e-commerce, store
 Requires at least: 4.4
 Tested up to: 4.8
 Stable tag: 1.0.6
-License: GPLv2
+License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 A configurable step-by-step ordering e-commerce ordering system to enhance what you sell using WooCommerce.
 
 == Description ==
-# Offer Your Customers an Enhanced Shopping Experience
+
+= Offer Your Customers an Enhanced Shopping Experience =
 
 The Step-By-Step Ordering System For WooCommerce is a fully functional plugin that works in conjunction with WooCommerce and takes your Wordpress shopping system to a whole new level.  Our system was built to focus on the shopping experience by offering online buyers a guided step-by-step visit through your online store.
 
-## How It Works:
+= How It Works =
 
 The Step-By-Step system works by offering step-by-step shopping.  This style of shopping is great for those who have packaged products or those who sell products in "layers" or "add-ons."  It offers buyers an opportunity to purchase products in a packaged, grouped or cross-promoted fashion.  Simply install the plugin and read the instructions provided. As you begin to work with the Step-By-Step system, you will see how easily it integrates into the WooCommerce interface. Create your sales packages, list your products for sale, and you’re ready to roll!
 
-## Great Scalability:
+= Great Scalability =
 
 By guiding your customers Step-By-Step, you provide them with clearer choices and stronger buying power.  Step-By-Step allows your customers to purchase items clearly and easily, which means increased sales for you.
 
@@ -26,11 +27,11 @@ The Step-By-Step Ordering System For WooCommerce helps keep your customers from 
 
 Create tailored packages and Step-By-Step shopping categories. Working with the WooCommerce system in conjunction with Step-By-Step offers your customers a great shopping experience, while offering you the confidence you’re looking for in an e-commerce system.  It's easy to set up and there are endless possibilities and configurations you can set up for your online shoppers!
 
-## Getting Started:
+= Getting Started =
 
 Start by downloading the Step-By-Step (SBS) Ordering Light Version.  it offers many useful tools to enhance your current WooCommerce site experience.  If you want to extend the shopper even more perks, we offer a Premium License which expands the SBS system features.
 
-## Features of Step-By-Step System for Woo Commerce:
+= Features of Step-By-Step System for Woo Commerce =
 
 * Ability to Choose "Package" Page, auto-configured for the SBS system
 * Ability to Choose "Ordering" Page, auto-configured for the SBS system
@@ -50,7 +51,7 @@ Start by downloading the Step-By-Step (SBS) Ordering Light Version.  it offers m
 * Options and Fees Step Section (Premium Version) - Allows for different product types and add-ons to be sold
 * Options and Fees builder
 
-## Display Features:
+= Display Features =
 
 * Color Schemes - A Variety of Color Schemes to Choose From.  Or use your own Default Theme CSS
 * Navbar Step Numbers and Name Shapes - Create Your Step Navigation to Appear in the Shape of Squares, Circles, Stars, Hearts, etc.
@@ -64,25 +65,25 @@ Start by downloading the Step-By-Step (SBS) Ordering Light Version.  it offers m
 
 Note: We suggest using a theme that designates support for WooCommerce.
 
-## Built For Developers:
+= Built For Developers =
 
 Extend your customer's WooCommerce capabilities.  Give their stores the enhancement of a shopper guided experience.
 
-## Great For Store Owner's Needs:
+= Great For Store Owner's Needs =
 
 Drive more sales to your store by adding the SBS package-driven step-by-step system to your website.  Combined with the power of WooCommerce, the Step-By-Step Ordering System combines integrates our product with theirs. You can't go wrong!
 
-## Step-By-Step Ordering System for WooCommerce - SBS Light Version:
+= Step-By-Step Ordering System for WooCommerce - SBS Light Version =
 
 The light version of the Step-By-Step Ordering System is a fully-functional plugin which you can download from WordPress.org and directly from our site. Examine all of the core features.  If you like it as much as we think you will, consider upgrading to our Premium Version to unlock the awesome features to really enhance the step-by-step experience.
 
-## Step-By-Step Ordering System for WooCommerce - SBS Premium:
+= Step-By-Step Ordering System for WooCommerce - SBS Premium =
 
 Go the the next level with the Step-By-Step Ordering Premium Version. Our Premium Version offers you countless enhanced tools tailored to drive your customer’s purchasing experience to the next level. People who shop on your site will be specifically guided to purchase your packages you offer for sale, along with add-on products you wish to cross-promote.  Your buyers will be given the opportunity to buy products in a cross-promoted fashion, offering you the ability to drive sales while offering the customer a great shopping experience.
 
 For more information on SBS Premium click here to visit our website.
 
-## Sign up for Premium and Receive:
+= Sign up for Premium and Receive =
 
 * Unlimited Steps
 * Unlimited Packages
@@ -99,16 +100,18 @@ For more information on SBS Premium click here to visit our website.
 * Premium Support
 * & Much More
 
-## Custom Set-up:
+= Custom Set-up =
 
-Need some help setting up your Step-By-Step System For WooCommerce?  Contact us for a custom quote. We provide custom setups and design for Premium customers.  The SBS system is a very powerful tool.  When setup correctly, SBS can help you drive more online sales and increase your profitability. Visit our site for more info.
+Need some help setting up your Step-By-Step System For WooCommerce?  Contact us for a custom quote. We provide custom setups and design for Premium customers.  The SBS system is a very powerful tool.  When setup correctly, SBS can help you drive more online sales and increase your profitability. [Visit our site](http://stepbystepsys.com) for more info.
 
 == Installation ==
+
 1. Install WooCommerce. WooCommerce is required for this plugin.
 2. Install the Step-By-Step plugin.
 3. Access the settings page found [here](http://stepbystepsys.com/wp-content/uploads/2017/06/admin-sidebar.png) to start configuring!
 
-### I. Packages
+= I. Packages =
+
 1. When you installed the plugin, a Packages category was automatically created
   and is selected by default to display in the Choose Package Page.
   If you want a different category to do this, select the desired category
@@ -127,14 +130,16 @@ Need some help setting up your Step-By-Step System For WooCommerce?  Contact us 
   Your Active Packages column to change the order they're displayed.
   [Example](http://stepbystepsys.com/wp-content/uploads/2017/06/package-page-builder.png)
 
-### II. Widgets
+= II. Widgets =
+
 To configure your sidebar in the ordering process:
 1. Go to the widgets section on your Wordpress Dashboard
 2. Add the WooCommerce Cart Totals widget to your sidebar.
 3. It is also recommended that you add the WooCommerce Cart Widget under the
   WooCommerce Cart Totals. [Example](http://stepbystepsys.com/wp-content/uploads/2017/06/widgets.png)
 
-### III. Step By Step
+= III. Step By Step =
+
 [Reference](http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-builder.png)
 1. The Step-By-Step is located under the Step-By-Step tab in the Step-By-Step
   Ordering settings
@@ -148,7 +153,8 @@ To configure your sidebar in the ordering process:
 5. Go to the Step-By-Step settings page and drag categories into Your Ordering
   Process.  You can rearrange the categories inside to change the order.
 
-### IV. Options and Fees (optional)
+= IV. Options and Fees (optional) =
+
 [Reference](http://stepbystepsys.com/wp-content/uploads/2017/06/onf-builder.png)
 1. This is an optional page you can create that displays products in a table
   rather than a catalog.
@@ -164,13 +170,14 @@ To configure your sidebar in the ordering process:
 5. Drag and drop child categories from Available Categories to Options and Fees
   Page Outline to build your Options and Fees page.
 
-### V. WordPress Themes
+= V. WordPress Themes =
+
 This plugin is configured to work with themes already compatible with
 WooCommerce.  While the plugin is fully functional with these themes out of the
 box, it is recommended to take these steps if you are using one of the
 following themes:
 
-#### Twenty Sixteen
+** Twenty Sixteen **
 It is recommended that a full-width template be used on the Choose Package
 page.  Since Twenty Sixteen does not come with a full-width template, download
 a child theme from our website, install it, then activate it.  Go to the package
@@ -179,14 +186,16 @@ right-hand sidebar.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-#### Twenty Seventeen
+** Twenty Seventeen **
+
 Twenty Seventeen does not come with a sidebar.  Download a child theme from our
 website, install it, then activate it.  Go to the Ordering page in WP Admin and
 choose the Page with Sidebar template on the right-hand sidebar.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-#### Divi
+** Divi **
+
 The Choose Package and Checkout page works best on a full-width template.
 The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template
 for main content and sidebar, respectively.
@@ -197,12 +206,14 @@ child theme here.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-#### Storefront
+** Storefront **
+
 The Choose Package page is best displayed on the Full width template, which
 you can select when you edit that page on the right-hand sidebar.  The default
 template is recommended for the Ordering page.
 
-## Step-By-Step Premium Upgrade
+= Step-By-Step Premium Upgrade =
+
 If you like our plugin and would like to see more content from us please
 consider purchasing a license from us.  Premium users get additional features
 like unlimited steps, navigation options, required products, either-or products,
@@ -213,7 +224,8 @@ After purchasing a license, a key will be sent to your provided email.  Enter
 this key into the input box in the Premium tab in the Step-By-Step Ordering
 settings and then click Activate.
 
-## Uninstalling
+= Uninstalling =
+
 If you wish to disable this plugin's functionality you can deactivate it in
 the plugin settings.  If you wish to completely remove this plugin, deactivate
 it, then click the Delete button.
@@ -227,7 +239,6 @@ your wp-config.php file:
 This will delete any content created by the Step-By-Step plugin, including
 the Package and Step-By-Step Ordering pages, all settings, and post metas.
 Products and Categories will not be removed.
-
 
 For more assistance with the Step-By-Step Ordering System for WooCommerce,
 please visit our site at http://stepbystepsys.com.
@@ -275,7 +286,8 @@ The Premium Features include:
 
 The Step-By-Step Ordering System For WooCommerce was design to work with themes that declare support for WooCommerce already.  While we do our best to test a wide variety of themes, some CSS adjustments may be needed for optimal results.  For the "Choose Packages" page, we recommend a full width page (without sidebar).  For your "Ordering Page" (the Step-By-Step pages), we recommend a page with a sidebar.  The sidebar will contain your SBS calculator widget and the WooCommerce cart widget (optional).  If you use any of the following themes, here are some instructions for implementation:
 
-#### Twenty Sixteen
+** Twenty Sixteen **
+
 It is recommended that a full-width template be used on the Choose Package
 page.  Since Twenty Sixteen does not come with a full-width template, download
 a child theme from our website, install it, then activate it.  Go to the Package
@@ -284,14 +296,16 @@ right-hand sidebar.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-#### Twenty Seventeen
+** Twenty Seventeen **
+
 Twenty Seventeen does not come with a sidebar.  Download a child theme from our
 website, install it, then activate it.  Go to the Ordering page in WP Admin and
 choose the Page with Sidebar template on the right-hand sidebar.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-#### Divi by Elegant Themes
+** Divi by Elegant Themes **
+
 The Choose Package and Checkout page works best on a full-width template.
 The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template
 for main content and sidebar, respectively.
@@ -302,7 +316,8 @@ child theme here.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-#### Storefront
+** Storefront **
+
 The Choose Package page is best displayed on the Full width template, which
 you can select when you edit that page on the right-hand sidebar.  The default
 template is recommended for the Ordering page.
@@ -313,7 +328,7 @@ The Step-By-Step Ordering System For WooCommerce will work for nearly all indust
 
 = Do I need to be a development expert to use the Step-By-Step Ordering System for WocCommerce? =
 
-No.  However, it is recommended that you have basic WordPress and WooCommerce knowledge when using the Step-By-Step Ordering System For WooCommerce.  Basically, if you have an understanding of CSS, the structure of WordPress and WooCommerce, then the SBS plugin should be quite easy to work with.  If you don't feel confident in your development/design abilities, we offer customized system configuration services to assist you.  Visit our site at [http://stepbystepsys.com](http://stepbystepsys.com)
+No.  However, it is recommended that you have basic WordPress and WooCommerce knowledge when using the Step-By-Step Ordering System For WooCommerce.  Basically, if you have an understanding of CSS, the structure of WordPress and WooCommerce, then the SBS plugin should be quite easy to work with.  If you don't feel confident in your development/design abilities, we offer customized system configuration services to assist you.  Visit our site at [http://stepbystepsys.com](http://stepbystepsys.com).
 
 = How many packages can I use with the Step-By-Step Ordering System for WocCommerce? =
 
