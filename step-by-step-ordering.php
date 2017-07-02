@@ -96,7 +96,7 @@ final class StepByStepSystem {
 		include_once( SBS_ABSPATH . 'includes/themes/common-theme-styles.php' );
 		include_once( SBS_ABSPATH . 'includes/themes/theme-selector.php' );
 
-    // Scripts to be enqueued only on SBS pages or with setting override.
+    // Scripts to be enqueued only on SBS pages (or sitewide with setting override).
     if ( is_sbs() || get_option('sbs_general')['ui-outside-sbs'] === 'yes' ) {
       // Enqueue custom scripts
       wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
@@ -108,6 +108,11 @@ final class StepByStepSystem {
       wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
       wp_enqueue_script( 'magnific-popupjs', plugins_url( '/js/frontend/magnific-popup.min.js', __FILE__ ), array( 'jquery' ) );
       wp_enqueue_script( 'zoom', plugins_url( '/js/frontend/zoom.min.js', __FILE__ ), array( 'jquery' ) );
+    }
+
+    // Scripts to be enqueued only on SBS pages
+    if ( is_sbs() ) {
+      wp_enqueue_Script( 'disable-cart-widget-links', plugins_url( '/js/frontend/disable-cart-widget-links.js', __FILE__ ), array( 'jquery' ) );
     }
 
     if ( ! (is_cart() || is_checkout()) ) {
