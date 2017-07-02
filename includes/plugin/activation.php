@@ -67,51 +67,60 @@ if ( get_option('sbs_onf') === false && !term_exists( 'Options and Fees', 'produ
  * Set default settings if none exist
  *
  */
-
-$sbs_general_defaults = array(
-  'page-name'               => get_page_by_title( 'Step-By-Step Ordering' )->ID,
-  'ui-outside-sbs'          => 'no',
-  'hide-placeholder-images' => 'no',
-  'featured-items-position' => '2',
-  'featured-label'          => 'Featured Items',
-  'req-label-before'        => 'Select',
-  'req-label-after'         => '(Required)',
-  'opt-label-before'        => '',
-  'opt-label-after'         => '(Addons)'
-);
-add_option( 'sbs_general', $sbs_general_defaults );
-
-add_option( 'step_order', '' );
-
-$sbs_navbar_defaults = array(
-  'throttle-nav' => '2'
-);
-add_option( 'sbs_navbar', $sbs_navbar_defaults );
-
-$sbs_package_defaults = array(
-  'enabled'          => '1',
-  'label'            => 'Step-By-Step Ordering',
-  'page-name'        => get_page_by_title( 'Choose Package' )->ID,
-  'category'         => '',
-  'active'           => '',
-  'clear-cart'       => '1',
-  'per-row'          => '1',
-  'add-to-cart-text' => 'Select Package',
-  'image-height'     => '',
-  'image-width'      => ''
-);
-
-if ( isset( $package_cat_id ) ) {
-  $sbs_package_defaults['category'] = $package_cat_id->term_id;
+if ( get_option('sbs_general') === false ) {
+  $sbs_general_defaults = array(
+    'page-name'               => get_page_by_title( 'Step-By-Step Ordering' )->ID,
+    'ui-outside-sbs'          => 'no',
+    'hide-placeholder-images' => 'no',
+    'featured-items-position' => '2',
+    'featured-label'          => 'Featured Items',
+    'req-label-before'        => 'Select',
+    'req-label-after'         => '(Required)',
+    'opt-label-before'        => '',
+    'opt-label-after'         => '(Addons)'
+  );
+  add_option( 'sbs_general', $sbs_general_defaults );
 }
-add_option( 'sbs_package', $sbs_package_defaults );
 
-$sbs_onf_defaults = array(
-  'category' => '',
-  'order' => ''
-);
-
-if ( isset( $onf_cat_id ) ) {
-  $sbs_onf_defaults['category'] = $onf_cat_id->term_id;
+if ( get_option('step_order') === false ) {
+  add_option( 'step_order', '' );
 }
-add_option( 'sbs_onf', $sbs_onf_defaults );
+
+if ( get_option('sbs_navbar') === false ) {
+  $sbs_navbar_defaults = array(
+    'throttle-nav' => '2'
+  );
+  add_option( 'sbs_navbar', $sbs_navbar_defaults );
+}
+
+if ( get_option('sbs_package') === false ) {
+  $sbs_package_defaults = array(
+    'enabled'          => '1',
+    'label'            => 'Step-By-Step Ordering',
+    'page-name'        => get_page_by_title( 'Choose Package' )->ID,
+    'category'         => '',
+    'active'           => '',
+    'clear-cart'       => '1',
+    'per-row'          => '1',
+    'add-to-cart-text' => 'Select Package',
+    'image-height'     => '',
+    'image-width'      => ''
+  );
+
+  if ( isset( $package_cat_id ) ) {
+    $sbs_package_defaults['category'] = $package_cat_id->term_id;
+  }
+  add_option( 'sbs_package', $sbs_package_defaults );
+}
+
+if ( get_option('sbs_onf') === false ) {
+  $sbs_onf_defaults = array(
+    'category' => '',
+    'order' => ''
+  );
+
+  if ( isset( $onf_cat_id ) ) {
+    $sbs_onf_defaults['category'] = $onf_cat_id->term_id;
+  }
+  add_option( 'sbs_onf', $sbs_onf_defaults );
+}
