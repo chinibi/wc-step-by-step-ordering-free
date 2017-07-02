@@ -51,10 +51,27 @@ function sbs_select_package_and_clear_cart( $passed, $product_id, $quantity ) {
 		}
   }
 
-  return true;
+  return $passed;
 
 }
 add_action( 'woocommerce_add_to_cart_validation', 'sbs_select_package_and_clear_cart', 1, 3 );
+
+// Currently, variable products set to sell individually will sell multiple quantities
+// if different variations are selected.  This action changes this behavior
+// to allow only one variation of such a product to be purchased per order.
+function sbs_fix_variable_individually_purchased_product_bug( $passed, $product_id, $quantity ) {
+  $product = wc_get_product( $product_id );
+  $name = $product->get_name();
+  if ( $product->is_sold_individually() && sbs_get_cart_key( $product_id ) ) {
+    wc_add_notice(
+      sprintf( 'You cannot add another "%s" to your cart.', $name ),
+      'error'
+    );
+    return false;
+  }
+  return true;
+}
+add_action( 'woocommerce_add_to_cart_validation', 'sbs_fix_variable_individually_purchased_product_bug', 10, 3 );
 
 
 function sbs_render_checkout_sbs_navbar() {
