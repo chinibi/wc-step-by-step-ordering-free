@@ -61,7 +61,7 @@ Start by downloading the Step-By-Step (SBS) Ordering Light Version.  it offers m
 * Compatible with Themes that Support WooCommerce
 * Compatible with Woo Themes Storefront Theme
 * Compatible with the Elegant Themes DIVI Theme
-* Compatible with Wordpress 2015, 2016, 2017? themes
+* Compatible with Wordpress 2015, 2016, 2017 themes
 
 Note: We suggest using a theme that designates support for WooCommerce.
 
@@ -369,6 +369,333 @@ The Options and Fees page is for miscellaneous items, services, and fees. They w
 = How does the Store Credit (Merchandise Credit) functionality work with the Step-By-Step Ordering System for WooCommerce? =
 
 You can assign a merchandise credit to one or more of your packages.  This merchandise credit will be applied any add-on items contained in your step-by-step pages.  For example, you might have a merchandise credit of $50 with one of your packages.   Someone who chooses this package will be able apply the  $50 credit towards the products offered in your store via the Step-By-Step pages.
+
+= --Support Questions-- =
+
+= How do I get support for the Step-By-Step Ordering System for WooCommerce? =
+
+Everyone gets access to customer support via the (SBS website)[http://stepbystepsys.com].  For the SBS Light Version of the plugin, feel free to look through the support documentation listed on (our website)[http://stepbystepsys.com] or post a question on the WordPress forums.  SBS Premium Version users gain full customer support for the duration of their license period via our contact form as well as documentation and forum support.  A staff member will respond to your request for assistance as quickly as possible.
+
+= Is full support offered with the premium version of the Step-By-Step system? =
+
+Yes.  We offer full support for premium users of the SBS plugin.  To initiate a support request, visit (our website)[http://stepbystepsys.com/contact/].  Under "Reason For Contact", select Premium Support.  Simply provide your license key and our support team will respond to you ASAP.
+
+= How do I get started with the Step-By-Step Ordering System for WooCommerce? =
+
+Download the Step-By-Step Ordering System for WooCommerce at https://wordpress.org/plugins/step-by-step-ordering-system-for-woocommerce/.  Or, via your WordPress install, go to Plugins > Add New > and then Search for Step By Step Ordering System For WooCommerce
+
+How do I set up the Step-By-Step Ordering System for WocCommerce?
+
+** Installation **
+
+1. Install WooCommerce. WooCommerce is required for this plugin.
+2. Install the Step-By-Step plugin.
+3. Access the settings page found [here](http://stepbystepsys.com/wp-content/uploads/2017/06/admin-sidebar.png) to start configuring!
+
+** I. Packages **
+
+1. When you installed the plugin, a Packages Category was automatically created and is selected by default to display in the Choose Package Page. If you want a different category to do this, create and select the desired category under the Package Category field in Package Settings.
+[Example] (http://stepbystepsys.com/wp-content/uploads/2017/06/package-category.png)
+
+2. Next, create a product to help create a tailored package. Make sure the package category is selected. For example, a product package might be:  Family Meal Plan: Plan comes with choice of Pizza, meat, salad and drinks.
+[Example] (http://stepbystepsys.com/wp-content/uploads/2017/06/new-product.png)
+
+3. If you have purchased a Premium license of this plugin, you can Assign Store Credit, which will be applied when it's added to the cart.  You can set it up in the Product General Settings.
+[Example] (http://stepbystepsys.com/wp-content/uploads/2017/06/package-product-custom-fields.png)
+
+4. When you're done creating packages, go back to the Package Settings page and drag packages from the Available Packages column to Your Active Packages column, which will help you to build the Choose Package page.  You can rearrange packages in the Your Active Packages column to change the order they're displayed.
+[Example] (http://stepbystepsys.com/wp-content/uploads/2017/06/package-page-builder.png)
+
+** II. Widgets **
+
+To Configure your Sidebar in the Ordering Process:
+
+1. Go to the Widgets section on your WordPress Dashboard
+2. Add the WooCommerce Cart Totals Widget to your Sidebar.
+3. It's also recommended that you Add the WooCommerce Cart Widget under the WooCommerce Cart Totals.
+
+[Example](http://stepbystepsys.com/wp-content/uploads/2017/06/widgets.png)r)
+
+** III. Step-By-Step **
+
+[Reference](http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-builder.png)
+
+1. The Step-By-Step is located under the Step-By-Step tab in the Step-By-Step Ordering Settings
+
+2. Create Product Categories. Each page in the ordering process will display one Parent Category, which will include their Child Categories.
+
+3. To create Child Categories, make a New Category and select the Parent Category under the Parent Field.
+
+4. To display products, assign **both** a Parent and Child Category to each product.  This is needed for Step-By-Step to function correctly.
+[Example](http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png)
+
+5. Go to the Step-By-Step Settings page and drag Categories into Your Ordering Process.  You can rearrange the categories inside to change the order.
+
+** IV. Options and Fees (optional) **
+
+[Reference](http://stepbystepsys.com/wp-content/uploads/2017/06/onf-builder.png)
+
+1. This is an optional page you can create that displays products in a table rather than a catalog.
+
+2. A Product Category named Options and Fees was automatically created on install.  This category is the default for the Options and Fees page.
+
+3. If you wish a different category to serve this role go the Options and Fees settings page, set up and select the category you want and save it.
+
+4. Create Child categories of the chosen Options and Fees category, and make products belonging to those categories. Assign **both** a parent and child
+category to each product.  This is needed for Step-By-Step to function correctly.
+[Example](http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png)
+
+5. Drag and drop Child Categories from Available Categories to Options and Fees Page Outline to build your Options and Fees page.
+
+** V. WordPress Themes **
+
+This plugin is configured to work with themes already compatible with WooCommerce.  While the plugin is fully functional with these themes out of the
+box, it is recommended to take these steps if you are using one of the following themes:
+
+** Twenty Sixteen **
+
+It is recommended that a full-width template be used on the Choose Package page.  Since Twenty Sixteen does not come with a full-width template, download
+a child theme from our website, install it, then activate it.  Go to the package selection page in the Admin settings and choose the Full Width template on the right-hand sidebar.
+
+Download the Child Theme [here](http://stepbystepsys.com).
+
+** Twenty Seventeen **
+
+Twenty Seventeen does not come with a sidebar.  Download a child theme from our website, install it, then activate it.  Go to the Ordering page in WP Admin and choose the Page with Sidebar template on the right-hand sidebar.
+
+Download the child theme [here](http://stepbystepsys.com).
+
+** Divi by Elegant Themes **
+
+The Choose Package and Checkout page works best on a full-width template. The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template
+for main content and sidebar, respectively.
+
+It is strongly recommended that a child theme be used, as core template CSS needs to be modified to optimize the UI.  You can download our custom Divi
+Child Theme.
+Download the Child Theme [here](http://stepbystepsys.com).
+
+** Storefront **
+
+The Choose Package page is best displayed on the Full Width Template, which you can select when you edit that page on the right-hand sidebar.  The default template is recommended for the Ordering page.
+
+= What is the suggested amount of packages to use? =
+
+With regard to SBS Premium Version, there is no correct amount of packages to use.  You may choose to offer only one package for certain situations, but most people use between 3-6 packages.  To keep it simple, we recommend using up to 3 packages to not overburden your customer with decisions.
+
+= What is the suggested amount of Step-By-Step pages to use? =
+
+Up to 6 total steps for SBS Premium customers.  This means you can have 4 Category pages, 1 Options and Fees page and a Checkout page.  Or you can configure it to have 5 category pages and 1 checkout pages.  It's flexible and its totally up to you!  If you only need a couple category pages, then you can do that as well.
+
+= What is the Default Step-By-Step (Ordering) Page called? =
+
+The default ordering page for the Step-By-Step Navigations page is set to "Ordering" by default.  You can change this to anything you would like in the General Settings tab.
+
+= Do I have to use Widgets? =
+
+It is recommended that you add two widgets to your sidebar.  First, add the WooCommerce Car Totals: Step-By-Step ordering to add our SBS widget calculator.  Next, right below it you can add the WooCommerce Cart widget.
+
+= --General Settings Tab-- =
+
+= What does Enable Catalog Pop-Ups Outside of Step-By-Step mean under General Settings? =
+
+This enables catalog pop-ups outside of the Step-By-Step system. Clicking Product Images in catalogs opens a pop-up window instead of opening a new page. If enabled, this will apply to all WooCommerce shop pages, not just Step-By-Step.  Depending on how you want your store setup, you may want to have this enabled.
+
+= What does the Hide Product Placeholder Images mean under general setting? =
+
+This hides the Product Placeholder Images (standard WooCommerce image placeholder).    If enabled, products without images assigned to them will not display a placeholder image.  This allows for a cleaner look and feel to your store in many cases.
+
+= What is the Featured Items Position (Premium) general setting? =
+
+If you decide to use Featured Items, this allows you to alter the position from the top or bottom of step-by-step pages. This is a Premium feature.  The default setting is at the bottom of pages
+
+= What is the Featured Items Visibility general setting? =
+
+Displays the Featured Items Visibility options.  You can display your featured items under both their parent category and the featured section, or you can display featured products only in the featured section.  Depending on how you want your products to show, this gives you options.
+
+= What is the Featured and Required Section Labels (Premium) general setting? =
+
+This premium feature allows you to change the labels of various items on the SBS System.
+
+"Required Items" Section Title: Products with the "Required" attribute are displayed in their own sections. You can add text before and after the category name.
+
+Before Category Name: Select - You can change to whatever you want.
+
+After Category Name: (Required) - You can change to whatever you want.
+
+"Optional Items" Section Title: Products that do not have the "Required" attribute are displayed separately from those that do. You can add text before and after the Category Name.
+
+Before Category Name: (default none) - You can change to whatever you want.
+
+After Category Name: (Add-ons) - You can change to whatever you want.
+
+"Featured Items" Section Title: Featured Products are products with the "Featured" tag selected from the Products list. You can name your featured section title anything you would like.
+
+Default title: Our Featured Items  - You can change to whatever you want.
+
+= --Packages Setting Tab-- =
+
+= What are the Package Setting in the SBS system for? =
+
+Packages serve as a lead-in to your online store. Selecting a package on the Packages page will take the customer to Step 1 of the ordering process.
+
+You can create a Package Product with multiple features to accompany your Step-By-Step store.
+
+Add additional features such as a Merchandise (store) Credit to your packages (Premium feature). If you accompany your package(s) with our product features such as Featured Products, Required Products (Premium), Either/Or Products (Premium), Already Added Products (Premium), etc. our step-by-step system provides endless ways to make your customer experience that much better!
+
+If you don't wish to use packages, select Deactivated from the drop down menu.
+
+= Under Package Settings, what is the Enable / Disable for? =
+
+Set to Activated by default, this allows you to offer packages on the SBS system.  Select "Deactivated" if you only want to use the Step-By-Step pages only.  In many cases, you will want to set up and use the Packages feature, but it all depends on what you want to do with your store.
+
+= What is the Package Page Setting under Package Setting? =
+
+This selects the page to determine where the Select Packages page is located. This must be selected in order for navigation to work properly.
+
+Default Page: The default page is "Choose Packages".  You can change this page to another name if you wish.
+
+= What is the Package Category setting in packages? =
+
+This selects the WooCommerce product category your packages are assigned to.  You must click Save Changes afterwards, in order to refresh the package list.  By default, this is set to "Packages"
+
+= What is the Package Page Builder setting for? =
+
+This allows you to select from Available Packages, and make them Active Packages.  Simply drag packages (or click the control buttons on the right side of each item) from the Available Packages box to the Active Packages to build your Package Selection page. You can rearrange the packages to change the order in which they are displayed. Anything listed under Active Packages will show up on your main Select Packages page.  If you are using the SBS Light Version, you will have access to your one allotted package.  If you use the SBS Premium Version, you have access to all of your unlimited packages.
+
+= What is the Add-to-Cart Behavior setting? =
+
+When a package is selected or changed in the SBS system, this is the action taken when a package is added to the cart. The default behavior is to clear the cart so the user has a fresh experience.  If you want items from the whole store to remain intact, simply select "Do not clear" from the dropdown menu.
+
+= What is the Package Selection Appearance setting? =
+
+This setting does three things:
+
+First, it allows you to choose the number of packages to display per row.  3 is the default setting, but you can set it any way you would like.
+
+Second, you can choose the "Add To Cart" button label (premium feature).  The default is set to "Select Package".
+
+The third setting allows you to select the Package Image Custom Size.  Set your image height and width parameters (in pixels).  This allows you to make your package images look the way you want them too.  If you have multiple packages to set up, it is recommended that you make your product package images the same size for uniformity.
+
+= What is the "Merchandise Credit" Calculator Widget Label (in SBS Premium)? =
+
+If you elect to use a store credit for your packages, this is the area where you can label the name of the actual store credit.  By default, it's set to "Merchandise Credit".  You can change this to anything you want.
+
+= --Step-By-Step Settings Tab-- =
+
+= What do the Step-By-Step Settings allow you to do? =
+
+This allows you to create your ordering process by dragging and dropping (or clicking the control buttons at the right side of each button) within your steps in the boxes below.
+
+You can select from your Product Categories. Drag any desired categories from the Available Categories column, and move them to the Your Ordering Process column. You can also do this by clicking the + button.
+
+To remove a step from your ordering process just drag it back under the Available Categories column. You can also do this by clicking the X button.
+
+Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.
+
+= What is the Step-By-Step Builder Setting? =
+
+This determines the page order of the ordering process.    You can craft your Step-By-Step pages any way you like.  It is recommended to use two main categories per page with up to three sub-categories per main/parent category.  It is best to spread out the products so you don't overwhelm your customers.  You'll want to guide them through an easy, user-friendly experience.
+
+= What is the Navbar Navigation Setting? =
+
+This is your Navbar Navigation   The step navbar contains navigable links in each step. You can disallow skipping of steps here. You are offered the following options:
+
+• Only allow forward navigation one step a time, but let users backtrack to any step.
+• Only allow navigation one step at a time in any direction
+• Users may freely navigate, skipping any step they'd like.
+
+= --Options and Fees Settings Tab-- =
+
+= What are the Options and Fees settings? =
+
+The Options and Fees page is for miscellaneous items, services, and fees. They will be each displayed compactly in a table.
+
+= What is Enable / Disable in the options and fees settings? =
+
+If deactivated, the page is removed from the ordering process. If no subcategories are present in the Options and Fees Page Outline the page will not be included in the ordering process. It is set to activated by default
+
+= What is Category in the options and fees settings? =
+
+Select the WooCommerce product category your Options and Fees items are located.
+Then click Save Changes to refresh the page.  The default category setting is set to "Options"?
+
+= What is the Options and Fees Builder? =
+
+This allows you to select what categories are part of your Options and Fees page.  Begin by creating subcategories of your selected parent category above. They will appear in the Available Categories box below.
+
+Create your Options and Fees page by dragging and dropping (or touching the control buttons on the right side of each item) your items in the boxes below.
+You can select from your subcategories of the parent category chosen to serve as Options. Drag any desired categories from the Available Categories column,
+and move them to the Your Ordering Process column. You can also do this by clicking the + button.
+
+You can change the order categories are displayed by rearranging the order of items in the column by drag-and-drop or arrow buttons.
+To remove a category from the page just drag it back under the Available Categories column. You can also do this by clicking the X button.
+Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.
+
+= --Display Settings Tab-- =
+
+= What is the display settings tab? =
+
+This allows you to customize the appearance of the ordering process with preset styles and themes.  This helps you create the appearance you want your Step-By-Step system to have.
+
+= What is the Color Scheme setting? =
+
+This setting determines what the colors of your SBS system will look like.  By default, the system uses your default theme's colors, however you may wish to choose one of many Color Schemes provided.  Select the color scheme you want from the drop down list provided.  Light users have a choice of 2 additional color schemes while premium users can use up to 10 additional color schemes.  You also have the option of using your own CSS to make the colors display as you would like
+
+= What is the Step Number Shape setting? =
+
+This allows you to change the shape of the step number in the navbar.  You have the ability to select from 2 different shapes as an SBS Light Version user and 8 different shapes as a Premium user
+
+= What is the Step Name Shape setting? =
+
+This allows you to change the shape of the step names in the navbar.  You have the ability to select from 2 different shapes as a Light user and 4 different shapes as a Premium user.
+
+With the combination of Step Number Shapes and Step Name Shapes, you have many possibilities to choose from!
+
+= What is the SBS Calculator Widget setting? =
+
+The SBS Calculator Widget settings allow for the styling of the widget displaying price totals of items in the cart, listed by each step (Woo Cart Totals Widget).
+
+The following settings can be changed:
+
+* Font Family (Premium feature)
+* Other Styles - Show a vertical border separating the category column and the price column
+* Store (Merchandise) Credit Display - Select the text alignment of package store credit in the calculator, if any.
+
+= How does the Fonts setting work? =
+
+This allows you to style the fonts of the SBS system.  By default, this is set to your theme default.  However, if you wish to do something different you can change the fonts with the ones provided in the drop down menus (Premium feature).
+
+The areas you can change the fonts in include:
+
+* Subcategory Name -  Select section name fonts for displayed on each page.
+* Subcategory Description -  Select the font for the description under each section name.
+* Nav Buttons -  Select the font for the Back/Foward buttons on each page.
+* Navbar -  Select the font for the bar at the top of each page displaying the customer's progress during ordering.
+
+These can also be customized with your own CSS if desired.
+
+= What are the Miscellaneous Styles settings? =
+
+These are two additional settings that can be changed as desired.
+
+* Allow SBS links to turn different colors when moused over (varies by theme)
+* Add drop shadows to SBS pages (Premium)
+
+These also can be customized with your own CSS if desired.
+
+= --Premium Settings Tab-- =
+
+= What is the Premium Settings tab? =
+
+This allows you to enter a license key, which can be obtained at http://stepbystepsys.com. Once you get your license, you can enter it under the License Key setting.  It will verify your license and unlock all the premium features of the SBS if activated.
+
+= --Help Settings Tab-- =
+
+= What is the Help Settings Tab for? =
+
+This provides useful help information on how to setup and operating the Step-By-Step Ordering System For WooCommerce.  Make sure to read this thoroughly to get a good overview of the SBS system. For additional support you can visit http://stepbystepsys.com
+
+= --License FAQ-- =
 
 = How do I purchase a license? =
 
