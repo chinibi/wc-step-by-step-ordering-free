@@ -49,26 +49,29 @@ function sbs_product_loop_mfp_modal() {
 
   global $product;
 
+  if ( $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
+    $open_popup_text = 'Change Selection';
+  }
+  else {
+    $open_popup_text = 'Learn More';
+  }
+
   if ( $product->get_image( 'shop_thumbnail', array(), false ) ) {
-    echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link learn-more-link">Learn More</a>';
+    echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link learn-more-link">' . $open_popup_text . '</a>';
     echo '<div id="modal-product-' . $product->get_id() . '" class="woocommerce white-popup mfp-hide">';
     echo    '<div class="modal-left-side">';
     echo      '<div class="modal-image">' . $product->get_image('post-thumbnail') . '</div>';
     echo    '</div>';
     echo    '<div class="modal-right-side single-product product">';
-
     do_action( 'woocommerce_single_product_summary' );
-
     echo    '</div>';
     echo '</div>';
   }
   else {
-    echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link learn-more-link">Learn More</a>';
+    echo '<a data-mfp-src="#modal-product-' . $product->get_id() . '" class="open-popup-link learn-more-link">' . $open_popup_text . '</a>';
     echo '<div id="modal-product-' . $product->get_id() . '" class="woocommerce white-popup mfp-hide">';
     echo    '<div class="modal-right-side modal-right-side-full single-product product">';
-
     do_action( 'woocommerce_single_product_summary' );
-
     echo    '</div>';
     echo '</div>';
   }
