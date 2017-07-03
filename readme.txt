@@ -25,11 +25,11 @@ By guiding your customers Step-By-Step, you provide them with clearer choices an
 
 The Step-By-Step Ordering System For WooCommerce helps keep your customers from getting "lost in space" while shopping.  It’s perfect for nearly any industry that relies on cross-promoted products, packaged products or grouped products.  Industries that thrive off of Step-By-Step include restaurants, caterers, wedding planners, florists, seminar and workshop leaders, marketers, promoters, trainers, consultants, life/business coaches, healers, health care professionals, wholesalers, retailers, and more!
 
-Create tailored packages and Step-By-Step shopping categories. Working with the WooCommerce system in conjunction with Step-By-Step offers your customers a great shopping experience, while offering you the confidence you’re looking for in an e-commerce system.  It's easy to set up and there are endless possibilities and configurations you can set up for your online shoppers!
+Create tailored packages and Step-By-Step shopping categories. Working with the WooCommerce system in conjunction with Step-By-Step offers your customers a great shopping experience, while offering you the confidence you’re looking for in an e-commerce system.  It's easy to set up and there are endless possibilities and configurations you can create for your online shoppers!
 
 = Getting Started =
 
-Start by downloading the Step-By-Step (SBS) Ordering Light Version.  it offers many useful tools to enhance your current WooCommerce site experience.  If you want to extend the shopper even more perks, we offer a Premium License which expands the SBS system features.
+Start by downloading the Step-By-Step (SBS) Ordering Light Version.  It offers many useful tools to enhance your current WooCommerce site experience.  If you want to extend the shopper even more perks, we offer a Premium License which expands the SBS system features.
 
 = Features of Step-By-Step System for Woo Commerce =
 
@@ -54,8 +54,8 @@ Start by downloading the Step-By-Step (SBS) Ordering Light Version.  it offers m
 = Display Features =
 
 * Color Schemes - A Variety of Color Schemes to Choose From.  Or use your own Default Theme CSS
-* Navbar Step Numbers and Name Shapes - Create Your Step Navigation to Appear in the Shape of Squares, Circles, Stars, Hearts, etc.
-* Variety of Font Settings for Various Areas of SBS Display, or use Default CSS from Your Theme
+* Navbar Step Numbers and Name Shapes - Create Your Step Navigation to appear in the shape of Squares, Circles, Stars, Hearts, etc.
+* Variety of Font Settings for various areas of SBS Display, or use Default CSS from Your Theme
 * Drop Shadow and Hover Effects
 * Integrates Seamlessly with WooCommerce
 * Compatible with Themes that Support WooCommerce
@@ -75,11 +75,11 @@ Drive more sales to your store by adding the SBS package-driven step-by-step sys
 
 = Step-By-Step Ordering System for WooCommerce - SBS Light Version =
 
-The light version of the Step-By-Step Ordering System is a fully-functional plugin which you can download from WordPress.org and directly from our site. Examine all of the core features.  If you like it as much as we think you will, consider upgrading to our Premium Version to unlock the awesome features to really enhance the step-by-step experience.
+The light version of the Step-By-Step Ordering System is a fully-functional plugin, which you can download from WordPress.org and directly from our site. Examine all of the core features. If you like it as much as we think you will, consider upgrading to our Premium Version to unlock the awesome features we offer, which will enhance the step-by-step shopping experience.
 
 = Step-By-Step Ordering System for WooCommerce - SBS Premium =
 
-Go the the next level with the Step-By-Step Ordering Premium Version. Our Premium Version offers you countless enhanced tools tailored to drive your customer’s purchasing experience to the next level. People who shop on your site will be specifically guided to purchase your packages you offer for sale, along with add-on products you wish to cross-promote.  Your buyers will be given the opportunity to buy products in a cross-promoted fashion, offering you the ability to drive sales while offering the customer a great shopping experience.
+Go the the next level with the Step-By-Step Ordering Premium Version. Our Premium Version offers you countless enhanced tools tailored to drive your customer’s purchasing experience to the next level. People who shop on your site will be specifically guided to purchase your packages you offer for sale, along with add-on products you wish to cross-promote.  Your buyers will be given the opportunity to buy products in an organized, grouped, cross-promoted fashion. The SBS system offers you the ability to help drive sales while offering the customer a great shopping experience in the process.
 
 For more information on SBS Premium click here to visit our website.
 
@@ -102,7 +102,7 @@ For more information on SBS Premium click here to visit our website.
 
 = Custom Set-up =
 
-Need some help setting up your Step-By-Step System For WooCommerce?  Contact us for a custom quote. We provide custom setups and design for Premium customers.  The SBS system is a very powerful tool.  When setup correctly, SBS can help you drive more online sales and increase your profitability. [Visit our site](http://stepbystepsys.com) for more info.
+Need some help setting up your Step-By-Step System For WooCommerce?  Contact us for a custom quote. We provide custom setups and design for Premium customers. The SBS system is a very powerful tool.  When setup correctly, SBS can help enhance online sales traffic, which translates to enhanced profitability. [Visit our site](http://stepbystepsys.com) for more info.
 
 == Installation ==
 
@@ -124,7 +124,7 @@ Need some help setting up your Step-By-Step System For WooCommerce?  Contact us 
   credit that will be applied when it's added to the cart.  You can set it in the
    product general settings.
   [Example](http://stepbystepsys.com/wp-content/uploads/2017/06/package-product-custom-fields.png)
-4. When you're done creating packages, go back to the package settings page
+4. When you're done creating packages, go back to the Package Settings page
   and drag packages from the Available Packages column to Your Active Packages
   column to build the Choose Package page.  You can rearrange packages in the
   Your Active Packages column to change the order they're displayed.
@@ -133,7 +133,7 @@ Need some help setting up your Step-By-Step System For WooCommerce?  Contact us 
 = II. Widgets =
 
 To configure your sidebar in the ordering process:
-1. Go to the widgets section on your Wordpress Dashboard
+1. Go to the Widgets section on your WordPress Dashboard
 2. Add the WooCommerce Cart Totals widget to your sidebar.
 3. It is also recommended that you add the WooCommerce Cart Widget under the
   WooCommerce Cart Totals. [Example](http://stepbystepsys.com/wp-content/uploads/2017/06/widgets.png)
@@ -159,7 +159,7 @@ To configure your sidebar in the ordering process:
 1. This is an optional page you can create that displays products in a table
   rather than a catalog.
 2. A product category named Options and Fees was automatically created on
-  install.  This category is the default for the Options and Fees page.
+  install. This category is the default for the Options and Fees page.
 3. If you wish a different category to serve this role go the Options and Fees
   settings page and select the category you want and save.
 4. Create child categories of the chosen Options and Fees category, and make
@@ -177,7 +177,7 @@ WooCommerce.  While the plugin is fully functional with these themes out of the
 box, it is recommended to take these steps if you are using one of the
 following themes:
 
-** Twenty Sixteen **
+** WordPress Twenty Sixteen **
 It is recommended that a full-width template be used on the Choose Package
 page.  Since Twenty Sixteen does not come with a full-width template, download
 a child theme from our website, install it, then activate it.  Go to the package
@@ -186,15 +186,15 @@ right-hand sidebar.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-** Twenty Seventeen **
+** WordPress Twenty Seventeen **
 
 Twenty Seventeen does not come with a sidebar.  Download a child theme from our
-website, install it, then activate it.  Go to the Ordering page in WP Admin and
+website, install it, then activate it.  Go to the Ordering page in WP-Admin and
 choose the Page with Sidebar template on the right-hand sidebar.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-** Divi **
+** Divi by Elegant Themes **
 
 The Choose Package and Checkout page works best on a full-width template.
 The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template
@@ -206,7 +206,7 @@ child theme here.
 
 Download the child theme [here](http://stepbystepsys.com).
 
-** Storefront **
+** Storefront by WooCommerce **
 
 The Choose Package page is best displayed on the Full width template, which
 you can select when you edit that page on the right-hand sidebar.  The default
@@ -215,9 +215,9 @@ template is recommended for the Ordering page.
 = Step-By-Step Premium Upgrade =
 
 If you like our plugin and would like to see more content from us please
-consider purchasing a license from us.  Premium users get additional features
+consider purchasing a Step-By-Step Ordering System license.  Premium users get additional features
 like unlimited steps, navigation options, required products, either-or products,
-package store credit, preset themes, and much more! You will also have access to
+package store credit, preset themes, and much more. You will also have access to
 our support team!
 
 After purchasing a license, a key will be sent to your provided email.  Enter
@@ -230,11 +230,11 @@ If you wish to disable this plugin's functionality you can deactivate it in
 the plugin settings.  If you wish to completely remove this plugin, deactivate
 it, then click the Delete button.
 
-By default all settings, custom fields, and custom metas are not deleted
+By default, all settings, custom fields, and custom metas are not deleted
 on uninstall.  If you wish to remove all Step-By-Step data, add this line to
 your wp-config.php file:
 
-`define( 'SBS_REMOVE_ALL_DATA', true );`
+define( 'SBS_REMOVE_ALL_DATA', true );
 
 This will delete any content created by the Step-By-Step plugin, including
 the Package and Step-By-Step Ordering pages, all settings, and post metas.
@@ -249,7 +249,7 @@ Thank you for using our plugin!
 
 = What is The Step-By-Step Ordering System for WooCommerce? =
 
-The Step-By-Step Ordering System For WooCommerce is a fully functional plugin that works in conjunction with WooCommerce and takes your WordPress shopping system to a whole new level.  Our system was built to focus on the shopping experience by offering online buyers a guided step-by-step visit through your online store. It's a great tool for sellers offering packages and add-ons for sale.
+The Step-By-Step Ordering System is a fully functional plugin that works in conjunction with WooCommerce and takes your WordPress shopping system to a whole new level.  Our system was built to focus on the shopping experience by offering online buyers a guided step-by-step visit through your online store. It's a great tool for sellers offering packages and add-ons and cross-promoted products for sale.
 
 = Do I need to have WordPress installed to use The Step-By-Step System? =
 
@@ -261,7 +261,7 @@ The Step-By-Step Ordering System for WooCommerce is completely free to use in th
 
 = Is the Light Version of The Step-By-Step Ordering System for WooCommerce fully functional? =
 
-Yes.  It is a fully functional plugin and works in conjunction with WooCommerce, which must also be installed.
+Yes. It is a fully functional plugin and works in conjunction with WooCommerce, which must also be installed.
 
 = What additional items come with SBS Premium Version? =
 
@@ -284,7 +284,7 @@ The Premium Features include:
 
 = What themes are compatible with the Step-By-Step Ordering System for WocCommerce? =
 
-The Step-By-Step Ordering System For WooCommerce was design to work with themes that declare support for WooCommerce already.  While we do our best to test a wide variety of themes, some CSS adjustments may be needed for optimal results.  For the "Choose Packages" page, we recommend a full width page (without sidebar).  For your "Ordering Page" (the Step-By-Step pages), we recommend a page with a sidebar.  The sidebar will contain your SBS calculator widget and the WooCommerce cart widget (optional).  If you use any of the following themes, here are some instructions for implementation:
+The Step-By-Step Ordering System For WooCommerce was design to work with themes that declare support for WooCommerce already.  While we do our best to test a wide variety of themes, some CSS adjustments may be needed for optimal results.  For the Choose Packages page, we recommend a full width page (without sidebar).  For your Ordering Page (the Step-By-Step pages), we recommend a page with a sidebar.  The sidebar will contain your SBS calculator widget and the WooCommerce cart widget (optional).  If you use any of the following themes, here are some instructions for implementation:
 
 ** Twenty Sixteen **
 
@@ -328,7 +328,7 @@ The Step-By-Step Ordering System For WooCommerce will work for nearly all indust
 
 = Do I need to be a development expert to use the Step-By-Step Ordering System for WocCommerce? =
 
-No.  However, it is recommended that you have basic WordPress and WooCommerce knowledge when using the Step-By-Step Ordering System For WooCommerce.  Basically, if you have an understanding of CSS, the structure of WordPress and WooCommerce, then the SBS plugin should be quite easy to work with.  If you don't feel confident in your development/design abilities, we offer customized system configuration services to assist you.  Visit our site at [http://stepbystepsys.com](http://stepbystepsys.com).
+No. However, it is recommended that you have basic WordPress and WooCommerce knowledge when using the Step-By-Step Ordering System For WooCommerce.  Basically, if you have an understanding of CSS, the structure of WordPress and WooCommerce, then the SBS plugin should be quite easy to work with.  If you don't feel confident in your development/design abilities, we offer customized system configuration services to assist you.  Visit our site at [http://stepbystepsys.com](http://stepbystepsys.com).
 
 = How many packages can I use with the Step-By-Step Ordering System for WocCommerce? =
 
@@ -348,7 +348,7 @@ You can use any Product Type offered by WooCommerce. Simple, General, Variable, 
 
 = I see I can offer stylized Navigation Shapes within the SBS system. What kind of are available? =
 
-The Step-By-Step Ordering System For WooCommerce offers a wide variety of different shape types to choose, from including squares, circles, upward triangles, downward triangles, hearts, 12-pointed star,s kites, and badge ribbons for step number shapes.  For the step name shape, you can have: rectangles, capsules, arrows, tv screens, and parallelograms.  Within these shapes there are a wide array of shape-combos you can create!  SBS Light offers limited shapes, but you can unlock all shapes offered in SBS Premium.
+The Step-By-Step Ordering System For WooCommerce offers a wide variety of different shape types to choose, from including squares, circles, upward triangles, downward triangles, hearts, 12-pointed stars, kites, and badge ribbons for step number shapes.  For the step name shape, you can have: rectangles, capsules, arrows, tv screens, and parallelograms.  Within these shapes there are a wide array of shape-combos you can create!  SBS Light offers limited shapes, but you can unlock all shapes offered in SBS Premium.
 
 = How many color schemes are offered with the Step-By-Step Ordering System for WooCommerce? =
 
@@ -356,15 +356,15 @@ Ten color schemes are offered with the SBS Premium plugin.  SBS Light offers two
 
 = Can the Step-By-Step Ordering System for WooCommerce be customized to my needs? =
 
-Yes.  Depending on your level of knowledge, the SBS System can be customized as you need.  If you want help with customization, visit our website for more information.  [http://stepbystepsys.com](http://stepbystepsys.com)
+Yes. Depending on your level of knowledge, the SBS System can be customized as you need. If you want help with customization, visit our website for more information.  [http://stepbystepsys.com](http://stepbystepsys.com)
 
 = Do you offer customized services for the Step-By-Step Ordering System for WooCommerce? =
 
-Yes.  If you desire custom help from one of our specialists, please visit our site for more information.  Select the contact form and select customized services (as the reason for contact).  [http://stepbystepsys.com](http://stepbystepsys.com)
+Yes. If you desire custom help from one of our specialists, please visit our site for more information.  Select the contact form and select customized services (as the reason for contact).  [http://stepbystepsys.com](http://stepbystepsys.com)
 
 = What is the additional Options and Fees section of the Step-By-Step Ordering System for WooCommerce? =
 
-The Options and Fees page is for miscellaneous items, services, and fees. They will be each displayed compactly in a table.  Often times, these product types do not feature images, and are items that usually compliment the main items you are selling.
+The Options and Fees page is mainly for miscellaneous items, services, and fees. They will be each displayed compactly in a table.  Often times, these product types do not feature images, and are items that usually compliment the main items you are selling.
 
 = How does the Store Credit (Merchandise Credit) functionality work with the Step-By-Step Ordering System for WooCommerce? =
 
@@ -400,7 +400,7 @@ How do I set up the Step-By-Step Ordering System for WocCommerce?
 2. Next, create a product to help create a tailored package. Make sure the package category is selected. For example, a product package might be:  Family Meal Plan: Plan comes with choice of Pizza, meat, salad and drinks.
 [Example] (http://stepbystepsys.com/wp-content/uploads/2017/06/new-product.png)
 
-3. If you have purchased a Premium license of this plugin, you can Assign Store Credit, which will be applied when it's added to the cart.  You can set it up in the Product General Settings.
+3. If you have purchased a Premium license of this plugin, you can assign a Store Credit, which will be applied when it's added to the cart.  You can set it up in the Product General Settings.
 [Example] (http://stepbystepsys.com/wp-content/uploads/2017/06/package-product-custom-fields.png)
 
 4. When you're done creating packages, go back to the Package Settings page and drag packages from the Available Packages column to Your Active Packages column, which will help you to build the Choose Package page.  You can rearrange packages in the Your Active Packages column to change the order they're displayed.
@@ -452,14 +452,14 @@ category to each product.  This is needed for Step-By-Step to function correctly
 This plugin is configured to work with themes already compatible with WooCommerce.  While the plugin is fully functional with these themes out of the
 box, it is recommended to take these steps if you are using one of the following themes:
 
-** Twenty Sixteen **
+** WordPress Twenty Sixteen **
 
 It is recommended that a full-width template be used on the Choose Package page.  Since Twenty Sixteen does not come with a full-width template, download
 a child theme from our website, install it, then activate it.  Go to the package selection page in the Admin settings and choose the Full Width template on the right-hand sidebar.
 
 Download the Child Theme [here](http://stepbystepsys.com).
 
-** Twenty Seventeen **
+** WordPress Twenty Seventeen **
 
 Twenty Seventeen does not come with a sidebar.  Download a child theme from our website, install it, then activate it.  Go to the Ordering page in WP Admin and choose the Page with Sidebar template on the right-hand sidebar.
 
@@ -474,7 +474,7 @@ It is strongly recommended that a child theme be used, as core template CSS need
 Child Theme.
 Download the Child Theme [here](http://stepbystepsys.com).
 
-** Storefront **
+** Storefront by WooCommerce **
 
 The Choose Package page is best displayed on the Full Width Template, which you can select when you edit that page on the right-hand sidebar.  The default template is recommended for the Ordering page.
 
@@ -502,11 +502,11 @@ This enables catalog pop-ups outside of the Step-By-Step system. Clicking Produc
 
 = What does the Hide Product Placeholder Images mean under general setting? =
 
-This hides the Product Placeholder Images (standard WooCommerce image placeholder).    If enabled, products without images assigned to them will not display a placeholder image.  This allows for a cleaner look and feel to your store in many cases.
+This hides the Product Placeholder Images (standard WooCommerce image placeholder).    If enabled, products without images assigned to them will not display a placeholder image.  This allows for a cleaner look and feel to your store, in many cases.
 
 = What is the Featured Items Position (Premium) general setting? =
 
-If you decide to use Featured Items, this allows you to alter the position from the top or bottom of step-by-step pages. This is a Premium feature.  The default setting is at the bottom of pages
+If you decide to use Featured Items, this allows you to alter the position from the top or bottom of step-by-step pages. This is a Premium feature.  The default setting is at the bottom of pages.
 
 = What is the Featured Items Visibility general setting? =
 
@@ -516,19 +516,19 @@ Displays the Featured Items Visibility options.  You can display your featured i
 
 This premium feature allows you to change the labels of various items on the SBS System.
 
-"Required Items" Section Title: Products with the "Required" attribute are displayed in their own sections. You can add text before and after the category name.
+Required Items Section Title: Products with the Required attribute are displayed in their own sections. You can add text before and after the category name.
 
 Before Category Name: Select - You can change to whatever you want.
 
 After Category Name: (Required) - You can change to whatever you want.
 
-"Optional Items" Section Title: Products that do not have the "Required" attribute are displayed separately from those that do. You can add text before and after the Category Name.
+Optional Items Section Title: Products that do not have the Required attribute are displayed separately from those that do. You can add text before and after the Category Name.
 
 Before Category Name: (default none) - You can change to whatever you want.
 
 After Category Name: (Add-ons) - You can change to whatever you want.
 
-"Featured Items" Section Title: Featured Products are products with the "Featured" tag selected from the Products list. You can name your featured section title anything you would like.
+Featured Items Section Title: Featured Products are products with the Featured tag selected from the Products list. You can name your featured section title anything you would like.
 
 Default title: Our Featured Items  - You can change to whatever you want.
 
@@ -546,17 +546,17 @@ If you don't wish to use packages, select Deactivated from the drop down menu.
 
 = Under Package Settings, what is the Enable / Disable for? =
 
-Set to Activated by default, this allows you to offer packages on the SBS system.  Select "Deactivated" if you only want to use the Step-By-Step pages only.  In many cases, you will want to set up and use the Packages feature, but it all depends on what you want to do with your store.
+Set to Activated by default, this allows you to offer packages on the SBS system.  Select Deactivated if you only want to use the Step-By-Step pages only.  In many cases, you will want to set up and use the Packages feature, but it all depends on what you want to do with your store.
 
 = What is the Package Page Setting under Package Setting? =
 
 This selects the page to determine where the Select Packages page is located. This must be selected in order for navigation to work properly.
 
-Default Page: The default page is "Choose Packages".  You can change this page to another name if you wish.
+Default Page: The default page is Choose Packages.  You can change this page to another name if you wish.
 
 = What is the Package Category setting in packages? =
 
-This selects the WooCommerce product category your packages are assigned to.  You must click Save Changes afterwards, in order to refresh the package list.  By default, this is set to "Packages"
+This selects the WooCommerce product category your packages are assigned to.  You must click Save Changes afterwards, in order to refresh the package list.  By default, this is set to Packages.
 
 = What is the Package Page Builder setting for? =
 
@@ -572,13 +572,13 @@ This setting does three things:
 
 First, it allows you to choose the number of packages to display per row.  3 is the default setting, but you can set it any way you would like.
 
-Second, you can choose the "Add To Cart" button label (premium feature).  The default is set to "Select Package".
+Second, you can choose the "Add To Cart" button label (premium feature).  The default is set to Select Package.
 
 The third setting allows you to select the Package Image Custom Size.  Set your image height and width parameters (in pixels).  This allows you to make your package images look the way you want them too.  If you have multiple packages to set up, it is recommended that you make your product package images the same size for uniformity.
 
 = What is the "Merchandise Credit" Calculator Widget Label (in SBS Premium)? =
 
-If you elect to use a store credit for your packages, this is the area where you can label the name of the actual store credit.  By default, it's set to "Merchandise Credit".  You can change this to anything you want.
+If you elect to use a store credit for your packages, this is the area where you can label the name of the actual store credit.  By default, it's set to Merchandise Credit.  You can change this to anything you want.
 
 = --Step-By-Step Settings Tab-- =
 
@@ -594,7 +594,7 @@ Note: Products must belong to both a parent and a child category in order for St
 
 = What is the Step-By-Step Builder Setting? =
 
-This determines the page order of the ordering process.    You can craft your Step-By-Step pages any way you like.  It is recommended to use two main categories per page with up to three sub-categories per main/parent category.  It is best to spread out the products so you don't overwhelm your customers.  You'll want to guide them through an easy, user-friendly experience.
+This determines the page order of the ordering process. You can craft your Step-By-Step pages any way you like.  It is recommended to use two main categories per page with up to three sub-categories per main/parent category.  It is best to spread out the products so you don't overwhelm your customers.  You'll want to guide them through an easy, user-friendly experience.
 
 = What is the Navbar Navigation Setting? =
 
@@ -617,7 +617,7 @@ If deactivated, the page is removed from the ordering process. If no subcategori
 = What is Category in the options and fees settings? =
 
 Select the WooCommerce product category your Options and Fees items are located.
-Then click Save Changes to refresh the page.  The default category setting is set to "Options"?
+Then click Save Changes to refresh the page.  The default category setting is set to Options?
 
 = What is the Options and Fees Builder? =
 
