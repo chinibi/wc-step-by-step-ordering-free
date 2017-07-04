@@ -15,6 +15,12 @@ A configurable step-by-step ordering e-commerce ordering system to enhance what 
 
 The Step-By-Step Ordering System For WooCommerce is a fully functional plugin that works in conjunction with WooCommerce and takes your Wordpress shopping system to a whole new level.  Our system was built to focus on the shopping experience by offering online buyers a guided step-by-step visit through your online store.
 
+= Demos =
+
+We've made a few example sites to demonstrate the plugin.  Try them out here:
+* [Chicagoman](http://chicagoman.stepbystepsys.com)
+* [Pizza Restaurant](http://plugin.stepbystepsys.com)
+
 = How It Works =
 
 The Step-By-Step system works by offering step-by-step shopping.  This style of shopping is great for those who have packaged products or those who sell products in "layers" or "add-ons."  It offers buyers an opportunity to purchase products in a packaged, grouped or cross-promoted fashion.  Simply install the plugin and read the instructions provided. As you begin to work with the Step-By-Step system, you will see how easily it integrates into the WooCommerce interface. Create your sales packages, list your products for sale, and you’re ready to roll!
