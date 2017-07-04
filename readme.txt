@@ -757,6 +757,17 @@ Not at this time, however this might become an option at a later date. We curren
 
 The license only covers one site at a time. However, you are welcome to install the plugin on your test server first, to see how it works and operates. Once you complete your testing, you can remove it from the Test Server and set it up on the Live Server you plan to use it on.
 
+== Screenshots ==
+
+1. Package Selection Page
+2. Step 1 of the ordering process
+3. Select a variable product from the catalog page without having to visit the product page.
+4. Our Cart Totals widget lets customers keep track of the value of items in their cart.
+5. The Options and Fees page is for products that serve as extra add-ons, tabulated in a compact format.
+6. Customers can review their cart before checking out. The selected package is highlighted.
+7. Customize your ordering process with an intuitive drag-and-drop interface.
+8. Premium users can choose from our premade color schemes, navbar shapes, fonts, and labels.
+
 == Changelog ==
 = v1.0.6 =
 * Official Public Release
