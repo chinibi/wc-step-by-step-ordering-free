@@ -74,11 +74,9 @@ final class StepByStepSystem {
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_dequeue_third_party_scripts'), 20 );
 	}
 
-
 	public function plugin_activation() {
 		include_once( SBS_ABSPATH . 'includes/plugin/activation.php' );
 	}
-
 
 	public function plugin_deactivation() {
 		include_once( SBS_ABSPATH . 'includes/plugin/deactivation.php' );
@@ -127,7 +125,6 @@ final class StepByStepSystem {
 	  ?>
 	  <script type="text/javascript">
 	    var sbsAjaxUrl = "<?php echo admin_url('admin-ajax.php') ?>";
-			var sbsLicenseValid = <?php echo sbs_check_license_cache() ? 'true' : 'false' ?>;
 	  </script>
 	  <?php
 	  echo ob_get_clean();

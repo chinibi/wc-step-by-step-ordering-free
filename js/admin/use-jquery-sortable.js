@@ -1,10 +1,6 @@
 (function($) {
   $(document).ready(function() {
 
-    if ( typeof sbsLicenseValid === 'undefined' ) {
-      return;
-    }
-
     function serializeData() {
       var data = $('#sbs-order').sortable('serialize').get();
       var jsonString = JSON.stringify(data);
@@ -16,11 +12,11 @@
       nested: true,
       isValidTarget: function($item, container) {
 
-        if ( !sbsLicenseValid && $(container.el).is('.step-sortable') && $('#sbs-order').children().not('.placeholder, .dragged').length >= 2  ) {
+        if ( $(container.el).is('.step-sortable') && $('#sbs-order').children().not('.placeholder, .dragged').length >= 2  ) {
           return false;
         }
 
-        if ( !sbsLicenseValid && $(container.el).is('.package-sortable') && $('#sbs-order').children().not('.placeholder, .dragged').length >= 1  ) {
+        if ( $(container.el).is('.package-sortable') && $('#sbs-order').children().not('.placeholder, .dragged').length >= 1  ) {
           return false;
         }
 
