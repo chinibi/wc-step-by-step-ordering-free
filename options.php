@@ -37,11 +37,9 @@ add_action( 'admin_enqueue_scripts', 'sbs_load_custom_wp_admin_style' );
 
 function sbs_admin_dashboard_notice() {
 
-	$license = sbs_check_license_cache();
-	$key = get_option('sbs_premium_key');
 	global $pagenow;
 
-	if ( $pagenow === 'index.php' && !$license && empty( $key ) ) {
+	if ( $pagenow === 'index.php' ) {
 		echo '<div class="notice notice-info is-dismissible">';
 		echo '<p class="sbs-buy-notice">Thank you for trying out the <strong>Step-By-Step Plugin</strong>.  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">purchasing a license</a></strong>, which will unlock additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more!  You will also have access to our <strong>support team</strong>!</p>';
 		echo '</div>';
@@ -51,9 +49,6 @@ function sbs_admin_dashboard_notice() {
 add_action( 'admin_notices', 'sbs_admin_dashboard_notice' );
 
 function sbs_admin_settings_notices() {
-
-	$license = sbs_check_license_cache();
-	$key = get_option('sbs_premium_key');
 
 	global $pagenow;
 	$is_woocommerce_or_front_page = false;
@@ -72,27 +67,19 @@ function sbs_admin_settings_notices() {
 
 	$current_admin_page = isset( $_GET['page'] ) ? $_GET['page'] : false;
 
-	if ( !$is_woocommerce_or_front_page || isset($_REQUEST['activate_license']) ) {
+	if ( !$is_woocommerce_or_front_page ) {
 		return;
 	}
 
-	if ( !$license && !empty( $key ) ) {
-		echo '<div class="notice notice-info is-dismissible">';
-		echo '<p>Your license key has expired or is no longer valid.  Any premium settings will have no effect until your license is renewed.</p>';
-		echo '</div>';
-	}
-	elseif( !$license && empty( $key ) ) {
-		echo '<div class="notice notice-info is-dismissible">';
-		echo '<p class="sbs-buy-notice">Thank you for using <strong>Step-By-Step Ordering for WooCommerce</strong>.  Although this is a fully functional plugin that will enhance your customer\'s shopping experience, our premium version of this plugin offers so much more!  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">purchasing a license</a></strong>, which will unlock additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more!  You will also have access to our <strong>support team</strong>!</p>';
-		echo '</div>';
-	}
+	echo '<div class="notice notice-info is-dismissible">';
+	echo '<p class="sbs-buy-notice">Thank you for using <strong>Step-By-Step Ordering for WooCommerce</strong>.  Although this is a fully functional plugin that will enhance your customer\'s shopping experience, our premium version of this plugin offers so much more!  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">purchasing a license</a></strong>, which will unlock additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more!  You will also have access to our <strong>support team</strong>!</p>';
+	echo '</div>';
 
 }
 add_action( 'admin_notices', 'sbs_admin_settings_notices' );
 
 
 function sbs_plugin_options_page() {
-  $license = sbs_check_license_cache();
   $banner_image_src = plugin_dir_url( __FILE__ ) . 'assets/admin/side-banner.png';
   $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general_options';
   ?>
@@ -109,52 +96,39 @@ function sbs_plugin_options_page() {
 			<a href="?page=stepbystepsys&tab=help" class="nav-tab <?php echo $active_tab === 'help' ? 'nav-tab-active' : null ?>">Help</a>
     </h2>
 
-    <?php if ( $license || isset( $_REQUEST['activate_license'] ) ): ?>
-
-      <?php if ( $active_tab !== 'sbs_premium' ): ?>
-        <form action="<?php echo esc_url('options.php') ?>" method="post">
-          <?php sbs_render_active_tab($active_tab) ?>
-        </form>
-      <?php else: ?>
-        <?php sbs_render_active_tab($active_tab) ?>
-      <?php endif ?>
-
-    <?php else: ?>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-9">
-            <?php if ( $active_tab !== 'sbs_premium' ): ?>
-              <form action="<?php echo esc_url('options.php') ?>" method="post">
-                <?php sbs_render_active_tab($active_tab) ?>
-              </form>
-            <?php else: ?>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-9">
+          <?php if ( $active_tab !== 'sbs_premium' ): ?>
+            <form action="<?php echo esc_url('options.php') ?>" method="post">
               <?php sbs_render_active_tab($active_tab) ?>
-            <?php endif ?>
-          </div>
-          <div class="col-sm-3">
-            <div style="text-align: center;">
-              <a class="sidebar-banner-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">
-                <img class="sidebar-banner" src="<?php echo esc_url( $banner_image_src ) ?>" />
-              </a><br>
-              <section>
-                Want to remove this ad?<br>
-                <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Get Premium</a></strong><br>
-              </section>
-              <section style="margin-top: 3em;">
-                <strong style="margin-bottom: 2em;">If you like working with the<br>Step-By-Step Ordering System For WooCommerce,<br>your donations are greatly appreciated!</strong>
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                  <input type="hidden" name="cmd" value="_s-xclick">
-                  <input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
-                  <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                  <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
-              </section>
-            </div>
+            </form>
+          <?php else: ?>
+            <?php sbs_render_active_tab($active_tab) ?>
+          <?php endif ?>
+        </div>
+        <div class="col-sm-3">
+          <div style="text-align: center;">
+            <a class="sidebar-banner-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">
+              <img class="sidebar-banner" src="<?php echo esc_url( $banner_image_src ) ?>" />
+            </a><br>
+            <section>
+              Want to remove this ad?<br>
+              <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Get Premium</a></strong><br>
+            </section>
+            <section style="margin-top: 3em;">
+              <strong style="margin-bottom: 2em;">If you like working with the<br>Step-By-Step Ordering System For WooCommerce,<br>your donations are greatly appreciated!</strong>
+              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+              </form>
+            </section>
           </div>
         </div>
       </div>
-
-    <?php endif; ?>
+    </div>
 
   </div>
 
@@ -519,8 +493,6 @@ function sbs_plugin_settings_init() {
  */
 
 function sbs_general_description() {
-  $license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 	<p>
@@ -528,43 +500,39 @@ function sbs_general_description() {
 		tabs above will help you configure the system for your needs.  For more
 		information, click on the <a href="<?php echo esc_url( admin_url('admin.php') . '?page=stepbystepsys&tab=help' )?>">Help</a> tab or <a href="http://stepbystepsys.com">visit our site</a>.
 	</p>
-  <?php if ( !$license ): ?>
-    <p>If you like working with Step-By-Step Ordering System for WooCommerce, you can donate to us by clicking the PayPal link below.</p>
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-      <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
-      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-    </form>
-    <div class="hidden-sm hidden-md hidden-lg">
-      <div class="container mobile-upsell-notice">
-        <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
-        <ul>
-          <li>Unlimited Steps</li>
-          <li>Unlimited Packages</li>
-          <li>Store Credit</li>
-          <li>Required Products</li>
-          <li>Either/Or Products</li>
-          <li>Auto-Add Products</li>
-          <li>Color Schemes</li>
-          <li>Multiple Nav Shapes</li>
-          <li>Custom Labels</li>
-          <li>Options and Fees Page</li>
-          <li>Shadow Effects</li>
-          <li>Premium Support</li>
-        </ul>
-        <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
-      </div>
+  <p>If you like working with Step-By-Step Ordering System for WooCommerce, you can donate to us by clicking the PayPal link below.</p>
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  <div class="hidden-sm hidden-md hidden-lg">
+    <div class="container mobile-upsell-notice">
+      <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+      <ul>
+        <li>Unlimited Steps</li>
+        <li>Unlimited Packages</li>
+        <li>Store Credit</li>
+        <li>Required Products</li>
+        <li>Either/Or Products</li>
+        <li>Auto-Add Products</li>
+        <li>Color Schemes</li>
+        <li>Multiple Nav Shapes</li>
+        <li>Custom Labels</li>
+        <li>Options and Fees Page</li>
+        <li>Shadow Effects</li>
+        <li>Premium Support</li>
+      </ul>
+      <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
     </div>
-  <?php endif ?>
+  </div>
 	<?php
 
 	echo ob_get_clean();
 }
 
 function sbs_sbs_description() {
-  $license = sbs_check_license_cache();
-
   ob_start();
   ?>
 	<p>Create your ordering process by dragging and dropping (or touching the control buttons at the right side of each button) your steps in the boxes below.</p>
@@ -574,35 +542,33 @@ function sbs_sbs_description() {
 	</p>
 	<p>To remove a step from your ordering process just drag it back under the Available Categories column. You can also do this by touching the &#10006; button.</p>
   <p><strong>Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.</strong> (<a rel="nofollow noreferrer" target="_blank" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png">Example</a>)</p>
-  <?php if ( !$license ): ?>
-    <div class="hidden-sm hidden-md hidden-lg">
-      <div class="container mobile-upsell-notice">
-        <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
-        <ul>
-          <li>Unlimited Steps</li>
-          <li>Unlimited Packages</li>
-          <li>Store Credit</li>
-          <li>Required Products</li>
-          <li>Either/Or Products</li>
-          <li>Auto-Add Products</li>
-          <li>Color Schemes</li>
-          <li>Multiple Nav Shapes</li>
-          <li>Custom Labels</li>
-          <li>Options and Fees Page</li>
-          <li>Shadow Effects</li>
-          <li>Premium Support</li>
-        </ul>
-        <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
-      </div>
+
+  <div class="hidden-sm hidden-md hidden-lg">
+    <div class="container mobile-upsell-notice">
+      <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+      <ul>
+        <li>Unlimited Steps</li>
+        <li>Unlimited Packages</li>
+        <li>Store Credit</li>
+        <li>Required Products</li>
+        <li>Either/Or Products</li>
+        <li>Auto-Add Products</li>
+        <li>Color Schemes</li>
+        <li>Multiple Nav Shapes</li>
+        <li>Custom Labels</li>
+        <li>Options and Fees Page</li>
+        <li>Shadow Effects</li>
+        <li>Premium Support</li>
+      </ul>
+      <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
     </div>
-  <?php endif ?>
+  </div>
+
   <?php
   echo ob_get_clean();
 }
 
 function sbs_package_description() {
-  $license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 		<p>
@@ -618,40 +584,7 @@ function sbs_package_description() {
 		<p>
 			If you don't wish to use packages, select Deactivated from the drop down menu.
 		</p>
-    <?php if ( !$license ): ?>
-      <div class="hidden-sm hidden-md hidden-lg">
-        <div class="container mobile-upsell-notice">
-          <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
-          <ul>
-            <li>Unlimited Steps</li>
-            <li>Unlimited Packages</li>
-            <li>Store Credit</li>
-            <li>Required Products</li>
-            <li>Either/Or Products</li>
-            <li>Auto-Add Products</li>
-            <li>Color Schemes</li>
-            <li>Multiple Nav Shapes</li>
-            <li>Custom Labels</li>
-            <li>Options and Fees Page</li>
-            <li>Shadow Effects</li>
-            <li>Premium Support</li>
-          </ul>
-          <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
-        </div>
-      </div>
-    <?php endif ?>
-	<?php
-	echo ob_get_clean();
-}
 
-function sbs_display_description() {
-  $license = sbs_check_license_cache();
-  ob_start();
-  ?>
-  <p>
-    Customize the appearance of the ordering process with preset styles and themes.
-  </p>
-  <?php if ( !$license ): ?>
     <div class="hidden-sm hidden-md hidden-lg">
       <div class="container mobile-upsell-notice">
         <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
@@ -672,21 +605,43 @@ function sbs_display_description() {
         <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
       </div>
     </div>
-  <?php endif ?>
+
+	<?php
+	echo ob_get_clean();
+}
+
+function sbs_display_description() {
+  ob_start();
+  ?>
+  <p>
+    Customize the appearance of the ordering process with preset styles and themes.
+  </p>
+  <div class="hidden-sm hidden-md hidden-lg">
+    <div class="container mobile-upsell-notice">
+      <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+      <ul>
+        <li>Unlimited Steps</li>
+        <li>Unlimited Packages</li>
+        <li>Store Credit</li>
+        <li>Required Products</li>
+        <li>Either/Or Products</li>
+        <li>Auto-Add Products</li>
+        <li>Color Schemes</li>
+        <li>Multiple Nav Shapes</li>
+        <li>Custom Labels</li>
+        <li>Options and Fees Page</li>
+        <li>Shadow Effects</li>
+        <li>Premium Support</li>
+      </ul>
+      <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+    </div>
+  </div>
   <?php
   echo ob_get_clean();
 }
 
 function sbs_premium_description() {
-	$license = sbs_check_license_cache();
-
-  if ( $license || isset( $_REQUEST['activate_license'] ) ) {
-    echo null;
-  }
-	else {
-		echo '<p style="font-size: 1.1em;"><strong>Unlock the full version of this plugin by purchasing a license on <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">our website</a>. Enter the key sent to your valid email address.</strong></p>';
-	}
-
+	echo '<p style="font-size: 1.1em;"><strong>Unlock the full version of this plugin by purchasing a license on <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">our website</a>. Enter the key sent to your valid email address.</strong></p>';
 }
 
 /**
@@ -695,23 +650,17 @@ function sbs_premium_description() {
  */
 function sbs_general_settings_sanitize( $input ) {
 
-	$license = sbs_check_license_cache();
+	$featured_label = isset( get_option('sbs_general')['featured-label'] ) ? get_option('sbs_general')['featured-label'] : 'Featured Items';
+	$req_label_before = isset( get_option('sbs_general')['req-label-before'] ) ? get_option('sbs_general')['req-label-before'] : 'Select';
+	$req_label_after = isset( get_option('sbs_general')['req-label-after'] ) ? get_option('sbs_general')['req-label-after'] : '(Required)';
+	$opt_label_before = isset( get_option('sbs_general')['opt-label-before'] ) ? get_option('sbs_general')['opt-label-before'] : '';
+	$opt_label_after = isset( get_option('sbs_general')['opt-label-after'] ) ? get_option('sbs_general')['opt-label-after'] : '(Addons)';
 
-	if ( !$license ):
-
-		$featured_label = isset( get_option('sbs_general')['featured-label'] ) ? get_option('sbs_general')['featured-label'] : 'Featured Items';
-		$req_label_before = isset( get_option('sbs_general')['req-label-before'] ) ? get_option('sbs_general')['req-label-before'] : 'Select';
-		$req_label_after = isset( get_option('sbs_general')['req-label-after'] ) ? get_option('sbs_general')['req-label-after'] : '(Required)';
-		$opt_label_before = isset( get_option('sbs_general')['opt-label-before'] ) ? get_option('sbs_general')['opt-label-before'] : '';
-		$opt_label_after = isset( get_option('sbs_general')['opt-label-after'] ) ? get_option('sbs_general')['opt-label-after'] : '(Addons)';
-
-		$input['featured-label'] = $featured_label;
-		$input['req-label-before'] = $req_label_before;
-		$input['req-label-after'] = $req_label_after;
-		$input['opt-label-before'] = $opt_label_before;
-		$input['opt-label-after'] = $opt_label_after;
-
-	endif;
+	$input['featured-label'] = $featured_label;
+	$input['req-label-before'] = $req_label_before;
+	$input['req-label-after'] = $req_label_after;
+	$input['opt-label-before'] = $opt_label_before;
+	$input['opt-label-after'] = $opt_label_after;
 
 	return $input;
 
@@ -719,59 +668,42 @@ function sbs_general_settings_sanitize( $input ) {
 
 function sbs_package_settings_sanitize( $input ) {
 
-	$license = sbs_check_license_cache();
+	$title_label = isset( get_option('sbs_package')['label'] ) ? get_option('sbs_package')['label'] : 'Step-By-Step Ordering';
+	$calc_label = isset( get_option('sbs_package')['merch-cred-label'] ) ? get_option('sbs_package')['merch-cred-label'] : 'Merchandise Credit';
+	$add_to_cart_text = isset( get_option('sbs_package')['add-to-cart-text'] ) ? get_option('sbs_package')['add-to-cart-text'] : 'Select Package';
+	$per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : '1';
 
-	if ( !$license ):
-		$title_label = isset( get_option('sbs_package')['label'] ) ? get_option('sbs_package')['label'] : 'Step-By-Step Ordering';
-		$calc_label = isset( get_option('sbs_package')['merch-cred-label'] ) ? get_option('sbs_package')['merch-cred-label'] : 'Merchandise Credit';
-		$add_to_cart_text = isset( get_option('sbs_package')['add-to-cart-text'] ) ? get_option('sbs_package')['add-to-cart-text'] : 'Select Package';
-		$per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : '1';
-
-		$input['label'] = $title_label;
-		$input['merch-cred-label'] = $calc_label;
-		$input['add-to-cart-text'] = $add_to_cart_text;
-		$input['per-row'] = $per_row;
-	endif;
+	$input['label'] = $title_label;
+	$input['merch-cred-label'] = $calc_label;
+	$input['add-to-cart-text'] = $add_to_cart_text;
+	$input['per-row'] = $per_row;
 
 	return $input;
-
 }
 
 function sbs_navbar_settings_sanitize( $input ) {
-
-	$license = sbs_check_license_cache();
-
-	if ( !$license ):
-		$throttle_nav = isset( get_option('sbs_navbar')['throttle-nav'] ) ? get_option('sbs_navbar')['throttle-nav'] : 2;
-
-		$input['throttle-nav'] = $throttle_nav;
-	endif;
+	$throttle_nav = isset( get_option('sbs_navbar')['throttle-nav'] ) ? get_option('sbs_navbar')['throttle-nav'] : 2;
+	$input['throttle-nav'] = $throttle_nav;
 
 	return $input;
 }
 
 function sbs_display_settings_sanitize( $input ) {
+	$calc_font = isset( get_option('sbs_display')['calc-font'] ) ? get_option('sbs_display')['calc-font'] : 1;
+	$category_font = isset( get_option('sbs_display')['category-font'] ) ? get_option('sbs_display')['category-font'] : 1;
+	$category_desc_font = isset( get_option('sbs_display')['category-desc-font'] ) ? get_option('sbs_display')['category-desc-font'] : 1;
+	$nav_button_font = isset( get_option('sbs_display')['nav-button-font'] ) ? get_option('sbs_display')['nav-button-font'] : 1;
+	$navbar_font = isset( get_option('sbs_display')['navbar-font'] ) ? get_option('sbs_display')['navbar-font'] : 1;
+	$drop_shadow = isset( get_option('sbs_display')['drop-shadow'] ) ? get_option('sbs_display')['drop-shadow'] : false;
 
-	$license = sbs_check_license_cache();
-
-	if ( !$license ):
-		$calc_font = isset( get_option('sbs_display')['calc-font'] ) ? get_option('sbs_display')['calc-font'] : 1;
-		$category_font = isset( get_option('sbs_display')['category-font'] ) ? get_option('sbs_display')['category-font'] : 1;
-		$category_desc_font = isset( get_option('sbs_display')['category-desc-font'] ) ? get_option('sbs_display')['category-desc-font'] : 1;
-		$nav_button_font = isset( get_option('sbs_display')['nav-button-font'] ) ? get_option('sbs_display')['nav-button-font'] : 1;
-		$navbar_font = isset( get_option('sbs_display')['navbar-font'] ) ? get_option('sbs_display')['navbar-font'] : 1;
-		$drop_shadow = isset( get_option('sbs_display')['drop-shadow'] ) ? get_option('sbs_display')['drop-shadow'] : false;
-
-		$input['calc-font'] = $calc_font;
-		$input['category-font'] = $category_font;
-		$input['category-desc-font'] = $category_desc_font;
-		$input['nav-button-font'] = $nav_button_font;
-		$input['navbar-font'] = $navbar_font;
-		$input['drop-shadow'] = $drop_shadow;
-	endif;
+	$input['calc-font'] = $calc_font;
+	$input['category-font'] = $category_font;
+	$input['category-desc-font'] = $category_desc_font;
+	$input['nav-button-font'] = $nav_button_font;
+	$input['navbar-font'] = $navbar_font;
+	$input['drop-shadow'] = $drop_shadow;
 
 	return $input;
-
 }
 
 /**
@@ -880,13 +812,11 @@ function sbs_featured_items_pos_callback() {
 
 	$option = isset( get_option('sbs_general')['featured-items-position'] ) ? get_option('sbs_general')['featured-items-position'] : 2;
 
-	$license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 		<fieldset>
-			<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
-				<input type="radio" name="sbs_general[featured-items-position]" value="1" <?php echo checked(1, $option) ?> <?php disabled( false, $license ) ?>>
+			<label class="grayed-out-text">
+				<input type="radio" name="sbs_general[featured-items-position]" value="1" <?php echo checked(1, $option) ?> <?php disabled( true, true ) ?>>
 				Top
 			</label><br />
 			<label>
@@ -903,8 +833,6 @@ function sbs_featured_items_pos_callback() {
 function sbs_featured_items_vis_callback() {
 
 	$option = isset( get_option('sbs_general')['featured-items-visibility'] ) ? get_option('sbs_general')['featured-items-visibility'] : 1;
-
-	$license = sbs_check_license_cache();
 
 	ob_start();
 	?>
@@ -932,11 +860,9 @@ function sbs_req_feat_label_callback() {
 	$opt_label_before = isset( get_option('sbs_general')['opt-label-before'] ) ? get_option('sbs_general')['opt-label-before'] : '';
 	$opt_label_after = isset( get_option('sbs_general')['opt-label-after'] ) ? get_option('sbs_general')['opt-label-after'] : '(Addons)';
 
-	$license = sbs_check_license_cache();
-
 	ob_start();
 	?>
-		<fieldset class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+		<fieldset class="grayed-out-text">
 			<span>
 				<label>
 					<strong>"Required Items" Section Title:</strong>
@@ -949,11 +875,11 @@ function sbs_req_feat_label_callback() {
 				</label><br />
 				<label>
 					Before Category Name:
-					<input type="text" name="sbs_general[req-label-before]" value="<?php echo $req_label_before ?>" <?php disabled( false, $license ) ?>/>
+					<input type="text" name="sbs_general[req-label-before]" value="<?php echo $req_label_before ?>" <?php disabled( true, true ) ?>/>
 				</label><br />
 				<label>
 					After Category Name:
-					<input type="text" name="sbs_general[req-label-after]" value="<?php echo $req_label_after ?>" <?php disabled( false, $license ) ?> />
+					<input type="text" name="sbs_general[req-label-after]" value="<?php echo $req_label_after ?>" <?php disabled( true, true ) ?> />
 				</label><br />
 			</span>
 			<span>
@@ -968,11 +894,11 @@ function sbs_req_feat_label_callback() {
 				</label><br />
 				<label>
 					Before Category Name:
-					<input type="text" name="sbs_general[opt-label-before]" value="<?php echo $opt_label_before ?>" <?php disabled( false, $license ) ?> />
+					<input type="text" name="sbs_general[opt-label-before]" value="<?php echo $opt_label_before ?>" <?php disabled( true, true ) ?> />
 				</label><br />
 				<label>
 					After Category Name:
-					<input type="text" name="sbs_general[opt-label-after]" value="<?php echo $opt_label_after ?>" <?php disabled( false, $license ) ?> />
+					<input type="text" name="sbs_general[opt-label-after]" value="<?php echo $opt_label_after ?>" <?php disabled( true, true ) ?> />
 				</label><br />
 			</span>
 			<span>
@@ -986,7 +912,7 @@ function sbs_req_feat_label_callback() {
 					?>
 				</label><br />
 				<label>
-					<input type="text" name="sbs_general[featured-label]" value="<?php echo $featured_label ?>" <?php disabled( false, $license ) ?> />
+					<input type="text" name="sbs_general[featured-label]" value="<?php echo $featured_label ?>" <?php disabled( true, true ) ?> />
 				</label><br />
 			</span>
 		</fieldset>
@@ -1033,15 +959,11 @@ function sbs_sbs_table_callback() {
 
 	} );
 
-	$license = sbs_check_license_cache();
-
   ob_start();
   ?>
-	<?php if ( !$license ) { ?>
 	<p><strong style="color: red; font-size: 1.2em;">
 		You may have up to two parent categories, or steps, active at a time in the free version of this plugin. Only the first two subcategories in each step will be displayed.<br>You can add as many steps and subcategories as you would like after purchasing a license for the premium version <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a>
 	</strong></p>
-	<?php } ?>
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-6">
@@ -1066,7 +988,7 @@ function sbs_sbs_table_callback() {
                     <span class="sbs-sortable-item-remove">&#10006;</span>
                   </div>
                   <div class="clearfix"></div>
-                  <ul class="<?php echo !$license ? 'subcat-restricted' : null ?>">
+                  <ul class="subcat-restricted">
                     <?php
                     foreach( $category->children as $child )
                     {
@@ -1158,8 +1080,6 @@ function sbs_navbar_navigation_callback() {
 
 	$option = isset( get_option('sbs_navbar')['throttle-nav'] ) ? get_option('sbs_navbar')['throttle-nav'] : 2;
 
-	$license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 	<fieldset>
@@ -1168,14 +1088,14 @@ function sbs_navbar_navigation_callback() {
 			Only allow forward navigation one step a time, but let users backtrack to
 			any step.
 		</label><br />
-		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
-			<input type="radio" id="step_navbar_navigation_1" name="sbs_navbar[throttle-nav]" value="1" <?php checked( 1, $option ) ?> <?php disabled( false, $license ) ?>/>
-			Only allow navigation one step at a time in any direction <?php echo !$license ? sbs_premium_site_link() : null ?>
+		<label class="grayed-out-text">
+			<input type="radio" id="step_navbar_navigation_1" name="sbs_navbar[throttle-nav]" value="1" <?php checked( 1, $option ) ?> <?php disabled( true, true ) ?>/>
+			Only allow navigation one step at a time in any direction <?php echo sbs_premium_site_link() ?>
 		</label><br />
 
-		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
-			<input type="radio" id="step_navbar_navigation_3" name="sbs_navbar[throttle-nav]" value="3" <?php checked( 3, $option ) ?> <?php disabled( false, $license ) ?>/>
-			Users may freely navigate, skipping any step they'd like. <?php echo !$license ? sbs_premium_site_link() : null ?>
+		<label class="grayed-out-text">
+			<input type="radio" id="step_navbar_navigation_3" name="sbs_navbar[throttle-nav]" value="3" <?php checked( 3, $option ) ?> <?php disabled( true, true ) ?>/>
+			Users may freely navigate, skipping any step they'd like. <?php echo sbs_premium_site_link() ?>
 		</label><br />
 	</fieldset>
 
@@ -1215,7 +1135,6 @@ function sbs_package_enable_callback() {
 function sbs_package_calc_label_callback() {
 
 	$option = isset( get_option('sbs_package')['label'] ) ? get_option('sbs_package')['label'] : 'Step-By-Step Ordering';
-	$license = sbs_check_license_cache();
 
 	ob_start();
 	?>
@@ -1227,7 +1146,7 @@ function sbs_package_calc_label_callback() {
 				'Appears if "Deactivated" was selected above.'
 			);
 			?>
-			<input style="width: 240px;" type="text" id="sbs_package[label]" name="sbs_package[label]" value="<?php echo $option ?>" <?php disabled( false, $license ) ?>/>
+			<input style="width: 240px;" type="text" id="sbs_package[label]" name="sbs_package[label]" value="<?php echo $option ?>" <?php disabled( true, true ) ?>/>
 		</label>
 	</fieldset>
 	<?php
@@ -1306,7 +1225,6 @@ function sbs_package_category_callback() {
 function sbs_package_merch_cred_callback() {
 
 	$wc_attributes = wc_get_attribute_taxonomies();
-	$license = sbs_check_license_cache();
 	$calc_label = isset( get_option('sbs_package')['merch-cred-label'] ) ? get_option('sbs_package')['merch-cred-label'] : 'Merchandise Credit';
 
 	ob_start();
@@ -1319,7 +1237,7 @@ function sbs_package_merch_cred_callback() {
 				'If your package has a store credit, the following text will be displayed on the widget calculator.  You can change this title to anything you would like.'
 			);
 			?>
-			<input style="width: 240px;" type="text" name="sbs_package[merch-cred-label]" value="<?php echo $calc_label ?>" <?php disabled( false, $license ) ?>/>
+			<input style="width: 240px;" type="text" name="sbs_package[merch-cred-label]" value="<?php echo $calc_label ?>" <?php disabled( true, true ) ?>/>
 		</label>
 	</fieldset>
 
@@ -1353,8 +1271,6 @@ function sbs_package_tier_callback() {
 		} );
 	}
 
-	$license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 
@@ -1365,12 +1281,8 @@ function sbs_package_tier_callback() {
 	<?php else: ?>
 		<p>
 			Drag (or touch the control buttons on the right side of each item) packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
-			the order in which they are displayed.
-
-			<?php if ( !$license ) { ?>
-				<br>
-				<strong style="color: red; font-size: 1.2em;">You may have up to one package in the free version of this plugin.<br>You can add as many packages as you would like after purchasing a license for the premium version of this plugin <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong>
-			<?php } ?>
+			the order in which they are displayed.<br>
+			<strong style="color: red; font-size: 1.2em;">You may have up to one package in the free version of this plugin.<br>You can add as many packages as you would like after purchasing a license for the premium version of this plugin <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong>
 		</p>
     <div class="container-fluid">
       <div class="row">
@@ -1478,12 +1390,10 @@ function sbs_package_select_style_callback() {
 
 	$add_to_cart_text = isset( get_option('sbs_package')['add-to-cart-text'] ) ? get_option('sbs_package')['add-to-cart-text'] : 'Select Package';
 
-	$license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 	<fieldset>
-		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+		<label class="grayed-out-text">
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
@@ -1491,7 +1401,7 @@ function sbs_package_select_style_callback() {
 			);
 			?>
 			Number of packages to display per row:
-			<select id="sbs-package-per-row" name="sbs_package[per-row]" <?php disabled( true, !$license ) ?>>
+			<select id="sbs-package-per-row" name="sbs_package[per-row]" <?php disabled( true, true ) ?>>
 			<?php
 			foreach ( $per_row_options as $option )
 			{
@@ -1505,7 +1415,7 @@ function sbs_package_select_style_callback() {
 			</select>
 		</label><br />
 
-		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+		<label class="grayed-out-text">
 			<?php
 			echo sbs_admin_help_tooltip(
 				'top',
@@ -1513,7 +1423,7 @@ function sbs_package_select_style_callback() {
 			);
 			?>
 			"Add to Cart" Text <?php echo sbs_premium_site_link() ?>:
-			<input type="text" id="sbs-package-add-cart-label" name="sbs_package[add-to-cart-text]" value="<?php echo $add_to_cart_text ?>" placeholder='Default: "Select Package"' <?php disabled( false, $license ) ?>/>
+			<input type="text" id="sbs-package-add-cart-label" name="sbs_package[add-to-cart-text]" value="<?php echo $add_to_cart_text ?>" placeholder='Default: "Select Package"' <?php disabled( true, true ) ?>/>
 		</label>
 
 		<p>
@@ -1594,8 +1504,6 @@ function sbs_display_color_scheme_callback() {
 			'image' => $image_dir . 'sbs-theme-royal-2.jpg' )
 	);
 
-	$license = sbs_check_license_cache();
-
   ob_start();
   ?>
 	<fieldset>
@@ -1610,7 +1518,7 @@ function sbs_display_color_scheme_callback() {
 		foreach( $colors as $key => $color )
 		{
 		?>
-	    <option value="<?php echo $key + 1 ?>" <?php echo selected( $key + 1, $option, false ) ?> <?php disabled( true, $color['premium'] && !$license ) ?>>
+	    <option value="<?php echo $key + 1 ?>" <?php echo selected( $key + 1, $option, false ) ?> <?php disabled( true, $color['premium'] ) ?>>
 				<?php echo esc_html( $color['name'] ) ?>
 				<?php echo $color['premium'] ? ' ' . sbs_premium_site_link() : null ?>
 			</option>
@@ -1661,15 +1569,13 @@ function sbs_display_calc_callback() {
 		'Verdana'
 	);
 
-	$license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 		<div>
-			<fieldset class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+			<fieldset class="grayed-out-text">
 				<label>
 					<p><strong>Font Family <?php echo sbs_premium_site_link() ?></strong></p>
-					<select id="sbs_display[calc-font]" name="sbs_display[calc-font]" <?php disabled( false, $license ) ?>>
+					<select id="sbs_display[calc-font]" name="sbs_display[calc-font]" <?php disabled( true, true ) ?>>
 					<?php
 					foreach( $fonts as $key => $font )
 					{
@@ -1733,8 +1639,6 @@ function sbs_display_fonts_callback() {
 		array( 'title' => 'Navbar ' . sbs_premium_site_link(), 'slug' => 'navbar-font', 'option' => $navbar_font, 'tooltip' => "Select the font for the bar at the top of each page displaying the customer's progress during ordering." ),
 	);
 
-	$license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 
@@ -1742,7 +1646,7 @@ function sbs_display_fonts_callback() {
 	foreach ( $sections as $section )
 	{
 	?>
-	<fieldset class="<?php echo !$license ? 'grayed-out-text' : null ?>">
+	<fieldset class="grayed-out-text">
 		<label>
 			<div>
 				<strong><?php echo $section['title'] ?></strong>
@@ -1753,7 +1657,7 @@ function sbs_display_fonts_callback() {
 				);
 				?>
 			</div>
-			<select id="sbs_display[<?php echo $section['slug'] ?>]" name="sbs_display[<?php echo $section['slug'] ?>]" <?php disabled( false, $license ) ?>>
+			<select id="sbs_display[<?php echo $section['slug'] ?>]" name="sbs_display[<?php echo $section['slug'] ?>]" <?php disabled( true, true ) ?>>
 			<?php
 			foreach ( $fonts as $key => $font )
 			{
@@ -1779,7 +1683,6 @@ function sbs_display_fonts_callback() {
 
 
 function sbs_display_misc_callback() {
-	$license = sbs_check_license_cache();
 	$hover_effect = isset( get_option('sbs_display')['hover-effect'] ) ? get_option('sbs_display')['hover-effect'] : false;
 	$drop_shadow = isset( get_option('sbs_display')['drop-shadow'] ) ? get_option('sbs_display')['drop-shadow'] : false;
 
@@ -1790,8 +1693,8 @@ function sbs_display_misc_callback() {
 			<input type="checkbox" id="show_hover_effect" name="sbs_display[hover-effect]" value="1" <?php checked(1, $hover_effect) ?> />
 			SBS links turn different colors when moused over (varies by theme)
 		</label><br />
-		<label class="<?php echo !$license ? 'grayed-out-text' : null ?>">
-			<input type="checkbox" id="sbs_display[drop-shadow]" name="sbs_display[drop-shadow]" value="1" <?php checked( 1, $drop_shadow ); disabled( false, $license ); ?> />
+		<label class="grayed-out-text">
+			<input type="checkbox" id="sbs_display[drop-shadow]" name="sbs_display[drop-shadow]" value="1" <?php checked( 1, $drop_shadow ); disabled( true, true ); ?> />
 			Add drop shadows to SBS pages <?php echo sbs_premium_site_link() ?>
 		</label>
 	</fieldset>
@@ -1848,8 +1751,6 @@ function sbs_display_navbar_number_shape_callback() {
 		 	'image' => $image_dir . 'badge-ribbon.png' )
 	);
 
-	$license = sbs_check_license_cache();
-
   ob_start();
 	?>
 	<fieldset>
@@ -1865,9 +1766,9 @@ function sbs_display_navbar_number_shape_callback() {
 		{
 			$index = $key + 1;
 		?>
-			<option value="<?php echo $index ?>" <?php echo selected( $index, $number_style, false) ?> <?php disabled( true, $style['premium'] && !$license ) ?>>
+			<option value="<?php echo $index ?>" <?php echo selected( $index, $number_style, false) ?> <?php disabled( true, $style['premium'] ) ?>>
 				<?php echo $style['name'] ?>
-				<?php echo $style['premium'] && !$license ? ' ' . sbs_premium_site_link() : null ?>
+				<?php echo $style['premium'] ? ' ' . sbs_premium_site_link() : null ?>
 			</option>
   	<?php
 		}
@@ -1929,8 +1830,6 @@ function sbs_display_navbar_title_shape_callback() {
 		 	'image' => $image_dir . 'parallelogram.png' )
 	);
 
-	$license = sbs_check_license_cache();
-
 	ob_start();
 	?>
 	<fieldset>
@@ -1946,9 +1845,9 @@ function sbs_display_navbar_title_shape_callback() {
 		{
 			$index = $key + 1;
 		?>
-			<option value="<?php echo $index ?>" <?php selected( $index, $title_style ) ?> <?php disabled( true, $style['premium'] && !$license ) ?>>
+			<option value="<?php echo $index ?>" <?php selected( $index, $title_style ) ?> <?php disabled( true, $style['premium'] ) ?>>
 				<?php echo $style['name'] ?>
-				<?php echo $style['premium'] && !$license ? ' ' . sbs_premium_site_link() : null ?>
+				<?php echo $style['premium'] ? ' ' . sbs_premium_site_link() : null ?>
 			</option>
 		<?php
 		}
@@ -1986,212 +1885,6 @@ function sbs_display_navbar_title_shape_callback() {
 
 function sbs_premium_key_callback() {
 
-	$secret_key = 'sb4Oj2baaBvIp7gP67lNq370';
-	$server_url = 'http://stepbystepsys.com';
-	$item_reference = 'SBS Premium License';
-
-	/*** License activate button was clicked ***/
-	if (isset($_REQUEST['activate_license'])) {
-
-			if ( !isset( $_POST['sbs_premium_key_form_nonce'] ) || !wp_verify_nonce( $_POST['sbs_premium_key_form_nonce'], 'sbs_premium_key' ) ) {
-				exit;
-			}
-
-			$license_key = $_REQUEST['sbs_premium_key'];
-
-			// API query parameters
-			$api_params = array(
-					'slm_action' => 'slm_activate',
-					'secret_key' => $secret_key,
-					'license_key' => $license_key,
-					'registered_domain' => $_SERVER['SERVER_NAME'],
-					'item_reference' => urlencode($item_reference)
-			);
-
-			// Send query to the license manager server
-			$query = esc_url_raw(add_query_arg($api_params, $server_url));
-			$response = wp_remote_get($query, array('timeout' => 20, 'sslverify' => false));
-
-			// Check for error in the response
-			if (is_wp_error($response)){
-					echo "Unexpected Error! The query returned with an error.";
-			}
-
-			//var_dump($response);//uncomment it if you want to look at the full response
-
-			// License data.
-			$license_data = json_decode(wp_remote_retrieve_body($response));
-
-			// TODO - Do something with it.
-			//var_dump($license_data);//uncomment it to look at the data
-
-			if($license_data->result == 'success'){//Success was returned for the license activation
-
-					//Uncomment the followng line to see the message that returned from the license server
-					echo '<p style="color: green;"><strong>' . $license_data->message . '</strong></p>';
-
-					//Save the license key in the options table
-					update_option('sbs_premium_key', $license_key);
-					update_option( 'sbs_premium_key_valid', 'true' );
-			}
-			else{
-					//Show error to the user. Probably entered incorrect license key.
-
-					//Uncomment the followng line to see the message that returned from the license server
-					echo '<p style="color: red;"><strong>' . $license_data->message . '.  Please try again.  If you do not have a license you can purchase one <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here</a></strong>.</p>';
-			}
-
-	}
-	/*** End of license activation ***/
-
-	/*** License activate button was clicked ***/
-	if (isset($_REQUEST['deactivate_license'])) {
-			$license_key = get_option('sbs_premium_key');
-
-			if ( !isset( $_POST['sbs_premium_key_form_nonce'] ) || !wp_verify_nonce( $_POST['sbs_premium_key_form_nonce'], 'sbs_premium_key' ) ) {
-				exit;
-			}
-
-			// API query parameters
-			$api_params = array(
-					'slm_action' => 'slm_deactivate',
-					'secret_key' => $secret_key,
-					'license_key' => $license_key,
-					'registered_domain' => $_SERVER['SERVER_NAME'],
-					'item_reference' => urlencode($item_reference),
-			);
-
-			// Send query to the license manager server
-			$query = esc_url_raw(add_query_arg($api_params, $server_url));
-			$response = wp_remote_get($query, array('timeout' => 20, 'sslverify' => false));
-
-			// Check for error in the response
-			if (is_wp_error($response)){
-					echo "Unexpected Error! The query returned with an error.";
-			}
-
-			//var_dump($response);//uncomment it if you want to look at the full response
-
-			// License data.
-			$license_data = json_decode(wp_remote_retrieve_body($response));
-
-			// TODO - Do something with it.
-			//var_dump($license_data);//uncomment it to look at the data
-
-			if($license_data->result == 'success'){//Success was returned for the license activation
-					echo '<p style="color: red;"><strong>' . $license_data->message . '</strong></p>';
-
-					//Remove the licensse key from the options table. It will need to be activated again.
-					update_option( 'sbs_premium_key', '' );
-					update_option( 'sbs_premium_key_valid', 'false' );
-			}
-			else{
-					//Show error to the user. Probably entered incorrect license key.
-
-					//Uncomment the followng line to see the message that returned from the license server
-					echo '<p style="color: red;"><strong>' . $license_data->message . '</strong></p>';
-			}
-
-	}
-	/*** End of license deactivation ***/
-
-	$saved_license_key = get_option('sbs_premium_key');
-
-	if ( empty( $saved_license_key ) ) {
-
-	}
-	else {
-
-		// $check_api_params = array(
-		// 	'slm_action' => 'slm_check',
-		// 	'secret_key' => $secret_key,
-		// 	'license_key' => $saved_license_key
-		// );
-		//
-		// $check_response = wp_remote_get( add_query_arg( $check_api_params, $server_url ) );
-
-		$check_response = sbs_query_key_verification_server();
-
-		if ( ! $check_response['response_success'] ) {
-			echo "The server was unable to respond to the query.";
-		}
-		else {
-
-			// $check_response = json_decode( wp_remote_retrieve_body( $check_response ) );
-
-			if ( $check_response['verify_success'] && $check_response['response_success'] ) {
-				echo '<p class="description" style="color: green;">Product key verified and premium features unlocked.</p>';
-			}
-			else {
-				echo '<p class="description" style="color: red;">Your product key is invalid or has expired.</p>';
-			}
-
-		}
-
-	}
-
-	?>
-	<form action="" method="post">
-		<?php wp_nonce_field( 'sbs_premium_key', 'sbs_premium_key_form_nonce' ) ?>
-		<fieldset>
-			<label>
-				<input class="regular-text" type="text" id="sbs_premium_key" name="sbs_premium_key" value="<?php echo $saved_license_key ?>" <?php disabled( true, !empty( $saved_license_key ) ) ?>>
-				<p class="submit">
-					<?php if ( empty( $saved_license_key ) ): ?>
-						<input type="submit" name="activate_license" value="Activate" class="button-primary" />
-					<?php endif ?>
-					<?php if ( !empty( $saved_license_key ) ): ?>
-						<input type="submit" name="deactivate_license" value="Deactivate" class="button" onclick="return confirm('Are you sure you want to deactivate all premium features?');"/>
-					<?php endif ?>
-				</p>
-			</label>
-		</fieldset>
-	</form>
-
-	<?php if ( isset( $check_response ) && isset( $check_response['data'] ) ) { ?>
-	<table>
-		<thead>
-			<tr>
-				<th colspan="2">License Information</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Status</td>
-				<td><strong><?php echo ucwords( esc_html( $check_response['data']->status ) ) ?></strong></td>
-			</tr>
-			<tr>
-				<td>Registered Email</td>
-				<td><?php echo esc_html( $check_response['data']->email ) ?></td>
-			</tr>
-			<tr>
-				<td>Maximum Allowed Domains</td>
-				<td><?php echo esc_html( $check_response['data']->max_allowed_domains ) ?></td>
-			</tr>
-			<tr>
-				<td>Registered Domains</td>
-				<td>
-					<?php foreach( $check_response['data']->registered_domains as $domain ): ?>
-						<?php echo esc_html( $domain->registered_domain ) . '<br>' ?>
-					<?php endforeach ?>
-				</td>
-			</tr>
-			<tr>
-				<td>Registered</td>
-				<td><?php echo esc_html( $check_response['data']->date_created ) ?></td>
-			</tr>
-			<tr>
-				<td>Renewed</td>
-				<td><?php echo esc_html( $check_response['data']->date_renewed ) ?></td>
-			</tr>
-			<tr>
-				<td>Expiration</td>
-				<td><?php echo esc_html( $check_response['data']->date_expiry ) ?></td>
-			</tr>
-		</tbody>
-	</table>
-	<?php } ?>
-	<?php
 }
 
 function sbs_render_admin_help_page() {

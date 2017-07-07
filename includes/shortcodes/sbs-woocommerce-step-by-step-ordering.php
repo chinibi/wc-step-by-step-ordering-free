@@ -353,8 +353,6 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps, $colum
 
 	global $woocommerce;
 
-	$license = sbs_check_license_cache();
-
   if ( $current_step === 0 ) {
 
 		$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
@@ -379,15 +377,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps, $colum
     if ( !empty( $steps[$current_step]->children ) ) {
 
       foreach( $steps[$current_step]->children as $subcategory ) {
-
-				if ( $license ) {
-					sbs_render_required_products( $subcategory->catid, $columns );
-					sbs_render_optional_products( $subcategory->catid, $columns );
-				}
-				else {
-					sbs_render_product_category( $subcategory->catid, $columns );
-				}
-
+				sbs_render_product_category( $subcategory->catid, $columns );
       }
 
     }
@@ -433,12 +423,8 @@ function sbs_generate_navbar_url( $step_key, $current_step, $step_count ) {
 
 	$previous_step = $current_step - 1;
 	$next_step = $current_step + 1;
-	$nav_option = isset( get_option('sbs_navbar')['throttle-nav'] ) ? get_option('sbs_navbar')['throttle-nav'] : '1';
 
-	$license = sbs_check_license_cache();
-	if ( !$license ) {
-		$nav_option = 2;
-	}
+	$nav_option = 2;
 
 	if ( $step_key < $current_step ) {
 
@@ -530,8 +516,6 @@ function sbs_woocommerce_step_by_step_ordering_shortcode( $atts = [] ) {
     return $columns;
   }, 10 );
 
-	$license = sbs_check_license_cache();
-
   $active_packages = sbs_get_active_packages();
   $packages_enabled = get_option('sbs_package')['enabled'];
 
@@ -547,11 +531,9 @@ function sbs_woocommerce_step_by_step_ordering_shortcode( $atts = [] ) {
     return '<div>This is the SBS Step-By-Step Ordering Page.  No ordering process has been set up yet; please access your admin settings and set up an ordering process.</div>';
   }
 
-	if ( !$license ) {
-		foreach( $steps as $step ) {
-			if ( !empty( $step->children ) ) {
-				 $step->children = array_slice( $step->children, 0, 2 );
-			}
+	foreach( $steps as $step ) {
+		if ( !empty( $step->children ) ) {
+			 $step->children = array_slice( $step->children, 0, 2 );
 		}
 	}
 

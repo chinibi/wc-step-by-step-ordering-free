@@ -4,17 +4,12 @@ function sbs_render_package_selection_box( $product_id, $per_row ) {
 
   $package = wc_get_product( $product_id );
 
-  $license = sbs_check_license_cache();
-
   $sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
   $base_url = get_permalink( $sbs_page );
 
   $add_to_cart_url = $base_url . '?step=1&add-to-cart=' . $product_id;
 
-  $add_to_cart_text = isset( get_option('sbs_package')['add-to-cart-text'] ) ? get_option('sbs_package')['add-to-cart-text'] : 'Select Package';
-  if ( !$license ) {
-    $add_to_cart_text = 'Select Package';
-  }
+  $add_to_cart_text = apply_filters( 'sbs_select_package_add_to_cart_text', 'Select Package' );
 
   ob_start();
   ?>

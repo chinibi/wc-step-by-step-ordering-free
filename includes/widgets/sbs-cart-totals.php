@@ -26,8 +26,6 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       return;
     }
 
-		$license = sbs_check_license_cache();
-
     // get woocommerce properties and methods
     global $woocommerce;
 
@@ -66,54 +64,6 @@ class SBS_WC_Cart_Totals extends WP_Widget {
       'cat_total' => wc_price( $woocommerce->cart->get_taxes_total() ),
       'css_class' => 'sbs-widget-sidebar-category'
     );
-
-
-
-    if ( isset( $package['credit'] ) && $package['credit'] > 0 && $license ) {
-
-			if ( !isset( get_option('sbs_display')['merch-cred-display'] ) || get_option('sbs_display')['merch-cred-display'] === '1' ) {
-
-				$totals[] = array(
-					'cat_name' => isset(get_option('sbs_package')['merch-cred-label']) && $license ? esc_html(get_option('sbs_package')['merch-cred-label']) : 'Store Credit',
-					'cat_total' => null,
-					'css_class' => 'sbs-widget-sidebar-merch-credit sbs-widget-sidebar-merch-credit-label',
-					'cat_name_colspan' => '2',
-					'cat_total_style' => 'display: none;'
-				);
-
-				$totals[] = array(
-					'cat_name' => null,
-					'cat_total' => wc_price(sbs_get_merchandise_credit_to_apply()) . ' of ' . wc_price( $package['credit'] ),
-					'css_class' => 'sbs-widget-sidebar-merch-credit sbs-widget-sidebar-merch-credit-value',
-					'cat_total_colspan' => '2',
-					'cat_name_style' => 'display: none;'
-				);
-
-			}
-
-			elseif ( get_option('sbs_display')['merch-cred-display'] === '2' ) {
-
-				$totals[] = array(
-					'cat_name' => isset(get_option('sbs_package')['merch-cred-label']) ? esc_html(get_option('sbs_package')['merch-cred-label']) : 'Merchandise Credit',
-					'cat_total' => null,
-					'css_class' => 'sbs-widget-sidebar-merch-credit sbs-widget-sidebar-merch-credit-label',
-					'cat_name_colspan' => '2',
-					'cat_name_style' => 'text-align: center;',
-					'cat_total_style' => 'display: none;'
-				);
-
-				$totals[] = array(
-					'cat_name' => null,
-					'cat_total' => wc_price(sbs_get_merchandise_credit_to_apply()) . ' of ' . wc_price( $package['credit'] ),
-					'css_class' => 'sbs-widget-sidebar-merch-credit sbs-widget-sidebar-merch-credit-value',
-					'cat_total_colspan' => '2',
-					'cat_name_style' => 'display: none;',
-					'cat_total_style' => 'text-align: center;'
-				);
-
-			}
-
-    }
 
     $totals[] = array(
       'cat_name' => 'TOTAL',

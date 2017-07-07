@@ -265,8 +265,7 @@ function sbs_get_active_packages( $slice = false ) {
     return wc_get_product( $package->catid );
   } );
 
-	$license = sbs_check_license_cache();
-	if ( !$license && $slice ) {
+	if ( $slice ) {
 		$package_order = array_slice( $package_order, 0, 1 );
 	}
 
@@ -328,8 +327,7 @@ function sbs_get_step_order( $slice = false ) {
     }
   }
 
-	$license = sbs_check_license_cache();
-	if ( !$license && $slice ) {
+	if ( $slice ) {
 		$step_order = array_slice( $step_order, 0, 2 );
 	}
 
