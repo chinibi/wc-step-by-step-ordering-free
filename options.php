@@ -1901,7 +1901,6 @@ function sbs_render_admin_help_page() {
 				<li><a href="#packages">Packages</a></li>
 				<li><a href="#widgets">Widgets</a></li>
 				<li><a href="#stepbystep">Step-By-Step</a></li>
-				<li><a href="#onf">Options and Fees</a></li>
 				<li><a href="#themes">Themes</a></li>
 				<li><a href="#premium">Premium</a></li>
         <li><a href="#uninstall">Uninstalling</a></li>
@@ -1973,25 +1972,6 @@ function sbs_render_admin_help_page() {
 			Process.  You can rearrange the categories inside to change the order.</li>
 		</ol>
 
-		<h3 id="onf">Options and Fees (optional)</h3>
-
-		(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/onf-builder.png">View Image</a>)
-
-		<ol>
-			<li>This is an optional page you can create that displays products in a table
-			rather than a catalog.</li>
-			<li>A product category named Options and Fees was automatically created on
-			install.  This category is the default for the Options and Fees page.</li>
-			<li>If you wish a different category to serve this role go the Options and Fees
-			settings page and select the category you want and save.</li>
-			<li>Create child categories of the chosen Options and Fees category, and make
-			products belonging to those categories. <strong>Assign a
-      parent and child category to each product. This is needed for Step-By-Step
-      to function correctly.</strong></li>
-			<li>Drag and drop child categories from Available Categories to Options and Fees
-			Page Outline to build your Options and Fees page.</li>
-		</ol>
-
 		<h3 id="themes">WordPress Themes</h3>
 
 		<p>This plugin is configured to work with themes already compatible with
@@ -2036,10 +2016,11 @@ function sbs_render_admin_help_page() {
 		package store credit, preset themes, and much more! You will also have access to
 		our support team!</p>
 
-		<p>After purchasing a license, a key will be sent to your provided email.  Enter
-		this key into the input box in the Premium tab in the Step-By-Step Ordering
-		settings and then click Activate.</p>
+		<p>After purchasing the premium version, you will download it from our <a href="http://stepbystepsys.com">website</a>.  You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
 
+    <p>If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our site.</p>
+
+    <p>The premium version of this plugin can be purchased directly at our <a href="http://stepbystepsys.com">website</a>.  We offer a 14 day trial of the premium version.  Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s).  This is a great selling tool.  For more info, visit our site for a full list of features in the premium version and try the premium version for free!</p>
 
     <h3 id="uninstall">Uninstalling</h3>
     <p>If you wish to disable this plugin's functionality you can deactivate it in
