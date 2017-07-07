@@ -104,7 +104,6 @@ function sbs_plugin_options_page() {
       <a href="?page=stepbystepsys&tab=general_options" class="nav-tab <?php echo $active_tab === 'general_options' ? 'nav-tab-active' : null ?>">General</a>
 			<a href="?page=stepbystepsys&tab=package_options" class="nav-tab <?php echo $active_tab === 'package_options' ? 'nav-tab-active' : null ?>">Packages</a>
       <a href="?page=stepbystepsys&tab=sbs_options" class="nav-tab <?php echo $active_tab === 'sbs_options' ? 'nav-tab-active' : null ?>">Step-By-Step</a>
-      <a href="?page=stepbystepsys&tab=onf_options" class="nav-tab <?php echo $active_tab === 'onf_options' ? 'nav-tab-active' : null ?>">Options and Fees</a>
       <a href="?page=stepbystepsys&tab=display_options" class="nav-tab <?php echo $active_tab === 'display_options' ? 'nav-tab-active' : null ?>">Display</a>
 			<a href="?page=stepbystepsys&tab=sbs_premium" class="nav-tab <?php echo $active_tab === 'sbs_premium' ? 'nav-tab-active' : null ?>">Premium</a>
 			<a href="?page=stepbystepsys&tab=help" class="nav-tab <?php echo $active_tab === 'help' ? 'nav-tab-active' : null ?>">Help</a>
@@ -175,9 +174,6 @@ function sbs_render_active_tab($active_tab) {
 		case 'package_options':
 			echo sbs_render_package_options();
 			break;
-		case 'onf_options':
-			echo sbs_render_onf_options();
-			break;
     case 'display_options':
       echo sbs_render_display_options();
       break;
@@ -220,18 +216,6 @@ function sbs_render_package_options() {
 		<?php settings_fields('sbs_package_settings') ?>
 		<?php do_settings_sections('sbs_package_settings') ?>
 		<?php submit_button() ?>
-	<?php
-
-	return ob_get_clean();
-}
-
-function sbs_render_onf_options() {
-	$license = sbs_check_license_cache();
-	ob_start();
-	?>
-		<?php settings_fields('sbs_onf_settings') ?>
-		<?php do_settings_sections('sbs_onf_settings') ?>
-		<?php if ( $license ) { submit_button(); } ?>
 	<?php
 
 	return ob_get_clean();
@@ -318,12 +302,6 @@ function sbs_plugin_settings_init() {
 		'Package Settings',
 		'sbs_package_description',
 		'sbs_package_settings'
-	);
-	add_settings_section(
-		'sbs_onf_settings',
-		'Options and Fees Settings',
-		'sbs_onf_description',
-		'sbs_onf_settings'
 	);
   add_settings_section(
     'sbs_display',
@@ -462,29 +440,6 @@ function sbs_plugin_settings_init() {
 		'sbs_package_settings'
 	);
 
-	// SBS Options and Fees Settings Fields
-	add_settings_field(
-		'sbs_onf_enable',
-		'Enable / Disable', // Enable/Disable Options and Fees page
-		'sbs_onf_enable_callback',
-		'sbs_onf_settings',
-		'sbs_onf_settings'
-	);
-	add_settings_field(
-		'sbs_onf_category',
-		'Category',
-		'sbs_onf_category_callback',
-		'sbs_onf_settings',
-		'sbs_onf_settings'
-	);
-	add_settings_field(
-		'sbs_onf_order',
-		'Options and Fees Builder',
-		'sbs_onf_order_callback',
-		'sbs_onf_settings',
-		'sbs_onf_settings'
-	);
-
   // SBS Display Settings Fields
   add_settings_field(
     'color_scheme',
@@ -548,7 +503,6 @@ function sbs_plugin_settings_init() {
   register_setting('sbs_order_settings', 'step_order');
 	register_setting('sbs_order_settings', 'sbs_navbar', 'sbs_navbar_settings_sanitize');
 	register_setting('sbs_package_settings', 'sbs_package', 'sbs_package_settings_sanitize');
-	register_setting('sbs_onf_settings', 'sbs_onf');
   register_setting('sbs_display', 'sbs_display', 'sbs_display_settings_sanitize');
   // register_setting('sbs_display', 'color_scheme');
   // register_setting('sbs_display', 'navbar_style');
@@ -664,44 +618,6 @@ function sbs_package_description() {
 		<p>
 			If you don't wish to use packages, select Deactivated from the drop down menu.
 		</p>
-    <?php if ( !$license ): ?>
-      <div class="hidden-sm hidden-md hidden-lg">
-        <div class="container mobile-upsell-notice">
-          <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
-          <ul>
-            <li>Unlimited Steps</li>
-            <li>Unlimited Packages</li>
-            <li>Store Credit</li>
-            <li>Required Products</li>
-            <li>Either/Or Products</li>
-            <li>Auto-Add Products</li>
-            <li>Color Schemes</li>
-            <li>Multiple Nav Shapes</li>
-            <li>Custom Labels</li>
-            <li>Options and Fees Page</li>
-            <li>Shadow Effects</li>
-            <li>Premium Support</li>
-          </ul>
-          <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
-        </div>
-      </div>
-    <?php endif ?>
-	<?php
-	echo ob_get_clean();
-}
-
-function sbs_onf_description() {
-	$license = sbs_check_license_cache() || isset( $_REQUEST['activate_license'] );
-	ob_start();
-	?>
-		<p>
-			The Options and Fees page is for miscellaneous items, services, and fees.
-			They will be each displayed compactly in a table.
-			<?php if ( ! $license ): ?>
-			<br><strong style="color: red; font-size: 1.2em;">A premium license is required to access this section.  You can purchase one <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong>
-			<?php endif ?>
-		</p>
-
     <?php if ( !$license ): ?>
       <div class="hidden-sm hidden-md hidden-lg">
         <div class="container mobile-upsell-notice">
@@ -1094,7 +1010,6 @@ function sbs_sbs_table_callback() {
 
 		$step_order = sbs_get_step_order( true );
 		$package_cat = isset( get_option('sbs_package')['category'] ) ? get_option('sbs_package')['category'] : null;
-		$option_cat = isset( get_option('sbs_onf')['category'] ) ? get_option('sbs_onf')['category'] : null;
 
 		$flat_step_order = array();
 
@@ -1177,15 +1092,6 @@ function sbs_sbs_table_callback() {
             ?>
 
           </ul>
-
-          <?php
-          if ( sbs_is_onf_section_active() )
-          {
-          ?>
-            <div class="fixed-item noselect">Options and Fees</div>
-          <?php
-          }
-          ?>
 
           <div class="fixed-item noselect">Checkout</div>
         </div>
@@ -1635,212 +1541,6 @@ function sbs_package_select_style_callback() {
 	echo ob_get_clean();
 
 }
-
-
-function sbs_onf_enable_callback() {
-
-	$option_defined = isset( get_option('sbs_onf')['enabled'] );
-	$category_defined = isset( get_option('sbs_onf')['category'] ) && !empty( get_option('sbs_onf')['category'] );
-	$option = $category_defined ? get_option('sbs_onf')['enabled'] : '0';
-
-	$license = sbs_check_license_cache();
-
-	ob_start();
-	?>
-		<fieldset>
-			<label>
-				<?php
-				echo sbs_admin_help_tooltip(
-					'top',
-					'If deactivated, the page is removed from the ordering process. If no subcategories are present in the Options and Fees Page Outline the page will not be included in the ordering process.'
-				);
-				?>
-				<select id="sbs_onf[enabled]" name="sbs_onf[enabled]" <?php disabled( false, $category_defined && $license ) ?>>
-					<option value="1" <?php selected(1, $option) ?>>Activated</option>
-					<option value="0" <?php selected(0, $option) ?>>Deactivated</option>
-				</select>
-				<?php if ( !$category_defined ): ?>
-					<p class="description">Select a product category below to enable the Options and Fees section in your ordering process.</p>
-				<?php endif ?>
-			</label>
-		</fieldset>
-	<?php
-
-	echo ob_get_clean();
-
-}
-
-function sbs_onf_category_callback() {
-
-	$wc_categories = sbs_get_all_wc_categories();
-
-	$license = sbs_check_license_cache();
-
-	$option = isset( get_option('sbs_onf')['category'] ) ? get_option('sbs_onf')['category'] : null;
-
-	ob_start();
-	?>
-		<fieldset class="<?php echo !$license ? 'grayed-out-text' : null ?>">
-			<label>
-				<?php
-				echo sbs_admin_help_tooltip(
-					'top',
-					'Select the WooCommerce product category your Options and Fees items are located.<br />
-					Then click Save Changes to refresh the page.'
-				);
-				?>
-				<select id="select-package-category" name="sbs_onf[category]" <?php disabled( false, $license ) ?>>
-					<option value="">Select One</option>
-					<?php
-					foreach( $wc_categories as $category )
-					{
-					?>
-						<option value="<?php echo $category->term_id ?>" <?php selected( $category->term_id, $option ) ?>>
-							<?php echo $category->name ?>
-						</option>
-					<?php
-					}
-					?>
-				</select>
-			</label>
-		</fieldset>
-
-		<?php if ( $license ) { submit_button(); } ?>
-	<?php
-
-	echo ob_get_clean();
-}
-
-function sbs_onf_order_callback() {
-
-	$onf_category = get_option('sbs_onf')['category'];
-	$onf_order = sbs_get_onf_order();
-
-	if ( empty( $onf_category ) ) {
-		echo '<p>Select a product category above to begin.</p>';
-		return;
-	}
-
-	$onf_subcats = sbs_get_subcategories_from_parent( $onf_category );
-
-	$available_categories = array_filter( $onf_subcats, function( $category ) {
-
-		$onf_order = sbs_get_onf_order();
-
-		if ( isset( $onf_order ) ) {
-			$onf_order = array_map( function( $package ) {
-				return $package->catid;
-			}, $onf_order);
-		} else {
-			$onf_order = array();
-		}
-
-		return !in_array( $category->term_id, $onf_order );
-	} );
-
-	$license = sbs_check_license_cache();
-
-	ob_start();
-	?>
-	<div class="<?php echo !$license ? 'grayed-out-text' : null ?>">
-    <p>Begin by creating subcategories of your selected parent category above.  They will appear in the Available Categories box below.</p>
-		<p>Create your Options and Fees page by dragging and dropping (or touching the control buttons on the right side of each item) your items in the boxes below.</p>
-		<p>You can select from your subcategories of the parent category chosen to serve as Options.  Drag any desired categories from the
-		Available Categories column,<br>and move them to the Your Ordering Process column.  You can also do this by touching the &#10133; button.</p>
-    <p>You can change the order categories are displayed by rearranging the order of items in the column by drag and drop or arrow buttons.</p>
-		<p>To remove a category from the page just drag it back under the Available Categories column.  You can also do this by touching the &#10006; button.</p>
-    <p><strong>Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.</strong> (<a rel="nofollow noreferrer" target="_blank" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png">Example</a>)</p>
-	</div>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6">
-
-        <div class="sortable-container <?php echo !$license ? 'grayed-out-text' : null ?>" id="sbs-order-container">
-          <h3 class="<?php echo !$license ? 'grayed-out-text' : null ?>">Options and Fees Page Outline</h3>
-          <ul id="sbs-order" class="sortable onf-sortable">
-
-            <?php
-            if ( $onf_order )
-            {
-              foreach( $onf_order as $category )
-              {
-              ?>
-                <li data-catid="<?php echo $category->catid ?>" class="sortable-item">
-                  <?php echo get_the_category_by_ID( $category->catid ) ?>
-                  <div class="alignright">
-                    <span class="sbs-sortable-item-move-up">&#9650;</span>
-                    <span class="sbs-sortable-item-move-down">&#9660;</span>
-                    <span class="sbs-sortable-item-add">&#10133;</span>
-                    <span class="sbs-sortable-item-remove">&#10006;</span>
-                  </div>
-                  <div class="clearfix"></div>
-                  <ul>
-                    <?php
-                    if ( !empty( $onf_order->children ) )
-                    {
-                      foreach( $category->children as $child )
-                      {
-                      ?>
-                        <li class="sortable-item" data-catid="<?php echo $child->catid ?>">
-                          <?php echo get_the_category_by_ID( $child->catid ) ?>
-                          <div class="alignright">
-                            <span class="sbs-sortable-item-move-up">&#9650;</span>
-                            <span class="sbs-sortable-item-move-down">&#9660;</span>
-                            <span class="sbs-sortable-item-add">&#10133;</span>
-                            <span class="sbs-sortable-item-remove">&#10006;</span>
-                          </div>
-                          <div class="clearfix"></div>
-                        </li>
-                      <?php
-                      }
-                    }
-                    ?>
-                  </ul>
-
-                </li>
-              <?php
-              }
-            }
-            ?>
-
-          </ul>
-        </div>
-
-      </div>
-      <div class="col-sm-6">
-
-        <div class="sortable-container <?php echo !$license ? 'grayed-out-text' : null ?>" id="sbs-pool-container">
-          <h3 class="<?php echo !$license ? 'grayed-out-text' : null ?>">Available Categories</h3>
-          <ul id="sbs-pool" class="sortable onf-sortable">
-            <?php foreach( $available_categories as $category ) { ?>
-              <li data-catid="<?php echo $category->term_id ?>" class="sortable-item">
-                <?php echo $category->name ?>
-                <div class="alignright">
-                  <span class="sbs-sortable-item-move-up">&#9650;</span>
-                  <span class="sbs-sortable-item-move-down">&#9660;</span>
-                  <span class="sbs-sortable-item-add">&#10133;</span>
-                  <span class="sbs-sortable-item-remove">&#10006;</span>
-                </div>
-                <div class="clearfix"></div>
-                <ul></ul>
-              </li>
-            <?php } ?>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-	<input type="hidden" id="step_order" name="sbs_onf[order]" value="<?php echo esc_attr( get_option('sbs_onf')['order'] ) ?>" />
-
-	<?php
-
-	echo ob_get_clean();
-
-}
-
 
 function sbs_display_color_scheme_callback() {
 

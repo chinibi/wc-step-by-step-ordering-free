@@ -377,62 +377,9 @@ function sbs_get_full_step_order( $slice = false ) {
 	//if ( !empty( $steps_package->catid ) ) {
 		array_unshift( $steps, $steps_package );
 	//}
-
-  if ( sbs_is_onf_section_active() ) {
-
-    $steps_onf = new stdClass();
-    $steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
-		$steps_onf->catid = (string) get_option('sbs_onf')['category'];
-		$steps_onf->type = 'options';
-    array_push( $steps, $steps_onf );
-
-  }
-
   array_push( $steps, $steps_checkout );
 
   return $steps;
-
-}
-
-/**
- *	The Options and Fees page should be enabled only if both the 'enabled' input
- *	is selected and a category is selected in the settings.
- *
- */
-
-function sbs_is_onf_section_active() {
-
-	$license = sbs_check_license_cache();
-	$category_selected = isset( get_option('sbs_onf')['category'] );
-	$activated = !isset( get_option('sbs_onf')['enabled'] ) || get_option('sbs_onf')['enabled'] === '1';
-	$subcategories = isset( get_option('sbs_onf')['order']) ? get_option('sbs_onf')['order'] : '[[]]';
-	$subcategories = json_decode( $subcategories )[0];
-
-	return !empty($subcategories) && $activated && $category_selected && $license;
-
-}
-
-function sbs_get_onf_order() {
-
-	$onf_order = get_option('sbs_onf')['order'];
-
-	if ( empty($onf_order) )
-		return null;
-
-	$onf_order = json_decode( $onf_order );
-
-	// Clean up this array because the nesting library did some weird stuff when serializing
-	$onf_order = $onf_order[0];
-	foreach( $onf_order as $onf ) {
-		$onf->children = $onf->children[0];
-	}
-
-  // Filter out any deleted categories
-  $onf_order = array_filter( $onf_order, function( $onf ) {
-    return term_exists( $onf->catid, 'product_cat' );
-  });
-
-	return $onf_order;
 
 }
 

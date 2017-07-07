@@ -41,7 +41,6 @@ final class StepByStepSystem {
     if ( !is_admin() ) {
       // Include SBS Ordering Shortcode
       include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-select-package.php' );
-      include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-options-and-fees.php' );
       include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
 
       // Include WooCommerce template and action overrides
@@ -54,11 +53,6 @@ final class StepByStepSystem {
       include_once( SBS_ABSPATH . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
     }
 
-    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/sbs-product-custom-fields.php' );
-    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/product-cat-either-or.php' );
-    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/store-credit.php' );
-    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/required-products.php' );
-    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/auto-add-product.php' );
     include_once( SBS_ABSPATH . 'includes/woocommerce-actions/additional-actions.php' );
 
 		// Include SBS Cart Totals Widget

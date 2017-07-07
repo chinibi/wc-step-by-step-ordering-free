@@ -55,24 +55,6 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     // calculated only on checkout
     $woocommerce->cart->calculate_fees();
 
-		if ( sbs_is_onf_section_active() ) {
-
-			foreach( $all_steps as $key => $step ) {
-				if ( empty( $step->catid ) ) continue;
-				if ( get_option('sbs_onf')['category'] == $step->catid ) {
-					$step_number = "${key}. ";
-					break;
-				}
-			}
-
-			$totals[] = array(
-				'cat_name' => $step_number . get_the_category_by_ID( get_option('sbs_onf')['category'] ),
-				'cat_total' => wc_price( sbs_get_cart_total_of_category( (int) get_option('sbs_onf')['category'] ) ),
-				'css_class' => 'sbs-widget-sidebar-category'
-			);
-
-		}
-
 		$totals[] = array(
 			'cat_name' => 'SUBTOTAL',
 			'cat_total' => wc_price( $woocommerce->cart->subtotal - $woocommerce->cart->get_taxes_total() ),
@@ -141,36 +123,6 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
 		// Generate Previous/Next Step Buttons
 		$current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : 1;
-
-	  // $all_categories = sbs_get_all_wc_categories();
-
-    // if ( !empty( $steps ) ) {
-    //   print_r( $steps );
-    //   foreach( $steps as $step ) {
-    //     $step->name = get_the_category_by_ID( $step->catid );
-    //   }
-    //
-    //   $steps_package = new stdClass();
-    //   $steps_package->name = 'Packages';
-    //   $steps_checkout = new stdClass();
-    //   $steps_checkout->name = 'Checkout';
-    //   array_unshift( $steps, $steps_package );
-    //
-    //   if ( sbs_is_onf_section_active() ) {
-    //
-    //     $steps_onf = new stdClass();
-    //     $steps_onf->name = get_the_category_by_ID( get_option('sbs_onf')['category'] );
-    //     array_push( $steps, $steps_onf );
-    //
-    //   }
-    //
-    //   array_push( $steps, $steps_checkout );
-    //
-    //   // Default to step 0 if an invalid step was requested
-    //   if ( !array_key_exists( $current_step, $steps ) ) {
-    //     $current_step = 0;
-    //   }
-    // }
 
     ?>
     <table id="sbs-widget-sidebar-cart-totals">

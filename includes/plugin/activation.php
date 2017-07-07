@@ -5,11 +5,6 @@
  */
 update_option( 'sbs_version', $this->version );
 
-// Schedule a daily WP cron job of all actions hooked to sbs_daily_event
-if ( ! wp_next_scheduled( 'sbs_daily_event' ) ) {
-  wp_schedule_event( time(), 'daily', 'sbs_daily_event' );
-}
-
 // Create the Main Step-By-Step Page
 if ( !post_exists( 'Step-By-Step Ordering' ) ) {
   $page_data = array(
@@ -48,17 +43,6 @@ if ( get_option('sbs_package') === false && !term_exists( 'Packages', 'product_c
     array(
       'description' => 'Begin your ordering process by choosing a package. You may choose one per order.',
       'slug' => 'packages'
-    )
-  );
-}
-
-if ( get_option('sbs_onf') === false && !term_exists( 'Options and Fees', 'product_cat' ) ) {
-  $onf_cat_id = wp_insert_term(
-    'Options and Fees',
-    'product_cat',
-    array(
-      'description' => 'You can choose miscellaneous options and extras here.',
-      'slug' => 'options-and-fees'
     )
   );
 }
@@ -119,8 +103,5 @@ if ( get_option('sbs_onf') === false ) {
     'order' => ''
   );
 
-  if ( isset( $onf_cat_id ) ) {
-    $sbs_onf_defaults['category'] = $onf_cat_id->term_id;
-  }
   add_option( 'sbs_onf', $sbs_onf_defaults );
 }

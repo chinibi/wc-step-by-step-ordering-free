@@ -400,14 +400,6 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps, $colum
 
   }
 
-	if ( sbs_is_onf_section_active() && $current_step === count($steps) - 2 ) {
-
-    echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Options' . '</h1>';
-		echo do_shortcode( '[sbs_options_and_fees]' );
-		return;
-
-	}
-
   if ($current_step === count($steps) - 1) {
 
     // echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Checkout' . '</h1>';
