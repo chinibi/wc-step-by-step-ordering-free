@@ -17,6 +17,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
     // Generate the Steps array
     $steps = sbs_get_step_order( true );
+    $all_steps = sbs_get_full_step_order( true );
 
     $step_by_step_page = (int) get_option('sbs_general')['page-name'];
 
@@ -31,10 +32,9 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     global $woocommerce;
 
 		// TODO: Refactor for use with sbs_get_full_step_order() instead.
-    $categories = sbs_get_step_order( true );
 
-    if ( !empty( $categories ) ) {
-      $totals = array_map( array( $this, 'map_categories_to_widget_array_callback' ), $categories );
+    if ( !empty( $steps ) ) {
+      $totals = array_map( array( $this, 'map_categories_to_widget_array_callback' ), $steps );
     }
 
     // Prepend Package to $totals
@@ -57,9 +57,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
 		if ( sbs_is_onf_section_active() ) {
 
-			$steps = sbs_get_full_step_order();
-
-			foreach( $steps as $key => $step ) {
+			foreach( $all_steps as $key => $step ) {
 				if ( empty( $step->catid ) ) continue;
 				if ( get_option('sbs_onf')['category'] == $step->catid ) {
 					$step_number = "${key}. ";
@@ -216,8 +214,8 @@ class SBS_WC_Cart_Totals extends WP_Widget {
     </table>
 
 		<div id="sbs-widget-sidebar-back-forward-buttons-container">
-	    <?php echo sbs_previous_step_button( $current_step, count($steps) ) ?>
-	    <?php echo sbs_next_step_button( $current_step, count($steps) ) ?>
+	    <?php echo sbs_previous_step_button( $current_step, count($all_steps) ) ?>
+	    <?php echo sbs_next_step_button( $current_step, count($all_steps) ) ?>
 	  </div>
 
   <?php
