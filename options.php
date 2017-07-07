@@ -1882,11 +1882,6 @@ function sbs_display_navbar_title_shape_callback() {
 	echo ob_get_clean();
 }
 
-
-function sbs_premium_key_callback() {
-
-}
-
 function sbs_render_admin_help_page() {
 	ob_start();
 	?>
