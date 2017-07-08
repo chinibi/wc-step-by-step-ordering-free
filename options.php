@@ -41,7 +41,7 @@ function sbs_admin_dashboard_notice() {
 
 	if ( $pagenow === 'index.php' ) {
 		echo '<div class="notice notice-info is-dismissible">';
-		echo '<p class="sbs-buy-notice">Thank you for trying out the <strong>Step-By-Step Plugin</strong>.  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">purchasing a license</a></strong>, which will unlock additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more!  You will also have access to our <strong>support team</strong>!</p>';
+		echo '<p class="sbs-buy-notice">Thank you for trying out the <strong>Step-By-Step Ordering System For WooCommerce</strong>.  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Going Pro!</a></strong> SBS Premium offers additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more!  You will also have access to our support team.  You can even try SBS Premium for FREE! <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Visit our website</a> for more info.</p>';
 		echo '</div>';
 	}
 
@@ -72,7 +72,7 @@ function sbs_admin_settings_notices() {
 	}
 
 	echo '<div class="notice notice-info is-dismissible">';
-	echo '<p class="sbs-buy-notice">Thank you for using <strong>Step-By-Step Ordering for WooCommerce</strong>.  Although this is a fully functional plugin that will enhance your customer\'s shopping experience, our premium version of this plugin offers so much more!  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">purchasing a license</a></strong>, which will unlock additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more!  You will also have access to our <strong>support team</strong>!</p>';
+	echo '<p class="sbs-buy-notice">Thank you for using the <strong>Step-By-Step Ordering System for WooCommerce</strong>.  Although this is a fully functional plugin that will enhance your customer\'s shopping experience, our premium version of this plugin offers so much more!  Please support us by <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Going Pro!</a></strong>. SBS Premium offers additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more! You will also have access to our <strong>support team</strong>! <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Click here</a> for more info!</p>';
 	echo '</div>';
 
 }
@@ -80,7 +80,7 @@ add_action( 'admin_notices', 'sbs_admin_settings_notices' );
 
 
 function sbs_plugin_options_page() {
-  $banner_image_src = plugin_dir_url( __FILE__ ) . 'assets/admin/side-banner.png';
+  $banner_image_src = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/side-banner.png';
   $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general_options';
   ?>
 
@@ -152,7 +152,7 @@ function sbs_render_active_tab($active_tab) {
       echo sbs_render_display_options();
       break;
 		case 'sbs_premium':
-			echo sbs_render_premium_key_page();
+			echo sbs_render_premium_page();
 			break;
 		case 'help':
 			echo sbs_render_admin_help_page();
@@ -1455,7 +1455,7 @@ function sbs_package_select_style_callback() {
 function sbs_display_color_scheme_callback() {
 
 	$option = isset( get_option('sbs_display')['color-scheme'] ) ? get_option('sbs_display')['color-scheme'] : 1;
-	$image_dir = plugin_dir_url( __FILE__ ) . 'assets/admin/color-schemes/';
+	$image_dir = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/color-schemes/';
 
 	$colors = array(
 		array(
@@ -1714,7 +1714,7 @@ function sbs_display_sidebar_calculator_callback() {
 
 function sbs_display_navbar_number_shape_callback() {
 	$number_style = isset( get_option('sbs_display')['navbar-style'] ) ? get_option('sbs_display')['navbar-style'] : 1;
-	$image_dir = plugin_dir_url( __FILE__ ) . 'assets/admin/nav-num-shapes/';
+	$image_dir = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/nav-num-shapes/';
 
 	$styles = array(
 		array(
@@ -1805,7 +1805,7 @@ function sbs_display_navbar_number_shape_callback() {
 
 function sbs_display_navbar_title_shape_callback() {
 	$title_style = isset( get_option('sbs_display')['nav-title-style'] ) ? get_option('sbs_display')['nav-title-style'] : 1;
-	$image_dir = plugin_dir_url( __FILE__ ) . 'assets/admin/nav-step-shapes/';
+	$image_dir = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/nav-step-shapes/';
 
 	$styles = array(
 		array(
@@ -1880,6 +1880,23 @@ function sbs_display_navbar_title_shape_callback() {
 	<?php
 
 	echo ob_get_clean();
+}
+
+function sbs_render_premium_page() {
+  $trial_img_src = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/pro-trial.jpg';
+  ob_start();
+  ?>
+  <div class="wrap">
+    <h2 style="text-align: center; margin-bottom: 2em;">Step-By-Step Premium Upgrade</h2>
+    <a href="http://stepbystepsys.com"><img src="<?php echo esc_url( $trial_img_src ) ?>" class="img-responsive center-block" style="margin-bottom: 2em;"></a>
+    <p>If you like our plugin and would like to see more content from us please consider purchasing a license from us. Premium users get additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more! You will also have access to our support team!</p>
+    <p>After purchasing the premium version, you will download it from our website. You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
+    <p>If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our site.</p>
+    <p>The premium version of this plugin can be purchased directly at <a href="http://stepbystepsys.com">our website</a>.</p>
+    <p><span style="font-size: 1.3em"><strong>We offer a 14-day FREE trial</strong></span> of the premium version. Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s). This is a great selling tool. For more info, visit <a href="http://stepbystepsys.com">our site</a> for a full list of features in the premium version and try the premium version for free!</p>
+  </div>
+  <?php
+  echo ob_get_clean();
 }
 
 function sbs_render_admin_help_page() {
@@ -1986,14 +2003,16 @@ function sbs_render_admin_help_page() {
 		a child theme from our website, install it, then activate it.  Go to the package
 		selection page in the Admin settings and choose the Full Width template on the
 		right-hand sidebar.</p>
-		[[LINK TO DOWNLOAD PAGE]]
+
+    You can download the SBS Twenty Sixteen Theme <a href="http://stepbystepsys.com/download">here</a>.
 
 		<h4>--Twenty Seventeen--</h4>
 
 		<p>Twenty Seventeen does not come with a sidebar.  Download a child theme from our
 		website, install it, then activate it.  Go to the Ordering page in WP Admin and
 		choose the Page with Sidebar template on the right-hand sidebar.</p>
-		[[LINK TO DOWNLOAD PAGE]]
+
+    You can download the SBS Twenty Seventeen Theme <a href="http://stepbystepsys.com/download">here</a>.
 
 		<h4>--Divi--</h4>
 

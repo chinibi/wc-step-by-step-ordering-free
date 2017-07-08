@@ -37,10 +37,6 @@
       }
     });
 
-    if ( !sbsLicenseValid ) {
-      $('.onf-sortable').sortable('disable');
-    }
-
     /**
      * Buttons for moving sortables, in case drag and drop does not work.
      */
@@ -83,7 +79,7 @@
       serializeData();
     });
 
-    if ( !sbsLicenseValid && $('#sbs-order-container').length ) {
+    if ( $('#sbs-order-container').length ) {
       $('.sbs-sortable-item-add').off();
       $('.sbs-sortable-item-remove').off();
       $('.sbs-sortable-item-move-up').off();
