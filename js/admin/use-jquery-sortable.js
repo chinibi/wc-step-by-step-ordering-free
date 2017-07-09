@@ -61,11 +61,11 @@
     $('.sbs-sortable-item-add').on('click touchend', function() {
       $item = $(this).parent().parent();
 
-      if ( !sbsLicenseValid && $('.step-sortable').length && $('#sbs-order').children().length >= 2  ) {
+      if ( $('.step-sortable').length && $('#sbs-order').children().length >= 2  ) {
         return false;
       }
 
-      if ( !sbsLicenseValid && $('.package-sortable').length && $('#sbs-order').children().length >= 1  ) {
+      if ( $('.package-sortable').length && $('#sbs-order').children().length >= 1  ) {
         return false;
       }
 
@@ -78,13 +78,6 @@
       $item.detach().appendTo('#sbs-pool');
       serializeData();
     });
-
-    if ( $('#sbs-order-container').length ) {
-      $('.sbs-sortable-item-add').off();
-      $('.sbs-sortable-item-remove').off();
-      $('.sbs-sortable-item-move-up').off();
-      $('.sbs-sortable-item-move-down').off();
-    }
 
   });
 })(jQuery);
