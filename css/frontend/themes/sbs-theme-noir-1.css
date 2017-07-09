@@ -44,8 +44,10 @@
     color: white;
 }
 
-.sbs-store-back-forward-buttons a,
-.sbs-store-back-forward-buttons a:hover,
+#sbs-widget-sidebar-back-forward-buttons-container .sbs-store-back-forward-buttons a,
+#sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons a,
+#sbs-widget-sidebar-back-forward-buttons-container .sbs-store-back-forward-buttons a:hover,
+#sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons a:hover,
 #sbs-widget-sidebar-cart-totals a.sbs-change-package-btn
 {
     color: white;
