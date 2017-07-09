@@ -962,7 +962,7 @@ function sbs_sbs_table_callback() {
   ob_start();
   ?>
 	<p><strong style="color: red; font-size: 1.2em;">
-		You may have up to two parent categories, or steps, active at a time in the free version of this plugin. Only the first two subcategories in each step will be displayed.<br>You can add as many steps and subcategories as you would like after purchasing a license for the premium version <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a>
+		You may have up two steps active at a time in the free version of this plugin. Only the first two subcategories in each step will be displayed.<br>With the Premium version of SBS, you can add as many steps as you would like.  You can try Step-By-Step Premium for FREE! by visiting our website <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a>
 	</strong></p>
   <div class="container-fluid">
     <div class="row">
@@ -1282,7 +1282,7 @@ function sbs_package_tier_callback() {
 		<p>
 			Drag (or touch the control buttons on the right side of each item) packages from the Available Packages box to the Active Packages here to build your Package Selection page.  You can rearrange the packages to change
 			the order in which they are displayed.<br>
-			<strong style="color: red; font-size: 1.2em;">You may have up to one package in the free version of this plugin.<br>You can add as many packages as you would like after purchasing a license for the premium version of this plugin <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong>
+			<strong style="color: red; font-size: 1.2em;">You may have up to one package in the free version of this plugin.<br>With the Premium version of SBS, you can add as many packages as you would like.  You can try Step-By-Step Premium for FREE! by visiting our website <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong>
 		</p>
     <div class="container-fluid">
       <div class="row">
@@ -1892,9 +1892,9 @@ function sbs_render_premium_page() {
     <div>
       <p style="font-size: 1.2em;">If you like our plugin and would like to see more content from us please consider purchasing a license from us. Premium users get additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more! You will also have access to our support team!</p>
       <p style="font-size: 1.2em;">After purchasing the premium version, you will download it from our website. You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
-      <p style="font-size: 1.2em;">If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our site.</p>
-      <p style="font-size: 1.2em;">The premium version of this plugin can be purchased directly at <a href="http://stepbystepsys.com">our website</a>.</p>
-      <p style="font-size: 1.2em;"><span style="font-size: 1.4em"><strong>We offer a 14-day FREE trial</strong></span> of the premium version. Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s). This is a great selling tool. For more info, visit <a href="http://stepbystepsys.com">our site</a> for a full list of features in the premium version and try the premium version for free!</p>
+      <p style="font-size: 1.2em;">If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our website.</p>
+      <p style="font-size: 1.2em;">The premium version of this plugin can be purchased directly at <a href="http://stepbystepsys.com"><strong>our website</strong></a>.</p>
+      <p style="font-size: 1.2em;"><span style="font-size: 1.4em"><strong>We offer a 14-day FREE trial</strong></span> of the premium version. Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s). This is a great selling tool. For more info, visit <a href="http://stepbystepsys.com"><strong>our website</strong></a> for a full list of features in the premium version and try the premium version for free!</p>
     </div>
   </div>
   <?php
@@ -2022,7 +2022,6 @@ function sbs_render_admin_help_page() {
 		<p>The Choose Package page is best displayed on the Full width template, which
 		you can select when you edit that page on the right-hand sidebar.  The default
 		template is recommended for the Ordering page.</p>
-
 
 		<h3 id="premium">Step-By-Step Premium Upgrade</h3>
 
