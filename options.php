@@ -1886,14 +1886,16 @@ function sbs_render_premium_page() {
   $trial_img_src = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/pro-trial.jpg';
   ob_start();
   ?>
-  <div class="wrap">
-    <h2 style="text-align: center; margin-bottom: 2em;">Step-By-Step Premium Upgrade</h2>
+  <div class="wrap" style="max-width: 1080px;">
+    <h2 style="text-align: center; margin-bottom: 2em;"><strong>Step-By-Step Premium Upgrade</strong></h2>
     <a href="http://stepbystepsys.com"><img src="<?php echo esc_url( $trial_img_src ) ?>" class="img-responsive center-block" style="margin-bottom: 2em;"></a>
-    <p>If you like our plugin and would like to see more content from us please consider purchasing a license from us. Premium users get additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more! You will also have access to our support team!</p>
-    <p>After purchasing the premium version, you will download it from our website. You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
-    <p>If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our site.</p>
-    <p>The premium version of this plugin can be purchased directly at <a href="http://stepbystepsys.com">our website</a>.</p>
-    <p><span style="font-size: 1.3em"><strong>We offer a 14-day FREE trial</strong></span> of the premium version. Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s). This is a great selling tool. For more info, visit <a href="http://stepbystepsys.com">our site</a> for a full list of features in the premium version and try the premium version for free!</p>
+    <div>
+      <p style="font-size: 1.2em;">If you like our plugin and would like to see more content from us please consider purchasing a license from us. Premium users get additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more! You will also have access to our support team!</p>
+      <p style="font-size: 1.2em;">After purchasing the premium version, you will download it from our website. You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
+      <p style="font-size: 1.2em;">If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our site.</p>
+      <p style="font-size: 1.2em;">The premium version of this plugin can be purchased directly at <a href="http://stepbystepsys.com">our website</a>.</p>
+      <p style="font-size: 1.2em;"><span style="font-size: 1.4em"><strong>We offer a 14-day FREE trial</strong></span> of the premium version. Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s). This is a great selling tool. For more info, visit <a href="http://stepbystepsys.com">our site</a> for a full list of features in the premium version and try the premium version for free!</p>
+    </div>
   </div>
   <?php
   echo ob_get_clean();
@@ -1943,13 +1945,13 @@ function sbs_render_admin_help_page() {
 				(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/package-category.png">View Image</a>)
 			</li>
 			<li>
-				Create some products. These will be your packages. Make sure the package
-				category is selected.
+				Create some products. These will be your Packages. Make sure the Package
+				Category is selected.
 				(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/new-product.png">View Image</a>)
 			</li>
 			<li>
-				If you have purchased a premium license of this plugin you can assign store
-				credit that will be applied when it's added to the cart.  You can set it in the product general settings.
+				If you have purchased a Premium License of this plugin you can assign Store
+				Credit or Merchanise Credit that will be applied when it's added to the cart.  You can set it in the Product General Settings.
 				(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/package-product-custom-fields.png">View Image</a>)
 			</li>
 			<li>
@@ -1977,16 +1979,11 @@ function sbs_render_admin_help_page() {
 		(<a target="_blank" rel="noreferrer noopener" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-builder.png">View Image</a>)
 
 		<ol>
-			<li>The Step-By-Step is located under the Step-By-Step tab in the Step-By-Step
-			Ordering settings</li>
-			<li>Create product categories. Each page in the ordering process will display
-			one parent category, which will include their child categories.</li>
-			<li>To create child categories, make a new category and select the parent
-			category under the Parent field.</li>
-      <li><strong>Assign a parent and child category to each product.
-      This is needed for Step-By-Step to function correctly.</strong></li>
-			<li>Go to the Step-By-Step settings page and drag categories into Your Ordering
-			Process.  You can rearrange the categories inside to change the order.</li>
+			<li>The Step-By-Step is located under the Step-By-Step tab in the Step-By-Step Ordering settings</li>
+			<li>Create product categories. Each page in the ordering process will display one parent category, which will include their child categories.</li>
+			<li>To create child categories, make a new category and select the parent category under the Parent field.</li>
+      <li>Assign a parent and child category to each product. This is needed for Step-By-Step to function correctly.</li>
+			<li>Go to the Step-By-Step settings page and drag categories into Your Ordering Process.  You can rearrange the categories inside to change the order.</li>
 		</ol>
 
 		<h3 id="themes">WordPress Themes</h3>
@@ -1996,7 +1993,7 @@ function sbs_render_admin_help_page() {
 		box, it is recommended to take these steps if you are using one of the
 		following themes:</p>
 
-		<h4>--Twenty Sixteen--</h4>
+		<h4>Twenty Sixteen</h4>
 
 		<p>It is recommended that a full-width template be used on the Choose Package
 		page.  Since Twenty Sixteen does not come with a full-width template, download
@@ -2006,7 +2003,7 @@ function sbs_render_admin_help_page() {
 
     You can download the SBS Twenty Sixteen Theme <a href="http://stepbystepsys.com/download">here</a>.
 
-		<h4>--Twenty Seventeen--</h4>
+		<h4>Twenty Seventeen</h4>
 
 		<p>Twenty Seventeen does not come with a sidebar.  Download a child theme from our
 		website, install it, then activate it.  Go to the Ordering page in WP Admin and
@@ -2014,30 +2011,26 @@ function sbs_render_admin_help_page() {
 
     You can download the SBS Twenty Seventeen Theme <a href="http://stepbystepsys.com/download">here</a>.
 
-		<h4>--Divi--</h4>
+		<h4>Divi</h4>
 
 		<p>The Choose Package and Checkout page works best on a full-width template.
 		The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template
 		for main content and sidebar, respectively.</p>
 
-		<h4>--Storefront--</h4>
+		<h4>Storefront</h4>
 
 		<p>The Choose Package page is best displayed on the Full width template, which
 		you can select when you edit that page on the right-hand sidebar.  The default
 		template is recommended for the Ordering page.</p>
 
 
-		<h3 id="premium">== Step-By-Step Premium Upgrade ==</h3>
+		<h3 id="premium">Step-By-Step Premium Upgrade</h3>
 
-		<p>If you like our plugin and would like to see more content from us please
-		consider purchasing a license from us.  Premium users get additional features
-		like unlimited steps, navigation options, required products, either-or products,
-		package store credit, preset themes, and much more! You will also have access to
-		our support team!</p>
+		<p>If you like our plugin and would like to upgrade to our expanded version, consider purchasing a license from us. Premium users receive great additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more! You will also have access to our support team!</p>
 
 		<p>After purchasing the premium version, you will download it from our <a href="http://stepbystepsys.com">website</a>.  You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
 
-    <p>If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our site.</p>
+    <p>If you have this version of the SBS plugin installed (the SBS Light Version), you will need to uninstall it and install the Premium Version you download from our website.</p>
 
     <p>The premium version of this plugin can be purchased directly at our <a href="http://stepbystepsys.com">website</a>.  We offer a 14 day trial of the premium version.  Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s).  This is a great selling tool.  For more info, visit our site for a full list of features in the premium version and try the premium version for free!</p>
 

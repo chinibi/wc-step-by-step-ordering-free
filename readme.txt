@@ -19,8 +19,9 @@ The Step-By-Step Ordering System For WooCommerce is a fully functional plugin th
 
 We've made a few example sites to demonstrate the plugin.  Try them out here:
 
-* [ChicagoMan](http://chicagoman.stepbystepsys.com)
-* [Pizza Restaurant](http://plugin.stepbystepsys.com)
+* [Flying Ninja](http://sbslight.stepbystepsys.com) - Example of SBS LIGHT
+* [ChicagoMan Clothing Store](http://chicagoman.stepbystepsys.com) - Example of SBS PRO
+* [Pizza Restaurant](http://plugin.stepbystepsys.com) - Example of SBS PRO
 
 = How It Works =
 
@@ -36,9 +37,9 @@ Create tailored packages and Step-By-Step shopping categories. Working with the 
 
 = Getting Started =
 
-Start by downloading the Step-By-Step (SBS) Ordering Light Version.  It offers many useful tools to enhance your current WooCommerce site experience.  If you want to extend the shopper even more perks, we offer a Premium License which expands the SBS system features.
+Start by downloading the Step-By-Step (SBS) Ordering Light Version.  It offers many useful tools to enhance your current WooCommerce site experience.  If you want to extend the shopper even more perks, we offer a Premium version of this plugin. You can try the pro version for FREE by downloading it from [our website](http://stepbystepsys.com).
 
-= Features of Step-By-Step System for Woo Commerce =
+= Features of Step-By-Step System for WooCommerce =
 
 * Ability to Choose "Package" Page, auto-configured for the SBS system
 * Ability to Choose "Ordering" Page, auto-configured for the SBS system
@@ -88,7 +89,7 @@ The light version of the Step-By-Step Ordering System is a fully-functional plug
 
 Go the the next level with the Step-By-Step Ordering Premium Version. Our Premium Version offers you countless enhanced tools tailored to drive your customer’s purchasing experience to the next level. People who shop on your site will be specifically guided to purchase your packages you offer for sale, along with add-on products you wish to cross-promote.  Your buyers will be given the opportunity to buy products in an organized, grouped, cross-promoted fashion. The SBS system offers you the ability to help drive sales while offering the customer a great shopping experience in the process.
 
-For more information on SBS Premium click here to visit our website.
+For more information on SBS Premium [click here](http://stepbystepsys.com) to visit our website.
 
 = Sign up for Premium and Receive =
 
@@ -160,13 +161,13 @@ This plugin is configured to work with themes already compatible with WooCommerc
 
 It is recommended that a full-width template be used on the Choose Package page.  Since Twenty Sixteen does not come with a full-width template, download a child theme from our website, install it, then activate it.  Go to the package selection page in the Admin settings and choose the Full Width template on the right-hand sidebar.
 
-Download the child theme [here](http://stepbystepsys.com).
+Download the child theme [here](http://stepbystepsys.com/download).
 
 ** WordPress Twenty Seventeen **
 
 Twenty Seventeen does not come with a sidebar.  Download a child theme from our website, install it, then activate it.  Go to the Ordering page in WP-Admin and choose the Page with Sidebar template on the right-hand sidebar.
 
-Download the child theme [here](http://stepbystepsys.com).
+Download the child theme [here](http://stepbystepsys.com/download).
 
 ** Divi by Elegant Themes **
 
@@ -174,7 +175,7 @@ The Choose Package and Checkout page works best on a full-width template. The St
 
 It is strongly recommended that a child theme be used, as core template CSS needs to be modified to optimize the UI.  You can download our custom Divi child theme here.
 
-Download the child theme [here](http://stepbystepsys.com).
+Download the child theme [here](http://stepbystepsys.com/download).
 
 ** Storefront by WooCommerce **
 
@@ -182,9 +183,11 @@ The Choose Package page is best displayed on the Full width template, which you 
 
 = Step-By-Step Premium Upgrade =
 
-If you like our plugin and would like to see more content from us please consider purchasing a Step-By-Step Ordering System license.  Premium users get additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more. You will also have access to our support team!
+If you like our plugin and would like to see more content from us please consider Going Premium by getting the Step-By-Step Ordering System For WooCommerce Pro version. You can purchase a license and download the pro version on our [website](http://stepbystepsys.com). Premium users get additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more. You will also have access to our support team!
 
-After purchasing a license, a key will be sent to your provided email.  Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.
+After purchasing a license, a key will be sent to your provided email.  Enter this key into the input box in the Premium tab in the pro version of the Step-By-Step Ordering settings and then click Activate.
+
+You can try our premium version SBS Pro for free. [See our website](http://stepbystepsys.com) for more information.
 
 = Uninstalling =
 
@@ -630,7 +633,7 @@ These also can be customized with your own CSS if desired.
 
 = What is the Premium Settings tab? =
 
-This allows you to enter a license key, which can be obtained at http://stepbystepsys.com. Once you get your license, you can enter it under the License Key setting.  It will verify your license and unlock all the premium features of the SBS if activated.
+The premium tab contains information about using the Step-By-Step Ordering System For WooCommerce Pro version.  You can try the SBS Pro for Free to experience all of the useful features it has. [Visit our website](http://stepbystepsys.com/) for more information.
 
 = --Help Settings Tab-- =
 
