@@ -3,7 +3,7 @@ Contributors: dreambuilders, trevorpham
 Tags: woocommerce, catalog, ordering, system, step-by-step, customizable, e-commerce, store, step by step
 Requires at least: 4.4
 Tested up to: 4.8
-Stable tag: 1.0.6
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,8 +19,10 @@ The Step-By-Step Ordering System For WooCommerce is a fully functional plugin th
 
 We've made a few example sites to demonstrate the plugin.  Try them out here:
 * [Flying Ninja](http://sbslight.stepbystepsys.com) - Example of SBS LIGHT
-* [Chicagoman](http://chicagoman.stepbystepsys.com) - Example of SBS PRO
+* [Chicagoman](http://chicagoman.stepbystepsys.com) - Example of SBS LIGHT
+* [Chicagoman Pro](http://chicagomanpro.stepbystepsys.com) - Example of SBS PRO
 * [Pizza Restaurant](http://plugin.stepbystepsys.com) - Example of SBS PRO
+* [Aquarium Service](http://aquariumservice.stepbystepsys.com) - Example of SBS PRO
 
 = How It Works =
 
@@ -713,11 +715,18 @@ Not at this time, however this might become an option at a later date. We curren
 
 The license only covers one site at a time. However, you are welcome to install the plugin on your test server first, to see how it works and operates. Once you complete your testing, you can remove it from the Test Server and set it up on the Live Server you plan to use it on.
 
-
 == Changelog ==
-= v1.0.6 =
+= v1.2.0 =
 * Official Public Release
+* Made a free version of plugin, full version moved to stepbystepsys.com website
+
+= v1.0.6 =
+* Public Pre-Release
 
 == Upgrade Notice ==
-= v1.0.6 =
+= v1.2.0 =
 * Official Public Release
+* Made a free version of plugin, full version moved to stepbystepsys.com website
+
+= v1.0.6 =
+* Public Pre-Release
