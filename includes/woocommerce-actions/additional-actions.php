@@ -19,18 +19,18 @@ if ( !defined( 'ABSPATH' ) ) {
 
 function sbs_select_package_and_clear_cart( $passed, $product_id, $quantity ) {
 
-  global $woocommerce;
+	global $woocommerce;
 
-  $package_cat_id = (int) get_option('sbs_package')['category'];
-  $product_parent_cat = sbs_get_product_parent_category( $product_id )->term_id;
+	$package_cat_id = (int) get_option('sbs_package')['category'];
+	$product_parent_cat = sbs_get_product_parent_category( $product_id )->term_id;
 
 	$empty_cart_option = isset( get_option('sbs_package')['clear-cart'] ) ? get_option('sbs_package')['clear-cart'] : '1';
 
-  if ( $product_parent_cat === $package_cat_id ) {
+	if ( $product_parent_cat === $package_cat_id ) {
 
 		if ( $empty_cart_option === '1' ) { // Empty Cart on package select
 
-	    $woocommerce->cart->empty_cart();
+			$woocommerce->cart->empty_cart();
 
 		}
 		elseif ( $empty_cart_option === '2' ) { // Do not empty cart, only swap packages
@@ -49,9 +49,9 @@ function sbs_select_package_and_clear_cart( $passed, $product_id, $quantity ) {
 			}
 
 		}
-  }
+	}
 
-  return $passed;
+	return $passed;
 
 }
 add_action( 'woocommerce_add_to_cart_validation', 'sbs_select_package_and_clear_cart', 1, 3 );
@@ -60,31 +60,31 @@ add_action( 'woocommerce_add_to_cart_validation', 'sbs_select_package_and_clear_
 // if different variations are selected.  This action changes this behavior
 // to allow only one variation of such a product to be purchased per order.
 function sbs_fix_variable_individually_purchased_product_bug( $passed, $product_id, $quantity ) {
-  global $woocommerce;
-  $product = wc_get_product( $product_id );
-  $name = $product->get_name();
-  $cart_item = sbs_get_cart_key( $product_id );
-  if ( $product->is_sold_individually() && $cart_item ) {
-    $woocommerce->cart->remove_cart_item( $cart_item['key'] );
-  }
-  return $passed;
+	global $woocommerce;
+	$product = wc_get_product( $product_id );
+	$name = $product->get_name();
+	$cart_item = sbs_get_cart_key( $product_id );
+	if ( $product->is_sold_individually() && $cart_item ) {
+		$woocommerce->cart->remove_cart_item( $cart_item['key'] );
+	}
+	return $passed;
 }
 add_action( 'woocommerce_add_to_cart_validation', 'sbs_fix_variable_individually_purchased_product_bug', 10, 3 );
 
 
 function sbs_render_checkout_sbs_navbar() {
 
-  $all_categories = sbs_get_all_wc_categories();
+	$all_categories = sbs_get_all_wc_categories();
 
-  $steps = sbs_get_full_step_order( true );
+	$steps = sbs_get_full_step_order( true );
 
-  $current_step = count( $steps ) - 1;
+	$current_step = count( $steps ) - 1;
 
-  ob_start();
-  ?>
-  <div id="sbs-navbar">
+	ob_start();
+	?>
+	<div id="sbs-navbar">
 		<?php sbs_render_sbs_navbar( $current_step, $steps ) ?>
-  </div>
+	</div>
 	<?php
 
 	echo ob_get_clean();

@@ -401,15 +401,6 @@ function is_sbs() {
 	return false;
 }
 
-
-function sbs_check_license_cache() {
-
-	$trans = get_option( 'sbs_premium_key_valid' );
-	return $trans === 'true';
-
-}
-
-
 function sbs_get_begin_url() {
 
 	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
