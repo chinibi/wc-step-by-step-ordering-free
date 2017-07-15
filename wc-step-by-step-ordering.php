@@ -104,7 +104,7 @@ final class StepByStepSystem {
 
 		// Scripts to be enqueued only on SBS pages
 		if ( is_sbs() ) {
-			wp_enqueue_Script( 'disable-cart-widget-links', plugins_url( '/js/frontend/disable-cart-widget-links.js', __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'disable-cart-widget-links', plugins_url( '/js/frontend/disable-cart-widget-links.js', __FILE__ ), array( 'jquery' ) );
 		}
 
 		if ( ! (is_cart() || is_checkout()) ) {

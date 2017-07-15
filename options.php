@@ -2014,7 +2014,7 @@ function sbs_render_admin_help_page() {
 		<h4>Divi</h4>
 
 		<p>The Choose Package and Checkout page works best on a full-width template.
-		The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template
+		The Step-By-Step Ordering page should be used on a 2/3 and 1/3 width template
 		for main content and sidebar, respectively.</p>
 
 		<h4>Storefront</h4>

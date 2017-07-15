@@ -179,6 +179,7 @@ h1.step-by-step-title {
   width: 49%;
   border: 2px solid black;
   border-radius: 2px;
+	font-weight: bold;
 }
 
 #sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a {

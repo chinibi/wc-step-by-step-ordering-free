@@ -169,7 +169,7 @@ Download the child theme [here](http://stepbystepsys.com/download).
 
 ** Divi by Elegant Themes **
 
-The Choose Package and Checkout page works best on a full-width template. The Step-By-Step Ordering page should be used on a 3/4 and 1/4 width template for main content and sidebar, respectively.
+The Choose Package and Checkout page works best on a full-width template. The Step-By-Step Ordering page should be used on a 2/3 and 1/3 width template for main content and sidebar, respectively.
 
 It is strongly recommended that a child theme be used, as core template CSS needs to be modified to optimize the UI.  You can download our custom Divi child theme here.
 
