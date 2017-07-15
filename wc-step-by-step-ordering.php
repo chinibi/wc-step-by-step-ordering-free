@@ -28,11 +28,11 @@ final class StepByStepSystem {
 		$this->initialize();
 	}
 
-  private function define_constants() {
-    define( 'SBS_PLUGIN_FILE', __FILE__ );
-    define( 'SBS_ABSPATH', dirname( __FILE__ ) . '/' );
-    define( 'SBS_VERSION', $this->version );
-  }
+	private function define_constants() {
+		define( 'SBS_PLUGIN_FILE', __FILE__ );
+		define( 'SBS_ABSPATH', dirname( __FILE__ ) . '/' );
+		define( 'SBS_VERSION', $this->version );
+	}
 
 	private function includes() {
 		// Include helper functions
