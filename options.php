@@ -10,14 +10,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'admin_menu', 'sbs_plugin_admin_add_page' );
 
 function sbs_plugin_admin_add_page() {
-  add_submenu_page(
-    'woocommerce', // The slug name for the parent menu (or the file name of a standard WordPress admin page).
-    'Step-By-Step Ordering', // The text to be displayed in the title tags of the page when the menu is selected.
-    'Step-By-Step Ordering', //  The text to be used for the menu.
-    'manage_options', // The capability required for this menu to be displayed to the user.
-    'stepbystepsys', // The slug name to refer to this menu by (should be unique for this menu).
-    'sbs_plugin_options_page' // The function to be called to output the content for this page.
-  );
+	add_submenu_page(
+		'woocommerce', // The slug name for the parent menu (or the file name of a standard WordPress admin page).
+		'Step-By-Step Ordering', // The text to be displayed in the title tags of the page when the menu is selected.
+		'Step-By-Step Ordering', // The text to be used for the menu.
+		'manage_options', // The capability required for this menu to be displayed to the user.
+		'stepbystepsys', // The slug name to refer to this menu by (should be unique for this menu).
+		'sbs_plugin_options_page' // The function to be called to output the content for this page.
+	);
 }
 
 function sbs_load_custom_wp_admin_style() {
@@ -28,7 +28,7 @@ function sbs_load_custom_wp_admin_style() {
 		// load custom jQuery UI scripts and styles
 		wp_enqueue_script( 'johnny-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/johnny-jquery-sortable.js', array( 'jquery' ) );
 		wp_enqueue_script( 'use-jquery-sortable', plugin_dir_url( __FILE__ ) . 'js/admin/use-jquery-sortable.js', array( 'johnny-jquery-sortable' ), filemtime( plugin_dir_path( __FILE__ ) . 'js/admin/use-jquery-sortable.js' ) );
-    wp_enqueue_style( 'bootstrap', plugin_dir_url( __FILE__ ) . 'css/admin/bootstrap.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/bootstrap.css' ) );
+		wp_enqueue_style( 'bootstrap', plugin_dir_url( __FILE__ ) . 'css/admin/bootstrap.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/bootstrap.css' ) );
 		wp_enqueue_style( 'sbs_admin_style', plugin_dir_url( __FILE__ ) . 'css/admin/style.css', array(), filemtime( plugin_dir_path( __FILE__ ) . 'css/admin/style.css' ) );
 	}
 
@@ -60,7 +60,7 @@ function sbs_admin_settings_notices() {
 			 ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-reports' ) ||
 			 ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-settings' ) ||
 			 ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-status' ) ||
-       ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-addons' )
+			 ( isset( $_GET['page'] ) && $_GET['page'] === 'wc-addons' )
 		 ) {
 		$is_woocommerce_or_front_page = true;
 	}
@@ -80,108 +80,108 @@ add_action( 'admin_notices', 'sbs_admin_settings_notices' );
 
 
 function sbs_plugin_options_page() {
-  $banner_image_src = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/side-banner.png';
-  $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general_options';
-  ?>
+	$banner_image_src = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/side-banner.png';
+	$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'general_options';
+	?>
 
-  <div class="wrap">
-    <h2>Step-By-Step Ordering Options</h2>
-    <?php settings_errors(); ?>
-    <h2 class="nav-tab-wrapper">
-      <a href="?page=stepbystepsys&tab=general_options" class="nav-tab <?php echo $active_tab === 'general_options' ? 'nav-tab-active' : null ?>">General</a>
+	<div class="wrap">
+		<h2>Step-By-Step Ordering Options</h2>
+		<?php settings_errors(); ?>
+		<h2 class="nav-tab-wrapper">
+			<a href="?page=stepbystepsys&tab=general_options" class="nav-tab <?php echo $active_tab === 'general_options' ? 'nav-tab-active' : null ?>">General</a>
 			<a href="?page=stepbystepsys&tab=package_options" class="nav-tab <?php echo $active_tab === 'package_options' ? 'nav-tab-active' : null ?>">Packages</a>
-      <a href="?page=stepbystepsys&tab=sbs_options" class="nav-tab <?php echo $active_tab === 'sbs_options' ? 'nav-tab-active' : null ?>">Step-By-Step</a>
-      <a href="?page=stepbystepsys&tab=display_options" class="nav-tab <?php echo $active_tab === 'display_options' ? 'nav-tab-active' : null ?>">Display</a>
+			<a href="?page=stepbystepsys&tab=sbs_options" class="nav-tab <?php echo $active_tab === 'sbs_options' ? 'nav-tab-active' : null ?>">Step-By-Step</a>
+			<a href="?page=stepbystepsys&tab=display_options" class="nav-tab <?php echo $active_tab === 'display_options' ? 'nav-tab-active' : null ?>">Display</a>
 			<a href="?page=stepbystepsys&tab=sbs_premium" class="nav-tab <?php echo $active_tab === 'sbs_premium' ? 'nav-tab-active' : null ?>">Premium</a>
 			<a href="?page=stepbystepsys&tab=help" class="nav-tab <?php echo $active_tab === 'help' ? 'nav-tab-active' : null ?>">Help</a>
-    </h2>
+		</h2>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-9">
-          <?php if ( $active_tab !== 'sbs_premium' ): ?>
-            <form action="<?php echo esc_url('options.php') ?>" method="post">
-              <?php sbs_render_active_tab($active_tab) ?>
-            </form>
-          <?php else: ?>
-            <?php sbs_render_active_tab($active_tab) ?>
-          <?php endif ?>
-        </div>
-        <div class="col-sm-3">
-          <div style="text-align: center;">
-            <a class="sidebar-banner-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">
-              <img class="sidebar-banner" src="<?php echo esc_url( $banner_image_src ) ?>" />
-            </a><br>
-            <section>
-              Want to remove this ad?<br>
-              <strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Get Premium</a></strong><br>
-            </section>
-            <section style="margin-top: 3em;">
-              <strong style="margin-bottom: 2em;">If you like working with the<br>Step-By-Step Ordering System For WooCommerce,<br>your donations are greatly appreciated!</strong>
-              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
-                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-              </form>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-9">
+					<?php if ( $active_tab !== 'sbs_premium' ): ?>
+						<form action="<?php echo esc_url('options.php') ?>" method="post">
+							<?php sbs_render_active_tab($active_tab) ?>
+						</form>
+					<?php else: ?>
+						<?php sbs_render_active_tab($active_tab) ?>
+					<?php endif ?>
+				</div>
+				<div class="col-sm-3">
+					<div style="text-align: center;">
+						<a class="sidebar-banner-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">
+							<img class="sidebar-banner" src="<?php echo esc_url( $banner_image_src ) ?>" />
+						</a><br>
+						<section>
+							Want to remove this ad?<br>
+							<strong><a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">Get Premium</a></strong><br>
+						</section>
+						<section style="margin-top: 3em;">
+							<strong style="margin-bottom: 2em;">If you like working with the<br>Step-By-Step Ordering System For WooCommerce,<br>your donations are greatly appreciated!</strong>
+							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+								<input type="hidden" name="cmd" value="_s-xclick">
+								<input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
+								<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+								<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+							</form>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
 
-  </div>
+	</div>
 
 	<?php add_filter( 'admin_footer_text', 'sbs_render_wp_admin_footer' ) ?>
 	<?php add_filter( 'update_footer', 'sbs_render_wp_admin_version', 100 ) ?>
-  <?php
+	<?php
 }
 
 function sbs_render_active_tab($active_tab) {
-  switch($active_tab) {
-    case 'general_options':
-      echo sbs_render_general_options();
-      break;
-    case 'sbs_options':
-      echo sbs_render_sbs_options();
-      break;
+	switch($active_tab) {
+		case 'general_options':
+			echo sbs_render_general_options();
+			break;
+		case 'sbs_options':
+			echo sbs_render_sbs_options();
+			break;
 		case 'package_options':
 			echo sbs_render_package_options();
 			break;
-    case 'display_options':
-      echo sbs_render_display_options();
-      break;
+		case 'display_options':
+			echo sbs_render_display_options();
+			break;
 		case 'sbs_premium':
 			echo sbs_render_premium_page();
 			break;
 		case 'help':
 			echo sbs_render_admin_help_page();
 			break;
-  }
+	}
 
 }
 
 
 function sbs_render_general_options() {
-  ob_start();
-  ?>
-    <?php settings_fields('sbs_general') ?>
-    <?php do_settings_sections('sbs_general') ?>
-    <?php submit_button() ?>
-  <?php
+	ob_start();
+	?>
+		<?php settings_fields('sbs_general') ?>
+		<?php do_settings_sections('sbs_general') ?>
+		<?php submit_button() ?>
+	<?php
 
-  return ob_get_clean();
+	return ob_get_clean();
 }
 
 function sbs_render_sbs_options() {
-  ob_start();
-  ?>
-    <?php settings_fields('sbs_order_settings') ?>
-    <?php do_settings_sections('sbs_order_settings') ?>
+	ob_start();
+	?>
+		<?php settings_fields('sbs_order_settings') ?>
+		<?php do_settings_sections('sbs_order_settings') ?>
 		<?php submit_button() ?>
-  <?php
+	<?php
 
-  return ob_get_clean();
+	return ob_get_clean();
 }
 
 function sbs_render_package_options() {
@@ -196,15 +196,15 @@ function sbs_render_package_options() {
 }
 
 function sbs_render_display_options() {
-  ob_start();
-  ?>
+	ob_start();
+	?>
 		<?php add_thickbox() ?>
-    <?php settings_fields('sbs_display') ?>
-    <?php do_settings_sections('sbs_display') ?>
+		<?php settings_fields('sbs_display') ?>
+		<?php do_settings_sections('sbs_display') ?>
 		<?php submit_button() ?>
-  <?php
+	<?php
 
-  return ob_get_clean();
+	return ob_get_clean();
 }
 
 function sbs_render_premium_key_page() {
@@ -259,30 +259,30 @@ function sbs_admin_help_tooltip( $direction = 'top', $html = '' ) {
 add_action('admin_init', 'sbs_plugin_settings_init');
 function sbs_plugin_settings_init() {
 
-  add_settings_section(
-    'sbs_general', // String for use in the 'id' attribute of tags.
-    'General Settings', // Title of the section.
-    'sbs_general_description', // Function that fills the section with the desired content. The function should echo its output.
-    'sbs_general' // The menu page on which to display this section. Should match $menu_slug from Function Reference/add theme page
-  );
-  add_settings_section(
-    'sbs_order_settings',
-    'Step-By-Step Settings',
-    'sbs_sbs_description',
-    'sbs_order_settings'
-  );
+	add_settings_section(
+		'sbs_general', // String for use in the 'id' attribute of tags.
+		'General Settings', // Title of the section.
+		'sbs_general_description', // Function that fills the section with the desired content. The function should echo its output.
+		'sbs_general' // The menu page on which to display this section. Should match $menu_slug from Function Reference/add theme page
+	);
+	add_settings_section(
+		'sbs_order_settings',
+		'Step-By-Step Settings',
+		'sbs_sbs_description',
+		'sbs_order_settings'
+	);
 	add_settings_section(
 		'sbs_package_settings',
 		'Package Settings',
 		'sbs_package_description',
 		'sbs_package_settings'
 	);
-  add_settings_section(
-    'sbs_display',
-    'Display Settings',
-    'sbs_display_description',
-    'sbs_display'
-  );
+	add_settings_section(
+		'sbs_display',
+		'Display Settings',
+		'sbs_display_description',
+		'sbs_display'
+	);
 	add_settings_section(
 		'sbs_premium',
 		'Step-By-Step Premium Version',
@@ -304,20 +304,20 @@ function sbs_plugin_settings_init() {
 		'sbs_general',
 		'sbs_general'
 	);
-  add_settings_field(
-    'sbs_ui_outside_sbs',
-    'Enable Catalog Pop-Ups Outside of Step-By-Step',
-    'sbs_apply_sbs_ui_outside_sbs_pages_callback',
-    'sbs_general',
-    'sbs_general'
-  );
-  add_settings_field(
-    'sbs_hide_product_placeholder_image',
-    'Hide Product Placeholder Images',
-    'sbs_hide_product_placeholder_image_callback',
-    'sbs_general',
-    'sbs_general'
-  );
+	add_settings_field(
+		'sbs_ui_outside_sbs',
+		'Enable Catalog Pop-Ups Outside of Step-By-Step',
+		'sbs_apply_sbs_ui_outside_sbs_pages_callback',
+		'sbs_general',
+		'sbs_general'
+	);
+	add_settings_field(
+		'sbs_hide_product_placeholder_image',
+		'Hide Product Placeholder Images',
+		'sbs_hide_product_placeholder_image_callback',
+		'sbs_general',
+		'sbs_general'
+	);
 	add_settings_field(
 		'sbs_featured_position',
 		'Featured Items Position ' . sbs_premium_site_link() . sbs_admin_help_tooltip( 'right', 'Display featured items at the beginning or end of pages.' ),
@@ -340,14 +340,14 @@ function sbs_plugin_settings_init() {
 		'sbs_general'
 	);
 
-  // SBS Step-By-Step Settings Fields
-  add_settings_field(
-    'step_order',
-    'Step-By-Step Builder' . sbs_admin_help_tooltip('right', 'Determines the page order of the ordering process.'),
-    'sbs_sbs_table_callback',
-    'sbs_order_settings',
-    'sbs_order_settings'
-  );
+	// SBS Step-By-Step Settings Fields
+	add_settings_field(
+		'step_order',
+		'Step-By-Step Builder' . sbs_admin_help_tooltip('right', 'Determines the page order of the ordering process.'),
+		'sbs_sbs_table_callback',
+		'sbs_order_settings',
+		'sbs_order_settings'
+	);
 	add_settings_field(
 		'sbs_navbar_navigation',
 		'Navbar Navigation' . sbs_admin_help_tooltip('right', 'The step navbar contains navigable links in each step. You can disallow skipping of steps here.'),
@@ -414,21 +414,21 @@ function sbs_plugin_settings_init() {
 		'sbs_package_settings'
 	);
 
-  // SBS Display Settings Fields
-  add_settings_field(
-    'color_scheme',
-    'Color Scheme',
-    'sbs_display_color_scheme_callback',
-    'sbs_display',
-    'sbs_display'
-  );
-  add_settings_field(
-    'navbar_style',
-    'Step Number Shape',
-    'sbs_display_navbar_number_shape_callback',
-    'sbs_display',
-    'sbs_display'
-  );
+	// SBS Display Settings Fields
+	add_settings_field(
+		'color_scheme',
+		'Color Scheme',
+		'sbs_display_color_scheme_callback',
+		'sbs_display',
+		'sbs_display'
+	);
+	add_settings_field(
+		'navbar_style',
+		'Step Number Shape',
+		'sbs_display_navbar_number_shape_callback',
+		'sbs_display',
+		'sbs_display'
+	);
 	add_settings_field(
 		'nav_title_style',
 		'Step Name Shape',
@@ -465,22 +465,22 @@ function sbs_plugin_settings_init() {
 		'sbs_premium',
 		'sbs_premium'
 	);
-  // add_settings_field(
-  //   'show_calculator',
-  //   'Display Sidebar Calculator Widget',
-  //   'sbs_display_sidebar_calculator_callback',
-  //   'sbs_display',
-  //   'sbs_display'
-  // );
+	// add_settings_field(
+	//   'show_calculator',
+	//   'Display Sidebar Calculator Widget',
+	//   'sbs_display_sidebar_calculator_callback',
+	//   'sbs_display',
+	//   'sbs_display'
+	// );
 
 	register_setting('sbs_general', 'sbs_general', 'sbs_general_settings_sanitize');
-  register_setting('sbs_order_settings', 'step_order');
+	register_setting('sbs_order_settings', 'step_order');
 	register_setting('sbs_order_settings', 'sbs_navbar', 'sbs_navbar_settings_sanitize');
 	register_setting('sbs_package_settings', 'sbs_package', 'sbs_package_settings_sanitize');
-  register_setting('sbs_display', 'sbs_display', 'sbs_display_settings_sanitize');
-  // register_setting('sbs_display', 'color_scheme');
-  // register_setting('sbs_display', 'navbar_style');
-  // register_setting('sbs_display', 'show_calculator');
+	register_setting('sbs_display', 'sbs_display', 'sbs_display_settings_sanitize');
+	// register_setting('sbs_display', 'color_scheme');
+	// register_setting('sbs_display', 'navbar_style');
+	// register_setting('sbs_display', 'show_calculator');
 
 }
 
@@ -500,69 +500,69 @@ function sbs_general_description() {
 		tabs above will help you configure the system for your needs.  For more
 		information, click on the <a href="<?php echo esc_url( admin_url('admin.php') . '?page=stepbystepsys&tab=help' )?>">Help</a> tab or <a href="http://stepbystepsys.com">visit our site</a>.
 	</p>
-  <p>If you like working with Step-By-Step Ordering System for WooCommerce, you can donate to us by clicking the PayPal link below.</p>
-  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-    <input type="hidden" name="cmd" value="_s-xclick">
-    <input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
-    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-  </form>
-  <div class="hidden-sm hidden-md hidden-lg">
-    <div class="container mobile-upsell-notice">
-      <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
-      <ul>
-        <li>Unlimited Steps</li>
-        <li>Unlimited Packages</li>
-        <li>Store Credit</li>
-        <li>Required Products</li>
-        <li>Either/Or Products</li>
-        <li>Auto-Add Products</li>
-        <li>Color Schemes</li>
-        <li>Multiple Nav Shapes</li>
-        <li>Custom Labels</li>
-        <li>Options and Fees Page</li>
-        <li>Shadow Effects</li>
-        <li>Premium Support</li>
-      </ul>
-      <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
-    </div>
-  </div>
+	<p>If you like working with Step-By-Step Ordering System for WooCommerce, you can donate to us by clicking the PayPal link below.</p>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="4KHCRZMQXFU3Q">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+	<div class="hidden-sm hidden-md hidden-lg">
+		<div class="container mobile-upsell-notice">
+			<span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+			<ul>
+				<li>Unlimited Steps</li>
+				<li>Unlimited Packages</li>
+				<li>Store Credit</li>
+				<li>Required Products</li>
+				<li>Either/Or Products</li>
+				<li>Auto-Add Products</li>
+				<li>Color Schemes</li>
+				<li>Multiple Nav Shapes</li>
+				<li>Custom Labels</li>
+				<li>Options and Fees Page</li>
+				<li>Shadow Effects</li>
+				<li>Premium Support</li>
+			</ul>
+			<a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+		</div>
+	</div>
 	<?php
 
 	echo ob_get_clean();
 }
 
 function sbs_sbs_description() {
-  ob_start();
-  ?>
+	ob_start();
+	?>
 	<p>Create your ordering process by dragging and dropping (or touching the control buttons at the right side of each button) your steps in the boxes below.</p>
 	<p>You can select from your Product Categories.  Drag any desired categories from the
 	Available Categories column, and move them to the Your Ordering Process column.
 	You can also do this by touching the &#10133; button.
 	</p>
 	<p>To remove a step from your ordering process just drag it back under the Available Categories column. You can also do this by touching the &#10006; button.</p>
-  <p><strong>Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.</strong> (<a rel="nofollow noreferrer" target="_blank" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png">Example</a>)</p>
+	<p><strong>Note: Products must belong to both a parent and a child category in order for Step-By-Step to function correctly.</strong> (<a rel="nofollow noreferrer" target="_blank" href="http://stepbystepsys.com/wp-content/uploads/2017/06/sbs-product-category.png">Example</a>)</p>
 
-  <div class="hidden-sm hidden-md hidden-lg">
-    <div class="container mobile-upsell-notice">
-      <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
-      <ul>
-        <li>Unlimited Steps</li>
-        <li>Unlimited Packages</li>
-        <li>Store Credit</li>
-        <li>Required Products</li>
-        <li>Either/Or Products</li>
-        <li>Auto-Add Products</li>
-        <li>Color Schemes</li>
-        <li>Multiple Nav Shapes</li>
-        <li>Custom Labels</li>
-        <li>Options and Fees Page</li>
-        <li>Shadow Effects</li>
-        <li>Premium Support</li>
-      </ul>
-      <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
-    </div>
-  </div>
+	<div class="hidden-sm hidden-md hidden-lg">
+		<div class="container mobile-upsell-notice">
+			<span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+			<ul>
+				<li>Unlimited Steps</li>
+				<li>Unlimited Packages</li>
+				<li>Store Credit</li>
+				<li>Required Products</li>
+				<li>Either/Or Products</li>
+				<li>Auto-Add Products</li>
+				<li>Color Schemes</li>
+				<li>Multiple Nav Shapes</li>
+				<li>Custom Labels</li>
+				<li>Options and Fees Page</li>
+				<li>Shadow Effects</li>
+				<li>Premium Support</li>
+			</ul>
+			<a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+		</div>
+	</div>
 
   <?php
   echo ob_get_clean();
@@ -585,59 +585,59 @@ function sbs_package_description() {
 			If you don't wish to use packages, select Deactivated from the drop down menu.
 		</p>
 
-    <div class="hidden-sm hidden-md hidden-lg">
-      <div class="container mobile-upsell-notice">
-        <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
-        <ul>
-          <li>Unlimited Steps</li>
-          <li>Unlimited Packages</li>
-          <li>Store Credit</li>
-          <li>Required Products</li>
-          <li>Either/Or Products</li>
-          <li>Auto-Add Products</li>
-          <li>Color Schemes</li>
-          <li>Multiple Nav Shapes</li>
-          <li>Custom Labels</li>
-          <li>Options and Fees Page</li>
-          <li>Shadow Effects</li>
-          <li>Premium Support</li>
-        </ul>
-        <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
-      </div>
-    </div>
+		<div class="hidden-sm hidden-md hidden-lg">
+			<div class="container mobile-upsell-notice">
+				<span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+				<ul>
+					<li>Unlimited Steps</li>
+					<li>Unlimited Packages</li>
+					<li>Store Credit</li>
+					<li>Required Products</li>
+					<li>Either/Or Products</li>
+					<li>Auto-Add Products</li>
+					<li>Color Schemes</li>
+					<li>Multiple Nav Shapes</li>
+					<li>Custom Labels</li>
+					<li>Options and Fees Page</li>
+					<li>Shadow Effects</li>
+					<li>Premium Support</li>
+				</ul>
+				<a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+			</div>
+		</div>
 
 	<?php
 	echo ob_get_clean();
 }
 
 function sbs_display_description() {
-  ob_start();
-  ?>
-  <p>
-    Customize the appearance of the ordering process with preset styles and themes.
-  </p>
-  <div class="hidden-sm hidden-md hidden-lg">
-    <div class="container mobile-upsell-notice">
-      <span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
-      <ul>
-        <li>Unlimited Steps</li>
-        <li>Unlimited Packages</li>
-        <li>Store Credit</li>
-        <li>Required Products</li>
-        <li>Either/Or Products</li>
-        <li>Auto-Add Products</li>
-        <li>Color Schemes</li>
-        <li>Multiple Nav Shapes</li>
-        <li>Custom Labels</li>
-        <li>Options and Fees Page</li>
-        <li>Shadow Effects</li>
-        <li>Premium Support</li>
-      </ul>
-      <a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
-    </div>
-  </div>
-  <?php
-  echo ob_get_clean();
+	ob_start();
+	?>
+	<p>
+		Customize the appearance of the ordering process with preset styles and themes.
+	</p>
+	<div class="hidden-sm hidden-md hidden-lg">
+		<div class="container mobile-upsell-notice">
+			<span style="font-size: 1.2em;"><strong>Upgrade to Premium today:</strong></span>
+			<ul>
+				<li>Unlimited Steps</li>
+				<li>Unlimited Packages</li>
+				<li>Store Credit</li>
+				<li>Required Products</li>
+				<li>Either/Or Products</li>
+				<li>Auto-Add Products</li>
+				<li>Color Schemes</li>
+				<li>Multiple Nav Shapes</li>
+				<li>Custom Labels</li>
+				<li>Options and Fees Page</li>
+				<li>Shadow Effects</li>
+				<li>Premium Support</li>
+			</ul>
+			<a class="mobile-upsell-link" rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">GET PREMIUM</a>
+		</div>
+	</div>
+	<?php
+	echo ob_get_clean();
 }
 
 function sbs_premium_description() {
@@ -765,47 +765,47 @@ function sbs_widgets_callback() {
 }
 
 function sbs_apply_sbs_ui_outside_sbs_pages_callback() {
-  $option = isset( get_option('sbs_general')['ui-outside-sbs'] ) ? get_option('sbs_general')['ui-outside-sbs'] : 'no';
+	$option = isset( get_option('sbs_general')['ui-outside-sbs'] ) ? get_option('sbs_general')['ui-outside-sbs'] : 'no';
 
-  ob_start();
-  ?>
-  <fieldset>
-    <label>
-      <?php echo sbs_admin_help_tooltip(
-        'top',
-        'Clicking product images in catalogs opens a popup window instead of opening a new page.  If enabled, this will apply to all WooCommerce shop pages, not just Step-By-Step.'
-      ); ?>
-      <select name="sbs_general[ui-outside-sbs]">
-        <option value="no" <?php selected('no', $option) ?>>Disabled</option>
-        <option value="yes" <?php selected('yes', $option) ?>>Enabled</option>
-      </select>
-    </label>
-  </fieldset>
-  <?php
+	ob_start();
+	?>
+	<fieldset>
+		<label>
+			<?php echo sbs_admin_help_tooltip(
+				'top',
+				'Clicking product images in catalogs opens a popup window instead of opening a new page.  If enabled, this will apply to all WooCommerce shop pages, not just Step-By-Step.'
+			); ?>
+			<select name="sbs_general[ui-outside-sbs]">
+				<option value="no" <?php selected('no', $option) ?>>Disabled</option>
+				<option value="yes" <?php selected('yes', $option) ?>>Enabled</option>
+			</select>
+		</label>
+	</fieldset>
+	<?php
 
-  echo ob_get_clean();
+	echo ob_get_clean();
 }
 
 function sbs_hide_product_placeholder_image_callback() {
-  $option = isset( get_option('sbs_general')['hide-placeholder-images'] ) ? get_option('sbs_general')['hide-placeholder-images'] : 'no';
+	$option = isset( get_option('sbs_general')['hide-placeholder-images'] ) ? get_option('sbs_general')['hide-placeholder-images'] : 'no';
 
-  ob_start();
-  ?>
-  <fieldset>
-    <label>
-      <?php echo sbs_admin_help_tooltip(
-        'top',
-        'If enabled, products without images assigned to them will not display a placeholder image.'
-      ); ?>
-      <select name="sbs_general[hide-placeholder-images]">
-        <option value="no" <?php selected('no', $option) ?>>Disabled</option>
-        <option value="yes" <?php selected('yes', $option) ?>>Enabled</option>
-      </select>
-    </label>
-  </fieldset>
-  <?php
+	ob_start();
+	?>
+	<fieldset>
+		<label>
+			<?php echo sbs_admin_help_tooltip(
+				'top',
+				'If enabled, products without images assigned to them will not display a placeholder image.'
+			); ?>
+			<select name="sbs_general[hide-placeholder-images]">
+				<option value="no" <?php selected('no', $option) ?>>Disabled</option>
+				<option value="yes" <?php selected('yes', $option) ?>>Enabled</option>
+			</select>
+		</label>
+	</fieldset>
+	<?php
 
-  echo ob_get_clean();
+	echo ob_get_clean();
 }
 
 function sbs_featured_items_pos_callback() {
@@ -939,9 +939,9 @@ function sbs_sbs_table_callback() {
 
 		$flat_step_order = array();
 
-    if ( $category->term_id == $package_cat || $category->term_id == $option_cat ) {
-      return false;
-    }
+		if ( $category->term_id == $package_cat || $category->term_id == $option_cat ) {
+			return false;
+		}
 
 		if ( empty( $step_order ) ) {
 			return true;
@@ -959,119 +959,119 @@ function sbs_sbs_table_callback() {
 
 	} );
 
-  ob_start();
-  ?>
+	ob_start();
+	?>
 	<p><strong style="color: red; font-size: 1.2em;">
 		You may have up two steps active at a time in the free version of this plugin. Only the first two subcategories in each step will be displayed.<br>With the Premium version of SBS, you can add as many steps as you would like.  You can try Step-By-Step Premium for FREE! by visiting our website <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a>
 	</strong></p>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-6">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6">
 
-        <div class="sortable-container" id="sbs-order-container">
-          <h3>Your Ordering Process</h3>
-          <div class="fixed-item noselect">Package Selection</div>
-          <ul id="sbs-order" class="sortable step-sortable">
+				<div class="sortable-container" id="sbs-order-container">
+					<h3>Your Ordering Process</h3>
+					<div class="fixed-item noselect">Package Selection</div>
+					<ul id="sbs-order" class="sortable step-sortable">
 
-            <?php
-            if ( isset( $step_order ) )
-            {
-              foreach( $step_order as $category )
-              {
-              ?>
-                <li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
-                  <?php echo get_the_category_by_ID( $category->catid ) ?>
-                  <div class="alignright">
-                    <span class="sbs-sortable-item-move-up">&#9650;</span>
-                    <span class="sbs-sortable-item-move-down">&#9660;</span>
-                    <span class="sbs-sortable-item-add">&#10133;</span>
-                    <span class="sbs-sortable-item-remove">&#10006;</span>
-                  </div>
-                  <div class="clearfix"></div>
-                  <ul class="subcat-restricted">
-                    <?php
-                    foreach( $category->children as $child )
-                    {
-                    ?>
-                      <li class="sortable-item sortable-nested-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
-                        <span class="subcat-name">
-                          <?php echo get_the_category_by_ID( $child->catid ) ?>
-                        </span>
-                        <div class="alignright">
-                          <span class="sbs-sortable-item-move-up">&#9650;</span>
-                          <span class="sbs-sortable-item-move-down">&#9660;</span>
-                        </div>
-                        <div class="clearfix"></div>
-                      </li>
-                    <?php
-                    }
-                    ?>
-                  </ul>
-                </li>
-              <?php
-              }
-            }
-            ?>
+						<?php
+						if ( isset( $step_order ) )
+						{
+							foreach( $step_order as $category )
+							{
+								?>
+								<li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
+									<?php echo get_the_category_by_ID( $category->catid ) ?>
+									<div class="alignright">
+										<span class="sbs-sortable-item-move-up">&#9650;</span>
+										<span class="sbs-sortable-item-move-down">&#9660;</span>
+										<span class="sbs-sortable-item-add">&#10133;</span>
+										<span class="sbs-sortable-item-remove">&#10006;</span>
+									</div>
+									<div class="clearfix"></div>
+									<ul class="subcat-restricted">
+										<?php
+										foreach( $category->children as $child )
+										{
+											?>
+											<li class="sortable-item sortable-nested-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
+												<span class="subcat-name">
+													<?php echo get_the_category_by_ID( $child->catid ) ?>
+												</span>
+												<div class="alignright">
+													<span class="sbs-sortable-item-move-up">&#9650;</span>
+													<span class="sbs-sortable-item-move-down">&#9660;</span>
+												</div>
+												<div class="clearfix"></div>
+											</li>
+											<?php
+										}
+										?>
+									</ul>
+								</li>
+								<?php
+							}
+						}
+						?>
 
-          </ul>
+					</ul>
 
-          <div class="fixed-item noselect">Checkout</div>
-        </div>
+					<div class="fixed-item noselect">Checkout</div>
+				</div>
 
-      </div>
+			</div>
 
-      <div class="col-sm-6">
+			<div class="col-sm-6">
 
-        <div class="sortable-container" id="sbs-pool-container">
-          <h3>Available Categories</h3>
-          <ul id="sbs-pool" class="sortable">
-            <?php foreach( $available_categories as $category ): ?>
+				<div class="sortable-container" id="sbs-pool-container">
+					<h3>Available Categories</h3>
+					<ul id="sbs-pool" class="sortable">
+						<?php foreach( $available_categories as $category ): ?>
 
-              <?php if ( $category->category_parent === 0 ): ?>
+							<?php if ( $category->category_parent === 0 ): ?>
 
-                <li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
-                  <?php echo $category->name ?>
-                  <div class="alignright">
-                    <span class="sbs-sortable-item-move-up">&#9650;</span>
-                    <span class="sbs-sortable-item-move-down">&#9660;</span>
-                    <span class="sbs-sortable-item-add">&#10133;</span>
-                    <span class="sbs-sortable-item-remove">&#10006;</span>
-                  </div>
-                  <div class="clearfix"></div>
-                  <ul>
-                    <?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
-                    <?php if ( !empty( $children ) ): ?>
-                      <?php foreach( $children as $child_id ): ?>
+								<li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
+									<?php echo $category->name ?>
+									<div class="alignright">
+										<span class="sbs-sortable-item-move-up">&#9650;</span>
+										<span class="sbs-sortable-item-move-down">&#9660;</span>
+										<span class="sbs-sortable-item-add">&#10133;</span>
+										<span class="sbs-sortable-item-remove">&#10006;</span>
+									</div>
+									<div class="clearfix"></div>
+									<ul>
+										<?php $children = get_term_children( $category->term_id, 'product_cat' ); ?>
+										<?php if ( !empty( $children ) ): ?>
+											<?php foreach( $children as $child_id ): ?>
 
-                        <li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
-                          <?php echo get_the_category_by_ID( $child_id ) ?>
-                          <div class="alignright">
-                            <span class="sbs-sortable-item-move-up">&#9650;</span>
-                            <span class="sbs-sortable-item-move-down">&#9660;</span>
-                          </div>
-                          <div class="clearfix"></div>
-                        </li>
+												<li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
+													<?php echo get_the_category_by_ID( $child_id ) ?>
+													<div class="alignright">
+														<span class="sbs-sortable-item-move-up">&#9650;</span>
+														<span class="sbs-sortable-item-move-down">&#9660;</span>
+													</div>
+													<div class="clearfix"></div>
+												</li>
 
-                      <?php endforeach; ?>
-                    <?php endif; ?>
-                  </ul>
+											<?php endforeach; ?>
+										<?php endif; ?>
+									</ul>
 
-                </li>
+								</li>
 
-              <?php endif; ?>
+							<?php endif; ?>
 
-            <?php endforeach; ?>
-          </ul>
-        </div>
+						<?php endforeach; ?>
+					</ul>
+				</div>
 
-      </div>
-    </div>
-  </div>
+			</div>
+		</div>
+	</div>
 
-  <input type="hidden" id="step_order" name="step_order" value="<?php echo esc_attr( get_option('step_order') ) ?>" />
-  <?php
+	<input type="hidden" id="step_order" name="step_order" value="<?php echo esc_attr( get_option('step_order') ) ?>" />
+	<?php
 
-  echo ob_get_clean();
+	echo ob_get_clean();
 
 }
 
@@ -1284,68 +1284,68 @@ function sbs_package_tier_callback() {
 			the order in which they are displayed.<br>
 			<strong style="color: red; font-size: 1.2em;">You may have up to one package in the free version of this plugin.<br>With the Premium version of SBS, you can add as many packages as you would like.  You can try Step-By-Step Premium for FREE! by visiting our website <a rel="noopener noreferrer" target="_blank" href="http://stepbystepsys.com">here.</a></strong>
 		</p>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-6">
 
-          <div class="sortable-container" id="sbs-order-container">
-            <h3>Active Packages</h3>
-            <ul id="sbs-order" class="sortable package-sortable">
-              <?php
-              if ( isset( $active_packages ) )
-              {
-                foreach( $active_packages as $package )
-                {
-                ?>
-                <li data-catid="<?php echo $package->catid ?>" class="sortable-item">
-                  <?php echo get_the_title( $package->catid ) ?>
-                  <div class="alignright">
-                    <span class="sbs-sortable-item-move-up">&#9650;</span>
-                    <span class="sbs-sortable-item-move-down">&#9660;</span>
-                    <span class="sbs-sortable-item-add">&#10133;</span>
-                    <span class="sbs-sortable-item-remove">&#10006;</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </li>
-                <?php
-                }
-              }
-              ?>
-            </ul>
-          </div>
+					<div class="sortable-container" id="sbs-order-container">
+						<h3>Active Packages</h3>
+						<ul id="sbs-order" class="sortable package-sortable">
+							<?php
+							if ( isset( $active_packages ) )
+							{
+								foreach( $active_packages as $package )
+								{
+									?>
+									<li data-catid="<?php echo $package->catid ?>" class="sortable-item">
+										<?php echo get_the_title( $package->catid ) ?>
+										<div class="alignright">
+											<span class="sbs-sortable-item-move-up">&#9650;</span>
+											<span class="sbs-sortable-item-move-down">&#9660;</span>
+											<span class="sbs-sortable-item-add">&#10133;</span>
+											<span class="sbs-sortable-item-remove">&#10006;</span>
+										</div>
+										<div class="clearfix"></div>
+									</li>
+									<?php
+								}
+							}
+							?>
+						</ul>
+					</div>
 
-        </div>
+				</div>
 
-        <div class="col-sm-6">
+				<div class="col-sm-6">
 
-          <div class="sortable-container" id="sbs-pool-container">
-            <h3>Available Packages</h3>
-            <ul id="sbs-pool" class="sortable">
-              <?php
-              if ( isset( $package_cat_id ) ) {
-                foreach( $available_packages as $package )
-                {
-                ?>
-                  <li data-catid="<?php echo $package->ID ?>" class="sortable-item">
-                    <?php echo $package->post_title ?>
-                    <div class="alignright">
-                      <span class="sbs-sortable-item-move-up">&#9650;</span>
-                      <span class="sbs-sortable-item-move-down">&#9660;</span>
-                      <span class="sbs-sortable-item-add">&#10133;</span>
-                      <span class="sbs-sortable-item-remove">&#10006;</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </li>
-                <?php
-                }
-              }
-              ?>
-            </ul>
-          </div>
+					<div class="sortable-container" id="sbs-pool-container">
+						<h3>Available Packages</h3>
+						<ul id="sbs-pool" class="sortable">
+							<?php
+							if ( isset( $package_cat_id ) ) {
+								foreach( $available_packages as $package )
+								{
+									?>
+									<li data-catid="<?php echo $package->ID ?>" class="sortable-item">
+										<?php echo $package->post_title ?>
+										<div class="alignright">
+											<span class="sbs-sortable-item-move-up">&#9650;</span>
+											<span class="sbs-sortable-item-move-down">&#9660;</span>
+											<span class="sbs-sortable-item-add">&#10133;</span>
+											<span class="sbs-sortable-item-remove">&#10006;</span>
+										</div>
+										<div class="clearfix"></div>
+									</li>
+									<?php
+								}
+							}
+							?>
+						</ul>
+					</div>
 
-        </div>
-      </div>
-    </div>
+				</div>
+			</div>
+		</div>
 
 		<input type="hidden" id="step_order" name="sbs_package[active]" value="<?php echo esc_attr( get_option('sbs_package')['active'] ) ?>" />
 
@@ -1504,7 +1504,7 @@ function sbs_display_color_scheme_callback() {
 			'image' => $image_dir . 'sbs-theme-royal-2.jpg' )
 	);
 
-  ob_start();
+	ob_start();
   ?>
 	<fieldset>
 		<?php
@@ -1551,9 +1551,9 @@ function sbs_display_color_scheme_callback() {
 		endforeach;
 		?>
 	</div>
-  <?php
+	<?php
 
-  echo ob_get_clean();
+	echo ob_get_clean();
 }
 
 function sbs_display_calc_callback() {
@@ -1704,12 +1704,12 @@ function sbs_display_misc_callback() {
 }
 
 function sbs_display_sidebar_calculator_callback() {
-  ob_start();
-  ?>
-    <input type="checkbox" id="show_calculator" name="sbs_display[show-calculator]" value="1" <?php echo checked(1, get_option('sbs_display')['show-calculator'], false) ?> />
-  <?php
+	ob_start();
+	?>
+	<input type="checkbox" id="show_calculator" name="sbs_display[show-calculator]" value="1" <?php echo checked(1, get_option('sbs_display')['show-calculator'], false) ?> />
+	<?php
 
-  echo ob_get_clean();
+	echo ob_get_clean();
 }
 
 function sbs_display_navbar_number_shape_callback() {
@@ -1720,35 +1720,35 @@ function sbs_display_navbar_number_shape_callback() {
 		array(
 			'name' => 'Square (Default)',
 			'premium' => false,
-		 	'image' => $image_dir . 'default.png'),
+			'image' => $image_dir . 'default.png'),
 		array(
 			'name' => 'Circle',
 			'premium' => false,
-		 	'image' => $image_dir . 'circle.png' ),
+			'image' => $image_dir . 'circle.png' ),
 		array(
 			'name' => 'Upward Triangle',
 			'premium' => false,
-		 	'image' => $image_dir . 'upward-triangle.png' ),
+			'image' => $image_dir . 'upward-triangle.png' ),
 		array(
 			'name' => 'Downward Triangle',
 			'premium' => true,
-		 	'image' => $image_dir . 'downward-triangle.png' ),
+			'image' => $image_dir . 'downward-triangle.png' ),
 		array(
 			'name' => 'Heart',
 			'premium' => true,
-		 	'image' => $image_dir . 'heart.png' ),
+			'image' => $image_dir . 'heart.png' ),
 		array(
 			'name' => '12-Pointed Star',
 			'premium' => true,
-		 	'image' => $image_dir . 'twelve-star.png' ),
+			'image' => $image_dir . 'twelve-star.png' ),
 		array(
 			'name' => 'Kite',
 			'premium' => true,
-		 	'image' => $image_dir . 'kite.png' ),
+			'image' => $image_dir . 'kite.png' ),
 		array(
 			'name' => 'Badge Ribbon',
 			'premium' => true,
-		 	'image' => $image_dir . 'badge-ribbon.png' )
+			'image' => $image_dir . 'badge-ribbon.png' )
 	);
 
   ob_start();
@@ -1770,7 +1770,7 @@ function sbs_display_navbar_number_shape_callback() {
 				<?php echo $style['name'] ?>
 				<?php echo $style['premium'] ? ' ' . sbs_premium_site_link() : null ?>
 			</option>
-  	<?php
+		<?php
 		}
 		?>
 		</select>
@@ -1800,7 +1800,7 @@ function sbs_display_navbar_number_shape_callback() {
 	</div>
 	<?php
 
-  echo ob_get_clean();
+	echo ob_get_clean();
 }
 
 function sbs_display_navbar_title_shape_callback() {
@@ -1811,23 +1811,23 @@ function sbs_display_navbar_title_shape_callback() {
 		array(
 			'name' => 'Rectangular (Default)',
 			'premium' => false,
-		 	'image' => $image_dir . 'default.png' ),
+			'image' => $image_dir . 'default.png' ),
 		array(
 			'name' => 'Capsule',
 			'premium' => false,
-		 	'image' => $image_dir . 'capsule.png' ),
+			'image' => $image_dir . 'capsule.png' ),
 		array(
 			'name' => 'Arrows',
 			'premium' => true,
-		 	'image' => $image_dir . 'arrows.png' ),
+			'image' => $image_dir . 'arrows.png' ),
 		array(
 			'name' => 'TV Screen',
 			'premium' => true,
-		 	'image' => $image_dir . 'tv-screen.png' ),
+			'image' => $image_dir . 'tv-screen.png' ),
 		array(
 			'name' => 'Parallelogram',
 			'premium' => true,
-		 	'image' => $image_dir . 'parallelogram.png' )
+			'image' => $image_dir . 'parallelogram.png' )
 	);
 
 	ob_start();
@@ -1883,22 +1883,22 @@ function sbs_display_navbar_title_shape_callback() {
 }
 
 function sbs_render_premium_page() {
-  $trial_img_src = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/pro-trial.jpg';
-  ob_start();
-  ?>
-  <div class="wrap" style="max-width: 1080px;">
-    <h2 style="text-align: center; margin-bottom: 2em;"><strong>Step-By-Step Premium Upgrade</strong></h2>
-    <a href="http://stepbystepsys.com"><img src="<?php echo esc_url( $trial_img_src ) ?>" class="img-responsive center-block" style="margin-bottom: 2em;"></a>
-    <div>
-      <p style="font-size: 1.2em;">If you like our plugin and would like to see more content from us please consider purchasing a license from us. Premium users get additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more! You will also have access to our support team!</p>
-      <p style="font-size: 1.2em;">After purchasing the premium version, you will download it from our website. You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
-      <p style="font-size: 1.2em;">If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our website.</p>
-      <p style="font-size: 1.2em;">The premium version of this plugin can be purchased directly at <a href="http://stepbystepsys.com"><strong>our website</strong></a>.</p>
-      <p style="font-size: 1.2em;"><span style="font-size: 1.4em"><strong>We offer a 14-day FREE trial</strong></span> of the premium version. Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s). This is a great selling tool. For more info, visit <a href="http://stepbystepsys.com"><strong>our website</strong></a> for a full list of features in the premium version and try the premium version for free!</p>
-    </div>
-  </div>
-  <?php
-  echo ob_get_clean();
+	$trial_img_src = plugin_dir_url( SBS_PLUGIN_FILE ) . 'assets/admin/pro-trial.jpg';
+	ob_start();
+	?>
+	<div class="wrap" style="max-width: 1080px;">
+		<h2 style="text-align: center; margin-bottom: 2em;"><strong>Step-By-Step Premium Upgrade</strong></h2>
+		<a href="http://stepbystepsys.com"><img src="<?php echo esc_url( $trial_img_src ) ?>" class="img-responsive center-block" style="margin-bottom: 2em;"></a>
+		<div>
+			<p style="font-size: 1.2em;">If you like our plugin and would like to see more content from us please consider purchasing a license from us. Premium users get additional features like unlimited steps, navigation options, required products, either-or products, package store credit, preset themes, and much more! You will also have access to our support team!</p>
+			<p style="font-size: 1.2em;">After purchasing the premium version, you will download it from our website. You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
+			<p style="font-size: 1.2em;">If you have this version of the SBS plugin installed (SBS Light), then you will need to uninstall this version, and then install the premium version you received from our website.</p>
+			<p style="font-size: 1.2em;">The premium version of this plugin can be purchased directly at <a href="http://stepbystepsys.com"><strong>our website</strong></a>.</p>
+			<p style="font-size: 1.2em;"><span style="font-size: 1.4em"><strong>We offer a 14-day FREE trial</strong></span> of the premium version. Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s). This is a great selling tool. For more info, visit <a href="http://stepbystepsys.com"><strong>our website</strong></a> for a full list of features in the premium version and try the premium version for free!</p>
+		</div>
+	</div>
+	<?php
+	echo ob_get_clean();
 }
 
 function sbs_render_admin_help_page() {
@@ -1922,7 +1922,7 @@ function sbs_render_admin_help_page() {
 				<li><a href="#stepbystep">Step-By-Step</a></li>
 				<li><a href="#themes">Themes</a></li>
 				<li><a href="#premium">Premium</a></li>
-        <li><a href="#uninstall">Uninstalling</a></li>
+				<li><a href="#uninstall">Uninstalling</a></li>
 			</ul>
 		</section>
 
@@ -1982,7 +1982,7 @@ function sbs_render_admin_help_page() {
 			<li>The Step-By-Step is located under the Step-By-Step tab in the Step-By-Step Ordering settings</li>
 			<li>Create product categories. Each page in the ordering process will display one parent category, which will include their child categories.</li>
 			<li>To create child categories, make a new category and select the parent category under the Parent field.</li>
-      <li>Assign a parent and child category to each product. This is needed for Step-By-Step to function correctly.</li>
+			<li>Assign a parent and child category to each product. This is needed for Step-By-Step to function correctly.</li>
 			<li>Go to the Step-By-Step settings page and drag categories into Your Ordering Process.  You can rearrange the categories inside to change the order.</li>
 		</ol>
 
@@ -2001,7 +2001,7 @@ function sbs_render_admin_help_page() {
 		selection page in the Admin settings and choose the Full Width template on the
 		right-hand sidebar.</p>
 
-    You can download the SBS Twenty Sixteen Theme <a href="http://stepbystepsys.com/download">here</a>.
+		You can download the SBS Twenty Sixteen Theme <a href="http://stepbystepsys.com/download">here</a>.
 
 		<h4>Twenty Seventeen</h4>
 
@@ -2009,7 +2009,7 @@ function sbs_render_admin_help_page() {
 		website, install it, then activate it.  Go to the Ordering page in WP Admin and
 		choose the Page with Sidebar template on the right-hand sidebar.</p>
 
-    You can download the SBS Twenty Seventeen Theme <a href="http://stepbystepsys.com/download">here</a>.
+		You can download the SBS Twenty Seventeen Theme <a href="http://stepbystepsys.com/download">here</a>.
 
 		<h4>Divi</h4>
 
@@ -2029,28 +2029,28 @@ function sbs_render_admin_help_page() {
 
 		<p>After purchasing the premium version, you will download it from our <a href="http://stepbystepsys.com">website</a>.  You will receive a license key, and this key will be sent to your provided email. Enter this key into the input box in the Premium tab in the Step-By-Step Ordering settings and then click Activate.</p>
 
-    <p>If you have this version of the SBS plugin installed (the SBS Light Version), you will need to uninstall it and install the Premium Version you download from our website.</p>
+		<p>If you have this version of the SBS plugin installed (the SBS Light Version), you will need to uninstall it and install the Premium Version you download from our website.</p>
 
-    <p>The premium version of this plugin can be purchased directly at our <a href="http://stepbystepsys.com">website</a>.  We offer a 14 day trial of the premium version.  Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s).  This is a great selling tool.  For more info, visit our site for a full list of features in the premium version and try the premium version for free!</p>
+		<p>The premium version of this plugin can be purchased directly at our <a href="http://stepbystepsys.com">website</a>.  We offer a 14 day trial of the premium version.  Along with unlimited packages, we offer the ability to add a store (merchandise credit) to your package(s).  This is a great selling tool.  For more info, visit our site for a full list of features in the premium version and try the premium version for free!</p>
 
-    <h3 id="uninstall">Uninstalling</h3>
-    <p>If you wish to disable this plugin's functionality you can deactivate it in
-    the plugin settings.  If you wish to completely remove this plugin, deactivate
-    it, then click the Delete button.</p>
-    <p>By default all settings, custom fields, and custom metas are not deleted
-    on uninstall.  If you wish to remove all Step-By-Step data, add this line to
-    your wp-config.php file:</p>
-    <pre>define( 'SBS_REMOVE_ALL_DATA', true );</pre>
-    <p>This will delete any content created by the Step-By-Step plugin when you uninstall, including
-    the Package and Step-By-Step Ordering pages, all settings, and post metas.
-    Products and Categories will not be removed.</p>
+		<h3 id="uninstall">Uninstalling</h3>
+		<p>If you wish to disable this plugin's functionality you can deactivate it in
+		the plugin settings.  If you wish to completely remove this plugin, deactivate
+		it, then click the Delete button.</p>
+		<p>By default all settings, custom fields, and custom metas are not deleted
+		on uninstall.  If you wish to remove all Step-By-Step data, add this line to
+		your wp-config.php file:</p>
+		<pre>define( 'SBS_REMOVE_ALL_DATA', true );</pre>
+		<p>This will delete any content created by the Step-By-Step plugin when you uninstall, including
+		the Package and Step-By-Step Ordering pages, all settings, and post metas.
+		Products and Categories will not be removed.</p>
 
-    <div style="margin-top: 40px">
-      <p>For more assistance and premium support with the Step-By-Step Ordering System for WooCommerce,
-      please visit our site at <a target="_blank" rel="noopener noreferrer" href="http://stepbystepsys.com">http://stepbystepsys.com</a>.</p>
+		<div style="margin-top: 40px">
+			<p>For more assistance and premium support with the Step-By-Step Ordering System for WooCommerce,
+				please visit our site at <a target="_blank" rel="noopener noreferrer" href="http://stepbystepsys.com">http://stepbystepsys.com</a>.</p>
 
-      <p>Thank you for using our plugin!</p>
-    </div>
+			<p>Thank you for using our plugin!</p>
+		</div>
 
 	</div>
 	<?php

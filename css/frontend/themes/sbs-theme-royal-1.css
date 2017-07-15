@@ -1,137 +1,137 @@
 /* SBS Package Selection Panes */
 
 .sbs-package-container {
-  border: 2px solid #9acbf0;
+	border: 2px solid #9acbf0;
 }
 
 .sbs-package-price {
-  color: #2481c8;
-  border-bottom: 1px solid #2481c8;
+	color: #2481c8;
+	border-bottom: 1px solid #2481c8;
 }
 
 .sbs-package-title,
 .checkout-package,
 .woocommerce .checkout-package a
 {
-  color: #fff;
-  background-color: #2481c8;
+	color: #fff;
+	background-color: #2481c8;
 }
 
 .woocommerce .checkout-package a.remove {
-  color: #fff !important; /* overrides WooCommerce important tag */
+	color: #fff !important; /* overrides WooCommerce important tag */
 }
 
 /* SBS Sidebar Calculator */
 
 .sbs-widget-sidebar-package {
-    background-color: #084675;
-    color: #ffffff;
-    border-bottom: 3px solid white;
+	background-color: #084675;
+	color: #ffffff;
+	border-bottom: 3px solid white;
 }
 
 #sbs-widget-sidebar-cart-totals {
-    background-color: #9acbf0;
-    font-size: .90em;
-    color: #000;
+	background-color: #9acbf0;
+	font-size: .90em;
+	color: #000;
 }
 
 .sbs-widget-sidebar-subtotal {
-    background-color: #2481c8;
-    color: white;
-    border-top: 3px solid white;
+	background-color: #2481c8;
+	color: white;
+	border-top: 3px solid white;
 }
 
 .sbs-widget-sidebar-merch-credit {
-    background-color: #2481c8;
-    /*border-top: 3px solid white;*/
-    color: white;
+	background-color: #2481c8;
+	/*border-top: 3px solid white;*/
+	color: white;
 }
 
 .sbs-widget-sidebar-grand-total {
-    font-size: 1em;
-    background-color: #084675;
-    color: #ffffff;
-    border-top: 3px solid white;
+	font-size: 1em;
+	background-color: #084675;
+	color: #ffffff;
+	border-top: 3px solid white;
 }
 
 
 .woocommerce-message {
-    background-color: #2481c8;
-    font-weight: bold;
-    color: #ffffff !important;
+	background-color: #2481c8;
+	font-weight: bold;
+	color: #ffffff !important;
 }
 
 #sbs-navbar .step-title {
-    background-color: #2481c8;
-    padding: 25px 0 15px;
-    margin-top: -20px;
+	background-color: #2481c8;
+	padding: 25px 0 15px;
+	margin-top: -20px;
 }
 
 #sbs-navbar .step-title:before {
-    border-color: #2481c8 transparent;
+	border-color: #2481c8 transparent;
 }
 
 
 #sbs-navbar .step-title.active {
-    background-color: #084675;
-    color: #ffffff;
-    font-weight: 600;
+	background-color: #084675;
+	color: #ffffff;
+	font-weight: 600;
 }
 
 #sbs-navbar .step-title.active:before {
-    border-color: #2481c8 transparent;
+	border-color: #2481c8 transparent;
 }
 
 #sbs-navbar .step-index > span.step-number {
-    background-color: #084675;
-    display: inline-block;
-    color: #ffffff;
-    font-size: 1.6em;
-    /* border-radius: 100%; */
-    border: 3px solid white;
-    line-height: 39px;
+	background-color: #084675;
+	display: inline-block;
+	color: #ffffff;
+	font-size: 1.6em;
+	/* border-radius: 100%; */
+	border: 3px solid white;
+	line-height: 39px;
 }
 
 #sbs-navbar .step-index > span.step-number.inactive:before,
 #sbs-navbar .step-index > span.step-number.inactive:after
 {
-    border-color: #084675 transparent;
-    background-color: #084675;
+	border-color: #084675 transparent;
+	background-color: #084675;
 }
 
 #sbs-navbar .step-index > span.step-number.active {
-    background-color: #2481c8;
-    color: #ffffff;
+	background-color: #2481c8;
+	color: #ffffff;
 }
 
 #sbs-navbar .step-index > span.step-number.active:before,
 #sbs-navbar .step-index > span.step-number.active:after
 {
-    border-color: #2481c8 transparent;
-    background-color: #2481c8;
+	border-color: #2481c8 transparent;
+	background-color: #2481c8;
 }
 
 #sbs-navbar .step-index span.step-number-before.active,
 #sbs-navbar .step-index span.step-number-before.active:after {
-    border-color: #2481c8 transparent;
+	border-color: #2481c8 transparent;
 }
 
 #sbs-navbar .step-index span.step-number-before.inactive,
 #sbs-navbar .step-index span.step-number-before.inactive:after {
-    border-color: #084675 transparent;
+	border-color: #084675 transparent;
 }
 
 #sbs-navbar .step-title a, #sbs-widget-sidebar-cart-totals a.sbs-change-package-btn {
-    color: white;
+	color: white;
 }
 
 #sbs-navbar .step-title a:hover {
-    color: white;
+	color: white;
 }
 
 .sbs-subcat-name {
-    background-color: #084675;
-    color: #7dc3f8 !important;
+	background-color: #084675;
+	color: #7dc3f8 !important;
 }
 
 a.open-popup-link,
@@ -141,7 +141,7 @@ a.open-popup-link,
 .product-name a,
 .product-loop-remove a
 {
-    color: #34a3f7;
+	color: #34a3f7;
 }
 
 .woocommerce ul.products li.product .button,
@@ -154,26 +154,26 @@ a.open-popup-link,
 .woocommerce button.button.alt:hover,
 .woocommerce input.button.alt
 {
-    background-color: #084675;
-    color: #7dc3f8;
-    border: none;
-    font-weight: 600;
+	background-color: #084675;
+	color: #7dc3f8;
+	border: none;
+	font-weight: 600;
 }
 
 .sbs-store-back-forward-buttons {
-    background-color: #2481c8;
-    padding: 8px;
-    width: 49%;
+	background-color: #2481c8;
+	padding: 8px;
+	width: 49%;
 }
 
 #sbs-store-back-forward-buttons-container .sbs-store-back-forward-buttons > a,
 #sbs-widget-sidebar-back-forward-buttons-container .sbs-store-back-forward-buttons > a
 {
-    display: block;
-    color: #ffffff;
+	display: block;
+	color: #ffffff;
 }
 
 /* Options Step */
 .sbs-options-and-fees .required td {
-    background-color: #dee8f1;
+	background-color: #dee8f1;
 }

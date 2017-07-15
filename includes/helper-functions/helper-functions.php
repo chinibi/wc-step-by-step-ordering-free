@@ -20,14 +20,14 @@ if ( !defined( 'ABSPATH' ) ) {
 
 function sbs_get_product_parent_category( $product_id ) {
 
-  $categories = wp_get_post_terms($product_id, 'product_cat');
+	$categories = wp_get_post_terms($product_id, 'product_cat');
 
-  foreach ($categories as $category) {
-    if ($category->parent === 0)
-      return $category;
+	foreach ($categories as $category) {
+		if ($category->parent === 0)
+			return $category;
   }
 
-  return (object) array( 'term_id' => 0 );
+	return (object) array( 'term_id' => 0 );
 
 }
 
@@ -58,17 +58,17 @@ function sbs_get_product_parent_category( $product_id ) {
 
 function sbs_get_wc_products_by_category( $category_id ) {
 
-  sbs_get_all_wc_categories();
+	sbs_get_all_wc_categories();
 
-  $args = array(
-    'post_type' => 'product',
-    'product_cat' => get_term_by('id', $category_id, 'product_cat')->slug,
+	$args = array(
+		'post_type' => 'product',
+		'product_cat' => get_term_by('id', $category_id, 'product_cat')->slug,
 		'posts_per_page' => -1
-  );
+	);
 
-  $products = get_posts( $args );
+	$products = get_posts( $args );
 
-  return $products;
+	return $products;
 
 }
 
@@ -172,15 +172,15 @@ function sbs_get_package_from_cart() {
  */
 
 function sbs_get_cart_key( $product_id ) {
-  global $woocommerce;
-  $cart = $woocommerce->cart->get_cart();
+	global $woocommerce;
+	$cart = $woocommerce->cart->get_cart();
 
-  foreach( $cart as $key => $cart_item ) {
-    if ( $product_id === $cart_item['product_id'] )
-      return array( 'key' => $key, 'cart_item' => $cart_item );
-  }
+	foreach( $cart as $key => $cart_item ) {
+		if ( $product_id === $cart_item['product_id'] )
+			return array( 'key' => $key, 'cart_item' => $cart_item );
+	}
 
-  return false;
+	return false;
 }
 
 
@@ -193,26 +193,26 @@ function sbs_get_cart_key( $product_id ) {
 
 function sbs_get_all_wc_categories() {
 
-  $taxonomy     = 'product_cat';
-  $orderby      = 'name';
-  $show_count   = 0;      // 1 for yes, 0 for no
-  $pad_counts   = 0;      // 1 for yes, 0 for no
-  $hierarchical = 1;      // 1 for yes, 0 for no
-  $title        = '';
-  $empty        = 0;
+	$taxonomy     = 'product_cat';
+	$orderby      = 'name';
+	$show_count   = 0;      // 1 for yes, 0 for no
+	$pad_counts   = 0;      // 1 for yes, 0 for no
+	$hierarchical = 1;      // 1 for yes, 0 for no
+	$title        = '';
+	$empty        = 0;
 
-  $args = array(
-         'taxonomy'     => $taxonomy,
-         'orderby'      => $orderby,
-         'show_count'   => $show_count,
-         'pad_counts'   => $pad_counts,
-         'hierarchical' => $hierarchical,
-         'title_li'     => $title,
-         'hide_empty'   => $empty
-  );
-  $all_categories = get_categories( $args );
+	$args = array(
+		'taxonomy'     => $taxonomy,
+		'orderby'      => $orderby,
+		'show_count'   => $show_count,
+		'pad_counts'   => $pad_counts,
+		'hierarchical' => $hierarchical,
+		'title_li'     => $title,
+		'hide_empty'   => $empty
+	);
+	$all_categories = get_categories( $args );
 
-  return $all_categories;
+	return $all_categories;
 
 }
 
@@ -260,10 +260,10 @@ function sbs_get_active_packages( $slice = false ) {
 	$package_order = json_decode( $package_order );
 	$package_order = $package_order[0];
 
-  // Filter out deleted products
-  $package_order = array_filter( $package_order, function( $package ) {
-    return wc_get_product( $package->catid );
-  } );
+	// Filter out deleted products
+	$package_order = array_filter( $package_order, function( $package ) {
+		return wc_get_product( $package->catid );
+	} );
 
 	if ( $slice ) {
 		$package_order = array_slice( $package_order, 0, 1 );
@@ -315,17 +315,17 @@ function sbs_get_step_order( $slice = false ) {
 		$step->children = $step->children[0];
 	}
 
-  // Filter out any deleted categories
-  $step_order = array_filter( $step_order, function( $step ) {
-    return term_exists( $step->catid, 'product_cat' );
-  });
-  foreach( $step_order as $step ) {
-    if ( isset( $step->children ) ) {
-      $step->children = array_filter( $step->children, function( $child ) {
-        return term_exists( $child->catid, 'product_cat' );
-      });
-    }
-  }
+	// Filter out any deleted categories
+	$step_order = array_filter( $step_order, function( $step ) {
+		return term_exists( $step->catid, 'product_cat' );
+	});
+	foreach( $step_order as $step ) {
+		if ( isset( $step->children ) ) {
+			$step->children = array_filter( $step->children, function( $child ) {
+				return term_exists( $child->catid, 'product_cat' );
+			});
+		}
+	}
 
 	if ( $slice ) {
 		$step_order = array_slice( $step_order, 0, 2 );
@@ -350,17 +350,17 @@ function sbs_get_step_order( $slice = false ) {
 
 function sbs_get_full_step_order( $slice = false ) {
 
-  $steps = sbs_get_step_order( $slice );
+	$steps = sbs_get_step_order( $slice );
 
 	if ( empty( $steps ) ) {
 		return;
 	}
 
-  foreach( $steps as $step ) {
-    $step->name = get_the_category_by_ID( $step->catid );
+	foreach( $steps as $step ) {
+		$step->name = get_the_category_by_ID( $step->catid );
 		$step->type = 'main';
-  }
-  $steps_package = new stdClass();
+	}
+	$steps_package = new stdClass();
 
 	//if ( isset( get_option('sbs_package')['category'] ) ) {
 		$steps_package->name = 'Packages';
@@ -368,16 +368,14 @@ function sbs_get_full_step_order( $slice = false ) {
 		$steps_package->type = 'package';
 	//}
 
-  $steps_checkout = new stdClass();
-  $steps_checkout->name = 'Checkout';
+	$steps_checkout = new stdClass();
+	$steps_checkout->name = 'Checkout';
 	$steps_checkout->type = 'checkout';
 
-	//if ( !empty( $steps_package->catid ) ) {
-		array_unshift( $steps, $steps_package );
-	//}
-  array_push( $steps, $steps_checkout );
+	array_unshift( $steps, $steps_package );
+	array_push( $steps, $steps_checkout );
 
-  return $steps;
+	return $steps;
 
 }
 
@@ -388,19 +386,19 @@ function sbs_get_full_step_order( $slice = false ) {
  * @return bool
  */
 function is_sbs() {
-  $package_page = get_option('sbs_package')['page-name'];
-  $main_pages = get_option('sbs_general')['page-name'];
-  $sbs_pages = array(
-    $package_page,
-    $main_pages
-  );
+	$package_page = get_option('sbs_package')['page-name'];
+	$main_pages = get_option('sbs_general')['page-name'];
+	$sbs_pages = array(
+		$package_page,
+		$main_pages
+	);
 
-  foreach( $sbs_pages as $sbs_page ) {
-    if ( is_page( $sbs_page ) ) {
-      return true;
-    }
-  }
-  return false;
+	foreach( $sbs_pages as $sbs_page ) {
+		if ( is_page( $sbs_page ) ) {
+			return true;
+		}
+	}
+	return false;
 }
 
 

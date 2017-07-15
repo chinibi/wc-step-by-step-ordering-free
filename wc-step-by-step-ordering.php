@@ -38,22 +38,22 @@ final class StepByStepSystem {
 		// Include helper functions
 		include_once( SBS_ABSPATH . 'includes/helper-functions/helper-functions.php' );
 
-    if ( !is_admin() ) {
-      // Include SBS Ordering Shortcode
-      include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-select-package.php' );
-      include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
+		if ( !is_admin() ) {
+			// Include SBS Ordering Shortcode
+			include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-select-package.php' );
+			include_once( SBS_ABSPATH . 'includes/shortcodes/sbs-woocommerce-step-by-step-ordering.php' );
 
-      // Include WooCommerce template and action overrides
-      include_once( SBS_ABSPATH . 'woocommerce/plugin-template-override.php' );
+			// Include WooCommerce template and action overrides
+			include_once( SBS_ABSPATH . 'woocommerce/plugin-template-override.php' );
 
-      // Include additions to WooCommerce actions
-      include_once( SBS_ABSPATH . 'includes/woocommerce-actions/add-to-cart-loop.php' );
+			// Include additions to WooCommerce actions
+			include_once( SBS_ABSPATH . 'includes/woocommerce-actions/add-to-cart-loop.php' );
 
-      // Include additional AJAX Add To Cart functions
-      include_once( SBS_ABSPATH . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
-    }
+			// Include additional AJAX Add To Cart functions
+			include_once( SBS_ABSPATH . 'includes/woocommerce-actions/add-to-cart-ajax.php' );
+		}
 
-    include_once( SBS_ABSPATH . 'includes/woocommerce-actions/additional-actions.php' );
+		include_once( SBS_ABSPATH . 'includes/woocommerce-actions/additional-actions.php' );
 
 		// Include SBS Cart Totals Widget
 		include_once( SBS_ABSPATH . 'includes/widgets/sbs-cart-totals.php' );
@@ -88,28 +88,28 @@ final class StepByStepSystem {
 		include_once( SBS_ABSPATH . 'includes/themes/common-theme-styles.php' );
 		include_once( SBS_ABSPATH . 'includes/themes/theme-selector.php' );
 
-    // Scripts to be enqueued only on SBS pages (or sitewide with setting override).
-    if ( is_sbs() || get_option('sbs_general')['ui-outside-sbs'] === 'yes' ) {
-      // Enqueue custom scripts
-      wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
-      wp_enqueue_script( 'sbs-init-magnific-popup', plugins_url( '/js/frontend/sbs-init-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
-      wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
-      wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery' ) );
-      // Enqueue libraries
-      wp_enqueue_style( 'magnific-popup-style', plugins_url( '/css/frontend/magnific-popup.css', __FILE__ ) );
-      wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
-      wp_enqueue_script( 'magnific-popupjs', plugins_url( '/js/frontend/magnific-popup.min.js', __FILE__ ), array( 'jquery' ) );
-      wp_enqueue_script( 'zoom', plugins_url( '/js/frontend/zoom.min.js', __FILE__ ), array( 'jquery' ) );
-    }
+		// Scripts to be enqueued only on SBS pages (or sitewide with setting override).
+		if ( is_sbs() || get_option('sbs_general')['ui-outside-sbs'] === 'yes' ) {
+			// Enqueue custom scripts
+			wp_enqueue_script( 'sbs-add-to-cart', plugins_url( '/js/frontend/sbs-add-to-cart-ajax.js', __FILE__ ), array( 'jquery', 'accountingjs' ) );
+			wp_enqueue_script( 'sbs-init-magnific-popup', plugins_url( '/js/frontend/sbs-init-magnific-popup.js', __FILE__ ), array( 'jquery', 'magnific-popupjs' ) );
+			wp_enqueue_script( 'sbs-init-zoom', plugins_url( '/js/frontend/sbs-init-zoom.js', __FILE__ ), array( 'jquery', 'zoom' ) );
+			wp_enqueue_script( 'sbs-add-to-cart-variation', plugins_url( '/js/frontend/add-to-cart-variation.js', __FILE__ ), array( 'jquery' ) );
+			// Enqueue libraries
+			wp_enqueue_style( 'magnific-popup-style', plugins_url( '/css/frontend/magnific-popup.css', __FILE__ ) );
+			wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
+			wp_enqueue_script( 'magnific-popupjs', plugins_url( '/js/frontend/magnific-popup.min.js', __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'zoom', plugins_url( '/js/frontend/zoom.min.js', __FILE__ ), array( 'jquery' ) );
+		}
 
-    // Scripts to be enqueued only on SBS pages
-    if ( is_sbs() ) {
-      wp_enqueue_Script( 'disable-cart-widget-links', plugins_url( '/js/frontend/disable-cart-widget-links.js', __FILE__ ), array( 'jquery' ) );
-    }
+		// Scripts to be enqueued only on SBS pages
+		if ( is_sbs() ) {
+			wp_enqueue_Script( 'disable-cart-widget-links', plugins_url( '/js/frontend/disable-cart-widget-links.js', __FILE__ ), array( 'jquery' ) );
+		}
 
-    if ( ! (is_cart() || is_checkout()) ) {
-      wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );
-    }
+		if ( ! (is_cart() || is_checkout()) ) {
+			wp_enqueue_script( 'sbs-fix-quantity-input', plugins_url( '/js/frontend/fix-quantity-input.js', __FILE__ ), array( 'jquery' ) );
+		}
 	}
 
 	public function sbs_dequeue_third_party_scripts() {
@@ -121,13 +121,13 @@ final class StepByStepSystem {
 	}
 
 	public function sbs_define_ajax_url() {
-	  ob_start();
-	  ?>
-	  <script type="text/javascript">
-	    var sbsAjaxUrl = "<?php echo admin_url('admin-ajax.php') ?>";
-	  </script>
-	  <?php
-	  echo ob_get_clean();
+		ob_start();
+		?>
+		<script type="text/javascript">
+			var sbsAjaxUrl = "<?php echo admin_url('admin-ajax.php') ?>";
+		</script>
+		<?php
+		echo ob_get_clean();
 	}
 
 }

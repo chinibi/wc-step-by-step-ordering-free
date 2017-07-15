@@ -175,13 +175,13 @@ add_action( 'woocommerce_cart_loaded_from_session', 'sbs_move_package_to_top_of_
 
 // Attach required attributes and CSS classes to the product loop link wrapper
 function woocommerce_template_loop_product_link_open_custom() {
-  global $product;
+	global $product;
 	echo '<a href="' . get_the_permalink() . '" data-mfp-src="#modal-product-' . $product->get_id() .'" class="woocommerce-LoopProduct-link open-popup-link">';
 }
 function sbs_replace_woocommerce_template_loop_product_link_open() {
 
-  remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
-  add_action ( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open_custom', 10 );
+	remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
+	add_action ( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open_custom', 10 );
 
 }
 
@@ -193,18 +193,18 @@ add_action( 'plugins_loaded', 'sbs_replace_woocommerce_template_loop_product_lin
  *
  */
 if ( isset( get_option('sbs_general')['hide-placeholder-images'] ) && get_option('sbs_general')['hide-placeholder-images'] === 'yes' ) {
-  // Fix for Divi theme causing the Sale badge to overlap price and name
-  if ( wp_get_theme()->get('Name') == 'Divi' || wp_get_theme()->get('Template') == 'Divi' ) {
-    add_filter('woocommerce_sale_flash', '__return_false');
-  }
+	// Fix for Divi theme causing the Sale badge to overlap price and name
+	if ( wp_get_theme()->get('Name') == 'Divi' || wp_get_theme()->get('Template') == 'Divi' ) {
+		add_filter('woocommerce_sale_flash', '__return_false');
+	}
 
-  add_action( 'init', 'sbs_custom_fix_thumbnail' );
+	add_action( 'init', 'sbs_custom_fix_thumbnail' );
 
-  function sbs_custom_fix_thumbnail() {
-    add_filter('woocommerce_placeholder_img_src', 'sbs_custom_woocommerce_placeholder_img_src');
+	function sbs_custom_fix_thumbnail() {
+		add_filter('woocommerce_placeholder_img_src', 'sbs_custom_woocommerce_placeholder_img_src');
 
-  	function sbs_custom_woocommerce_placeholder_img_src( $src ) {
-    	return plugins_url( 'assets/frontend/transparent_spacer.png', SBS_PLUGIN_FILE );
-  	}
-  }
+		function sbs_custom_woocommerce_placeholder_img_src( $src ) {
+			return plugins_url( 'assets/frontend/transparent_spacer.png', SBS_PLUGIN_FILE );
+		}
+	}
 }

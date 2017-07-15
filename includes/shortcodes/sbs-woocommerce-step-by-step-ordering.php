@@ -18,12 +18,12 @@ function sbs_previous_step_url( $current_step, $step_count ) {
 	$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
 	$package_enabled = sbs_is_package_section_active();
 
-  $sbs_base_url = get_permalink( $sbs_page );
+	$sbs_base_url = get_permalink( $sbs_page );
 	$package_base_url = get_permalink( $package_page );
 
-  if ( $current_step > 0 ) {
+	if ( $current_step > 0 ) {
 
-    $previous_step = $current_step - 1;
+		$previous_step = $current_step - 1;
 
 		if ( $previous_step === 0 && !$package_enabled ) {
 			return null;
@@ -31,11 +31,11 @@ function sbs_previous_step_url( $current_step, $step_count ) {
 
 		return $previous_step === 0 ? $package_base_url : $sbs_base_url . '?step=' . $previous_step;
 
-  } else {
+	} else {
 
-    return null;
+		return null;
 
-  }
+	}
 
 }
 
@@ -45,78 +45,78 @@ function sbs_previous_step_button( $current_step, $step_count ) {
 	$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
 	$package_enabled = sbs_is_package_section_active();
 
-  $base_url = get_permalink( $sbs_page );
+	$base_url = get_permalink( $sbs_page );
 	$package_base_url = get_permalink( $package_page );
 
-  if ( $current_step > 0 ) {
+	if ( $current_step > 0 ) {
 
-    $previous_step = $current_step - 1;
+		$previous_step = $current_step - 1;
 
 		if ( $previous_step === 0 && !$package_enabled ) {
 			return '<div style="border: none; background: none;" class="sbs-store-back-forward-buttons"></div>';
 		}
 
-    ob_start();
-    ?>
+		ob_start();
+		?>
 			<?php if ( $previous_step === 0 ): ?>
 				<div class="sbs-store-back-forward-buttons">
 					<a href="<?php echo esc_url( $package_base_url ) ?>">&#171; GO BACK</a>
 				</div>
 			<?php else: ?>
 				<div class="sbs-store-back-forward-buttons">
-      		<a href="<?php echo esc_url( $base_url . '?step=' . $previous_step ) ?>">&#171; GO BACK</a>
+					<a href="<?php echo esc_url( $base_url . '?step=' . $previous_step ) ?>">&#171; GO BACK</a>
 				</div>
 			<?php endif ?>
-    <?php
-    return ob_get_clean();
+		<?php
+		return ob_get_clean();
 
-  } else {
+	} else {
 
-    return '<div style="border: none; background: none;" class="sbs-store-back-forward-buttons"></div>';
+		return '<div style="border: none; background: none;" class="sbs-store-back-forward-buttons"></div>';
 
-  }
+	}
 
 }
 
 function sbs_next_step_url( $current_step, $step_count ) {
 
 	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
-  $base_url = get_permalink( $sbs_page );
+	$base_url = get_permalink( $sbs_page );
 
-  if ( $current_step !== $step_count - 1 ) {
+	if ( $current_step !== $step_count - 1 ) {
 
-    $next_step = $current_step + 1;
-    return $base_url . '?step=' . $next_step;
+		$next_step = $current_step + 1;
+		return $base_url . '?step=' . $next_step;
 
-  } else {
+	} else {
 
-    return null;
+		return null;
 
-  }
+	}
 
 }
 
 function sbs_next_step_button( $current_step, $step_count ) {
 
 	$sbs_page = isset( get_option('sbs_general')['page-name'] ) ? get_option('sbs_general')['page-name'] : get_page_by_title( 'Step-By-Step Ordering' )->ID;
-  $base_url = get_permalink( $sbs_page );
+	$base_url = get_permalink( $sbs_page );
 
-  if ( $current_step !== $step_count - 1 ) {
+	if ( $current_step !== $step_count - 1 ) {
 
-    $next_step = $current_step + 1;
-    ob_start();
-    ?>
+		$next_step = $current_step + 1;
+		ob_start();
+		?>
 		<div class="sbs-store-back-forward-buttons">
-      <a href="<?php echo esc_url( $base_url . '?step=' . $next_step ) ?>">NEXT &#187;</a>
+			<a href="<?php echo esc_url( $base_url . '?step=' . $next_step ) ?>">NEXT &#187;</a>
 		</div>
-    <?php
-    return ob_get_clean();
+		<?php
+		return ob_get_clean();
 
-  } else {
+	} else {
 
-    return null;
+		return null;
 
-  }
+	}
 
 }
 
@@ -300,7 +300,7 @@ function sbs_render_product_category( $category_id ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => -1,
-    'order' => 'ASC',
+		'order' => 'ASC',
 		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
@@ -353,51 +353,51 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps, $colum
 
 	global $woocommerce;
 
-  if ( $current_step === 0 ) {
+	if ( $current_step === 0 ) {
 
 		$package_page = isset( get_option('sbs_package')['page-name'] ) ? get_option('sbs_package')['page-name'] : get_page_by_title( 'Choose Package' )->ID;
 
-    echo sprintf( '<script>window.location.href="%s"</script>', get_permalink( $package_page ) );
-    return;
+		echo sprintf( '<script>window.location.href="%s"</script>', get_permalink( $package_page ) );
+		return;
 
-  }
+	}
 
-  if ( $steps[$current_step]->type === 'main' ) {
+	if ( $steps[$current_step]->type === 'main' ) {
 
 		$cat_term = get_term_by( 'id', $steps[$current_step]->catid, 'product_cat', 'ARRAY_A' );
-    $current_category_name = get_the_category_by_ID( $steps[$current_step]->catid );
+		$current_category_name = get_the_category_by_ID( $steps[$current_step]->catid );
 
-    echo '<h1 class="sbs-step-title">Step ' . $current_step . ': ' . $current_category_name . '</h1>';
+		echo '<h1 class="sbs-step-title">Step ' . $current_step . ': ' . $current_category_name . '</h1>';
 		echo '<p>' . $cat_term['description'] . '</p>';
 
 		if ( isset( get_option('sbs_general')['featured-items-position'] ) && get_option('sbs_general')['featured-items-position'] === '1' ) {
 			sbs_render_featured_products( $current_step, $steps, $columns );
 		}
 
-    if ( !empty( $steps[$current_step]->children ) ) {
+		if ( !empty( $steps[$current_step]->children ) ) {
 
-      foreach( $steps[$current_step]->children as $subcategory ) {
+			foreach( $steps[$current_step]->children as $subcategory ) {
 				sbs_render_product_category( $subcategory->catid, $columns );
-      }
+			}
 
-    }
+		}
 
 		if ( !isset( get_option('sbs_general')['featured-items-position'] ) || get_option('sbs_general')['featured-items-position'] === '2' ) {
 			sbs_render_featured_products( $current_step, $steps, $columns );
 		}
 
-    return;
+		return;
 
-  }
+	}
 
-  if ($current_step === count($steps) - 1) {
+	if ($current_step === count($steps) - 1) {
 
-    // echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Checkout' . '</h1>';
-    // echo do_shortcode( '[woocommerce_checkout]' );
+		// echo '<h1 class="sbs-step-title">Step ' . $current_step . ': Checkout' . '</h1>';
+		// echo do_shortcode( '[woocommerce_checkout]' );
 		echo '<script type="text/javascript">window.location.href="' . esc_url( $woocommerce->cart->get_checkout_url() ) . '"</script>';
-    return;
+		return;
 
-  }
+	}
 
 }
 
@@ -505,31 +505,31 @@ function sbs_render_sbs_navbar( $current_step, $steps ) {
 
 function sbs_woocommerce_step_by_step_ordering_shortcode( $atts = [] ) {
 
-  // Set default shortcode attributes
-  $atts = shortcode_atts(
-    array(
-      'columns' => '4'
-    ), $atts, 'sbs_woocommerce_step_by_step_ordering'
-  );
-  $columns = $atts['columns'];
-  add_filter( 'loop_shop_columns', function( $cols ) use ( $columns ) {
-    return $columns;
-  }, 10 );
+	// Set default shortcode attributes
+	$atts = shortcode_atts(
+		array(
+			'columns' => '4'
+		), $atts, 'sbs_woocommerce_step_by_step_ordering'
+	);
+	$columns = $atts['columns'];
+	add_filter( 'loop_shop_columns', function( $cols ) use ( $columns ) {
+		return $columns;
+	}, 10 );
 
-  $active_packages = sbs_get_active_packages();
-  $packages_enabled = get_option('sbs_package')['enabled'];
+	$active_packages = sbs_get_active_packages();
+	$packages_enabled = get_option('sbs_package')['enabled'];
 
-  $default_step = empty( $active_packages ) || !$packages_enabled ? 1 : 0;
+	$default_step = empty( $active_packages ) || !$packages_enabled ? 1 : 0;
 
-  $current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : $default_step;
+	$current_step = isset( $_GET['step'] ) && is_numeric( $_GET['step'] ) ? (int) $_GET['step'] : $default_step;
 
-  $all_categories = sbs_get_all_wc_categories();
+	$all_categories = sbs_get_all_wc_categories();
 
 	$steps = sbs_get_full_step_order( true );
 
-  if ( empty( $steps ) ) {
-    return '<div>This is the SBS Step-By-Step Ordering Page.  No ordering process has been set up yet; please access your admin settings and set up an ordering process.</div>';
-  }
+	if ( empty( $steps ) ) {
+		return '<div>This is the SBS Step-By-Step Ordering Page.  No ordering process has been set up yet; please access your admin settings and set up an ordering process.</div>';
+	}
 
 	foreach( $steps as $step ) {
 		if ( !empty( $step->children ) ) {
@@ -537,50 +537,50 @@ function sbs_woocommerce_step_by_step_ordering_shortcode( $atts = [] ) {
 		}
 	}
 
-  // Default to step 0 if an invalid step was requested
-  if ( !array_key_exists( $current_step, $steps ) ) {
-    $current_step = 0;
-  }
+	// Default to step 0 if an invalid step was requested
+	if ( !array_key_exists( $current_step, $steps ) ) {
+		$current_step = 0;
+	}
 
 	do_action( 'sbs_before_sbs_content', $current_step, $steps );
 
-  ob_start();
-  ?>
+	ob_start();
+	?>
 
-  <?php
-  if ( $current_step > 0 ): // Do not render on package selection page.
-  ?>
-    <div id="sbs-navbar">
-    	<?php sbs_render_sbs_navbar( $current_step, $steps ) ?>
-    </div>
+	<?php
+	if ( $current_step > 0 ): // Do not render on package selection page.
+		?>
+		<div id="sbs-navbar">
+			<?php sbs_render_sbs_navbar( $current_step, $steps ) ?>
+		</div>
 
-    <div>
-      <?php wc_print_notices() ?>
-    </div>
-  <?php
+		<div>
+			<?php wc_print_notices() ?>
+		</div>
+		<?php
 	endif;
-  ?>
+	?>
 
-  <div>
-    <?php sbs_render_step_by_step_ordering_content( $current_step, $steps, $columns ) ?>
-  </div>
+	<div>
+		<?php sbs_render_step_by_step_ordering_content( $current_step, $steps, $columns ) ?>
+	</div>
 
-  <?php
-  if ( $current_step > 0 ): // Do not render on package selection page.
-  ?>
+	<?php
+	if ( $current_step > 0 ): // Do not render on package selection page.
+	?>
 
-  <div id="sbs-store-back-forward-buttons-container">
-    <?php echo sbs_previous_step_button( $current_step, count($steps) ) ?>
-    <?php echo sbs_next_step_button( $current_step, count($steps) ) ?>
-  </div>
+		<div id="sbs-store-back-forward-buttons-container">
+			<?php echo sbs_previous_step_button( $current_step, count($steps) ) ?>
+			<?php echo sbs_next_step_button( $current_step, count($steps) ) ?>
+		</div>
 
-  <?php
+	<?php
 	endif;
-  ?>
+	?>
 
-  <?php
+	<?php
 
-  return ob_get_clean();
+	return ob_get_clean();
 }
 
 add_shortcode( 'sbs_woocommerce_step_by_step_ordering', 'sbs_woocommerce_step_by_step_ordering_shortcode' );
