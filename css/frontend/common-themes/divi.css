@@ -14,17 +14,25 @@
   }
 }
 
-.sbs-package-content.sbs-package-content-per-row-1 {
+.sbs-package-content {
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+.sbs-package-content.sbs-package-content-per-row-1 ul,
+.sbs-package-content.sbs-package-content-per-row-1 ol {
   padding-left: 33%;
   padding-right: 33%;
 }
 
-.sbs-package-content.sbs-package-content-per-row-2 {
+.sbs-package-content.sbs-package-content-per-row-2 ul,
+.sbs-package-content.sbs-package-content-per-row-2 ol {
   padding-left: 33%;
   padding-right: 33%;
 }
 
-.sbs-package-content.sbs-package-content-per-row-3 {
+.sbs-package-content.sbs-package-content-per-row-3 ul,
+.sbs-package-content.sbs-package-content-per-row-3 ol, {
   padding-left: 20%;
   padding-right: 20%;
 }
