@@ -98,8 +98,7 @@ function sbs_render_checkout_goback_button() {
 	$all_categories = sbs_get_all_wc_categories();
 	$steps = sbs_get_full_step_order();
 
-	$current_step = count($steps) - 1;
-	echo '<a class="button alt sbs-checkout-return" href="' . sbs_previous_step_url( $current_step, count($steps) ) . '">&#171; Return to Ordering</a>';
+	echo '<a class="button alt sbs-checkout-return" href="' . sbs_previous_step_url( 2, 2 ) . '">&#171; Return to Ordering</a>';
 
 }
 add_action( 'woocommerce_review_order_before_submit', 'sbs_render_checkout_goback_button', 10 );
