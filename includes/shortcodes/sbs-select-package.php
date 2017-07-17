@@ -93,7 +93,7 @@ function sbs_select_package_shortcode() {
 	<?php
 	} else {
 	?>
-		<div id="sbs-package-list" class="container">
+		<div id="sbs-package-list" class="sbs-container">
 			<?php foreach( $packages as $index => $package ) {
 			echo '<div class="grid-container ' . $grid_class . '">';
 			echo sbs_render_package_selection_box( $package->catid, $per_row );
