@@ -54,48 +54,34 @@ function sbs_select_package_shortcode() {
 	$active = sbs_is_package_section_active();
 	$steps = sbs_get_full_step_order();
 	$packages = sbs_get_active_packages( true );
-	$per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : 3;
+	// $per_row = isset( get_option('sbs_package')['per-row'] ) ? get_option('sbs_package')['per-row'] : 1;
+	$per_row = 1;
 
-	switch ( $per_row ) {
+	switch( $per_row ) {
 		case 1:
-		$container_width = '51%';
-		break;
+			$grid_class = 'col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2';
+			break;
 		case 2:
-		$container_width = '45%';
-		break;
+			$grid_class = 'col-sm-6';
+			break;
 		case 3:
-		$container_width = '30%';
-		break;
+			$grid_class = 'col-sm-4';
+			break;
 		case 4:
-		$container_width = '22%';
-		break;
+			$grid_class = 'col-md-3 col-sm-4';
+			break;
 		case 5:
-		$container_width = '19%';
-		break;
-		default:
-		$container_width = '30%';
-		break;
+			$grid_class = 'col-md-5ths col-sm-4';
+			break;
 	}
 
 	ob_start();
 	?>
-	<style>
-	@media (min-width: 768px) {
-		.sbs-package-container.woocommerce {
-			<?php echo apply_filters(
-				'sbs_package_container_flex_style',
-				sprintf('flex: 0 1 calc(%s - 4px);', $container_width ),
-				$container_width
-			); ?>
-		}
-	}
-	</style>
 	<?php
 	if ( !$packages || !$active )
 	{
 	?>
-
-	<div>
+		<div>
 		<?php echo apply_filters(
 			'sbs_empty_package_placeholder',
 			sprintf(
@@ -104,15 +90,16 @@ function sbs_select_package_shortcode() {
 				)
 			); ?>
 		</div>
-
-		<?php
+	<?php
 	} else {
-		?>
-
-		<div id="sbs-package-list">
-		<?php foreach( $packages as $package ) {
+	?>
+		<div id="sbs-package-list" class="container">
+			<?php foreach( $packages as $index => $package ) {
+			echo '<div class="grid-container ' . $grid_class . '">';
 			echo sbs_render_package_selection_box( $package->catid, $per_row );
-		} ?>
+			echo '</div>';
+			echo sbs_responsive_column_reset( $index, $per_row );
+			} ?>
 		</div>
 
 	<?php
