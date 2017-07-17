@@ -92,7 +92,7 @@ if ( get_option('sbs_package') === false ) {
 	);
 
 	if ( isset( $package_cat_id ) ) {
-		$sbs_package_defaults['category'] = $package_cat_id->term_id;
+		$sbs_package_defaults['category'] = $package_cat_id['term_id'];
 	}
 	add_option( 'sbs_package', $sbs_package_defaults );
 }
