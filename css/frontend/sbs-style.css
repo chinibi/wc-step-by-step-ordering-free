@@ -42,7 +42,7 @@
 
 #sbs-navbar span.step-span-container {
   width: 20%;
-  border: 4px solid white;
+  border: 4px solid transparent;
 }
 
 #sbs-navbar .step-div-container {
