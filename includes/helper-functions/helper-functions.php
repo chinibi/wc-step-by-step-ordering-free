@@ -264,6 +264,7 @@ function sbs_get_active_packages( $slice = false ) {
 	$package_order = array_filter( $package_order, function( $package ) {
 		return wc_get_product( $package->catid );
 	} );
+	$package_order = array_values( $package_order );
 
 	if ( $slice ) {
 		$package_order = array_slice( $package_order, 0, 1 );
