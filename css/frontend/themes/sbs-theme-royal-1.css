@@ -54,7 +54,7 @@
 }
 
 
-.woocommerce-message {
+.woocommerce-message, .woocommerce-info {
     background-color: #2481c8;
     font-weight: bold;
     color: #ffffff !important;

@@ -117,7 +117,7 @@
     color: #000000;
 }
 
-.woocommerce-message {
+.woocommerce-message, .woocommerce-info {
     background-color: #bbbbbb;
     font-weight: bold;
     color: #000000 !important;
