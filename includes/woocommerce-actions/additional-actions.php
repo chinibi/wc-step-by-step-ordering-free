@@ -207,3 +207,13 @@ if ( isset( get_option('sbs_general')['hide-placeholder-images'] ) && get_option
 		}
 	}
 }
+
+/**
+ * Prevent form autofocus in checkout since the cart shortcode
+ * is now at the top of the checkout page.
+ */
+function sbs_disable_checkout_autofocus( $fields ) {
+	$fields['billing']['billing_first_name']['autofocus'] = false;
+	return $fields;
+}
+add_action( 'woocommerce_checkout_fields', 'sbs_disable_checkout_autofocus', 15 );
