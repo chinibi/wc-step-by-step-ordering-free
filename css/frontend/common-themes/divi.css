@@ -1,3 +1,4 @@
+/* Main Content */
 /* Package Selection Page */
 .sbs-package-container {
   padding-bottom: 50px;
@@ -9,9 +10,11 @@
   }
 }
 
-.sbs-package-content {
-	padding-left: 20%;
-	padding-right: 20%;
+@media (min-width: 769px) {
+	.sbs-package-content {
+		padding-left: 20%;
+		padding-right: 20%;
+	}
 }
 
 .sbs-package-content.sbs-package-content-per-row-1 ul,
@@ -37,7 +40,7 @@
   margin: 0 auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
 	.sbs-package-content.sbs-package-content-per-row-1 ul,
 	.sbs-package-content.sbs-package-content-per-row-1 ol {
     padding-left: 14%;
@@ -55,6 +58,15 @@
     padding-left: 14%;
     padding-right: 14%;
   }
+}
+
+@media (min-width: 768px) and (max-width: 1080px) {
+	.sbs-package-content-per-row-3,
+	.sbs-package-content-per-row-4,
+	.sbs-package-content-per-row-5
+	{
+		font-size: 0.8em;
+	}
 }
 
 /* Step-By-Step Navbar */
@@ -159,6 +171,10 @@ p.sbs-subcat-description:last-of-type {
 }
 
 /* Calculator Widget */
+#sbs-widget-sidebar-cart-totals {
+	border: none;
+}
+
 .sbs-widget-sidebar-merch-credit .sbs-widget-sidebar-total-column {
   border-top: none !important;
 }

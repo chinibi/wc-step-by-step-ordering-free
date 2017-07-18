@@ -100,6 +100,8 @@ final class StepByStepSystem {
 			wp_enqueue_script( 'accountingjs', plugins_url( '/js/frontend/accounting.min.js', __FILE__ ) );
 			wp_enqueue_script( 'magnific-popupjs', plugins_url( '/js/frontend/magnific-popup.min.js', __FILE__ ), array( 'jquery' ) );
 			wp_enqueue_script( 'zoom', plugins_url( '/js/frontend/zoom.min.js', __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'jquery-match-height', plugins_url( '/js/frontend/jquery.matchHeight-min.js', __FILE__ ), array( 'jquery' ) );
+			wp_enqueue_script( 'sbs-use-match-height', plugins_url( '/js/frontend/sbs-use-matchheight.js', __FILE__ ), array( 'jquery-match-height' ) );
 		}
 
 		// Scripts to be enqueued only on SBS pages
