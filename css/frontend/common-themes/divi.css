@@ -197,4 +197,5 @@ p.sbs-subcat-description:last-of-type {
 /* Options and Fees table */
 .woocommerce.sbs-options-and-fees tr td {
   padding: 15px 24px;
+  border: none;
 }

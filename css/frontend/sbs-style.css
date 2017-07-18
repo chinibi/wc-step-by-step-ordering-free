@@ -204,12 +204,12 @@ h1.step-by-step-title {
 }
 
 @media (min-width: 769px) {
-	.sbs-package-content-per-row-5 {
-		font-size: 0.8em;
-	}
-	.sbs-package-content-per-row-4 {
-		font-size: 0.9em;
-	}
+  .sbs-package-content-per-row-5 {
+    font-size: 0.8em;
+  }
+  .sbs-package-content-per-row-4 {
+    font-size: 0.9em;
+  }
 }
 
 .sbs-package-container {
@@ -332,6 +332,10 @@ h1.step-by-step-title {
   margin-bottom: 1em;
 }
 
+.sbs-options-and-fees .sbs-subcat-name {
+	margin-bottom: 0;
+}
+
 .sbs-subcat-description {
   font-size: 1.2em;
   margin-bottom: 1em;
@@ -354,6 +358,11 @@ a.sbs-change-package-btn:hover {
 /* Options and Fees Table */
 table.sbs-options-and-fees {
   width: 100%;
+	background-color: white;
+}
+
+.sbs-options-and-fees tr:nth-child(odd) {
+	background-color: #eee;
 }
 
 .sbs-options-and-fees td {

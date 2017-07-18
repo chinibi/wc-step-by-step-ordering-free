@@ -49,6 +49,41 @@ function sbs_render_package_selection_box( $product_id, $per_row ) {
 	return ob_get_clean();
 }
 
+function sbs_responsive_column_reset( $index, $per_row ) {
+	switch( $per_row ) {
+		case 1:
+			$grid_class = 'col-sm-6';
+			$offset_grid_class = ' col-sm-offset-3';
+			break;
+		case 2:
+			if ( ($index + 1) % 2 === 0 ) {
+				echo '<div class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>';
+			}
+			break;
+		case 3:
+			if ( ($index + 1) % 3 === 0 ) {
+				echo '<div class="clearfix visible-sm-block visible-md-block visible-lg-block"></div>';
+			}
+			break;
+		case 4:
+			if ( ($index + 1) % 3 === 0 ) {
+				echo '<div class="clearfix visible-sm-block"></div>';
+			}
+			if ( ($index + 1) % 4 === 0 ) {
+				echo '<div class="clearfix visible-md-block visible-lg-block"></div>';
+			}
+			break;
+		case 5:
+			if ( ($index + 1) % 3 === 0 ) {
+				echo '<div class="clearfix visible-sm-block"></div>';
+			}
+			if ( ($index + 1) % 5 === 0 ) {
+				echo '<div class="clearfix visible-md-block visible-lg-block"></div>';
+			}
+			break;
+	}
+}
+
 function sbs_select_package_shortcode() {
 
 	$active = sbs_is_package_section_active();
