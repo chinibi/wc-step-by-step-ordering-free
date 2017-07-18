@@ -125,10 +125,10 @@ add_filter( 'woocommerce_cart_item_class', 'sbs_highlight_package_checkout', 10,
 
 
 function sbs_add_cart_shortcode_to_checkout() {
-
 	echo '<h2>Review Your Order</h2>';
+	echo '<div class="sbs-checkout-cart-section">';
 	echo do_shortcode( '[woocommerce_cart]' );
-
+	echo '</div>';
 }
 add_action( 'woocommerce_before_checkout_form', 'sbs_add_cart_shortcode_to_checkout', 10 );
 

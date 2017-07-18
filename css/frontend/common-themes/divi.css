@@ -199,3 +199,8 @@ p.sbs-subcat-description:last-of-type {
   padding: 15px 24px;
   border: none;
 }
+
+/* Checkout Page */
+#order_review_heading {
+	margin-top: 2em;
+}

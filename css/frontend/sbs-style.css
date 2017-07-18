@@ -445,6 +445,10 @@ th.sbs-subcat-name[colspan="1"] {
 }
 
 /* Checkout Page */
+.sbs-checkout-cart-section table.cart td.actions .coupon {
+	display: none;
+}
+
 .checkout-package {
   background-color: lightgreen;
 }
