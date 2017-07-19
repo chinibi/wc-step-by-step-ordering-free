@@ -137,7 +137,8 @@
 .woocommerce button.button.alt,
 .woocommerce button.button.alt:hover,
 .woocommerce input.button.alt,
-.woocommerce .actions .button
+.woocommerce .actions .button,
+.woocommerce .checkout_coupon .button
 {
     background-color: #000000 !important;
     color: #ffffff !important;

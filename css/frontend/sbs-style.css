@@ -49,6 +49,10 @@
   text-align: center;
 }
 
+#sbs-navbar .active .step-title-text {
+  font-weight: bold;
+}
+
 #sbs-navbar .step-index > span.step-number {
   background-color: #b5b5b5;
   height: 45px;
@@ -451,6 +455,7 @@ th.sbs-subcat-name[colspan="1"] {
 
 .checkout-package {
   background-color: lightgreen;
+  font-weight: bold;
 }
 
 .grid-container {
