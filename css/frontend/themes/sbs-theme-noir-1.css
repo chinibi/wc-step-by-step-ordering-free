@@ -136,7 +136,8 @@
 .woocommerce button.button,
 .woocommerce button.button.alt,
 .woocommerce button.button.alt:hover,
-.woocommerce input.button.alt
+.woocommerce input.button.alt,
+.woocommerce .actions .button
 {
     background-color: #000000 !important;
     color: #ffffff !important;
