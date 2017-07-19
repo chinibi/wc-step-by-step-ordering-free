@@ -59,7 +59,6 @@
 
 #sbs-navbar .step-title.active > a {
     color: #ffffff;
-    font-weight: 600;
 }
 
 #sbs-navbar .step-index > span.step-number {
@@ -110,7 +109,6 @@
 #sbs-navbar .step-title-text a {
     display: block;
     color: #000000;
-    font-weight: 600;
 }
 
 #sbs-navbar .step-title-text a:hover {

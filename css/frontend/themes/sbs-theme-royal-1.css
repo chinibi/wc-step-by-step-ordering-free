@@ -73,7 +73,6 @@
 #sbs-navbar .step-title.active {
     background-color: #084675;
     color: #ffffff;
-    font-weight: 600;
 }
 
 #sbs-navbar .step-title.active:before {
