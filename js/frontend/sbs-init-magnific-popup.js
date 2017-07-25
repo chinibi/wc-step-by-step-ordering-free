@@ -1,10 +1,9 @@
 (function($) {
 
 $(document).ready(function() {
-  console.log('use-magnific-popup.js loaded');
   // prevent thumbnails on shop pages from opening links; they will instead
   // open a modal
-  $('.woocommerce-LoopProduct-link').click(function(e) {
+  $('.woocommerce-LoopProduct-link, .woocommerce-LoopProduct-link img, .woocommerce-LoopProduct-link .woocommerce-loop-product__title, .woocommerce-LoopProduct-link .price').on('contextmenu', function(e) {
     e.preventDefault();
   });
 
