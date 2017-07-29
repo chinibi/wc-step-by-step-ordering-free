@@ -1,6 +1,6 @@
 === Step-By-Step Ordering System for WooCommerce ===
 Contributors: dreambuilders, trevorpham
-Tags: woocommerce, shopping, step-by-step, customizable, e-commerce
+Tags: woocommerce, shopping, step-by-step, ordering, e-commerce
 Requires at least: 4.4
 Tested up to: 4.8
 Stable tag: 1.2.1
