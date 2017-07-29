@@ -291,7 +291,7 @@ function sbs_render_optional_products( $category_id, $columns ) {
 }
 
 
-function sbs_render_product_category( $category_id ) {
+function sbs_render_product_category( $category_id, $columns ) {
 
 	$sub_term = get_term_by('id', $category_id, 'product_cat', 'ARRAY_A');
 
@@ -328,7 +328,7 @@ function sbs_render_product_category( $category_id ) {
 
 		echo '<h3 class="sbs-subcat-name">' . $sub_term['name'] . '</h3>';
 		echo '<p class="sbs-subcat-description">' . $sub_term['description'] . '</p>';
-		echo '<div class="woocommerce columns-4">';
+		echo '<div class="woocommerce columns-' . $columns . '">';
 		woocommerce_product_loop_start();
 
 		while ( $query->have_posts() ):

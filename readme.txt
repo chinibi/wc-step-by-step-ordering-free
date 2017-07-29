@@ -1,9 +1,9 @@
 === Step-By-Step Ordering System for WooCommerce ===
 Contributors: dreambuilders, trevorpham
-Tags: woocommerce, catalog, ordering, system, step-by-step, customizable, e-commerce, store, step by step
+Tags: woocommerce, shopping, step-by-step, customizable, e-commerce
 Requires at least: 4.4
 Tested up to: 4.8
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,12 +13,13 @@ A configurable step-by-step ordering e-commerce ordering system to enhance what 
 
 = Offer Your Customers an Enhanced Shopping Experience =
 
-The Step-By-Step Ordering System For WooCommerce is a fully functional plugin that works in conjunction with WooCommerce and takes your Wordpress shopping system to a whole new level.  Our system was built to focus on the shopping experience by offering online buyers a guided step-by-step visit through your online store.
+The Step-By-Step Ordering System For WooCommerce is a fully functional e-commerce plugin that works in conjunction with WooCommerce and takes your WordPress shopping system to a whole new level.  Our system was built to focus on the shopping experience by offering online buyers a guided step-by-step visit through your online store.
 
 = Demos =
 
 We've made a few example sites to demonstrate the plugin.  Try them out here:
-* [Flying Ninja](http://sbslight.stepbystepsys.com) - Example of SBS LIGHT
+
+* [Flying Ninja Music and Clothing](http://sbslight.stepbystepsys.com) - Example of SBS LIGHT
 * [Chicagoman](http://chicagoman.stepbystepsys.com) - Example of SBS LIGHT
 * [Chicagoman Pro](http://chicagomanpro.stepbystepsys.com) - Example of SBS PRO
 * [Pizza Restaurant](http://plugin.stepbystepsys.com) - Example of SBS PRO
@@ -26,7 +27,7 @@ We've made a few example sites to demonstrate the plugin.  Try them out here:
 
 = How It Works =
 
-The Step-By-Step system works by offering step-by-step shopping.  This style of shopping is great for those who have packaged products or those who sell products in "layers" or "add-ons."  It offers buyers an opportunity to purchase products in a packaged, grouped or cross-promoted fashion.  Simply install the plugin and read the instructions provided. As you begin to work with the Step-By-Step system, you will see how easily it integrates into the WooCommerce interface. Create your sales packages, list your products for sale, and you’re ready to roll!
+The Step-By-Step system works by offering step-by-step shopping.  This style of shopping is great for those who have packaged products or those who sell products in "layers" or "add-ons."  It offers buyers an opportunity to purchase products in a packaged, grouped or cross-promoted fashion.  Simply install the plugin and read the instructions provided. As you begin to work with the Step-By-Step e-commerce system, you will see how easily it integrates into the WooCommerce interface. Create your sales packages, list your products for sale, and you’re ready to roll!
 
 = Great Scalability =
 
@@ -80,7 +81,7 @@ Extend your customer's WooCommerce capabilities.  Give their stores the enhancem
 
 = Great For Store Owner's Needs =
 
-Drive more sales to your store by adding the SBS package-driven step-by-step system to your website.  Combined with the power of WooCommerce, the Step-By-Step Ordering System combines integrates our product with theirs. You can't go wrong!
+Combined with the power of WooCommerce, the Step-By-Step E-Commerce Ordering System combines integrates our product with theirs. You can’t go wrong!
 
 = Step-By-Step Ordering System for WooCommerce - SBS Light Version =
 
@@ -716,6 +717,10 @@ Not at this time, however this might become an option at a later date. We curren
 The license only covers one site at a time. However, you are welcome to install the plugin on your test server first, to see how it works and operates. Once you complete your testing, you can remove it from the Test Server and set it up on the Live Server you plan to use it on.
 
 == Changelog ==
+= v1.2.1 =
+* Fixed the "columns" argument passed into the sbs_step_by_step_ordering shortcode not properly setting column width.
+* Removed the ability to right-click on product images in SBS pages.
+
 = v1.2.0 =
 * Official Public Release
 * Made a free version of plugin, full version moved to stepbystepsys.com website
