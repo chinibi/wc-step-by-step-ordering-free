@@ -20,7 +20,7 @@ if ( ! class_exists( 'StepByStepSystem' ) ):
 
 final class StepByStepSystem {
 
-	public $version = '1.2.1';
+	public $version = '1.2.2';
 
 	public function __construct() {
     $this->define_constants();
