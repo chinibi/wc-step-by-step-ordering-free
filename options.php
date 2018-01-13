@@ -924,7 +924,7 @@ function sbs_req_feat_label_callback() {
 
 function sbs_sbs_table_callback() {
 
-  // get_the_category_by_ID() only works if this function is called for some reason
+  // get_term() only works if this function is called for some reason
   $available_categories = sbs_get_all_wc_categories();
 
 	$step_order = sbs_get_step_order( true );
@@ -979,8 +979,8 @@ function sbs_sbs_table_callback() {
 							foreach( $step_order as $category )
 							{
 								?>
-								<li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_category($category->catid)->category_parent ?>">
-									<?php echo get_the_category_by_ID( $category->catid ) ?>
+								<li data-catid="<?php echo $category->catid ?>" class="sortable-item" parent-id="<?php echo get_term($category->catid)->category_parent ?>">
+									<?php echo get_term( $category->catid )->name ?>
 									<div class="alignright">
 										<span class="sbs-sortable-item-move-up">&#9650;</span>
 										<span class="sbs-sortable-item-move-down">&#9660;</span>
@@ -993,9 +993,9 @@ function sbs_sbs_table_callback() {
 										foreach( $category->children as $child )
 										{
 											?>
-											<li class="sortable-item sortable-nested-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_category($child->catid)->category_parent ?>">
+											<li class="sortable-item sortable-nested-item" data-catid="<?php echo $child->catid ?>" parent-id="<?php echo get_term($child->catid)->parent ?>">
 												<span class="subcat-name">
-													<?php echo get_the_category_by_ID( $child->catid ) ?>
+													<?php echo get_term( $child->catid )->name ?>
 												</span>
 												<div class="alignright">
 													<span class="sbs-sortable-item-move-up">&#9650;</span>
@@ -1029,7 +1029,7 @@ function sbs_sbs_table_callback() {
 
 							<?php if ( $category->category_parent === 0 ): ?>
 
-								<li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo $category->category_parent ?>">
+								<li data-catid="<?php echo $category->term_id ?>" class="sortable-item" parent-id="<?php echo get_term($category->catid)->parent ?>">
 									<?php echo $category->name ?>
 									<div class="alignright">
 										<span class="sbs-sortable-item-move-up">&#9650;</span>
@@ -1044,7 +1044,7 @@ function sbs_sbs_table_callback() {
 											<?php foreach( $children as $child_id ): ?>
 
 												<li data-catid="<?php echo $child_id ?>" class="sortable-item" parent-id="<?php echo $category->term_id ?>">
-													<?php echo get_the_category_by_ID( $child_id ) ?>
+													<?php echo get_term( $child_id )->name ?>
 													<div class="alignright">
 														<span class="sbs-sortable-item-move-up">&#9650;</span>
 														<span class="sbs-sortable-item-move-down">&#9660;</span>

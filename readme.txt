@@ -717,6 +717,9 @@ Not at this time, however this might become an option at a later date. We curren
 The license only covers one site at a time. However, you are welcome to install the plugin on your test server first, to see how it works and operates. Once you complete your testing, you can remove it from the Test Server and set it up on the Live Server you plan to use it on.
 
 == Changelog ==
+= v1.2.2=
+* Fixed step names not appearing in WordPress 4.9
+
 = v1.2.1 =
 * Fixed the "columns" argument passed into the sbs_step_by_step_ordering shortcode not properly setting column width.
 * Removed the ability to right-click on product images in SBS pages.

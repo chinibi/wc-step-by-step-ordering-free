@@ -365,7 +365,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps, $colum
 	if ( $steps[$current_step]->type === 'main' ) {
 
 		$cat_term = get_term_by( 'id', $steps[$current_step]->catid, 'product_cat', 'ARRAY_A' );
-		$current_category_name = get_the_category_by_ID( $steps[$current_step]->catid );
+		$current_category_name = get_term( $steps[$current_step]->catid )->name;
 
 		echo '<h1 class="sbs-step-title">Step ' . $current_step . ': ' . $current_category_name . '</h1>';
 		echo '<p>' . $cat_term['description'] . '</p>';

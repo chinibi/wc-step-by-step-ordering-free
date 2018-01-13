@@ -358,7 +358,7 @@ function sbs_get_full_step_order( $slice = false ) {
 	}
 
 	foreach( $steps as $step ) {
-		$step->name = get_the_category_by_ID( $step->catid );
+		$step->name = get_term( $step->catid )->name;
 		$step->type = 'main';
 	}
 	$steps_package = new stdClass();

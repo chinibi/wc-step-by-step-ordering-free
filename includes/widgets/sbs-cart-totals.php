@@ -184,7 +184,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 		}
 
 		return array(
-			'cat_name' => $step_number . get_the_category_by_ID( $category->catid ),
+			'cat_name' => $step_number . get_term( $category->catid )->name,
 			'cat_total' => wc_price( sbs_get_cart_total_of_category( $category->catid ) ),
 			'css_class' => 'sbs-widget-sidebar-category'
 		);
