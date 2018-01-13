@@ -3,7 +3,7 @@
 Plugin Name: Step-By-Step Ordering System for WooCommerce
 Plugin URI:  http://stepbystepsys.com
 Description: Guide customers through your customized ordering process. Requires WooCommerce.
-Version:     1.2.1
+Version:     1.2.2
 Author:      Trevor Pham, Andrew Lambros, The Dream Builders Company
 Author URI:  http://dreambuilders.co/
 License:     GPL2
