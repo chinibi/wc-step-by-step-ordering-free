@@ -1,9 +1,9 @@
 === Step-By-Step Ordering System for WooCommerce ===
 Contributors: dreambuilders, trevorpham
 Tags: woocommerce, shopping, step-by-step, ordering, e-commerce
-Requires at least: 4.4
-Tested up to: 4.9.1
-Stable tag: 1.2.2
+Requires at least: 4.7
+Tested up to: 4.9.4
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -717,6 +717,9 @@ Not at this time, however this might become an option at a later date. We curren
 The license only covers one site at a time. However, you are welcome to install the plugin on your test server first, to see how it works and operates. Once you complete your testing, you can remove it from the Test Server and set it up on the Live Server you plan to use it on.
 
 == Changelog ==
+= v1.2.5 =
+* Fix modal add-to-cart behavior.
+
 = v1.2.2 =
 * Fixed step names not appearing in WordPress 4.9
 
