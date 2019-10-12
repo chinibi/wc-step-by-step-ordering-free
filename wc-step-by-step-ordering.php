@@ -3,15 +3,15 @@
 Plugin Name: Step-By-Step Ordering System for WooCommerce
 Plugin URI:  http://stepbystepsys.com
 Description: Guide customers through your customized ordering process. Requires WooCommerce.
-Version:     1.2.10
+Version:     1.3.0
 Author:      Trevor Pham, Andrew Lambros, The Dream Builders Company
 Author URI:  http://dreambuilders.co/
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: wporg
+Text Domain: wc-step-by-step-ordering
 Domain Path: /languages
 WC requires at least: 3.0
-WC tested up to: 3.6.2
+WC tested up to: 3.7.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,7 +22,7 @@ if ( ! class_exists( 'StepByStepSystem' ) ):
 
 final class StepByStepSystem {
 
-	public $version = '1.2.10';
+	public $version = '1.3.0';
 
 	public function __construct() {
     $this->define_constants();
