@@ -1921,6 +1921,8 @@ function sbs_render_admin_help_page() {
 				<li><a href="#widgets">Widgets</a></li>
 				<li><a href="#stepbystep">Step-By-Step</a></li>
 				<li><a href="#themes">Themes</a></li>
+				<li><a href="#translating">Translating</a></li>
+				<li><a href="#issues">Common Issues and Troubleshooting</a></li>
 				<li><a href="#premium">Premium</a></li>
 				<li><a href="#uninstall">Uninstalling</a></li>
 			</ul>
@@ -2022,6 +2024,97 @@ function sbs_render_admin_help_page() {
 		<p>The Choose Package page is best displayed on the Full width template, which
 		you can select when you edit that page on the right-hand sidebar.  The default
 		template is recommended for the Ordering page.</p>
+
+		<h3 id="translating">Translating</h3>
+    <p>Text in Step-By-Step is now available for translation with your favorite translation plugin!
+      This will greatly enhance your capabilities to communicate in your language without having to
+      do any special "hard coding" or altering system files.  Your translations will be saved through
+      every plugin update.</p>
+    <p>Using a plugin such as <a target="_blank" rel="noopener noreferrer" href="https://wordpress.org/plugins/loco-translate/">Loco Translate</a>
+      or a variety of others available, you can translate the Step-By-Step text in your store to any language you want.</p>
+    <p>Here's an example if you're using Loco Translate:<br>
+      <ol>
+        <li>When you have Loco Translate installed, go to your Dashboard of your Wordpress site and select Loco Translate > Languages.</li>
+        <li>Navigate to your language and select your language.</li>
+        <li>Once selected, go to the area called "Plugins" and select "Step-By-Step Ordering System For WooCommerce"</li>
+        <li>Make the appropriate edits for your language and click on "Save"</li>
+        <li>Your changed updates will appear in the Step-By-Step system.</li>
+      </ol>
+    </p>
+    <p>Translatable fields include:
+      <ul style="list-style-type: square; padding-left: 30px;">
+        <li>"Learn More"</li>
+        <li>"Select Package"</li>
+        <li>"GO BACK"</li>
+        <li>"NEXT"</li>
+        <li>"Step"</li>
+        <li>"Options"</li>
+        <li>"Change Package"</li>
+        <li>"Packages"</li>
+        <li>"Store Credit" [Premium]</li>
+        <li>"Merchandise Credit" [Premium]</li>
+        <li>"of"</li>
+        <li>"Sales Tax"</li>
+        <li>"SUBTOTAL"</li>
+        <li>"TOTAL"</li>
+        <li>"Step-By-Step Ordering"</li>
+        <li>"Qty."</li>
+        <li>"In Cart"</li>
+        <li>"Remove"</li>
+        <li>"Change Selection"</li>
+				<li>"Review Your Order"</li>
+				<li>"(Required)" [Premium]</li>
+        <li>"Required" [Premium]</li>
+        <li>"Product must be in cart in order to check out." [Premium]</li>
+        <li>"Auto Add To Cart" [Premium]</li>
+        <li>"Automatically add to cart when customer navigates to containing page." [Premium]</li>
+        <li>"You must add required items to your cart before proceeding: %s" [Premium]</li>
+        <li>"You must add required products to the cart before you can checkout. Click here to add required products." [Premium]</li>
+      </ul>
+    </p>
+    <p>Note: Some of the Step-By-Step text, such as the Package Selection button,
+      is customizable in the Step-By-Step settings instead.  If you can’t find the text
+      you want to translate in your translation plugin look in the Step-By-Step settings first!</p>
+
+    <h3 id="issues">Common Issues and Troubleshooting</h3>
+    <h4>&#8226; Plugin Conflicts</h4>
+    <p>Many issues are caused by plugins trying to perform actions on the same
+      WooCommerce functions as Step-By-Step does.  Here's one way to identify
+      which plugins conflict with ours:</p>
+    <ol>
+      <li>Disable all plugins except WooCommerce and Step-By-Step</li>
+      <li>Activate one plugin and check for issues</li>
+      <li>Disable that plugin, activate another plugin, repeat step 2</li>
+    </ol>
+    <p>When you have identified the conflicting plugins, please send an email
+      to stepbystep@dreambuilderscompany.com and we'll be happy to take a look.</p>
+
+    <h4>&#8226; Advanced CSS Theme Conflicts and Resolution Techniques</h4>
+    <p>Depending on what theme you are using, you may encounter some CSS issues
+      related to the look and feel of SBS. Usually, this can happen when your
+      theme overrides the CSS which various plugins may use. If this happens,
+      you can try copying the css from SBS directly into your main CSS
+      location(s) for your theme.  The main SBS CSS can be found in:</p>
+
+    <p>wp-content/plugins/wc-step-by-step-ordering/css/frontend/sbs-style.css</p>
+
+    <p>Just copy everything in that file into your theme CSS.</p>
+
+    <h4>&#8226; Add to Cart Button takes the user out of the Step-By-Step process</h4>
+    <p>Some 3rd party product plugins can potentially present conflicts with SBS.
+    This usually happens when the "Add To Cart" function of the product is
+    controlled by another plugin.  By using a plugin such as <a href="https://wordpress.org/plugins/woocommerce-add-to-cart-custom-redirect/" target="_blank">WooCommerce Add to
+    Cart Custom Redirect</a>, you can control where the "Add To Cart" function
+    goes for a specific product. Simply point the product you are having this
+    issue with to the step number the product belongs to: (eg: If the product is
+    in Step 1, then redirect to "/ordering/?step=1")</p>
+
+    <h4>&#8226; "Go Back", "Next", or "View Cart" buttons are directing me out of the ordering process to pages like the Home page</h4>
+    <p>Make sure your WooCommerce and SBS pages are correctly assigned in your settings.</p>
+    <ol>
+      <li>Go to WooCommerce > Settings > Advanced and make sure the Cart and Checkout pages are correctly assigned.</li>
+      <li>Go to WooCommerce > Step-By-Step Ordering and make sure the Step-By-Step Ordering Page is set to the page containing the ordering process (default is Step-By-Step Ordering).</li>
+    </ol>
 
 		<h3 id="premium">Step-By-Step Premium Upgrade</h3>
 

@@ -364,13 +364,13 @@ function sbs_get_full_step_order( $slice = false ) {
 	$steps_package = new stdClass();
 
 	//if ( isset( get_option('sbs_package')['category'] ) ) {
-		$steps_package->name = 'Packages';
-		$steps_package->catid = get_option('sbs_package')['category'];
-		$steps_package->type = 'package';
+	$steps_package->name = __('Packages', 'wc-step-by-step-ordering');
+	$steps_package->catid = get_option('sbs_package')['category'];
+	$steps_package->type = 'package';
 	//}
 
 	$steps_checkout = new stdClass();
-	$steps_checkout->name = 'Checkout';
+	$steps_checkout->name = __('Checkout', 'wc-step-by-step-ordering');
 	$steps_checkout->type = 'checkout';
 
 	array_unshift( $steps, $steps_package );

@@ -54,19 +54,19 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 		$woocommerce->cart->calculate_fees();
 
 		$totals[] = array(
-			'cat_name' => 'SUBTOTAL',
+			'cat_name' => __('SUBTOTAL', 'wc-step-by-step-ordering'),
 			'cat_total' => wc_price( $woocommerce->cart->subtotal - $woocommerce->cart->get_taxes_total() ),
 			'css_class' => 'sbs-widget-sidebar-subtotal'
 		);
 
 		$totals[] = array(
-			'cat_name' => 'Sales Tax',
+			'cat_name' => __('Sales Tax', 'wc-step-by-step-ordering'),
 			'cat_total' => wc_price( $woocommerce->cart->get_taxes_total() ),
 			'css_class' => 'sbs-widget-sidebar-category'
 		);
 
 		$totals[] = array(
-			'cat_name' => 'TOTAL',
+			'cat_name' => __('TOTAL', 'wc-step-by-step-ordering'),
 			'cat_total' => 	wc_price( max( 0, apply_filters( 'woocommerce_calculated_total', round( $woocommerce->cart->cart_contents_total + $woocommerce->cart->tax_total + $woocommerce->cart->shipping_tax_total + $woocommerce->cart->shipping_total + $woocommerce->cart->fee_total, $woocommerce->cart->dp ), $woocommerce->cart ) ) ),
 			'css_class' => 'sbs-widget-sidebar-grand-total'
 		);

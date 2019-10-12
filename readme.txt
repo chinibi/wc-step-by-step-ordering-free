@@ -3,7 +3,7 @@ Contributors: dreambuilders, trevorpham
 Tags: woocommerce, shopping, step-by-step, ordering, e-commerce
 Requires at least: 4.7
 Tested up to: 5.2
-Stable tag: 1.2.9
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -717,7 +717,7 @@ Not at this time, however this might become an option at a later date. We curren
 The license only covers one site at a time. However, you are welcome to install the plugin on your test server first, to see how it works and operates. Once you complete your testing, you can remove it from the Test Server and set it up on the Live Server you plan to use it on.
 
 == Changelog ==
-= v1.2.9 =
+= v1.2.10 =
 * Bump WC to version 3.6.2, WP to 5.2
 
 = v1.2.5 =

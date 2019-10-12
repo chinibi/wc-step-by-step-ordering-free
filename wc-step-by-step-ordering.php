@@ -3,7 +3,7 @@
 Plugin Name: Step-By-Step Ordering System for WooCommerce
 Plugin URI:  http://stepbystepsys.com
 Description: Guide customers through your customized ordering process. Requires WooCommerce.
-Version:     1.2.9
+Version:     1.2.10
 Author:      Trevor Pham, Andrew Lambros, The Dream Builders Company
 Author URI:  http://dreambuilders.co/
 License:     GPL2
@@ -22,7 +22,7 @@ if ( ! class_exists( 'StepByStepSystem' ) ):
 
 final class StepByStepSystem {
 
-	public $version = '1.2.9';
+	public $version = '1.2.10';
 
 	public function __construct() {
     $this->define_constants();
@@ -70,10 +70,19 @@ final class StepByStepSystem {
 		register_activation_hook( __FILE__, array( $this, 'plugin_activation' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'plugin_deactivation' ) );
 
+		add_action( 'init', array( $this, 'load_text_domain' ) );
 		add_action( 'wp_head', array( $this, 'sbs_define_ajax_url' ) );
 		add_action( 'admin_head', array( $this, 'sbs_define_ajax_url' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_enqueue_client_style_scripts' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'sbs_dequeue_third_party_scripts'), 20 );
+	}
+
+	public function load_text_domain()
+	{
+			$po_rel_path = apply_filters('sbs_po_rel_path', '../languages/loco/plugins');
+			if (file_exists(WP_PLUGIN_DIR . '/' . $po_rel_path)) {
+				load_plugin_textdomain('wc-step-by-step-ordering', false, $po_rel_path);
+			}
 	}
 
 	public function plugin_activation() {

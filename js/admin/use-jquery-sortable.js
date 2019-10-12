@@ -2,12 +2,12 @@
   $(document).ready(function() {
 
     function serializeData() {
-      var data = $('#sbs-order').sortable('serialize').get();
+      var data = $('#sbs-order').sbssortable('serialize').get();
       var jsonString = JSON.stringify(data);
       $('input#step_order').val(jsonString);
     }
 
-    var group = $('.sortable').sortable({
+    var group = $('.sortable').sbssortable({
       group: 'sortable',
       nested: true,
       isValidTarget: function($item, container) {

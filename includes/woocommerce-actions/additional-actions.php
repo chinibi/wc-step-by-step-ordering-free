@@ -125,7 +125,7 @@ add_filter( 'woocommerce_cart_item_class', 'sbs_highlight_package_checkout', 10,
 
 
 function sbs_add_cart_shortcode_to_checkout() {
-	echo '<h2>Review Your Order</h2>';
+	echo '<h2>' . __('Review Your Order', 'wc-step-by-step-ordering') . '</h2>';
 	echo '<div class="sbs-checkout-cart-section">';
 	echo do_shortcode( '[woocommerce_cart]' );
 	echo '</div>';

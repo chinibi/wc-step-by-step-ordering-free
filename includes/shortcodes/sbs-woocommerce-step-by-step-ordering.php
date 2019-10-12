@@ -58,15 +58,15 @@ function sbs_previous_step_button( $current_step, $step_count ) {
 
 		ob_start();
 		?>
-			<?php if ( $previous_step === 0 ): ?>
+		<?php if ($previous_step === 0): ?>
 				<div class="sbs-store-back-forward-buttons">
-					<a href="<?php echo esc_url( $package_base_url ) ?>">&#171; GO BACK</a>
+						<a href="<?php echo esc_url($package_base_url) ?>">&#171; <?php echo __('GO BACK', 'wc-step-by-step-ordering') ?></a>
 				</div>
-			<?php else: ?>
+		<?php else: ?>
 				<div class="sbs-store-back-forward-buttons">
-					<a href="<?php echo esc_url( $base_url . '?step=' . $previous_step ) ?>">&#171; GO BACK</a>
+						<a href="<?php echo esc_url($base_url . '?step=' . $previous_step) ?>">&#171; <?php echo __('GO BACK', 'wc-step-by-step-ordering') ?></a>
 				</div>
-			<?php endif ?>
+		<?php endif ?>
 		<?php
 		return ob_get_clean();
 
@@ -107,8 +107,8 @@ function sbs_next_step_button( $current_step, $step_count ) {
 		ob_start();
 		?>
 		<div class="sbs-store-back-forward-buttons">
-			<a href="<?php echo esc_url( $base_url . '?step=' . $next_step ) ?>">NEXT &#187;</a>
-		</div>
+      <a href="<?php echo esc_url($base_url . '?step=' . $next_step) ?>"><?php echo __('NEXT', 'wc-step-by-step-ordering') ?> &#187;</a>
+    </div>
 		<?php
 		return ob_get_clean();
 
@@ -184,7 +184,7 @@ function sbs_render_featured_products( $current_step, $steps, $columns ) {
 		'post_status' => 'publish',
 		'ignore_sticky_posts'	=> 1,
 		'posts_per_page' => -1,
-    'order' => 'ASC',
+		'order' => 'ASC',
 		'orderby' => 'menu_order',
 		'tax_query' => array(
 			array(
@@ -367,7 +367,7 @@ function sbs_render_step_by_step_ordering_content( $current_step, $steps, $colum
 		$cat_term = get_term_by( 'id', $steps[$current_step]->catid, 'product_cat', 'ARRAY_A' );
 		$current_category_name = get_term( $steps[$current_step]->catid )->name;
 
-		echo '<h1 class="sbs-step-title">Step ' . $current_step . ': ' . $current_category_name . '</h1>';
+		echo '<h1 class="sbs-step-title">' . __('Step', 'wc-step-by-step-ordering') . ' ' . $current_step . ': ' . $current_category_name . '</h1>';
 		echo '<p>' . $cat_term['description'] . '</p>';
 
 		if ( isset( get_option('sbs_general')['featured-items-position'] ) && get_option('sbs_general')['featured-items-position'] === '1' ) {

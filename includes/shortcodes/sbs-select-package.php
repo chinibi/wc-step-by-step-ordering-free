@@ -9,7 +9,7 @@ function sbs_render_package_selection_box( $product_id, $per_row ) {
 
 	$add_to_cart_url = $base_url . '?step=1&add-to-cart=' . $product_id;
 
-	$add_to_cart_text = apply_filters( 'sbs_select_package_add_to_cart_text', 'Select Package' );
+	$add_to_cart_text = apply_filters( 'sbs_select_package_add_to_cart_text', __('Select Package', 'wc-step-by-step-ordering') );
 
 	ob_start();
 	?>

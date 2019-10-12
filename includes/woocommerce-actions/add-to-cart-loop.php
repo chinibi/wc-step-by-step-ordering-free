@@ -50,10 +50,10 @@ function sbs_product_loop_mfp_modal() {
 	global $product;
 
 	if ( $product->is_sold_individually() && sbs_get_cart_key( $product->get_id() ) ) {
-		$open_popup_text = 'Change Selection';
+		$open_popup_text = __('Change Selection', 'wc-step-by-step-ordering');
 	}
 	else {
-		$open_popup_text = 'Learn More';
+		$open_popup_text = __('Learn More', 'wc-step-by-step-ordering');
 	}
 
 	if ( $product->get_image( 'shop_thumbnail', array(), false ) ) {
@@ -90,7 +90,7 @@ function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 	if ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() && ! $product->is_sold_individually() ) {
 		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
 		$html .= '<div class="loop-quantity-input">';
-		$html .= 'Qty.' . woocommerce_quantity_input( array(), $product, false );
+		$html .= __('Qty.', 'wc-step-by-step-ordering') . woocommerce_quantity_input(array(), $product, false);
 		$html .= '</div>';
 		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
 		$html .= '</form>';
@@ -102,7 +102,7 @@ function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 		$remove_url = $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] );
 
 		$html = '<form action="' . esc_url( $remove_url ) . '" class="cart" method="post" enctype="multipart/form-data">';
-		$html .= '<button type="submit" class="button alt">' . 'Remove' . '</button>';
+		$html .= '<button type="submit" class="button alt">' . __('Remove', 'wc-step-by-step-ordering') . '</button>';
 		$html .= '</form>';
 
 		return $html;
