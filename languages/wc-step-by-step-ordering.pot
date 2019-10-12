@@ -28,6 +28,9 @@ msgstr ""
 msgid "Select Package"
 msgstr ""
 
+msgid "Checkout"
+msgstr ""
+
 msgid "GO BACK"
 msgstr ""
 
@@ -44,12 +47,6 @@ msgid "Change Package"
 msgstr ""
 
 msgid "Packages"
-msgstr ""
-
-msgid "Store Credit"
-msgstr ""
-
-msgid "Merchandise Credit"
 msgstr ""
 
 msgid "of"

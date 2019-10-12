@@ -42,7 +42,7 @@ class SBS_WC_Cart_Totals extends WP_Widget {
 
 		if ( isset( $package ) && $package_enabled ) {
 			array_unshift( $totals, array(
-				'cat_name' => $package['item']['data']->get_name() . '<br /><a class="sbs-change-package-btn" href="' . get_permalink( $package_page ) . '">Change Package</a>',
+				'cat_name' => $package['item']['data']->get_name() . '<br /><a class="sbs-change-package-btn" href="' . get_permalink($package_page) . '">' . __('Change Package', 'wc-step-by-step-ordering') . '</a>',
 				'cat_total' => wc_price( $package['item']['line_total'] ),
 				'css_class' => 'sbs-widget-sidebar-package'
 				) );
