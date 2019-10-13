@@ -3,7 +3,7 @@ Contributors: dreambuilders, trevorpham
 Tags: woocommerce, shopping, step-by-step, ordering, e-commerce
 Requires at least: 4.7
 Tested up to: 5.2
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -717,6 +717,83 @@ Not at this time, however this might become an option at a later date. We curren
 The license only covers one site at a time. However, you are welcome to install the plugin on your test server first, to see how it works and operates. Once you complete your testing, you can remove it from the Test Server and set it up on the Live Server you plan to use it on.
 
 == Changelog ==
+= v1.3.1 =
+Text in Step-By-Step is now available for translation with your favorite translation plugin!  This will greatly enhance your capabilities to communicate in your language without having to do any special "hard coding" or altering system files.  Your translations will be saved through every plugin update.
+
+Using a plugin such as Loco Translate (https://wordpress.org/plugins/loco-translate/) or a variety of others available, you can translate the Step-By-Step text in your store to any language you want.
+
+Here’s an example if you’re using Loco Translate:
+* When you have Loco Translate installed, go to your Dashboard of your Wordpress site and select Loco Translate > Languages.
+* Navigate to your language and select your language.
+* Once selected, go to the area called "Plugins" and select "Step-By-Step Ordering System For WooCommerce"
+* Make the appropriate edits for your language and click on "Save"
+* Your changed updates will appear in the Step-By-Step system.
+
+Note: Some of the Step-By-Step text, such as the Package Selection button, is customizable in the Step-By-Step settings instead.  If you can’t find the text you want to translate in your translation plugin look in the Step-By-Step settings first!
+
+Translatable fields include:
+* "(Required)"
+* "Learn More"
+* "Select Package"
+* "GO BACK"
+* "NEXT"
+* "Step"
+* "Options"
+* "Change Package"
+* "Packages"
+* "Store Credit"
+* "Merchandise Credit"
+* "of"
+* "Sales Tax"
+* "SUBTOTAL"
+* "TOTAL"
+* "Step-By-Step Ordering"
+* "Qty."
+* "In Cart"
+* "Remove"
+* "Change Selection"
+* "Required"
+* "Product must be in cart in order to check out."
+* "Auto Add To Cart"
+* "Automatically add to cart when customer navigates to containing page."
+* "Review Your Order"
+* "You must add required items to your cart before proceeding: %s"
+* "You must add required products to the cart before you can checkout.  <a "
+"href=\"%s\">Click here</a> to pick required products."
+
+Text in Step-By-Step is now available for translation with your favorite translation plugin!  This will greatly enhance your capabilities to communicate in your language without having to do any special "hard coding" or altering system files.  Your translations will be saved through every plugin update.
+
+Using a plugin such as Loco Translate (https://wordpress.org/plugins/loco-translate/) or a variety of others available, you can translate the Step-By-Step text in your store to any language you want.
+
+Here’s an example if you’re using Loco Translate:
+* When you have Loco Translate installed, go to your Dashboard of your Wordpress site and select Loco Translate > Languages.
+* Navigate to your language and select your language.
+* Once selected, go to the area called "Plugins" and select "Step-By-Step Ordering System For WooCommerce"
+* Make the appropriate edits for your language and click on "Save"
+* Your changed updates will appear in the Step-By-Step system.
+
+Note: Some of the Step-By-Step text, such as the Package Selection button, is customizable in the Step-By-Step settings instead.  If you can’t find the text you want to translate in your translation plugin look in the Step-By-Step settings first!
+
+Translatable fields include:
+* "Learn More"
+* "Select Package"
+* "GO BACK"
+* "NEXT"
+* "Step"
+* "Options"
+* "Change Package"
+* "Packages"
+* "of"
+* "Sales Tax"
+* "SUBTOTAL"
+* "TOTAL"
+* "Step-By-Step Ordering"
+* "Qty."
+* "In Cart"
+* "Remove"
+* "Change Selection"
+* "Review Your Order"
+
 = v1.2.10 =
 * Bump WC to version 3.6.2, WP to 5.2
 

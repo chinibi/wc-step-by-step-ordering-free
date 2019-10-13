@@ -32,8 +32,8 @@ function sbs_product_loop_quantity_in_cart() {
 
 		echo '<div class="product-loop-in-cart">';
 		echo '<span class="product-loop-in-cart-text">';
-		echo esc_html( sbs_get_cart_key( $product->get_id() )['cart_item']['quantity'] ) . ' In Cart';
-		echo '<small class="product-loop-remove"><a href="' . esc_url( $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] ) ) . '">Remove</a></small>';
+		echo esc_html( sbs_get_cart_key( $product->get_id() )['cart_item']['quantity'] ) . ' ' . __('In Cart', 'wc-step-by-step-ordering');
+		echo '<small class="product-loop-remove"><a href="' . esc_url( $woocommerce->cart->get_remove_url( sbs_get_cart_key( $product->get_id() )['key'] ) ) . '">' . __('Remove', 'wc-step-by-step-ordering') . '</a></small>';
 		echo '</span></div>';
 
 	}
@@ -88,7 +88,7 @@ function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 	global $woocommerce;
 
 	if ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() && ! $product->is_sold_individually() ) {
-		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
+		$html = '<form action="' . esc_url( remove_query_arg( 'added-to-cart', add_query_arg( 'add-to-cart', $product->get_id() ) ) ) . '" class="cart" method="post" enctype="multipart/form-data">';
 		$html .= '<div class="loop-quantity-input">';
 		$html .= __('Qty.', 'wc-step-by-step-ordering') . woocommerce_quantity_input(array(), $product, false);
 		$html .= '</div>';
@@ -109,7 +109,7 @@ function sbs_woocommerce_loop_add_to_cart_link( $html, $product ) {
 	}
 
 	elseif ( $product && $product->is_type( 'simple' ) && $product->is_purchasable() && $product->is_in_stock() ) {
-		$html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
+		$html = '<form action="' . esc_url( remove_query_arg( 'added-to-cart', add_query_arg( 'add-to-cart', $product->get_id() ) ) ) . '" class="cart" method="post" enctype="multipart/form-data">';
 		$html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
 		$html .= '</form>';
 

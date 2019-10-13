@@ -2062,8 +2062,8 @@ function sbs_render_admin_help_page() {
         <li>"In Cart"</li>
         <li>"Remove"</li>
         <li>"Change Selection"</li>
-				<li>"Review Your Order"</li>
-				<li>"(Required)" [Premium]</li>
+        <li>"Review Your Order"</li>
+        <li>"(Required)" [Premium]</li>
         <li>"Required" [Premium]</li>
         <li>"Product must be in cart in order to check out." [Premium]</li>
         <li>"Auto Add To Cart" [Premium]</li>
