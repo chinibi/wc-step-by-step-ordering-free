@@ -2,7 +2,7 @@
 Contributors: dreambuilders, trevorpham
 Tags: woocommerce, shopping, step-by-step, ordering, e-commerce
 Requires at least: 4.7
-Tested up to: 5.2
+Tested up to: 5.2.4
 Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
