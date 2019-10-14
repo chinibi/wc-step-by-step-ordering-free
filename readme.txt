@@ -737,6 +737,7 @@ Translatable fields include:
 * "Select Package"
 * "GO BACK"
 * "NEXT"
+* "Checkout"
 * "Step"
 * "Options"
 * "Change Package"

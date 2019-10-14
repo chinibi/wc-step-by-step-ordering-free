@@ -2055,6 +2055,7 @@ function sbs_render_admin_help_page() {
         <li>"Merchandise Credit" [Premium]</li>
         <li>"of"</li>
         <li>"Sales Tax"</li>
+        <li>"Checkout"</li>
         <li>"SUBTOTAL"</li>
         <li>"TOTAL"</li>
         <li>"Step-By-Step Ordering"</li>
@@ -2072,6 +2073,9 @@ function sbs_render_admin_help_page() {
         <li>"You must add required products to the cart before you can checkout. Click here to add required products." [Premium]</li>
       </ul>
     </p>
+    <p>If you've updated our plugin recently, you may need to refresh the translation list in your
+      translation plugin to see any new available text.  In Loco Translate this is done by
+      clicking the "Sync" button.</p>
     <p>Note: Some of the Step-By-Step text, such as the Package Selection button,
       is customizable in the Step-By-Step settings instead.  If you can’t find the text
       you want to translate in your translation plugin look in the Step-By-Step settings first!</p>
