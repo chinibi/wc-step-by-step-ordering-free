@@ -36,6 +36,12 @@
   margin-bottom: 30px;
 }
 
+@media (max-width: 768px) {
+  #sbs-navbar {
+    flex-flow: wrap;
+  }
+}
+
 #sbs-navbar a {
   box-shadow: none;
 }
