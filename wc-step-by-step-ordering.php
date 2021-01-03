@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: wc-step-by-step-ordering
 Domain Path: /languages
 WC requires at least: 3.0
-WC tested up to: 4.3.1
+WC tested up to: 4.8.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,7 +22,7 @@ if ( ! class_exists( 'StepByStepSystem' ) ):
 
 final class StepByStepSystem {
 
-	public $version = '1.3.4';
+	public $version = '1.3.5';
 
 	public function __construct() {
     $this->define_constants();
